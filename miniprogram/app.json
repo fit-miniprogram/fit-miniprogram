@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/homePage",
+    "pages/homePage/homePage",
     "pages/newhomePage/newhomePage"
   ],
   "window": {
