@@ -1,2 +1,3 @@
-<!--miniprogram/pages/homePage.wxml-->
-<text>wdnmd</text>
+<view class="swiperItem">
+      wdnmd
+</view>

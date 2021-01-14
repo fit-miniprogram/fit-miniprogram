@@ -1,1 +1,3 @@
-/* miniprogram/pages/homePage.wxss */
+.swiperItem {
+  margin: 50rpx;
+}
