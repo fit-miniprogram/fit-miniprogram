@@ -1,4 +1,4 @@
-// pages/newhomePage/newhomePage.js
+// pages/newhomePage1/newhomePage1.js
 Page({
 
   /**
