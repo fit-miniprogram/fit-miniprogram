@@ -1,1 +1,10 @@
-/* pages/homePage/homePage.wxss */
+page {
+  background-color: #ffffff;
+}
+.Navbar {
+  margin-top: 50rpx;
+  height: 200rpx;
+}
+.Navbar .Navlogo {
+  height: 200rpx;
+}
