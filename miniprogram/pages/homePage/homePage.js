@@ -1,4 +1,15 @@
 Page({
+
+
+  onShow: function () {
+    if (typeof this.getTabBar === 'function' &&
+    this.getTabBar()) {
+    this.getTabBar().setData({
+      selected: 0
+    })
+  }
+  },
+
   data: {
     cardCur: 0,
     swiperList: [{
@@ -101,3 +112,4 @@ Page({
     }
   }
 })
+

@@ -600,6 +600,12 @@ Page({
    */
   onShow: function () {
     this.getOpenid()//获取用户的openid
+    if (typeof this.getTabBar === 'function' &&
+    this.getTabBar()) {
+    this.getTabBar().setData({
+      selected: 3
+    })
+  }
   },
 
   /**
@@ -637,4 +643,5 @@ Page({
 
   }
 })
+
 
