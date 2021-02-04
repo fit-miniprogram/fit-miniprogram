@@ -12,8 +12,25 @@ App({
          env: 'fit-gc46z',
         traceUser: true,
       })
+      
     }
 
     this.globalData = {}
+  },
+
+  loadFont() {
+    wx.loadFontFace({
+      family: 'logo',
+      source: 'url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/Commercialscript.ttf?sign=523f4c1144673cd9928e56e4710cfc6b&t=1612446808")',
+      success(res){
+        console.log('res', res)
+      },
+      fail(err){
+        console.log('err', err)
+      },
+      complete(res){
+        console.log('complete', res)
+      }
+    })
   }
 })

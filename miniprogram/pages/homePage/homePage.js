@@ -10,6 +10,7 @@ Page({
   }
   },
 
+
   data: {
     cardCur: 0,
     swiperList: [{
@@ -44,7 +45,7 @@ Page({
   },
   onLoad() {
     this.towerSwiper('swiperList');
-    // 初始化towerSwiper 传已有的数组名即可
+    getApp().loadFont();
   },
   DotStyle(e) {
     this.setData({

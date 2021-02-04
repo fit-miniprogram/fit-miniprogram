@@ -10,7 +10,7 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "FIT",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
   },
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom"

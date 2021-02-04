@@ -1,15 +1,14 @@
 
-<view class="Navbar">
-    <image class="Navlogo" src="https://6669-fit-gc46z-1304760622.tcb.qcloud.la/Fit_logo.png?sign=59153a1b501b8bc22888f04d392293ba&t=1611887269" mode="aspectFit|aspectFill|widthFix" 
-    lazy-load="false" binderror="" bindload="" />
-      
-  
+<view class="body">
+
+  <view class="logo">
+  <text class="logoContent">Fit</text>
 </view>
 
 
 <view class="home-swiper">
 <swiper class="card-swiper" indicator-dots="{{false}}" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
-  <swiper-item wx:for="{{swiperList}}" wx:key class="{{cardCur==index?'cur':''}}">
+  <swiper-item wx:for="{{swiperList}}" wx:key="id" class="{{cardCur==index?'cur':''}}">
     <view class="swiper-item">
       <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
       <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
@@ -19,6 +18,8 @@
 </view>
 
 
+
+
 <view class="cu-bar search bg-white">
  
     <view class="search-form round">
@@ -26,91 +27,4 @@
       <input type="text" placeholder="开 始 热 量 查 找" confirm-type="search"></input>
     </view>
   </view>
-
-  <view class="cu-bar search bg-white">
- 
- <view class="search-form round">
-   <text class="cuIcon-search"></text>
-   <input type="text" placeholder="开 始 热 量 查 找" confirm-type="search"></input>
- </view>
-</view>
-<view class="cu-bar search bg-white">
- 
- <view class="search-form round">
-   <text class="cuIcon-search"></text>
-   <input type="text" placeholder="开 始 热 量 查 找" confirm-type="search"></input>
- </view>
-</view>
-<view class="cu-bar search bg-white">
- 
- <view class="search-form round">
-   <text class="cuIcon-search"></text>
-   <input type="text" placeholder="开 始 热 量 查 找" confirm-type="search"></input>
- </view>
-</view>
-<view class="cu-bar search bg-white">
- 
- <view class="search-form round">
-   <text class="cuIcon-search"></text>
-   <input type="text" placeholder="开 始 热 量 查 找" confirm-type="search"></input>
- </view>
-</view>
-<view class="cu-bar search bg-white">
- 
- <view class="search-form round">
-   <text class="cuIcon-search"></text>
-   <input type="text" placeholder="开 始 热 量 查 找" confirm-type="search"></input>
- </view>
-</view>
-
-<view class="cu-bar search bg-white">
- 
- <view class="search-form round">
-   <text class="cuIcon-search"></text>
-   <input type="text" placeholder="开 始 热 量 查 找" confirm-type="search"></input>
- </view>
-</view>
-<view class="cu-bar search bg-white">
- 
- <view class="search-form round">
-   <text class="cuIcon-search"></text>
-   <input type="text" placeholder="开 始 热 量 查 找" confirm-type="search"></input>
- </view>
-</view>
-<view class="cu-bar search bg-white">
- 
- <view class="search-form round">
-   <text class="cuIcon-search"></text>
-   <input type="text" placeholder="开 始 热 量 查 找" confirm-type="search"></input>
- </view>
-</view>
-
-<view class="cu-bar search bg-white">
- 
- <view class="search-form round">
-   <text class="cuIcon-search"></text>
-   <input type="text" placeholder="开 始 热 量 查 找" confirm-type="search"></input>
- </view>
-</view>
-<view class="cu-bar search bg-white">
- 
- <view class="search-form round">
-   <text class="cuIcon-search"></text>
-   <input type="text" placeholder="开 始 热 量 查 找" confirm-type="search"></input>
- </view>
-</view>
-<view class="cu-bar search bg-white">
- 
- <view class="search-form round">
-   <text class="cuIcon-search"></text>
-   <input type="text" placeholder="开 始 热 量 查 找" confirm-type="search"></input>
- </view>
-</view>
-
-<view class="cu-bar search bg-white">
- 
- <view class="search-form round">
-   <text class="cuIcon-search"></text>
-   <input type="text" placeholder="开 始 热 量 查 找" confirm-type="search"></input>
- </view>
 </view>
