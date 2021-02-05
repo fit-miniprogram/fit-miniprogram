@@ -13,6 +13,7 @@ Component({
       const index = data.index;
       const _this = this;
       const url = data.path
+      console.log(e)
       wx.switchTab({
         url: url,
         //success: function () {

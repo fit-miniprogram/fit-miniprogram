@@ -9,10 +9,23 @@ Page({
     })
   }
   },
-
+  wdnmd : function(e){
+    if (this.data.swiperClass == 'swiper-init swiper-moved') {
+      this.setData({
+        swiperClass: 'swiper-init',
+      })
+    } else {
+      this.setData({
+        swiperClass: 'swiper-init swiper-moved',
+      })
+    }
+  },
 
   data: {
     cardCur: 0,
+    isShow:true,
+    searchClass:'',
+    swiperClass:'',
     swiperList: [{
       id: 0,
       type: 'image',
