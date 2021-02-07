@@ -3,37 +3,53 @@ Page({
 
   onShow: function () {
     if (typeof this.getTabBar === 'function' &&
-    this.getTabBar()) {
-    this.getTabBar().setData({
-      selected: 0
-    })
-  }
-  },
-  wdnmd : function(e){
-    if (this.data.swiperClass == 'swiper-init swiper-moved') {
-      this.setData({
-        swiperClass: 'swiper-init',
-      })
-    } else {
-      this.setData({
-        swiperClass: 'swiper-init swiper-moved',
+      this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 0
       })
     }
+  },
+  clickMove: function (e) {
+    this.setData({
+      swiperClass: 'swiper-init swiper-moved',
+      searchClass: 'searchPartInit searchPartMove',
+      cameraClass:'camera-init cameraMove',
+      speechClass:'speech-init speechMove',
+      bottomClass:'bottom-init bottomMove',
+      isFocus: true,
+      placeHolderContent: " "
+    })
+  },
+
+  moveBack: function (e) {
+    this.setData({
+      swiperClass: 'swiper-init',
+      searchClass: 'searchPartInit',
+      cameraClass:'camera-init',
+      speechClass:'speech-init',
+      bottomClass:'bottom-init',
+      placeHolderContent: "开 始 热 量 查 找",
+      isFocus: false,
+      inputValue:''
+    })
   },
 
   data: {
     cardCur: 0,
-    isShow:true,
-    searchClass:'',
-    swiperClass:'',
+    placeHolderContent: "开 始 热 量 查 找",
+    searchClass: 'searchPartInit',
+    swiperClass: 'swiper-init',
+    cameraClass:'camera-init',
+    speechClass:'speech-init',
+    bottomClass:'bottom-init',
     swiperList: [{
       id: 0,
       type: 'image',
       url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg'
     }, {
       id: 1,
-        type: 'image',
-        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84001.jpg',
+      type: 'image',
+      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84001.jpg',
     }, {
       id: 2,
       type: 'image',
