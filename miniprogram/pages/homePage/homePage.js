@@ -1,3 +1,5 @@
+import throttle from '../../gradient-bar/utils/throttle';
+const SCROLL_TOP_OFFSET = 200;
 Page({
 
 
@@ -9,39 +11,52 @@ Page({
       })
     }
   },
+  
   clickMove: function (e) {
+    var that = this 
     this.setData({
       swiperClass: 'swiper-init swiper-moved',
       searchClass: 'searchPartInit searchPartMove',
       cameraClass:'camera-init cameraMove',
       speechClass:'speech-init speechMove',
       bottomClass:'bottom-init bottomMove',
-      isFocus: true,
+      searchTipClass:'searchTip-init searchTipMove',
       placeHolderContent: " "
     })
+   /* setTimeout(function () {   //此处必须为that 垃圾微信
+      that.setData({isShow:false})},1000)*/
   },
 
   moveBack: function (e) {
+   /* var that = this
+    setTimeout(function () {
+      that.setData({isShow:true})},1000)
+  */
     this.setData({
       swiperClass: 'swiper-init',
       searchClass: 'searchPartInit',
       cameraClass:'camera-init',
       speechClass:'speech-init',
       bottomClass:'bottom-init',
+      searchTipClass:'searchTip-init',
       placeHolderContent: "开 始 热 量 查 找",
-      isFocus: false,
+      //isShow: true,
       inputValue:''
     })
   },
 
   data: {
+    opacity: 0,
+    list: new Array(40),
     cardCur: 0,
     placeHolderContent: "开 始 热 量 查 找",
-    searchClass: 'searchPartInit',
-    swiperClass: 'swiper-init',
+    searchClass: 'searchPartInit ',
+    swiperClass: 'swiper-init ',
     cameraClass:'camera-init',
     speechClass:'speech-init',
     bottomClass:'bottom-init',
+    searchTipClass:'searchTip-init',
+    isShow:true,
     swiperList: [{
       id: 0,
       type: 'image',
@@ -140,6 +155,25 @@ Page({
         swiperList: list
       })
     }
+  },
+  onPageScroll(evt) {
+    throttle(this.handleScroll.bind(this), 300)(evt);
+  },
+
+  handleScroll({ scrollTop }) {
+    if (scrollTop > SCROLL_TOP_OFFSET && this.data.opacity === 1) {
+      // 不需要再计算
+      return;
+    }
+    let opacity = scrollTop / SCROLL_TOP_OFFSET;
+    if (scrollTop > SCROLL_TOP_OFFSET) {
+      opacity = 1;
+    }
+
+    this.setData({ opacity });
   }
 })
+
+  
+
 

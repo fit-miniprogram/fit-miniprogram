@@ -1,28 +1,38 @@
 page {
-  background-color: rgb(40,40,40);
+  background-color: #ffffff;
 }
 
+.putin{
+  position: relative;
+  top: 0rpx;
+  background-color: rgb(40,40,40);
+  height: 3800rpx;
+}
 .logo {
   font-family: "logo";
   font-size: 100rpx;
   position: fixed;
   top: 50rpx;
   width: 100%;
-  background-color: rgb(40,40,40);
-  color: rgb(255,255,200);
+  background-color: rgb(40, 40, 40);
+  color: rgb(255, 255, 200);
   z-index: 5;
+
   .logoContent {}
 }
 
-.searchcolor{
-  background-color: rgb(40,40,40);;
+.searchcolor {
+  background-image: linear-gradient(rgb(40, 40, 40),white);
+  
 }
 
-
+.swipercolor{
+  background-color: rgb(40,40,40);
+}
 .searchPartInit {
-  
+
   position: relative;
-  top: 100rpx;
+  top: -1rpx;
   transition: all 1s;
 
 }
@@ -35,7 +45,7 @@ page {
 
 .swiper-init {
   position: relative;
-  top: 140rpx;
+  top: 0rpx;
   transition: all 1s;
 }
 
@@ -44,49 +54,56 @@ page {
   top: -500rpx;
 }
 
-.camera-speech{
+.camera-speech {
   display: flex;
+  position: relative;
+  top: -1rpx;
   flex-direction: row;
   justify-content: space-around;
-  .camera-init{
+  
+  .camera-init {
     height: 150rpx;
     width: 150rpx;
     position: relative;
-    top: 130rpx;
-    left:30rpx ;
+    top: 0rpx;
+    left: 30rpx;
     border-radius: 80rpx;
-    background-color: rgb(188,153,78);
+    background-color: rgb(188, 153, 78);
     padding: 40rpx;
     transition: left 1s;
   }
-  .speech-init{
+
+  .speech-init {
     height: 150rpx;
     width: 150rpx;
     position: relative;
-    right:30rpx ;
-    top: 130rpx;
+    right: 30rpx;
+    top: 0rpx;
     border-radius: 80rpx;
-    background-color: rgb(188,153,78);
+    background-color: rgb(188, 153, 78);
     padding: 40rpx;
     transition: right 1s;
   }
-  .cameraMove{
-    left:-300rpx;
+
+  .cameraMove {
+    left: -300rpx;
   }
-  .speechMove{
-    right:-300rpx;
+
+  .speechMove {
+    right: -300rpx;
   }
 }
 
 
-.bottom-init{
+.bottom-init {
   position: relative;
   bottom: 0rpx;
   display: flex;
   flex-direction: column;
   opacity: 1;
-  transition: opacity 1s;
-  .dailyQuestion{
+  transition: all 1s;
+
+  .dailyQuestion {
     position: relative;
     top: 200rpx;
     height: 500rpx;
@@ -94,17 +111,60 @@ page {
     background-color: #c6c6c6;
     display: flex;
     flex-direction: column;
-    align-items:center ;
+    align-items: center;
     align-self: center;
   }
 }
 
-.bottomMove{
+.bottomMove {
   opacity: 0;
-  display: none;
+
 }
 
-.blank{
-  height: 400rpx;
-  background-color:rgb(40,40,40) ;
+.blank {
+  height: 600rpx;
+}
+
+.searchTip-init {
+  opacity: 0;
+  //z-index: 5;
+  position: relative;
+  top: -850rpx;
+  font-size: 35rpx;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-self: start;
+  left: 30rpx;
+  height: 300rpx;
+  transition: all 1s;
+
+  .history {
+
+    .content {
+      color: black;
+      display: flex;
+      background-color: whitesmoke;
+      border-radius: 30rpx;
+      justify-content: center;
+      width: 200rpx;
+      height: 50rpx;
+    }
+  }
+
+  .hot {
+    .content {
+      color: black;
+      display: flex;
+      background-color: whitesmoke;
+      border-radius: 30rpx;
+      justify-content: center;
+      width: 200rpx;
+      height: 50rpx;
+    }
+  }
+}
+
+.searchTipMove{
+  opacity: 1;
 }

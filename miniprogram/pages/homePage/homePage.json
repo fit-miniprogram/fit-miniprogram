@@ -1,6 +1,9 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "gradient-bar": "../../gradient-bar/index"
+  },
   "navigationStyle": "custom",
-  "navigationBarTextStyle":"black",
-  "navigationBarBackgroundColor": "#ffffff"
+  "navigationBarTextStyle":"white",
+  "navigationBarBackgroundColor": "#282828"
+  
 }

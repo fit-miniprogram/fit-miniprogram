@@ -1,0 +1,19 @@
+<view
+	wx:if="{{ showBar }}"
+	class="grident-bar bar {{ sticky ? '' : 'bar--fixed' }}">
+	<!-- padding-top为了把手机显示时间的部分让出来 -->
+	<view
+		wx:if="{{ title1 }}"
+		class="bar__title"
+		style="padding-top: {{ top }}px;opacity: {{ opacity }};color: {{ textColor }}">
+		<text class="title_content1">{{ title1 }}</text>
+		<text class="title_content2">{{ title2 }}</text>
+	</view>
+	<van-icon
+		wx:if="{{ showBack }}"
+		bind:click="onClickBack"
+		class="bar__back"
+		style="top: {{ top + 12 }}px;"
+    name="arrow-left"
+  />
+</view>
