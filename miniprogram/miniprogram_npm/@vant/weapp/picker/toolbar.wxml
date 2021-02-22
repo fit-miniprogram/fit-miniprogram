@@ -6,7 +6,7 @@
     data-type="cancel"
     bindtap="emit"
   >
-    {{ cancelButtonText }}
+  <text decode="{{true}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
   </view>
   <view wx:if="{{ title }}" class="van-picker__title van-ellipsis">{{
     title
