@@ -155,25 +155,18 @@ Page({
     height_choose: ['150', '151', '152', '153', '154','155','156','157','158','159','160','161','162','163','164','165','166','167','168','169','170','171','172','173','174','175','176','177', '178', '179','180','181','182','183','184','185','186','187','188','189','190','191','192','193','194','195'],
     show_height: false,
     height:'---',
+    height_record:[],
     weight_choose: ['40', '41', '42', '43', '44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','62','63','64','65','66','67', '68', '69','70','71','72','73','74','75','76','77','78','79','80','81','82','83','84','85'],
     show_weight: false,
     weight:'---',
+    weight_record:[],
     height_flag:0,
     weight_flag:0,
     BMI:'---',
+    BMI_record:[],
     user:[],
     _id:'',
     openid:'',
-    //打卡
-    year: 0,
-    month: 0,
-    date: ['日', '一', '二', '三', '四', '五', '六'],
-    dateArr: [],
-    isToday: 0,
-    isTodayWeek: false,
-    todayIndex: 0,
-    sighArr:[],
-    isTodaySigh:false,
     //图表数据
     /*heightData:[],
     weightData:[],
@@ -210,12 +203,14 @@ Page({
     const { picker, value, index } = event.detail;
     this.setData({
       height:value,
+      height_record:that.data.height_record.concat(value),
       height_flag:1
     })
-    db.collection('user').doc(this.data._id)
+    db.collection('user').doc(that.data._id)
     .update({
       data:{
-        height:value
+        height:value,
+        height_record:that.data.height_record
       }
     })
     if(that.data.height!='---' && that.data.weight!='---'){
@@ -226,12 +221,14 @@ Page({
       console.log(height)
       BMI = weight / ((height/100) * (height/100));
       this.setData({
-        BMI:BMI.toFixed(2)
+        BMI:BMI.toFixed(2),
+        BMI_record:that.data.BMI_record.concat(BMI.toFixed(2)),
       })
-      db.collection('user').doc(this.data._id)
+      db.collection('user').doc(that.data._id)
       .update({
         data:{
-          BMI:BMI.toFixed(2)
+          BMI:BMI.toFixed(2),
+          BMI_record:that.data.BMI_record,
         }
       })
     }
@@ -253,14 +250,18 @@ Page({
   onConfirm_weight(event) {
     var that = this;
     const { picker, value, index } = event.detail;
+    console.log(that.data.weight_record)
     this.setData({
       weight:value,
+      weight_record:that.data.weight_record.concat(value),
       weight_flag:1
     })
-    db.collection('user').doc(this.data._id)
+    console.log(that.data.weight_record)
+    db.collection('user').doc(that.data._id)
     .update({
       data:{
-        weight:value
+        weight:value,
+        weight_record:that.data.weight_record,
       }
     })
     if(that.data.height!='---' && that.data.weight!='---'){
@@ -269,12 +270,14 @@ Page({
       var weight = that.data.weight;
       BMI = weight / ((height/100) * (height/100));
       this.setData({
-        BMI:BMI.toFixed(2)
+        BMI:BMI.toFixed(2),
+        BMI_record:that.data.BMI_record.concat(BMI.toFixed(2)),
       })
-      db.collection('user').doc(this.data._id)
+      db.collection('user').doc(that.data._id)
       .update({
         data:{
-          BMI:BMI.toFixed(2)
+          BMI:BMI.toFixed(2),
+          BMI_record:that.data.BMI_record,
         }
       })
     }
@@ -324,10 +327,16 @@ Page({
               openid: e.result.openid,
               height:0,
               weight:0,
-              BMI:0
+              BMI:0,
+              height_record:[],
+              weight_record:[],
+              BMI_record:[]
             },
             success: res => {
               console.log(res); 
+              that.setData({
+                _id:res._id
+              })
             },
             fail: err => {
               console.log(err);
@@ -393,7 +402,6 @@ Page({
           openid:res
         })
         that.judgeUser(res) //判断用户是否存在
-        that.searchSigh(res)
       })
         .catch(err => { //调用getOpenid失败打印错误信息
         console.log(err);

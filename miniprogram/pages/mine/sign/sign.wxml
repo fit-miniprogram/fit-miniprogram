@@ -1,2 +1,51 @@
 <!--miniprogram/pages/mine/sign/sign.wxml-->
-<text>miniprogram/pages/mine/sign/sign.wxml</text>
+<view class='wrap'>
+  <view>
+    <view class='date-show'>
+      <view class='lt-arrow' bindtap='lastMonth'>
+        <image src='/image/arrow-right1.png' mode='aspectFit'></image>
+      </view>
+      {{year}}年{{month}}月
+      <view class='rt-arrow' bindtap='nextMonth'>
+        <image src='/image/fanhui-copy.png' mode='aspectFit'></image>
+      </view>
+    </view>
+  </view>
+  <view class='header'>
+    <view wx:key='index' wx:for='{{date}}' class='{{(index == todayIndex) && isTodayWeek ? "weekMark" : ""}}'>
+      {{item}}
+      <view></view>
+    </view>
+  </view>
+  <view class='date-box'>
+    <view wx:key='index' wx:for='{{dateArr}}' class='{{item.isSigh ? "nowDay" : ""}}' data-date='{{item.isToday}}'>
+      <view class='date-head'>
+        <view>{{item.dateNum}}</view>
+      </view>
+      <!-- <view class='date-weight'>{{item.weight}}</view> -->
+    </view>
+  </view>
+
+  <view wx:if="{{isTodayWeek}}">
+  <view wx:if="{{!isTodaySigh}}"  bindtap = "addsighdate" class="no">
+    <button size="default"  class="non_button" plain="{{true}}"  >点击签到</button>
+  </view>
+  <view wx:if="{{isTodaySigh}}" class = "yes"  >
+    <button size="default" class="yes_button"   >今日已签到</button>
+  </view>
+  </view>
+
+  <view wx:else>
+    
+  </view>
+    
+
+    
+
+  <view class="sighDay_view" >
+    <text class="sighDay_text">你已经累计签到{{sighArr.length}}天，冲冲冲！</text> 
+  </view>
+
+    
+    
+</view>
