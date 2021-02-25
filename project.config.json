@@ -67,6 +67,30 @@
         {
           "name": "pages/mine/mine",
           "pathName": "pages/mine/mine",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/history/height/height",
+          "pathName": "pages/mine/history/height/height",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/history/weight/weight",
+          "pathName": "pages/mine/history/weight/weight",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/history/BMI/BMI",
+          "pathName": "pages/mine/history/BMI/BMI",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/history/history",
+          "pathName": "pages/mine/history/history",
           "scene": null
         }
       ]

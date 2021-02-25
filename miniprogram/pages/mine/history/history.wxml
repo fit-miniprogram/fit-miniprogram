@@ -1,2 +1,4 @@
 <!--miniprogram/pages/mine/history/history.wxml-->
-<text>miniprogram/pages/mine/history/history.wxml</text>
+<van-cell icon="https://6669-fit-gc46z-1304760622.tcb.qcloud.la/mine/height.png?sign=e00e5c8c21abb9c9affce044e817807e&t=1614258301" title="身高" is-link bindtap="height" class="cell"/>
+<van-cell icon="https://6669-fit-gc46z-1304760622.tcb.qcloud.la/mine/weight.png?sign=5687280eb60c2cf5969c73192d99c1b5&t=1614258092" title="体重" is-link bindtap="weight" class="cell"/>
+<van-cell icon="https://6669-fit-gc46z-1304760622.tcb.qcloud.la/mine/bmi.png?sign=8def8f2be735f3abb051ff88971ee64c&t=1614258151" title="BMI" is-link bindtap="BMI" class="cell"/>

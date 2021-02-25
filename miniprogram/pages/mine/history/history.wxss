@@ -1,1 +1,10 @@
 /* miniprogram/pages/mine/history/history.wxss */
+page{
+  background-color: white;
+}
+
+.cell{
+  position: relative;
+  margin-bottom: 30rpx;
+  margin-top: 30rpx;
+}

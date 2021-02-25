@@ -7,7 +7,10 @@
     "pages/mine/target/target",
     "pages/mine/history/history",
     "pages/mine/sign/sign",
-    "pages/mine/about/about"
+    "pages/mine/about/about",
+    "pages/mine/history/BMI/BMI",
+    "pages/mine/history/height/height",
+    "pages/mine/history/weight/weight"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

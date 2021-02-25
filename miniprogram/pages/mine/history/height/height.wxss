@@ -1,0 +1,23 @@
+/* miniprogram/pages/mine/history/height/height.wxss */
+page{
+  background-color: #272727;
+}
+
+ec-canvas {
+  width: 750rpx;
+  height: 100%;
+}
+
+.container {
+  position: absolute;
+  top: 250rpx;
+  bottom: 200rpx;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+} 

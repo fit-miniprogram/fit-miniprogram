@@ -1,8 +1,8 @@
 {
   "usingComponents": {
-    "van-cell": "../../../miniprogram_npm/@vant/weapp/cell/index"
+    "ec-canvas": "../../../../ec-canvas/ec-canvas"
   },
-  "navigationBarTitleText": "我的历史",
+  "navigationBarTitleText": "",
   "navigationBarBackgroundColor": "#272727",
   "navigationBarTextStyle": "white"
 }

@@ -1,0 +1,4 @@
+<!--miniprogram/pages/mine/history/weight/weight.wxml-->
+<view class="container2" >
+  <ec-canvas id="mychartlineWeight" canvas-id="mychart-line" ec="{{ ec2 }}"></ec-canvas>
+</view>
