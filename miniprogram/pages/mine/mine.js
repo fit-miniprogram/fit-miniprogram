@@ -32,11 +32,15 @@ Page({
     user:[],
     _id:'',
     openid:'',
+    targetRun:0
   },
 
   target:function(){
+    var openid = this.data.openid;
+    var _id = this.data._id;
+    var targetRun = this.data.targetRun;
     wx.navigateTo({
-      url: '/pages/mine/target/target',
+      url: '/pages/mine/target/target?info=' + openid + "|" + _id + "|" + targetRun,
     })
   },
 
@@ -96,8 +100,8 @@ Page({
           }
         })
       }
-      //修改BMI
-      if(that.data.height!='---' && that.data.weight!='---'){
+      //当天没有修改过体重，添加BMI
+      if(that.data.height!='---' && that.data.weight!='---' && !that.data.flag_weight){
         //计算BMI
         var BMI;
         var height = that.data.height;
@@ -116,8 +120,29 @@ Page({
           }
         })
       }
+      //当天修改过体重，修改BMI数组
+      if(that.data.height!='---' && that.data.weight!='---' && that.data.flag_weight){
+        //计算BMI
+        var BMI;
+        var height = that.data.height;
+        var weight = that.data.weight;
+        BMI = weight / ((height/100) * (height/100));    
+        var BMI_record_temp = that.data.BMI_record;
+        BMI_record_temp[BMI_record_temp.length - 1] = BMI.toFixed(2);
+        this.setData({
+          BMI:BMI.toFixed(2),
+          BMI_record:BMI_record_temp
+        })
+        db.collection('user').doc(that.data._id)
+        .update({
+          data:{
+            BMI:BMI.toFixed(2),
+            BMI_record:BMI_record_temp
+          }
+        })
+      }
     }
-    //不是当天首次修改身高，往记录数组中添加信息
+    //不是当天首次修改身高，修改记录数组中信息
     if(that.data.flag_height){
       var height_record_temp = that.data.height_record;
       height_record_temp[height_record_temp.length - 1] = value;
@@ -207,8 +232,8 @@ Page({
           }
         })
       }
-      //修改BMI
-      if(that.data.height!='---' && that.data.weight!='---'){
+      //当天没有修改过身高，添加BMI
+      if(that.data.height!='---' && that.data.weight!='---' && !that.data.flag_height){
         //计算BMI
         var BMI;
         var height = that.data.height;
@@ -223,6 +248,27 @@ Page({
           data:{
             BMI:BMI.toFixed(2),
             BMI_record:that.data.BMI_record
+          }
+        })
+      }
+      //当天修改过身高，修改BMI数组
+      if(that.data.height!='---' && that.data.weight!='---' && that.data.flag_height){
+        //计算BMI
+        var BMI;
+        var height = that.data.height;
+        var weight = that.data.weight;
+        BMI = weight / ((height/100) * (height/100));    
+        var BMI_record_temp = that.data.BMI_record;
+        BMI_record_temp[BMI_record_temp.length - 1] = BMI.toFixed(2);
+        this.setData({
+          BMI:BMI.toFixed(2),
+          BMI_record:BMI_record_temp
+        })
+        db.collection('user').doc(that.data._id)
+        .update({
+          data:{
+            BMI:BMI.toFixed(2),
+            BMI_record:BMI_record_temp
           }
         })
       }
@@ -317,7 +363,11 @@ Page({
               dateString_record:[],
               signInDate_record:[],
               flag_height:'',
-              flag_weight:''
+              flag_weight:'',
+              calorie_breakfast:0,
+              calorie_lunch:0,
+              calorie_dinner:0,
+              targetRun:5000
             },
             success: res => {
               console.log(res); 
@@ -342,7 +392,8 @@ Page({
             dateString_record:res.data[0].dateString_record,
             signInDate_record:res.data[0].signInDate_record,
             flag_height:res.data[0].flag_height,
-            flag_weight:res.data[0].flag_weight
+            flag_weight:res.data[0].flag_weight,
+            targetRun:res.data[0].targetRun
           })
           //显示用户身高、体重、BMI
           if(res.data[0].height==0 || res.data[0].weight==0){
@@ -441,7 +492,10 @@ Page({
         data:{
           flag_height:0,
           flag_weight:0,
-          signInDate_record:that.data.signInDate_record.concat(dateString)
+          signInDate_record:that.data.signInDate_record.concat(dateString),
+          calorie_breakfast:0,
+          calorie_lunch:0,
+          calorie_dinner:0
         }
       })
     }

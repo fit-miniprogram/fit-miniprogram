@@ -91,6 +91,12 @@
         {
           "name": "pages/mine/history/history",
           "pathName": "pages/mine/history/history",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/target/target",
+          "pathName": "pages/mine/target/target",
           "scene": null
         }
       ]

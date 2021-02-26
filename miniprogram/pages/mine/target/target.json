@@ -1,6 +1,8 @@
 {
   "usingComponents": {
-    "van-circle": "../../../miniprogram_npm/@vant/weapp/circle/index"
+    "van-circle": "../../../miniprogram_npm/@vant/weapp/circle/index",
+    "van-dialog": "../../../miniprogram_npm/@vant/weapp/dialog/index",
+    "van-field": "../../../miniprogram_npm/@vant/weapp/field/index"
   },
   "navigationBarTitleText": "目标",
   "navigationBarBackgroundColor": "#272727",
