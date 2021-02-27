@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "van-toast": "../../../miniprogram_npm/@vant/weapp/toast/index"
+  },
   "navigationBarTitleText": "签到",
   "navigationBarBackgroundColor": "#272727",
   "navigationBarTextStyle": "white"

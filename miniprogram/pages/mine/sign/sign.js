@@ -12,14 +12,104 @@ Page({
        isTodayWeek: false,
        todayIndex: 0,
        sighArr:[],
-       isTodaySigh:false
+       isTodaySigh:false,
+       stepToday:0,
+       calorieToday:0,
+       currentOpenid:'',
+       targetRun:0
      
  },
+
+  /**
+   * 用户授权读取微信运动数据
+   */
+
+  authorizeWeRun(){
+    var that = this
+//首先获取用户的授权状态
+    wx.getSetting({
+      success(res){
+        // console.log(res)
+        if(!res.authSetting['scope.werun']){
+// 如果用户还未授权过，需要用户授权读取微信运动数据
+          wx.authorize({
+            scope: 'scope.werun',
+            success() {
+              //读取微信步数数据
+              that.getWeRunData()
+            },
+            fail() {
+              //如果用户拒绝授权，提示用户需要同意授权才能获取他的微信运动数据
+              wx.showModal({
+                title: '读取微信运动数据失败',
+                content: '请在小程序设置界面（「右上角」 - 「关于」 - 「右上角」 - 「设置」）中允许我们访问微信运动数据',
+              })
+            }
+          })
+
+        }else{
+           //如果用户已授权过，直接开始同步微信运动数据
+          //读取微信步数数据
+          that.getWeRunData()
+        }
+      }
+    })
+  },
+
+  /**
+   * 获取微信运动数据
+   */
+
+  getWeRunData(){
+    var that = this
+    wx.getWeRunData({
+      success(res){
+        //console.log(res)
+      wx.cloud.callFunction({
+        name:'desrundata',
+        data:{
+         weRunData: wx.cloud.CloudID(res.cloudID)  //直到云函数被替换
+        }
+      }).then(res=>{
+        console.log(res)
+        that.setData({
+          stepToday: res.result.event.weRunData.data.stepInfoList[30].step
+        })
+        console.log(that.data.stepToday)
+      })
+      }
+    })
+  },
+
+  /**
+   * 获取卡路里数据
+   */
+  getCalorie(e){
+    var that = this
+    
+    console.log(e.result.openid)
+    db.collection('user') // 限制返回数量为 20 条
+    .where({
+      openid: e.result.openid
+    }).get({
+      success: (res) => {
+        this.setData({
+          calorieToday:res.data[0].calorie_breakfast + res.data[0].calorie_lunch + res.data[0].calorie_dinner,
+          targetRun:res.data[0].targetRun
+        })
+      },
+      fail: err =>{
+        console.log("错误")
+      }
+    })
+  },
+
  onShow:function(){
    this.getOpenid()
 
  },
    onLoad: function () {
+      this.authorizeWeRun();
      let now = new Date();
      let year = now.getFullYear();
      let month = now.getMonth() + 1;
@@ -43,7 +133,8 @@ Page({
       that.setData({
         currentOpenid: res
       })
-      that.searchSigh(res); 
+      that.searchSigh(res);
+      that.getCalorie(res);
     })
     .catch(err => { //调用getOpenid失败打印错误信息
       console.log(err);
@@ -92,6 +183,21 @@ Page({
 
  addsighdate:function(e){
   var that = this;
+  if(that.data.stepToday < that.data.targetRun){
+    wx.showToast({
+      title: '步数未达标,无法签到！',
+      icon: 'none',
+      duration: 2000
+    })
+  }
+  else if(that.data.calorieToday > 1200){
+    wx.showToast({
+      title: '摄入卡路里超标，无法签到！',
+      icon: 'none',
+      duration: 2000
+    })
+  }
+  else{
     db.collection('sigh').add({
       data: {
         openid:e,
@@ -105,9 +211,13 @@ Page({
         console.log(err);
     
     }})
+  }
+  setTimeout(function(){        
     wx.redirectTo({
       url: '/pages/mine/sign/sign',
       })
+    },2000)
+    
   
 },
   dateInit: function (setYear, setMonth) {
