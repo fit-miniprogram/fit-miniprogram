@@ -44,7 +44,7 @@ page {
 .camera-speech {
   display: flex;
   position: relative;
-  top: -1rpx;
+  top: 20rpx;
   flex-direction: row;
   justify-content: space-around;
 }

@@ -2,8 +2,8 @@
   <text class="logoContent">Fit</text>
 <!-- </view> -->
 <!-- <view class="putin"> </view> -->
-<view class="demo"> 
-<gradient-bar title1="Fit" title2="主页"  opacity="{{opacity}}" sticky="{{fasle}}" />
+<view class="demo">
+  <gradient-bar title1="Fit" title2="主页" opacity="{{opacity}}" sticky="{{fasle}}" />
 </view>
 
 <view class=" {{swiperClass}} swipercolor">
@@ -54,12 +54,12 @@
 </view>
 
 <view class="{{searchTipClass}}">
-<view class="history">
-  <text class="content">搜索历史</text>
-</view>
-<view class="hot">
-  <text class="content">热门搜索</text>
-</view>
+  <view class="history" bindtap="wdnmd">
+    <text class="content">搜索历史</text>
+  </view>
+  <view class="hot">
+    <text class="content">热门搜索</text>
+  </view>
 </view>
 
 

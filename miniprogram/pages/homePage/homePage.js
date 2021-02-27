@@ -2,6 +2,11 @@ import throttle from '../../gradient-bar/utils/throttle';
 const SCROLL_TOP_OFFSET = 200;
 Page({
 
+  // wdnmd:function(){
+  // wx.switchTab({
+  //   url: '/pages/list/list',
+  // })
+  // },
 
   onShow: function () {
     if (typeof this.getTabBar === 'function' &&
@@ -11,37 +16,37 @@ Page({
       })
     }
   },
-  
+
   clickMove: function (e) {
-    var that = this 
+    var that = this
     this.setData({
       swiperClass: 'swiper-init swiper-moved',
       searchClass: 'searchPartInit searchPartMove',
-      cameraClass:'camera-init cameraMove',
-      speechClass:'speech-init speechMove',
-      bottomClass:'bottom-init bottomMove',
-      searchTipClass:'searchTip-init searchTipMove',
+      cameraClass: 'camera-init cameraMove',
+      speechClass: 'speech-init speechMove',
+      bottomClass: 'bottom-init bottomMove',
+      searchTipClass: 'searchTip-init searchTipMove',
       placeHolderContent: " "
     })
-   /* setTimeout(function () {   //此处必须为that 垃圾微信
-      that.setData({isShow:false})},1000)*/
+    /* setTimeout(function () {   //此处必须为that 垃圾微信
+       that.setData({isShow:false})},1000)*/
   },
 
   moveBack: function (e) {
-   /* var that = this
-    setTimeout(function () {
-      that.setData({isShow:true})},1000)
-  */
+    /* var that = this
+     setTimeout(function () {
+       that.setData({isShow:true})},1000)
+   */
     this.setData({
       swiperClass: 'swiper-init',
       searchClass: 'searchPartInit',
-      cameraClass:'camera-init',
-      speechClass:'speech-init',
-      bottomClass:'bottom-init',
-      searchTipClass:'searchTip-init',
+      cameraClass: 'camera-init',
+      speechClass: 'speech-init',
+      bottomClass: 'bottom-init',
+      searchTipClass: 'searchTip-init',
       placeHolderContent: "开 始 热 量 查 找",
       //isShow: true,
-      inputValue:''
+      inputValue: ''
     })
   },
 
@@ -52,11 +57,11 @@ Page({
     placeHolderContent: "开 始 热 量 查 找",
     searchClass: 'searchPartInit ',
     swiperClass: 'swiper-init ',
-    cameraClass:'camera-init',
-    speechClass:'speech-init',
-    bottomClass:'bottom-init',
-    searchTipClass:'searchTip-init',
-    isShow:true,
+    cameraClass: 'camera-init',
+    speechClass: 'speech-init',
+    bottomClass: 'bottom-init',
+    searchTipClass: 'searchTip-init',
+    isShow: true,
     swiperList: [{
       id: 0,
       type: 'image',
@@ -174,6 +179,6 @@ Page({
   }
 })
 
-  
+
 
 
