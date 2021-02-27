@@ -19,9 +19,8 @@
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
-    "useMultiFrameRuntime": true,
+    "useMultiFrameRuntime": false,
     "useApiHook": true,
-    "useApiHostProcess": false,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -32,7 +31,6 @@
     "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
-    "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
     "minifyWXSS": true
@@ -53,7 +51,55 @@
       "list": []
     },
     "miniprogram": {
-      "list": []
+      "list": [
+        {
+          "id": -1,
+          "name": "db guide",
+          "pathName": "pages/databaseGuide/databaseGuide",
+          "query": ""
+        },
+        {
+          "name": "pages/homePage/homePage",
+          "pathName": "pages/homePage/homePage",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/mine",
+          "pathName": "pages/mine/mine",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/history/height/height",
+          "pathName": "pages/mine/history/height/height",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/history/weight/weight",
+          "pathName": "pages/mine/history/weight/weight",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/history/BMI/BMI",
+          "pathName": "pages/mine/history/BMI/BMI",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/history/history",
+          "pathName": "pages/mine/history/history",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/target/target",
+          "pathName": "pages/mine/target/target",
+          "scene": null
+        }
+      ]
     }
   }
 }

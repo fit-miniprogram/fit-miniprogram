@@ -1,0 +1,132 @@
+<!--miniprogram/pages/mine/target/target.wxml-->
+<view class="Run">
+  <view class="title">
+    <view style="width:100rpx">步数</view>
+    <view class="edit">
+      <image mode='widthFix' src="https://6669-fit-gc46z-1304760622.tcb.qcloud.la/mine/edit.png?sign=3abb9584380df03e284e345fa1958ccd&t=1614323504" style="width:20rpx"></image>
+      <view style="width:120rpx;" bindtap="edit_Run">编辑目标步数</view>
+    </view>
+    
+  </view>
+  <view class="data">
+    <view class="runToday">
+      <view style="font-size: 40rpx;">{{stepToday}}</view>
+      <view style="font-size: 20rpx;">步</view>
+    </view>
+    <van-circle
+      value="{{ vauleRun }}"
+      layer-color="#eeeeee"
+      color="#ee0a24"
+      text="{{targetRun}}"
+      class="circle"
+    />
+  </view>
+</view>
+
+<view class="diet">
+  <view class="title">
+    <view style="width:100rpx">饮食</view>
+    <view class="edit">
+      <view style="width:180rpx;">推荐摄入1200千卡</view>
+    </view>
+  </view>
+  <view class="data">
+    <view class="data_left">
+      <view class="calorie" bindtap="edit_breakfast">
+        <view style="height:40rpx;">早餐</view>
+        <view class="calorie_data">
+          <view style="font-size: 40rpx;">{{breakfast}}</view>
+          <view style="font-size: 20rpx;width:40rpx">千卡</view>
+        </view>
+      </view>
+      <view class="calorie" bindtap="edit_lunch">
+        <view style="height:40rpx;">中餐</view>
+        <view class="calorie_data">
+          <view style="font-size: 40rpx;">{{lunch}}</view>
+          <view style="font-size: 20rpx;width:40rpx">千卡</view>
+        </view>
+      </view>
+      <view class="calorie" bindtap="edit_dinner">
+        <view style="height:40rpx;">晚餐</view>
+        <view class="calorie_data">
+          <view style="font-size: 40rpx;">{{dinner}}</view>
+          <view style="font-size: 20rpx;width:40rpx">千卡</view>
+        </view>
+      </view>
+    </view>
+    <van-circle
+      value="{{ valueCalorie }}"
+      layer-color="#eeeeee"
+      color="#ee0a24"
+      text="{{targetCalorie}}"
+      class="circle"
+    />
+  </view>
+</view>
+
+<van-dialog
+  use-slot
+  title="目标步数"
+  show="{{ show_run }}"
+  show-cancel-button
+  confirm-button-open-type="confirm_run"
+  bind:close="onClose_run"
+  bind:confirm="confirm_run"
+>
+  <van-field
+    value="{{ run_get }}"
+    placeholder="请输入目标步数"
+    bind:change="onChange_run"
+  />
+</van-dialog>
+
+<van-dialog
+  use-slot
+  title="早餐"
+  show="{{ show_breakfast }}"
+  show-cancel-button
+  confirm-button-open-type="confirm_breakfast"
+  bind:close="onClose_breakfast"
+  bind:confirm="confirm_breakfast"
+>
+  <van-field
+    value="{{ breakfast_get }}"
+    placeholder="请输入早餐摄入卡路里"
+    border="{{ false }}"
+    bind:change="onChange_breakfast"
+  />
+</van-dialog>
+
+<van-dialog
+  use-slot
+  title="中餐"
+  show="{{ show_lunch }}"
+  show-cancel-button
+  confirm-button-open-type="confirm_lunch"
+  bind:close="onClose_lunch"
+  bind:confirm="confirm_lunch"
+>
+  <van-field
+    value="{{ lunch_get }}"
+    placeholder="请输入中餐摄入卡路里"
+    border="{{ false }}"
+    bind:change="onChange_lunch"
+  />
+</van-dialog>
+
+<van-dialog
+  use-slot
+  title="晚餐"
+  show="{{ show_dinner }}"
+  show-cancel-button
+  confirm-button-open-type="confirm_dinner"
+  bind:close="onClose_dinner"
+  bind:confirm="confirm_dinner"
+>
+  <van-field
+    value="{{ dinner_get }}"
+    placeholder="请输入晚餐摄入卡路里"
+    border="{{ false }}"
+    bind:change="onChange_dinner"
+  />
+</van-dialog>

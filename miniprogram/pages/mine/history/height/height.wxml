@@ -1,0 +1,4 @@
+<!--miniprogram/pages/mine/history/height/height.wxml-->
+<view class="container">
+  <ec-canvas id="mychartline" canvas-id="mychart-line" ec="{{ ec }}"></ec-canvas>
+</view>

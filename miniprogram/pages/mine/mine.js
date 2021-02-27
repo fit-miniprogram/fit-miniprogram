@@ -1,216 +1,190 @@
 // pages/homepage/homepage.js
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
-import * as echarts from '../../ec-canvas/echarts';
-
-const app = getApp();
 
 const db = wx.cloud.database({
   env: 'fit-gc46z'
 });  //用db代替数据库
 const user = db.collection('user'); //用user代替用户集合
 
-function initChart(chart, heightAll, weightAll,dateAll) {
-  var option = {
-    title: {
-      text: '身高体重',
-      left: 'center'
-    },
-    color: ["#37A2DA", "#67E0E3"],
-    legend: {
-      data: ['height', 'weight'],
-      top: 50,
-      left: 'center',
-      backgroundColor: 'white',
-      z: 100
-    },
-    grid: {
-      containLabel: true
-    },
-    tooltip: {
-      show: true,
-      trigger: 'axis'
-    },
-    xAxis: {
-      type: 'category',
-      boundaryGap: false,
-      data: dateAll,
-      name:"日期",
-      nameLocation:'center'
-      // show: false
-    },
-    yAxis: [{
-      x: 'center',
-      name:'身高',
-      type: 'value',
-      position:'left',
-      min:150,
-      max:195,
-      splitLine: {
-        lineStyle: {
-          type: 'dashed'
-        }
-      }
-      // show: false
-    },{
-      x: 'center',
-      name:'体重',
-      type: 'value',
-      position:'right',
-      min:40,
-      max:85,
-      splitLine: {
-        lineStyle: {
-          type: 'dashed'
-        }
-      }
-    }],
-    series: [{
-      name: 'height',
-      type: 'line',
-      smooth: true,
-      data: heightAll,
-      yAxisIndex:0
-    }, {
-      name: 'weight',
-      type: 'line',
-      smooth: true,
-      data: weightAll,
-      yAxisIndex:1
-    }]
-  };
-  return option;
-}
-
-function initChart2(chart2, BMIAll,dateAll) {
-  var option = {
-    title: {
-      text: 'BMI',
-      left: 'center'
-    },
-    color: ["#9FE6B8"],
-    legend: {
-      data: ['BMI'],
-      top: 50,
-      left: 'center',
-      backgroundColor: 'white',
-      z: 100
-    },
-    grid: {
-      containLabel: true
-    },
-    tooltip: {
-      show: true,
-      trigger: 'axis'
-    },
-    xAxis: {
-      type: 'category',
-      boundaryGap: false,
-      data: dateAll,
-      name:"日期",
-      nameLocation:'center'
-    },
-    yAxis: [{
-      x: 'center',
-      name:'BMI',
-      type: 'value',
-      position:'left',
-      min:16,
-      max:35,
-      splitLine: {
-        lineStyle: {
-          type: 'dashed'
-        }
-      }
-    }],
-    visualMap: {//区间内控制显示颜色
-      show: false,
-      dimension: 1,
-      pieces: [{gte: 18.5, lte: 22.9, color: '#9FE6B8'}],
-      outOfRange: {
-          color: '#f7a483'
-      }
-    },
-    series: [ {
-      name: 'BMI',
-      type: 'line',
-      smooth: true,
-      data: BMIAll
-    }]
-  };
-  return option;
-}
-
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    ec: {
-      onInit: initChart
-    },
-    ec2: {
-      onInit: initChart2
-    },
+    dateString:'',
+    dateString_record:[],//标记修改信息的日期
+    signInDate_record:[],//标记登录的日期
+    flag_height:'',//标记当天是否修改w过身高
+    flag_weight:'',//标记当天是否修改过体重
     //基本信息
     height_choose: ['150', '151', '152', '153', '154','155','156','157','158','159','160','161','162','163','164','165','166','167','168','169','170','171','172','173','174','175','176','177', '178', '179','180','181','182','183','184','185','186','187','188','189','190','191','192','193','194','195'],
     show_height: false,
     height:'---',
+    height_record:[],
     weight_choose: ['40', '41', '42', '43', '44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','62','63','64','65','66','67', '68', '69','70','71','72','73','74','75','76','77','78','79','80','81','82','83','84','85'],
     show_weight: false,
     weight:'---',
+    weight_record:[],
     height_flag:0,
     weight_flag:0,
     BMI:'---',
+    BMI_record:[],
     user:[],
     _id:'',
     openid:'',
-    //打卡
-    year: 0,
-    month: 0,
-    date: ['日', '一', '二', '三', '四', '五', '六'],
-    dateArr: [],
-    isToday: 0,
-    isTodayWeek: false,
-    todayIndex: 0,
-    sighArr:[],
-    isTodaySigh:false,
-    //图表数据
-    /*heightData:[],
-    weightData:[],
-    BMIData:[],
-    dateData:[]*/
+    targetRun:0
   },
 
-  onChange_height(event) {
+  target:function(){
+    var openid = this.data.openid;
+    var _id = this.data._id;
+    var targetRun = this.data.targetRun;
+    wx.navigateTo({
+      url: '/pages/mine/target/target?info=' + openid + "|" + _id + "|" + targetRun,
+    })
+  },
+
+  history:function(){
+    var openid = this.data.openid;
+    wx.navigateTo({
+      url: 'history/history?openid=' + openid,
+    })
+  },
+
+  sign:function(){
+    wx.navigateTo({
+      url: '/pages/mine/sign/sign',
+    })
+  },
+
+  about:function(){
+    wx.navigateTo({
+      url: '/pages/mine/about/about',
+    })
+  },
+
+  onConfirm_height(event) {
     var that = this
     const { picker, value, index } = event.detail;
     this.setData({
       height:value,
       height_flag:1
     })
-    db.collection('user').doc(this.data._id)
+    db.collection('user').doc(that.data._id)
     .update({
       data:{
         height:value
       }
     })
-    if(that.data.height!='---' && that.data.weight!='---'){
-      console.log(that.data.weight)
-      var BMI;
-      var height = that.data.height;
-      var weight = that.data.weight;
-      console.log(height)
-      BMI = weight / ((height/100) * (height/100));
+    //是当天首次修改身高，往记录数组中添加信息
+    if(!that.data.flag_height){
       this.setData({
-        BMI:BMI.toFixed(2)
+        height_record:that.data.height_record.concat(value),
+        flag_height:1
       })
-      db.collection('user').doc(this.data._id)
+      db.collection('user').doc(that.data._id)
       .update({
         data:{
-          BMI:BMI.toFixed(2)
+          height_record:that.data.height_record,
+          flag_height:1
         }
       })
+      if(!that.data.flag_weight){//如果没有修改过体重，加入修改日期到记录数组
+        this.setData({
+          dateString_record:that.data.dateString_record.concat(that.data.dateString)
+        })
+        db.collection('user').doc(that.data._id)
+        .update({
+          data:{
+            dateString_record:that.data.dateString_record
+          }
+        })
+      }
+      //当天没有修改过体重，添加BMI
+      if(that.data.height!='---' && that.data.weight!='---' && !that.data.flag_weight){
+        //计算BMI
+        var BMI;
+        var height = that.data.height;
+        var weight = that.data.weight;
+        console.log(height)
+        BMI = weight / ((height/100) * (height/100));   
+        this.setData({
+          BMI:BMI.toFixed(2),
+          BMI_record:that.data.BMI_record.concat(BMI.toFixed(2))
+        })
+        db.collection('user').doc(that.data._id)
+        .update({
+          data:{
+            BMI:BMI.toFixed(2),
+            BMI_record:that.data.BMI_record
+          }
+        })
+      }
+      //当天修改过体重，修改BMI数组
+      if(that.data.height!='---' && that.data.weight!='---' && that.data.flag_weight){
+        //计算BMI
+        var BMI;
+        var height = that.data.height;
+        var weight = that.data.weight;
+        BMI = weight / ((height/100) * (height/100));    
+        var BMI_record_temp = that.data.BMI_record;
+        BMI_record_temp[BMI_record_temp.length - 1] = BMI.toFixed(2);
+        this.setData({
+          BMI:BMI.toFixed(2),
+          BMI_record:BMI_record_temp
+        })
+        db.collection('user').doc(that.data._id)
+        .update({
+          data:{
+            BMI:BMI.toFixed(2),
+            BMI_record:BMI_record_temp
+          }
+        })
+      }
     }
+    //不是当天首次修改身高，修改记录数组中信息
+    if(that.data.flag_height){
+      var height_record_temp = that.data.height_record;
+      height_record_temp[height_record_temp.length - 1] = value;
+      this.setData({
+        height_record:height_record_temp,
+        flag_height:1
+      })
+      db.collection('user').doc(that.data._id)
+      .update({
+        data:{
+          height_record:height_record_temp,
+          flag_height:1
+        }
+      })
+      //修改BMI
+      if(that.data.height!='---' && that.data.weight!='---'){
+        //计算BMI
+        var BMI;
+        var height = that.data.height;
+        var weight = that.data.weight;
+        BMI = weight / ((height/100) * (height/100));    
+        var BMI_record_temp = that.data.BMI_record;
+        BMI_record_temp[BMI_record_temp.length - 1] = BMI.toFixed(2);
+        this.setData({
+          BMI:BMI.toFixed(2),
+          BMI_record:BMI_record_temp
+        })
+        db.collection('user').doc(that.data._id)
+        .update({
+          data:{
+            BMI:BMI.toFixed(2),
+            BMI_record:BMI_record_temp
+          }
+        })
+      }
+    }
+    
+    this.setData({ show_height: false });
+  },
+
+  onCancel_height() {
+    Toast('取消');
   },
 
   showPopup_height() {
@@ -221,34 +195,126 @@ Page({
     this.setData({ show_height: false });
   },
 
-  onChange_weight(event) {
+  onConfirm_weight(event) {
     var that = this;
     const { picker, value, index } = event.detail;
     this.setData({
       weight:value,
       weight_flag:1
     })
-    db.collection('user').doc(this.data._id)
+    db.collection('user').doc(that.data._id)
     .update({
       data:{
         weight:value
       }
     })
-    if(that.data.height!='---' && that.data.weight!='---'){
-      var BMI;
-      var height = that.data.height;
-      var weight = that.data.weight;
-      BMI = weight / ((height/100) * (height/100));
+    //是当天首次修改体重，往记录数组中添加信息
+    if(!that.data.flag_weight){
       this.setData({
-        BMI:BMI.toFixed(2)
+        weight_record:that.data.weight_record.concat(value),
+        flag_weight:1
       })
-      db.collection('user').doc(this.data._id)
+      db.collection('user').doc(that.data._id)
       .update({
         data:{
-          BMI:BMI.toFixed(2)
+          weight_record:that.data.weight_record,
+          flag_weight:1
         }
       })
+      if(!that.data.flag_height){//如果没有修改过身高，加入修改日期到记录数组
+        this.setData({
+          dateString_record:that.data.dateString_record.concat(that.data.dateString)
+        })
+        db.collection('user').doc(that.data._id)
+        .update({
+          data:{
+            dateString_record:that.data.dateString_record
+          }
+        })
+      }
+      //当天没有修改过身高，添加BMI
+      if(that.data.height!='---' && that.data.weight!='---' && !that.data.flag_height){
+        //计算BMI
+        var BMI;
+        var height = that.data.height;
+        var weight = that.data.weight;
+        BMI = weight / ((height/100) * (height/100));   
+        this.setData({
+          BMI:BMI.toFixed(2),
+          BMI_record:that.data.BMI_record.concat(BMI.toFixed(2))
+        })
+        db.collection('user').doc(that.data._id)
+        .update({
+          data:{
+            BMI:BMI.toFixed(2),
+            BMI_record:that.data.BMI_record
+          }
+        })
+      }
+      //当天修改过身高，修改BMI数组
+      if(that.data.height!='---' && that.data.weight!='---' && that.data.flag_height){
+        //计算BMI
+        var BMI;
+        var height = that.data.height;
+        var weight = that.data.weight;
+        BMI = weight / ((height/100) * (height/100));    
+        var BMI_record_temp = that.data.BMI_record;
+        BMI_record_temp[BMI_record_temp.length - 1] = BMI.toFixed(2);
+        this.setData({
+          BMI:BMI.toFixed(2),
+          BMI_record:BMI_record_temp
+        })
+        db.collection('user').doc(that.data._id)
+        .update({
+          data:{
+            BMI:BMI.toFixed(2),
+            BMI_record:BMI_record_temp
+          }
+        })
+      }
     }
+    //不是当天首次修改体重，修改记录数组中信息
+    if(that.data.flag_weight){
+      var weight_record_temp = that.data.weight_record;
+      weight_record_temp[weight_record_temp.length - 1] = value;
+      this.setData({
+        weight_record:weight_record_temp,
+        flag_weight:1
+      })
+      db.collection('user').doc(that.data._id)
+      .update({
+        data:{
+          weight_record:weight_record_temp,
+          flag_weight:1
+        }
+      })
+      //修改BMI
+      if(that.data.height!='---' && that.data.weight!='---'){
+        //计算BMI
+        var BMI;
+        var height = that.data.height;
+        var weight = that.data.weight;
+        BMI = weight / ((height/100) * (height/100));    
+        var BMI_record_temp = that.data.BMI_record;
+        BMI_record_temp[BMI_record_temp.length - 1] = BMI.toFixed(2);
+        this.setData({
+          BMI:BMI.toFixed(2),
+          BMI_record:BMI_record_temp
+        })
+        db.collection('user').doc(that.data._id)
+        .update({
+          data:{
+            BMI:BMI.toFixed(2),
+            BMI_record:BMI_record_temp
+          }
+        })
+      }
+    }
+    this.setData({ show_weight: false });
+  },
+
+  onCancel_weight() {
+    Toast('取消');
   },
 
   showPopup_weight() {
@@ -290,10 +356,25 @@ Page({
               openid: e.result.openid,
               height:0,
               weight:0,
-              BMI:0
+              BMI:0,
+              height_record:[],
+              weight_record:[],
+              BMI_record:[],
+              dateString_record:[],
+              signInDate_record:[],
+              flag_height:'',
+              flag_weight:'',
+              calorie_breakfast:0,
+              calorie_lunch:0,
+              calorie_dinner:0,
+              targetRun:5000
             },
             success: res => {
               console.log(res); 
+              that.setData({
+                _id:res._id
+              })
+              this.getDate()//获取当天日期
             },
             fail: err => {
               console.log(err);
@@ -304,7 +385,15 @@ Page({
           console.log("用户存在")
           console.log(res)
           that.setData({
-            _id:res.data[0]._id
+            _id:res.data[0]._id,
+            height_record:res.data[0].height_record,
+            weight_record:res.data[0].weight_record,
+            BMI_record:res.data[0].BMI_record,
+            dateString_record:res.data[0].dateString_record,
+            signInDate_record:res.data[0].signInDate_record,
+            flag_height:res.data[0].flag_height,
+            flag_weight:res.data[0].flag_weight,
+            targetRun:res.data[0].targetRun
           })
           //显示用户身高、体重、BMI
           if(res.data[0].height==0 || res.data[0].weight==0){
@@ -337,7 +426,9 @@ Page({
               BMI:res.data[0].BMI
             })
           }
+          this.getDate()//获取当天日期
         }
+        
       },
       fail: err =>{
         console.log("错误")
@@ -356,237 +447,65 @@ Page({
       .then(res => { //调用getOpenid成功进行以下操作
         console.log(res);
         that.setData({
-          openid:res
+          openid:res.result.openid
         })
         that.judgeUser(res) //判断用户是否存在
-        that.searchSigh(res)
+        
       })
         .catch(err => { //调用getOpenid失败打印错误信息
         console.log(err);
       });
     },
 
-    searchSigh: function (e) {
-      var that = this;
-      console.log(e)
-      db.collection("sigh").where({  	
-        _openid: e.result.openid
-      }).get({
-        success(res) {
-          console.log(res.data),
-            that.setData({
-              sighArr : res.data
-            })   
-            for(let i = 0 ; i<that.data.sighArr.length ; i++){
-              for(let j = 0 ; j<that.data.arrLen ; j++){
-               
-                if(that.data.dateArr[j].isToday == that.data.sighArr[i].sighDays){
-                  var wdnmd = "dateArr["+j+"].isSigh"
-                  that.setData({
-                    [wdnmd] : true
-                  })
-                  if(that.data.sighArr[i].sighDays==that.data.isToday)
-                  {
-                    that.setData({
-                      isTodaySigh:true
-                    })
-                  }
-                  // console.log([wdnmd])
-                }
-                // else{
-                //   console.log(j+"no")
-                // }
-              }
-            }
-            
-        }  
-      })
-     },
-
-     addsighdate:function(e){
-      var that = this;
-        db.collection('sigh').add({
-          data: {
-            openid:e,
-            sighDays: that.data.isToday,
-            isTodaySigh: true,
-            weight:that.data.weight,
-            height:that.data.height,
-            BMI:that.data.BMI
-          },
-          success: res => {
-            console.log(res);
-          },
-          fail: err => {
-            console.log(err);
-        
-        }})
-        wx.redirectTo({
-          url: '/pages/homePage/homePage',
-          })
-      
-    },
-      dateInit: function (setYear, setMonth) {
-        //全部时间的月份都是按0~11基准，显示月份才+1
-       let dateArr = [];                        
-        let arrLen = 0;                            
-        let now = setYear ? new Date(setYear, setMonth) : new Date();
-        let year = setYear || now.getFullYear();
-        let nextYear = 0;
-        let month = setMonth || now.getMonth();                    //没有+1方便后面计算当月总天数
-        let nextMonth = (month + 1) > 11 ? 1 : (month + 1);
-       let startWeek = new Date(year + '/' + (month + 1) + '/' + 1).getDay();                            //目标月1号对应的星期
-       let dayNums = new Date(year, nextMonth, 0).getDate();                //获取目标月有多少天
-       let obj = {};
-       let num = 0;
-       
-        if (month + 1 > 11) {
-           nextYear = year + 1;
-           dayNums = new Date(nextYear, nextMonth, 0).getDate();
-         }
-         arrLen = startWeek + dayNums;
-         for (let i = 0; i < arrLen; i++) {
-           if (i >= startWeek) {
-             num = i - startWeek + 1;
-             obj = {
-               isToday: '' + year + (month + 1) + num,
-               dateNum: num,
-               weight: 5,
-               isSigh:false
-             }
-           } else {
-             obj = {};
-            }
-            dateArr[i] = obj;
-          }
-          this.setData({
-            dateArr: dateArr
-          })
-          this.setData({
-            arrLen:arrLen
-          })
-          let nowDate = new Date();
-          let nowYear = nowDate.getFullYear();
-          let nowMonth = nowDate.getMonth() + 1;
-          let nowWeek = nowDate.getDay();
-          let getYear = setYear || nowYear;
-          let getMonth = setMonth >= 0 ? (setMonth + 1) : nowMonth;
-      
-          if (nowYear == getYear && nowMonth == getMonth) {
-            this.setData({
-              isTodayWeek: true,
-              todayIndex: nowWeek
-            })
-          } else {
-            this.setData({
-              isTodayWeek: false,
-              todayIndex: -1
-            })
-          }
-          
-        },
-        lastMonth: function () {
-          //全部时间的月份都是按0~11基准，显示月份才+1
-          let year = this.data.month - 2 < 0 ? this.data.year - 1 : this.data.year;
-          let month = this.data.month - 2 < 0 ? 11 : this.data.month - 2;
-          this.setData({
-            year: year,
-            month: (month + 1)
-          })
-          this.dateInit(year, month);
-          this.getOpenid()
-        },
-        nextMonth: function () {   //全部时间的月份都是按0~11基准，显示月份才+1
-         let year = this.data.month > 11 ? this.data.year + 1 : this.data.year;
-         let month = this.data.month > 11 ? 0 : this.data.month;
-         this.setData({
-           year: year,
-           month: (month + 1)
-         })
-         this.dateInit(year, month);
-         this.getOpenid()
-         
-       },
-
-  //获取图表数据
-  getData:function(){
-    var heightAll=[],weightAll=[],BMIAll=[],dateAll=[]
-
-    db.collection('sigh') // 限制返回数量为 20 条
-    .where({
-      _openid: this.data.openid
-    }).get({
-      success: (res) => {
-        console.log(res.data)
-        for(let i = 0 ;i < res.data.length; i++){
-          heightAll = heightAll.concat(res.data[i].height);
-          weightAll = weightAll.concat(res.data[i].weight);
-          BMIAll = BMIAll.concat(res.data[i].BMI);
-          if(res.data[i].sighDays[5]==0&&res.data[i].sighDays[6]==1){
-            dateAll = dateAll.concat(res.data[i].sighDays.substring(3,5)+'.'+res.data[i].sighDays.substring(5,7));
-          }
-          else dateAll = dateAll.concat(res.data[i].sighDays.substring(5,7));
-        }
-        this.initGraph(heightAll, weightAll,dateAll);
-        this.initGraph2(BMIAll,dateAll)
-      },
-      fail: err =>{
-        console.log("错误")
-      }
+  getDate:function(){
+    var that=this;
+    var timestamp = Date.parse(new Date());
+    var date = new Date(timestamp);
+    var dateString = '';
+    //获取年份  
+    var Y =date.getFullYear();
+    //获取月份  
+    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+    //获取当日日期 
+    var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate(); 
+    //合并日期
+    dateString = Y + M + D;
+    that.setData({
+      dateString:dateString
     })
+
+    //判断当天是否登录过
+    var singIn=0;
+    for(var i = 0 ; i < that.data.signInDate_record.length;i ++){
+      if(that.data.signInDate_record[i] == that.data.dateString){//当天登陆过
+        singIn=1;
+      }
+    }
+    
+    if(!singIn||that.data.signInDate_record.length==0){//当天没有登录过
+      that.setData({
+        flag_height:0,
+        flag_weight:0
+      })
+      db.collection('user').doc(that.data._id)
+      .update({
+        data:{
+          flag_height:0,
+          flag_weight:0,
+          signInDate_record:that.data.signInDate_record.concat(dateString),
+          calorie_breakfast:0,
+          calorie_lunch:0,
+          calorie_dinner:0
+        }
+      })
+    }
   },
-
-  //初始化图表1
-  initGraph: function (heightAll, weightAll,dateAll) {
-    this.oneComponent.init((canvas, width, height) => {
-     const chart = echarts.init(canvas, null, {
-      width: width,
-      height: height
-     });
-     
-     var option;
-     option = initChart(chart, heightAll, weightAll,dateAll);
-     this.chart = chart;
-     chart.setOption(option);
-     return chart;
-    });
-   },
-
-   //初始化图表2
-  initGraph2: function (BMIAll,dateAll) {
-    this.oneComponent2.init((canvas2, width, height) => {
-     const chart2 = echarts.init(canvas2, null, {
-      width: width,
-      height: height
-     });
-     
-     var option;
-     option = initChart2(chart2, BMIAll,dateAll);
-     this.chart2 = chart2;
-     chart2.setOption(option);
-     return chart2;
-    });
-   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let now = new Date();
-    let year = now.getFullYear();
-    let month = now.getMonth() + 1;
-    this.dateInit();
-
-    this.setData({
-      year: year,
-      month: month,
-      isToday: '' + year + month + now.getDate()
-    });
-
-    this.oneComponent = this.selectComponent('#mychartline');
-    this.oneComponent2 = this.selectComponent('#mychartlineBMI');
-    //获取图表数据
-    this.getData()
+    this.getOpenid()//获取用户的openid
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -599,7 +518,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getOpenid()//获取用户的openid
     if (typeof this.getTabBar === 'function' &&
     this.getTabBar()) {
     this.getTabBar().setData({

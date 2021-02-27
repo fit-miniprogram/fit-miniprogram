@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "van-cell": "../../../miniprogram_npm/@vant/weapp/cell/index"
+  },
+  "navigationBarTitleText": "我的历史",
+  "navigationBarBackgroundColor": "#272727",
+  "navigationBarTextStyle": "white"
+}

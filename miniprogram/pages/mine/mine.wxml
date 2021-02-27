@@ -17,60 +17,31 @@
   </view>
 </view>
 <van-popup show="{{ show_height }}" position="bottom" custom-style="height: 50%;" bind:close="onClose_height">
-  <van-picker columns="{{ height_choose }}" default-index="{{ height-150 }}" bind:change="onChange_height" />
+  <!--<van-picker columns="{{ height_choose }}" default-index="{{ height-150 }}" bind:change="onChange_height" />-->
+  <van-picker
+  show-toolbar
+  title="身高"
+  columns="{{ height_choose }}"
+  bind:cancel="onCancel_height"
+  bind:confirm="onConfirm_height"
+  default-index="{{ height-150 }}"
+/>
 </van-popup>
+
 <van-popup show="{{ show_weight }}" position="bottom" custom-style="height: 50%;" bind:close="onClose_weight">
-  <van-picker columns="{{ weight_choose }}" default-index="{{ weight-40 }}" bind:change="onChange_weight" />
+  <!--<van-picker columns="{{ weight_choose }}" default-index="{{ weight-40 }}" bind:change="onChange_weight" />-->
+  <van-picker
+  show-toolbar
+  title="体重"
+  columns="{{ weight_choose }}"
+  bind:cancel="onCancel_weight"
+  bind:confirm="onConfirm_weight"
+  default-index="{{ weight-40 }}"
+/>
 </van-popup>
 
 
-<view class='wrap'>
-  <view>
-    <view class='date-show'>
-      <view class='lt-arrow' bindtap='lastMonth'>
-        <image src='https://6669-fit-gc46z-1304760622.tcb.qcloud.la/homepage/arrow-right1.png?sign=575657b4247bd529ea10265f84a39c0a&t=1612004007' mode='aspectFit'></image>
-      </view>
-      {{year}}年{{month}}月
-      <view class='rt-arrow' bindtap='nextMonth'>
-        <image src='https://6669-fit-gc46z-1304760622.tcb.qcloud.la/homepage/fanhui-copy.png?sign=5942e2d2ecb547fad8ccfeac57f6f3ea&t=1612004020' mode='aspectFit'></image>
-      </view>
-    </view>
-  </view>
-  <view class='header'>
-    <view wx:key='key' wx:for='{{date}}' class='{{(index == todayIndex) && isTodayWeek ? "weekMark" : ""}}'>
-      {{item}}
-      <view></view>
-    </view>
-  </view>
-  <view class='date-box'>
-    <view wx:key='key' wx:for='{{dateArr}}' class='{{item.isSigh ? "nowDay" : ""}}' data-date='{{item.isToday}}'>
-      <view class='date-head'>
-        <view>{{item.dateNum}}</view>
-      </view>
-    </view>
-  </view>
-
-  <view wx:if="{{isTodayWeek}}">
-  <view wx:if="{{!isTodaySigh}}"  bindtap = "addsighdate" class="no">
-    <button size="default"  class="non_button" plain="{{true}}"  >点击签到</button>
-  </view>
-  <view wx:if="{{isTodaySigh}}" class = "yes"  >
-    <button size="default" class="yes_button"   >今日已签到</button>
-  </view>
-  </view>
-  <view wx:else>
-  </view>
-
-  <view class="sighDay_view" >
-    <text class="sighDay_text">你已经累计签到{{sighArr.length}}天，冲冲冲！</text> 
-  </view>
-
-</view>
-
-<view class="container">
-  <ec-canvas id="mychartline" canvas-id="mychart-line" ec="{{ ec }}"></ec-canvas>
-</view>
-
-<view class="container2" >
-  <ec-canvas id="mychartlineBMI" canvas-id="mychart-line" ec="{{ ec2 }}"></ec-canvas>
-</view>
+  <van-cell icon="https://6669-fit-gc46z-1304760622.tcb.qcloud.la/mine/target.png?sign=538f4ba3e7910c79dcd1399acb16f151&t=1613961020" title="我的目标" is-link bindtap="target" class="cell"/>
+  <van-cell icon="https://6669-fit-gc46z-1304760622.tcb.qcloud.la/mine/history.png?sign=5c67e2f05bc4c9b5c3b4ea35db026d7d&t=1613961031" title="我的历史" is-link bindtap="history" class="cell"/>
+  <van-cell icon="https://6669-fit-gc46z-1304760622.tcb.qcloud.la/mine/sign.png?sign=565707d7ba4eaa8d39f8da7b189f64e0&t=1613961042" title="签到" is-link bindtap="sign" class="cell"/>
+  <van-cell icon="https://6669-fit-gc46z-1304760622.tcb.qcloud.la/mine/about.png?sign=d323ae98a7b0af1475f7ee7c6a399734&t=1613964619" title="关于我们" is-link bindtap="about" class="cell"/>

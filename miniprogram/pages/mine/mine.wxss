@@ -75,6 +75,12 @@ page{
   text-align: end;
 }
 
+.cell{
+  position: relative;
+  margin-bottom: 30rpx;
+  margin-top: 30rpx;
+}
+
 .date-show{
   position: relative;
   width: 250rpx;

@@ -1,0 +1,65 @@
+/* miniprogram/pages/mine/target/target.wxss */
+.Run{
+  border: 1px solid #fff;
+  border-radius: 15rpx;
+  background-color: #fff;
+  margin: 20rpx;
+  justify-content: space-between;
+}
+
+.title{
+  font-size: 35rpx;
+  margin: 30rpx;
+  display: flex;
+  justify-content: start;
+}
+
+.edit{
+  width: 150rpx;
+  display: flex;
+  justify-content: start;
+  font-size: 18rpx;
+  align-self: flex-end;
+}
+
+.data{
+  display: flex;
+  justify-content: space-between;
+  margin: 30rpx;
+}
+
+.runToday{
+  align-self: center;
+  display:flex;
+  height: 50rpx;
+}
+
+.diet{
+  border: 1px solid #fff;
+  border-radius: 15rpx;
+  background-color: #fff;
+  margin: 20rpx;
+  justify-content: space-between;
+}
+
+.data_left{
+  align-self: center;
+  display:flex;
+  height: 50rpx;
+}
+
+.calorie{
+  flex: 1;
+  align-self: center;
+  display:flex;
+  flex-direction: column;
+  margin-left: 0;
+  margin-right: 40rpx;
+}
+
+.calorie_data{
+  height:40rpx;
+  align-self: center;
+  display:flex;
+  margin-top: 20rpx;
+}

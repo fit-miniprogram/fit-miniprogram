@@ -1,0 +1,4 @@
+<!--miniprogram/pages/mine/history/BMI/BMI.wxml-->
+<view class="container3" >
+  <ec-canvas id="mychartlineBMI" canvas-id="mychart-line" ec="{{ ec3 }}"></ec-canvas>
+</view>
