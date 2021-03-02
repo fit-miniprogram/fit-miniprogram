@@ -17,20 +17,25 @@ page {
   color: #ffffc8;
   z-index: 5;
 }
-.searchcolor {
-  background-image: linear-gradient(#282828, white);
+.searchShadow {
+  transition: all 1s;
+  box-shadow: 10px 10px 5px #888888;
+}
+.searchShadowMove {
+  box-shadow: 0px 0px 0px #888888;
 }
 .swipercolor {
-  background-color: #282828;
+  background-image: linear-gradient(#282828, white);
 }
 .searchPartInit {
   position: relative;
-  top: -1rpx;
+  top: -5rpx;
   transition: all 1s;
+  transition-timing-function: ease-out;
 }
 .searchPartMove {
   position: relative;
-  top: -400rpx;
+  top: -420rpx;
 }
 .swiper-init {
   position: relative;
@@ -39,12 +44,12 @@ page {
 }
 .swiper-moved {
   position: relative;
-  top: -500rpx;
+  top: -600rpx;
 }
 .camera-speech {
   display: flex;
   position: relative;
-  top: 20rpx;
+  top: 40rpx;
   flex-direction: row;
   justify-content: space-around;
 }
@@ -55,8 +60,9 @@ page {
   top: 0rpx;
   left: 30rpx;
   border-radius: 80rpx;
-  background-color: #bc994e;
+  background-color: #f5f5f5;
   padding: 40rpx;
+  box-shadow: 0px 0px 20px #888888;
   transition: left 1s;
 }
 .camera-speech .speech-init {
@@ -66,7 +72,8 @@ page {
   right: 30rpx;
   top: 0rpx;
   border-radius: 80rpx;
-  background-color: #bc994e;
+  box-shadow: 0px 0px 20px #888888;
+  background-color: #f5f5f5;
   padding: 40rpx;
   transition: right 1s;
 }
@@ -139,6 +146,20 @@ page {
   background-color: #272727;
   color: #ffffc8;
   font-family: "logo";
-  padding-top: 40rpx ;
+  padding-top: 50rpx ;
+  font-size: 45rpx;
+  transition: all 1s;
+  height: 120rpx;
+}
+.slogan .sloganContent {
+  position: relative;
+  top: 15rpx;
+}
+.slogan-move {
+  background-color: #272727;
+  color: #ffffc8;
+  font-family: "logo";
+  padding-top: 50rpx ;
+  height: 150rpx;
   font-size: 45rpx;
 }

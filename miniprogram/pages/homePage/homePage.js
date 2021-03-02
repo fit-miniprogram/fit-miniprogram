@@ -17,6 +17,23 @@ Page({
     }
   },
 
+  cameraTap:function(){
+    wx.showToast({
+      title: '还没做完，点锤子点',
+      icon: 'none',
+      duration: 2000
+    })
+  },
+
+  speechTap: function(){
+    wx.showToast({
+      title: '还没做完，点锤子点',
+      icon: 'none',
+      duration: 2000
+    })
+  },
+
+
   clickMove: function (e) {
     var that = this
     this.setData({
@@ -25,6 +42,8 @@ Page({
       cameraClass: 'camera-init cameraMove',
       speechClass: 'speech-init speechMove',
       bottomClass: 'bottom-init bottomMove',
+      sloganClass: 'slogan slogan-move ',
+      searchShadowClass: 'searchShadow searchShadowMove',
       searchTipClass: 'searchTip-init searchTipMove',
       placeHolderContent: " "
     })
@@ -43,6 +62,8 @@ Page({
       cameraClass: 'camera-init',
       speechClass: 'speech-init',
       bottomClass: 'bottom-init',
+      sloganClass: 'slogan ',
+      searchShadowClass: 'searchShadow',
       searchTipClass: 'searchTip-init',
       placeHolderContent: "开 始 热 量 查 找",
       //isShow: true,
@@ -56,10 +77,12 @@ Page({
     cardCur: 0,
     placeHolderContent: "开 始 热 量 查 找",
     searchClass: 'searchPartInit ',
+    sloganClass: 'slogan ',
     swiperClass: 'swiper-init ',
     cameraClass: 'camera-init',
     speechClass: 'speech-init',
     bottomClass: 'bottom-init',
+    searchShadowClass: 'searchShadow',
     searchTipClass: 'searchTip-init',
     isShow: true,
     swiperList: [{
