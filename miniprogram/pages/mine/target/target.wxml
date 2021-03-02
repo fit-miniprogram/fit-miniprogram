@@ -16,7 +16,7 @@
     <van-circle
       value="{{ vauleRun }}"
       layer-color="#eeeeee"
-      color="#ee0a24"
+      color="#33ff33"
       text="{{targetRun}}"
       class="circle"
     />
@@ -57,7 +57,7 @@
     <van-circle
       value="{{ valueCalorie }}"
       layer-color="#eeeeee"
-      color="#ee0a24"
+      color="#99ccff"
       text="{{targetCalorie}}"
       class="circle"
     />
