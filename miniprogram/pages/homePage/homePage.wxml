@@ -6,6 +6,10 @@
   <gradient-bar title1="Fit" title2="主页" opacity="{{opacity}}" sticky="{{fasle}}" />
 </view>
 
+<view class="slogan">
+    <text class="sloganContent">wdnmd</text>
+</view>
+
 <view class=" {{swiperClass}} swipercolor">
   <view class="home-swiper">
     <swiper class="card-swiper" indicator-dots="{{false}}" circular="true" autoplay="true" interval="5000"
