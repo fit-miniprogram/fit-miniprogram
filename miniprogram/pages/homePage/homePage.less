@@ -113,14 +113,65 @@ page {
 
   .dailyQuestion {
     position: relative;
-    top: 200rpx;
-    height: 500rpx;
-    width: 550rpx;
-    background-color: #c6c6c6;
+    top: 150rpx;
+    height: 800rpx;
+    width: 85%;
+    background-color: #FFFFFF;
     display: flex;
+    box-shadow: 0rpx 0rpx 20rpx #888888;
+    border-radius: 20rpx;
     flex-direction: column;
     align-items: center;
     align-self: center;
+
+    .title{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%; //这点有点重要
+      align-items: center;
+      background-color: #cfcfcf;
+      border-radius: 20rpx 20rpx 0 0;
+      .titleImage{
+        height: 100rpx;
+        width: 100rpx;
+      }
+      .titleContent{
+        font-size: 50rpx;
+      }
+    }
+    .questionPic{
+      margin-top: 50rpx;
+      height: 450rpx;
+      width: 70%;
+    }
+    .questionStem{
+      font-size: 50rpx;
+    }
+    .option{
+      display: flex;
+      justify-content: space-around;
+      width: 100%; //非常重要
+      align-items: center;
+      font-size: 50rpx;
+      margin-top: 30rpx;
+      margin-left:20rpx ;
+      margin-right: 20rpx;
+      .optionButton{
+        width: 30%;
+        box-shadow: 0rpx 0rpx 5rpx #888888;
+      }
+    }
+    .answerTip{
+      display: flex;
+      justify-content: space-around;
+      width: 100%; //非常重要
+      align-items: center;
+      font-size: 30rpx;
+      margin-top: 30rpx;
+      margin-left:20rpx ;
+      margin-right: 20rpx;
+    }
   }
 }
 

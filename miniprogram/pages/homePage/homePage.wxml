@@ -2,13 +2,14 @@
   <text class="logoContent">Fit</text>
 <!-- </view> -->
 <!-- <view class="putin"> </view> -->
-<view class="demo">
+<!-- <view class="demo">
   <gradient-bar title1="Fit" title2="主页" opacity="{{opacity}}" sticky="{{fasle}}" />
 </view>
 
 <view class="{{sloganClass}}">
-    <text class="sloganContent">自律给我自由</text>
-</view>
+  <text class="sloganContent">自律给我自由</text>
+</view> -->
+<!-- 以上内容作废 -->
 
 <view class=" {{swiperClass}} swipercolor">
   <view class="home-swiper">
@@ -33,7 +34,7 @@
 
     <view class="search-form round  {{searchShadowClass}}">
       <text class="cuIcon-search"></text>
-      <input type="text" placeholder="{{placeHolderContent}}" confirm-type="search" bindtap="clickMove"
+      <input type="text" placeholder="{{placeHolderContent}}" confirm-type="search" bindtap="clickMove" 
         disabled="{{isAble}}" bindblur="moveBack" value="{{inputValue}}"></input>
     </view>
   </view>
@@ -51,11 +52,25 @@
 
 <view class="{{bottomClass}}" wx:if="{{isShow}}">
   <view class="dailyQuestion">
-    <view class="title">t</view>
-    <image class="pic">p</image>
-    <view class="option">o</view>
+    <view class="title">
+      <image class="titleImage" src="{{titleImageBase64}}"></image>
+      <text class="titleContent">每日一题</text>
+      <view class="titleBlank"> </view>
+    </view>
+      <image class="questionPic" src="{{questionPicBase}}"></image>
+    <view class="questionStem">{{stem}}</view>
+    <view class="option" wx:if="{{optionShow}}">
+      <button class="cu-btn round lines-gray shadow optionButton " data-option="one" bindtap="questionTap">{{optionOne}}</button>
+      <button class="cu-btn round lines-gray shadow optionButton" data-option="two" bindtap="questionTap">{{optionTwo}}</button>
+      <button class="cu-btn round lines-gray shadow optionButton" data-option="three" bindtap="questionTap">{{optionThree}}</button>
+    </view>
+    <view class="answerTip" wx:if="{{answerTipErrorShow}}">回答错误！正确答案：{{rightAnswer}}还没做完wdnmd</view>
+    <view class="answerTip" wx:if="{{answerTipTrueShow}}">回答正确！积分+10 还没做完wdnmd</view>
   </view>
 </view>
+
+
+
 
 <view class="{{searchTipClass}}">
   <view class="history" bindtap="wdnmd">

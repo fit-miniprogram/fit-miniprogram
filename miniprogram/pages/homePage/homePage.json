@@ -2,7 +2,7 @@
   "usingComponents": {
     "gradient-bar": "../../gradient-bar/index"
   },
-  "navigationStyle": "custom",
+  "navigationStyle": "default",
   "navigationBarTextStyle":"white",
   "navigationBarBackgroundColor": "#282828"
   
