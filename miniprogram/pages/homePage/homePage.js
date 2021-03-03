@@ -241,7 +241,7 @@ Page({
     that.towerSwiper('swiperList');
     that.getNowTime();
     that.getOpenid();
-    that.searchAnswer();
+    // that.searchAnswer();
    // that.getQuestion()
     // that.searchAnswer();
     // setTimeout(function() {
@@ -257,6 +257,7 @@ Page({
 
   searchAnswer: function (e) {
     var that = this;
+    console.log(that.data.currentOpenid)
     db.collection("userAnswer").where({ 
       openid:that.data.currentOpenid
     }).get({
@@ -454,9 +455,11 @@ Page({
       config:{env:"fit-gc46z"}
     })
       .then(res => { //调用getOpenid成功进行以下操作
-        console.log(res.result.openid);
+       // console.log(res.result.openid);
         that.setData({
           currentOpenid: res.result.openid
+        },()=>{
+          that.searchAnswer()
         })
       })
       .catch(err => { //调用getOpenid失败打印错误信息
