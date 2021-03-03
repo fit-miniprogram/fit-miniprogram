@@ -64,8 +64,8 @@
       <button class="cu-btn round lines-gray shadow optionButton" data-option="two" bindtap="questionTap">{{optionTwo}}</button>
       <button class="cu-btn round lines-gray shadow optionButton" data-option="three" bindtap="questionTap">{{optionThree}}</button>
     </view>
-    <view class="answerTip" wx:if="{{answerTipErrorShow}}">回答错误！正确答案：{{rightAnswer}}还没做完wdnmd</view>
-    <view class="answerTip" wx:if="{{answerTipTrueShow}}">回答正确！积分+10 还没做完wdnmd</view>
+    <view class="answerTip" wx:if="{{answerTipErrorShow}}">回答错误！正确答案：{{rightAnswer}}</view>
+    <view class="answerTip" wx:if="{{answerTipTrueShow}}">回答正确！积分+10</view>
   </view>
 </view>
 
