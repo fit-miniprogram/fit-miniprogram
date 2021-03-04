@@ -32,5 +32,25 @@ App({
         console.log('complete', res)
       }
     })
+
+    wx.loadFontFace({
+      family: 'songti',
+      source: 'url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/fzzj-hfxsjw.ttf?sign=a833fc8ef7876ff3e03b1debf6c9d3d4&t=1614821008")',
+      success(res){
+        console.log('res', res)
+      },
+      fail(err){
+        console.log('err', err)
+      },
+      complete(res){
+        console.log('complete', res)
+      }
+    })
+
   }
+
+
+
+
+
 })

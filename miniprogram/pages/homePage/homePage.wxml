@@ -29,8 +29,8 @@
 
 <!-- 此处移动时光标不第一时间移动的问题未解决 -->
 
-<view class="{{searchClass}}">
-  <view class="cu-bar search bg-white">
+<view class="{{searchClass}} ">
+  <view class="cu-bar search bg-white searchColor">
 
     <view class="search-form round  {{searchShadowClass}}">
       <text class="cuIcon-search"></text>
@@ -54,19 +54,35 @@
   <view class="dailyQuestion">
     <view class="title">
       <image class="titleImage" src="{{titleImageBase64}}"></image>
-      <text class="titleContent">每日一题</text>
+      <text class="titleContent" decode="true" space="emsp">每日一题 </text>
       <view class="titleBlank"> </view>
     </view>
       <image class="questionPic" src="{{questionPicBase}}"></image>
     <view class="questionStem">{{stem}}</view>
     <view class="option" wx:if="{{optionShow}}">
-      <button class="cu-btn round lines-gray shadow optionButton " data-option="one" bindtap="questionTap">{{optionOne}}</button>
-      <button class="cu-btn round lines-gray shadow optionButton" data-option="two" bindtap="questionTap">{{optionTwo}}</button>
-      <button class="cu-btn round lines-gray shadow optionButton" data-option="three" bindtap="questionTap">{{optionThree}}</button>
+      <button class=" lines-gray shadow optionButton " data-option="one" bindtap="questionTap">{{optionOne}}</button>
+      <button class=" lines-gray shadow optionButton" data-option="two" bindtap="questionTap">{{optionTwo}}</button>
+      <button class=" lines-gray shadow optionButton" data-option="three" bindtap="questionTap">{{optionThree}}</button>
     </view>
     <view class="answerTip" wx:if="{{answerTipErrorShow}}">回答错误！正确答案：{{rightAnswer}}</view>
     <view class="answerTip" wx:if="{{answerTipTrueShow}}">回答正确！积分+10</view>
   </view>
+
+
+  <view class="doYouKonw" wx:for="{{doYouKonwList}}" wx:for-item="list">
+    <view class="title">
+      <image class="titleImage" src="{{titleImageBase64Konw}}"></image>
+      <text class="titleContent" decode="true" space="emsp">{{list.title}}</text>
+      <!-- <view class="titleBlank"> </view> -->
+    </view>
+    <image class="konwPic" src="{{list.pic}}"></image>
+    <view class="konwContent">
+      <text>{{list.content}}</text>
+    </view>
+  </view>
+
+
+
 </view>
 
 
@@ -82,4 +98,3 @@
 </view>
 
 
-<view class="blank"></view>

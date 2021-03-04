@@ -1,6 +1,12 @@
 page {
-  background-color: #ffffff;
+  background-color: rgb(246,248,247);
 }
+
+.searchColor{
+  background-color: rgb(246,248,247);
+}
+
+
 
 .putin{
   position: relative;
@@ -18,12 +24,13 @@ page {
   color: rgb(255, 255, 200);
   z-index: 5;
 
-  .logoContent {}
+
 }
 
 .searchShadow {
   transition: all 1s;
-  box-shadow: 10px 10px 5px #888888 
+  box-shadow: 10px 10px 5px #888888 ;
+  background-color: whitesmoke;
 }
 
 .searchShadowMove{
@@ -51,7 +58,7 @@ page {
 .swiper-init {
   position: relative;
   top: 0rpx;
-  transition: all 1s;
+  transition: all 1.5s;
 }
 
 .swiper-moved {
@@ -76,7 +83,7 @@ page {
     background-color: rgb(245, 245, 245);
     padding: 40rpx;
     box-shadow: 0px 0px 20px #888888;
-    transition: left 1s;
+    transition: left 2s;
   }
 
   .speech-init {
@@ -90,7 +97,7 @@ page {
     box-shadow: 0px 0px 20px #888888;
     background-color: rgb(245, 245, 245);
     padding: 40rpx;
-    transition: right 1s;
+    transition: right 2s;
   }
 
   .cameraMove {
@@ -109,11 +116,13 @@ page {
   display: flex;
   flex-direction: column;
   opacity: 1;
-  transition: all 1s;
+  transition: all 2s;
 
   .dailyQuestion {
+    color: rgb(36,88,132);
     position: relative;
     top: 150rpx;
+    font-family: "songti";
     height: 800rpx;
     width: 85%;
     background-color: #FFFFFF;
@@ -123,42 +132,49 @@ page {
     flex-direction: column;
     align-items: center;
     align-self: center;
-
+    margin-bottom: 100rpx;
+    justify-content: space-between;
     .title{
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       width: 100%; //这点有点重要
       align-items: center;
-      background-color: #cfcfcf;
+      //background-color: #cfcfcf;
       border-radius: 20rpx 20rpx 0 0;
       .titleImage{
+        margin-left: 20rpx;
         height: 100rpx;
         width: 100rpx;
       }
       .titleContent{
-        font-size: 50rpx;
+        font-size: 80rpx;
       }
     }
     .questionPic{
+      border-radius: 30rpx;
       margin-top: 50rpx;
-      height: 450rpx;
-      width: 70%;
+      height: 50%;
+      width: 60%;
     }
     .questionStem{
-      font-size: 50rpx;
+      font-size: 60rpx;
     }
     .option{
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
       width: 100%; //非常重要
       align-items: center;
-      font-size: 50rpx;
-      margin-top: 30rpx;
-      margin-left:20rpx ;
-      margin-right: 20rpx;
+      margin-top: 50rpx;
+      margin-left:30rpx ;
+      margin-right: 30rpx;
+      margin-bottom: 45rpx;
       .optionButton{
+        background-color: rgb(246,246,246);
         width: 30%;
+        font-size: 26rpx;
+        color: rgb(36,88,132);
+        border-radius: 20rpx;
         box-shadow: 0rpx 0rpx 5rpx #888888;
       }
     }
@@ -167,12 +183,64 @@ page {
       justify-content: space-around;
       width: 100%; //非常重要
       align-items: center;
-      font-size: 30rpx;
-      margin-top: 30rpx;
+      font-size: 40rpx;
+      margin-top: 40rpx;
       margin-left:20rpx ;
       margin-right: 20rpx;
+      margin-bottom: 45rpx;
     }
   }
+
+  .doYouKonw{
+    color: rgb(36,88,132);
+    position: relative;
+    top: 150rpx;
+    font-family: "songti";
+    height: 500rpx;
+    width: 85%;
+    background-color: #FFFFFF;
+    display: flex;
+    box-shadow: 0rpx 0rpx 20rpx #888888;
+    border-radius: 20rpx;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    margin-bottom: 100rpx;
+    justify-content: space-around;
+
+    .title{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      width: 100%; //这点有点重要
+      align-items: center;
+      //background-color: #cfcfcf;
+      border-radius: 20rpx 20rpx 0 0;
+      margin: 20rpx;
+      .titleImage{
+       // margin-left: 20rpx;
+        margin-right: 20rpx;
+        height: 80rpx;
+        width: 80rpx;
+      }
+      .titleContent{
+        font-size: 60rpx;
+      }
+    }
+    .konwPic{
+      height: 15%;
+      width: 15%;
+      //smargin-bottom: 30rpx;
+    }
+    .konwContent{
+      font-size: 40rpx;
+      margin: 25rpx;
+    }
+
+  }
+
+
+
 }
 
 .bottomMove {
@@ -188,15 +256,15 @@ page {
   opacity: 0;
   //z-index: 5;
   position: relative;
-  top: -850rpx;
+  top: -1350rpx;
   font-size: 35rpx;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   align-self: start;
-  left: 30rpx;
+  left: -300rpx;
   height: 300rpx;
-  transition: all 1s;
+  transition: all 2s;
 
   .history {
 
@@ -226,6 +294,7 @@ page {
 
 .searchTipMove{
   opacity: 1;
+  left: 30rpx;
 }
 
 .slogan{
