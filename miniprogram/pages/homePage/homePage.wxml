@@ -32,7 +32,7 @@
 <view class="{{searchClass}} ">
   <view class="cu-bar search bg-white searchColor">
 
-    <view class="search-form round  {{searchShadowClass}}">
+    <view class="search-form round {{searchShadowClass}}" >
       <text class="cuIcon-search"></text>
       <input type="text" placeholder="{{placeHolderContent}}" confirm-type="search" bindtap="clickMove" 
         disabled="{{isAble}}" bindblur="moveBack" value="{{inputValue}}"></input>
@@ -50,8 +50,8 @@
   </image>
 </view>
 
-<view class="{{bottomClass}}" wx:if="{{isShow}}">
-  <view class="dailyQuestion">
+<view class="{{bottomClass}}  " wx:if="{{isShow}}">
+  <view class="dailyQuestion ">
     <view class="title">
       <image class="titleImage" src="{{titleImageBase64}}"></image>
       <text class="titleContent" decode="true" space="emsp">每日一题 </text>
@@ -69,7 +69,7 @@
   </view>
 
 
-  <view class="doYouKonw" wx:for="{{doYouKonwList}}" wx:for-item="list">
+  <view class="doYouKonw " wx:for="{{doYouKonwList}}" wx:for-item="list">
     <view class="title">
       <image class="titleImage" src="{{titleImageBase64Konw}}"></image>
       <text class="titleContent" decode="true" space="emsp">{{list.title}}</text>

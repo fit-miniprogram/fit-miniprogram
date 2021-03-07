@@ -51,15 +51,16 @@ Page({
       searchTipClass: 'searchTip-init searchTipMove',
       placeHolderContent: " "
     })
-    /* setTimeout(function () {   //此处必须为that 垃圾微信
-       that.setData({isShow:false})},1000)*/
-  },
+     /*setTimeout(function () {   //此处必须为that 垃圾微信
+       that.setData({isShow:false})},2000)
+  */
+      },
 
   moveBack: function (e) {
-    /* var that = this
+     /*var that = this
      setTimeout(function () {
-       that.setData({isShow:true})},1000)
-   */
+       that.setData({isShow:true})},1)*/
+   
     this.setData({
       swiperClass: 'swiper-init',
       searchClass: 'searchPartInit',
