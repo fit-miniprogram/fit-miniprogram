@@ -1,1 +1,109 @@
-/* miniprogram/pages/game/game.wxss */
+.gameAnimation {
+  position: relative;
+  top: 500rpx;
+  left: 500rpx;
+}
+.gameAnimation .subject {
+  transform: rotate(0deg);
+  width: 50rpx;
+  transform-origin: left bottom;
+  animation-name: gamePlayer;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease;
+}
+.gameAnimation .subject .head {
+  position: relative;
+  height: 100rpx;
+  width: 100rpx;
+  background-color: #ff5757;
+  border-radius: 50rpx;
+  border-width: 10rpx;
+  border-color: black;
+  border-style: solid;
+  z-index: 5;
+  left: -49rpx;
+  top: 29rpx;
+}
+.gameAnimation .subject .pole {
+  position: relative;
+  height: 150rpx;
+  width: 30rpx;
+  background-color: #5cb9ff;
+  border-width: 10rpx;
+  border-top-style: unset;
+  border-color: black;
+  border-style: solid;
+  z-index: -1;
+  left: -15rpx;
+  top: -10rpx;
+}
+.gameAnimation .bottom {
+  position: relative;
+  width: 200rpx;
+  height: 50rpx;
+  background-color: #ffdd50;
+  border-width: 10rpx;
+  border-color: black;
+  border-style: solid;
+  border-top-right-radius: 30rpx;
+  border-top-left-radius: 30rpx;
+  left: -100rpx;
+  top: -46rpx;
+}
+.gameAnimation .bottom-line {
+  position: relative;
+  height: 1rpx;
+  width: 300rpx;
+  border-width: 5rpx;
+  border-color: black;
+  border-style: solid;
+  background-color: black;
+  left: -150rpx;
+  top: -54rpx;
+}
+.game {
+  position: relative;
+  height: 750rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.game .game-button {
+  height: 150rpx;
+  width: 75%;
+  border-radius: 25rpx;
+  box-shadow: 0 0 10rpx #888888;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.game .game-button .pic {
+  margin-left: 50rpx;
+  width: 80rpx;
+  height: 80rpx;
+}
+.game .game-button .content {
+  font-size: 30rpx;
+  font-weight: bolder;
+}
+@keyframes gamePlayer {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(50deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-50deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}

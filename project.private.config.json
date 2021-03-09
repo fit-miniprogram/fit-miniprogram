@@ -1,0 +1,70 @@
+{
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": -1,
+          "name": "db guide",
+          "pathName": "pages/databaseGuide/databaseGuide",
+          "query": ""
+        },
+        {
+          "name": "pages/homePage/homePage",
+          "pathName": "pages/homePage/homePage",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/mine",
+          "pathName": "pages/mine/mine",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/history/height/height",
+          "pathName": "pages/mine/history/height/height",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/history/weight/weight",
+          "pathName": "pages/mine/history/weight/weight",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/history/BMI/BMI",
+          "pathName": "pages/mine/history/BMI/BMI",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/history/history",
+          "pathName": "pages/mine/history/history",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/target/target",
+          "pathName": "pages/mine/target/target",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/game/game",
+          "pathName": "pages/game/game",
+          "scene": null
+        }
+      ]
+    }
+  }
+}
