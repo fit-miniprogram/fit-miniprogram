@@ -29,16 +29,28 @@
 
 <!-- 此处移动时光标不第一时间移动的问题未解决 -->
 
-<view class="{{searchClass}} ">
+<view class="{{searchClass}} " wx:if="{{isShow}}">
   <view class="cu-bar search bg-white searchColor">
 
     <view class="search-form round {{searchShadowClass}}" >
       <text class="cuIcon-search"></text>
       <input type="text" placeholder="{{placeHolderContent}}" confirm-type="search" bindtap="clickMove" 
-        disabled="{{isAble}}" bindblur="moveBack" value="{{inputValue}}"></input>
+        disabled="false" value="{{inputValue}}"></input>
     </view>
   </view>
 </view>
+
+<view class="{{searchClassReal}} ">
+  <view class="cu-bar search bg-white searchColor">
+
+    <view class="search-form round {{searchShadowClass}}" >
+      <text class="cuIcon-search"></text>
+      <input type="text" placeholder="{{placeHolderContent}}" confirm-type="search" bindtap="clickMove" 
+       focus="{{isFocus}}" disabled="{{isAble}}" bindblur="moveBack" value="{{inputValue}}"></input>
+    </view>
+  </view>
+</view>
+
 
 
 <view class="camera-speech" wx:if="{{isShow}}">

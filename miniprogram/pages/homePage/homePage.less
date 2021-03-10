@@ -3,7 +3,7 @@ page {
 }
 
 .searchColor{
-  background-color: rgb(246,248,247);
+  background-color: transparent;
 }
 
 
@@ -45,22 +45,41 @@ page {
 .searchPartInit {
 
   position: relative;
+  opacity: 1;
   top: -5rpx;
-  transition: all 1s;
+  transition: opacity 0.5s;
   transition-timing-function:ease-out ;
 
 }
 
 .searchPartMove {
   position: relative;
-  top: -420rpx;
+  opacity: 0;
+  //top: -420rpx;
 }
 
+.searchPartInitReal {
+
+  position: fixed;
+  opacity: 0;
+  top: 20rpx;
+  width: 100%;
+  transition: opacity 1s;
+  transition-timing-function:ease-out ;
+
+}
+
+.searchPartMoveReal {
+  width: 100%;
+ // position: relative;
+  opacity: 1;
+  //top: -420rpx;
+}
 
 .swiper-init {
   position: relative;
   top: 0rpx;
-  transition: all 1.5s;
+  transition: all 1s;
 }
 
 .swiper-moved {
@@ -85,7 +104,7 @@ page {
     background-color: rgb(245, 245, 245);
     padding: 40rpx;
     box-shadow: 0px 0px 20px #888888;
-    transition: left 2s;
+    transition: left 1s;
   }
 
   .speech-init {
@@ -99,7 +118,7 @@ page {
     box-shadow: 0px 0px 20px #888888;
     background-color: rgb(245, 245, 245);
     padding: 40rpx;
-    transition: right 2s;
+    transition: right 1s;
   }
 
   .cameraMove {
@@ -118,7 +137,7 @@ page {
   display: flex;
   flex-direction: column;
   opacity: 1;
-  transition: all 2s;
+  transition: all 1s;
 
   .dailyQuestion {
     color: rgb(36,88,132);
@@ -257,8 +276,8 @@ page {
 .searchTip-init {
   opacity: 0;
   //z-index: 5;
-  position: relative;
-  top: -3250rpx;
+  position: fixed;
+  top: 150rpx;
   font-size: 35rpx;
   display: flex;
   justify-content: space-between;
@@ -266,7 +285,7 @@ page {
   align-self: start;
   left: -300rpx;
   height: 300rpx;
-  transition: all 2s;
+  transition: all 1s;
 
   .history {
 

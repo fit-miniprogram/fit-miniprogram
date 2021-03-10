@@ -43,6 +43,8 @@ Page({
     this.setData({
       swiperClass: 'swiper-init swiper-moved',
       searchClass: 'searchPartInit searchPartMove',
+      searchClassReal:'searchPartInitReal searchPartMoveReal',
+      isFocus:true,
       cameraClass: 'camera-init cameraMove',
       speechClass: 'speech-init speechMove',
       bottomClass: 'bottom-init bottomMove',
@@ -51,23 +53,25 @@ Page({
       searchTipClass: 'searchTip-init searchTipMove',
       placeHolderContent: " "
     })
-     /*setTimeout(function () {   //此处必须为that 垃圾微信
-       that.setData({isShow:false})},2000)
+    /* setTimeout(function () {   //此处必须为that 垃圾微信
+       that.setData({isShow:false})},1000)
   */
       },
 
   moveBack: function (e) {
-     /*var that = this
+    /* var that = this
      setTimeout(function () {
        that.setData({isShow:true})},1)*/
    
     this.setData({
       swiperClass: 'swiper-init',
       searchClass: 'searchPartInit',
+      searchClassReal:'searchPartInitReal',
       cameraClass: 'camera-init',
       speechClass: 'speech-init',
       bottomClass: 'bottom-init',
       sloganClass: 'slogan ',
+      isFocus:false,
       searchShadowClass: 'searchShadow',
       searchTipClass: 'searchTip-init',
       placeHolderContent: "开 始 热 量 查 找",
@@ -92,7 +96,9 @@ Page({
     cameraClass: 'camera-init',
     speechClass: 'speech-init',
     bottomClass: 'bottom-init',
+    searchClassReal:'searchPartInitReal',
     optionShow:true,
+    isFocus:false,
     tureAnswer:'',
     searchShadowClass: 'searchShadow',
     searchTipClass: 'searchTip-init',
