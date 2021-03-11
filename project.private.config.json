@@ -1,4 +1,5 @@
 {
+  "setting": {},
   "condition": {
     "plugin": {
       "list": []
@@ -62,6 +63,12 @@
         {
           "name": "pages/game/game",
           "pathName": "pages/game/game",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/game/catch/catch",
+          "pathName": "pages/game/catch/catch",
           "scene": null
         }
       ]
