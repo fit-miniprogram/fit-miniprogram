@@ -8,6 +8,12 @@ Page({
 
   },
 
+  shock : function(){
+    wx.vibrateShort({
+      success: (res) => {},
+    })
+  },
+  
   catchShock : function(){
     wx.vibrateShort({
       success: (res) => {},
