@@ -22,6 +22,15 @@ Page({
       url: '../game/catch/catch',
     }) 
   },
+
+  classifyShock : function(){
+    wx.vibrateShort({
+      success: (res) => {},
+    })
+    wx.navigateTo({
+      url: '../game/classify/classify',
+    }) 
+  },
    /* setTimeout({
       function(){
         wx.navigateTo({

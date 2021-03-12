@@ -1,0 +1,25 @@
+<!--miniprogram/pages/game/classify/classify.wxml-->
+<view class="whole" style="height:{{windowHeight}}px;">
+  <view class="back">
+    <view class="low">
+      <view wx:if="{{answer==-1 || trueAnswer == 'high'}}" class="tagLow">低热量</view>
+      <view wx:if="{{answer==0 && trueAnswer == 'low'}}" class="tagLow" style="background-color: rgb(247, 6, 6);">低热量</view>
+      <view wx:if="{{answer==1 && trueAnswer == 'low'}}" class="tagLow" style="background-color: rgb(20, 241, 57);">低热量</view>
+      <image src="{{imageSrc}}"></image>
+    </view>
+    <view class="high">
+      <view wx:if="{{answer==-1 || trueAnswer == 'low'}}" class="tagHigh">高热量</view>
+      <view wx:if="{{answer==0 && trueAnswer == 'high'}}" class="tagHigh" style="background-color: rgb(247, 6, 6);">高热量</view>
+      <view wx:if="{{answer==1 && trueAnswer == 'high'}}" class="tagHigh" style="background-color: rgb(20, 241, 57);">高热量</view>
+    </view>
+  </view>
+  
+  <view class="bottom">
+    <view class="low" bindtap="button_low">
+      <image mode='widthFix' style="width:100rpx" src="https://6669-fit-gc46z-1304760622.tcb.qcloud.la/classify/%E5%B7%A6%E5%90%91.png?sign=9d0509e49a923afae4e9dfb29599cc33&t=1615538148"></image>
+    </view>
+    <view class="high" bindtap="button_high">
+      <image mode='widthFix' style="width:100rpx" src="https://6669-fit-gc46z-1304760622.tcb.qcloud.la/classify/%E5%8F%B3%E5%90%91.png?sign=9de9d6e21a287823b0d7d7fa3d8e4d00&t=1615538171"></image>
+    </view>
+  </view>
+</view>

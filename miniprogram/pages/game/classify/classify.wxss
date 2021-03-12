@@ -1,0 +1,42 @@
+/* miniprogram/pages/game/classify/classify.wxss */
+.whole{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.back{
+  flex: 7;
+  border: 1px solid #000;
+}
+
+.tagLow{
+  border: 1px solid #000;
+  border-radius: 20rpx;
+}
+
+
+.tagHigh{
+  border: 1px solid #000;
+  border-radius: 20rpx;
+}
+
+.bottom{
+  flex:1;
+  border: 1px solid #000;
+  display: flex;
+}
+
+.low{
+  flex: 1;
+  align-self: center;
+  justify-content: center;
+  display: flex;
+}
+
+.high{
+  flex: 1;
+  align-self: center;
+  justify-content: center;
+  display: flex;
+}
