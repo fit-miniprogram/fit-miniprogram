@@ -99,6 +99,12 @@
         {
           "name": "pages/mine/target/target",
           "pathName": "pages/mine/target/target",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/game/classify/classify",
+          "pathName": "pages/game/classify/classify",
           "scene": null
         }
       ]
