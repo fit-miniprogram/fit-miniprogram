@@ -14,7 +14,7 @@ App({
       })
       
     }
-
+    this.loadFont()
     this.globalData = {}
   },
 
@@ -36,6 +36,20 @@ App({
     wx.loadFontFace({
       family: 'songti',
       source: 'url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/fzzj-hfxsjw.ttf?sign=a833fc8ef7876ff3e03b1debf6c9d3d4&t=1614821008")',
+      success(res){
+        console.log('res', res)
+      },
+      fail(err){
+        console.log('err', err)
+      },
+      complete(res){
+        console.log('complete', res)
+      }
+    })
+
+    wx.loadFontFace({
+      family: 'cola',
+      source: 'url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/Coca-ColaCareFontKaiTi.ttf?sign=24c2c64c1476ab771789664d06bd58af&t=1615555621")',
       success(res){
         console.log('res', res)
       },

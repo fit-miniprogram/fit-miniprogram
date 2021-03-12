@@ -17,6 +17,28 @@
 .fallDown .fallDownContent {
   font-weight: bolder;
 }
+.intro {
+  position: fixed;
+  top: 450rpx;
+  height: 350rpx;
+  width: 100%;
+  font-size: 50rpx;
+  font-weight: bolder;
+  flex-direction: column;
+  display: flex;
+  font-family: 'cola';
+  justify-content: space-between;
+  align-items: center;
+}
+.intro .intro1 {
+  opacity: 0;
+}
+.intro .intro2 {
+  opacity: 0;
+}
+.intro .intro3 {
+  opacity: 0;
+}
 .moveArea {
   position: fixed;
   bottom: 100rpx;
