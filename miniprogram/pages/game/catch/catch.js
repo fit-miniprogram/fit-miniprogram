@@ -1,4 +1,6 @@
-// miniprogram/pages/game/catch/catch.js
+const db = wx.cloud.database({
+  env: 'fit-gc46z'
+}); 
 Page({
 
   /**
@@ -7,7 +9,10 @@ Page({
   data: {
     left:0,
     bottom:1200,
-  //  bottom2:1200,
+    score:0,
+    content:"",
+    src:"",
+    currentOpenid:"",
     fallDown1Show:false,
     fallDown2Show:false,
     basketX:0,
@@ -23,36 +28,54 @@ Page({
       basketX: (e.detail.x) * 2
     })
     //此处的x是px所以需要转化为rpx ，是一个坑
-    console.log("basketX:"+that.data.basketX)
+    //console.log("basketX:"+that.data.basketX)
     
   },
 
   changeLeft() {
     var that = this
-    var num = that.randomNum(100,600)
+    var num = that.randomNum(50,550)
     console.log(num)
     that.setData({
       x:0,
       y:0,
       left:num
     })
-
   },
 
 
+  getFallDown: function()
+  {
+    var that = this 
+    db.collection('catchGameBank')
+      .aggregate()
+      .sample({
+        size:1
+      })
+      .end().then(  res => {  
+          console.log(res.list);
+          that.setData({
+            content: res.list[0].content,
+            src :res.list[0].src
+          })
+         })
+
+  },
+
   fall() {
     var that = this
+    that.getFallDown()
+    var num = that.randomNum(50,550)
     that.setData({
-      fallDown1Show:true
+      fallDown1Show:true,
+      left:num
     })
     var Fallinterval = setInterval(function(){
-      var num = that.randomNum(100,600)
       that.setData({
         bottom: that.data.bottom - 50,
-        //left: num
       })
       that.judgeIn()
-    }, 300)
+    }, 200)
    
   },
 
@@ -63,13 +86,11 @@ Page({
     var basketRight = basketLeft + 250
     var blockLeft = that.data.left
     var blockRight = that.data.left+150
-    if(that.data.bottom > 60 && that.data.bottom < 210)
+    if(that.data.bottom > 60 && that.data.bottom < 160)
     {
       if(basketLeft<blockLeft && basketRight > blockRight)
       {
-        wx.showToast({
-          title: 'wdnmd',
-        })
+        that.judgeTOF()
         that.vanishAndShow()
       }
     }
@@ -80,8 +101,16 @@ Page({
   },
 
 
+  judgeTOF(){
+    wx.showToast({
+      title: 'wdnmd',
+    })
+  },
+
   vanishAndShow(){
     var that = this
+    that.getFallDown()
+    that.changeLeft()
     if(that.data.fallDown1Show)
     {
       that.setData({
@@ -114,12 +143,95 @@ Page({
     } 
 },
 
+updateScore:function(e){
+  var that = this
+  console.log(e)
+  that.judgeUser()
+  db.collection('userScore').where({  	
+    openid: that.data.currentOpenid
+  }).update({
+    data: {
+      score: db.command.inc(e)
+    },
+    success: function(res) {
+      console.log(res)
+    },
+    error: function(err){
+      console.log(err)
+    }
+  })
+},
+
+getOpenid: function () {
+  let that = this;
+  wx.cloud.callFunction({ //调用getOpenid云函数
+    name: 'getOpenid',
+    data:{},
+    config:{env:"fit-gc46z"}
+  })
+    .then(res => { //调用getOpenid成功进行以下操作
+     // console.log(res.result.openid);
+      that.setData({
+        currentOpenid: res.result.openid
+      },()=>{
+        that.judgeUser()
+      }
+    )  
+})
+},
+
+
+judgeUser:function(e){ //判断用户集合中是否存在当前用户
+  var that = this;
+  let flag = false;
+  db.collection('userScore') // 限制返回数量为 20 条
+  .where({
+    openid: that.data.currentOpenid
+  }).get({
+    success: (res) => {
+      let user_get = res.data; //获取到的对象数组数据
+      console.log(res)
+      for (let i = 0; i < user_get.length; i++) { //遍历数据库对象集合
+        if (that.data.currentOpenid === user_get[i].openid) { //Openid存在
+          console.log(res.data)
+          flag = true
+          that.setData({
+            score: user_get[i].score
+          })
+        }
+      }
+      if (flag === false) { //用户不存在
+        console.log("用户不存在")
+        db.collection('userScore').add({ //将该用户加入用户集合 
+          data: { 
+            openid: that.data.currentOpenid,
+            score: 0,
+          },
+          success: res => {
+            console.log(res); 
+            that.setData({
+              _id:res._id
+            })
+          },
+          fail: err => {
+            console.log(err);
+          }
+        })
+      }
+    },
+    fail: err =>{
+      console.log("错误")
+    }
+  })
+  },
+
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this
+    that.getOpenid()
   },
 
   /**
@@ -133,7 +245,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
 
   /**

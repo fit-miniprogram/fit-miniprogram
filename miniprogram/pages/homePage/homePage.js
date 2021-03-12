@@ -415,54 +415,6 @@ Page({
             }
           })
         }
-      //   else {
-      //     console.log("用户存在")
-      //     console.log(res)
-      //     that.setData({
-      //       _id:res.data[0]._id,
-      //       height_record:res.data[0].height_record,
-      //       weight_record:res.data[0].weight_record,
-      //       BMI_record:res.data[0].BMI_record,
-      //       dateString_record:res.data[0].dateString_record,
-      //       signInDate_record:res.data[0].signInDate_record,
-      //       flag_height:res.data[0].flag_height,
-      //       flag_weight:res.data[0].flag_weight,
-      //       targetRun:res.data[0].targetRun
-      //     })
-      //     //显示用户身高、体重、BMI
-      //     if(res.data[0].height==0 || res.data[0].weight==0){
-      //       this.setData({
-      //         BMI:'---'
-      //       })
-      //       if(res.data[0].height==0 && res.data[0].weight!=0){
-      //         this.setData({
-      //           height:'---',
-      //           weight:res.data[0].weight
-      //         })
-      //       }
-      //       else if(res.data[0].weight==0 && res.data[0].height!=0){
-      //         this.setData({
-      //           weight:'---',
-      //           height:res.data[0].height
-      //         })
-      //       }
-      //       else{
-      //         this.setData({
-      //           weight:'---',
-      //           height:'---'
-      //         })
-      //       }
-      //     }
-      //     else{
-      //       this.setData({
-      //         weight:res.data[0].weight,
-      //         height:res.data[0].height,
-      //         BMI:res.data[0].BMI
-      //       })
-      //     }
-      //     this.getDate()//获取当天日期
-      //   }
-        
       },
       fail: err =>{
         console.log("错误")

@@ -1,18 +1,33 @@
 
 <view class="fallDown" wx:if="{{fallDown1Show}}" style="left:{{left}}rpx; bottom:{{bottom}}rpx;">
+  <image class="fallDownImg" src="{{src}}"> </image>
+  <text class="fallDownContent">{{content}}</text>
 </view>
 <view class="fallDown" wx:if="{{fallDown2Show}}" style="left:{{left}}rpx; bottom:{{bottom}}rpx;">
+  <image class="fallDownImg" src="{{src}}"> </image>
+  <text class="fallDownContent">{{content}}</text>
 </view>
 
 <!-- 此处涉及到rpx与px转化的问题，是一个坑，后期可能会删除该游戏 -->
 
   <movable-area class="moveArea">
-    <movable-view class="moveBasket" x="{{initX}}" y="{{initY}}" direction="horizontal" out-of-bounds="true" bindchange="onChange">
+    <movable-view class="moveBasket" x="{{initX}}" y="{{initY}}" direction="horizontal" out-of-bounds="true" bindchange="onChange" inertia="true">
         <image class="moveBasketImg" src="{{basketImg}}"></image>
     </movable-view>
   </movable-area>
 
-  <view class="restart" bindtap="changeLeft">
+  <view class="information">
+    <view class="information-img">
+      <open-data type="userAvatarUrl" ></open-data>
+    </view>
+    <text class="information-score">
+        积分：{{score}}
+    </text>
+    <view></view>
+  </view>
+
+
+  <view class="changeLeft" bindtap="changeLeft">
     wdnmd
   </view>
 
