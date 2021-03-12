@@ -1,20 +1,27 @@
 .fallDown {
   position: fixed;
-  width: 150rpx;
-  height: 100rpx;
+  width: 200rpx;
+  height: 150rpx;
   left: 0rpx;
-  background-color: green;
   transition: all 0.2s;
   transition-timing-function: linear ;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.fallDown .fallDownImg {
+  height: 100rpx;
+  width: 100rpx;
+}
+.fallDown .fallDownContent {
+  font-weight: bolder;
 }
 .moveArea {
   position: fixed;
   bottom: 100rpx;
   width: 100%;
   height: 250rpx;
-  border-bottom-style: solid;
-  border-bottom-width: 10rpx;
-  border-bottom-color: black;
 }
 .moveArea .moveBasket {
   width: 250rpx;
@@ -24,15 +31,40 @@
   width: 100%;
   height: 100%;
 }
+.moveArea .moveAreaBottom {
+  position: fixed;
+  bottom: 100rpx;
+  background-color: #888888;
+  box-shadow: 0 0 20rpx #888888;
+  width: 100%;
+  height: 10rpx;
+}
 .changeLeft {
   position: fixed;
   bottom: 0rpx;
   right: 200rpx;
 }
-.fall {
+.startfall {
   position: fixed;
+  width: 100rpx;
+  height: 100rpx;
   bottom: 0rpx;
-  right: 0rpx;
+  right: 325rpx;
+}
+.startfall .startfallImg {
+  width: 100%;
+  height: 100%;
+}
+.stopfall {
+  position: fixed;
+  width: 80rpx;
+  height: 80rpx;
+  bottom: 10rpx;
+  right: 325rpx;
+}
+.stopfall .stopfallImg {
+  width: 100%;
+  height: 100%;
 }
 .information {
   position: fixed;
@@ -56,5 +88,5 @@
 }
 .information .information-score {
   position: relative;
-  bottom: 10rpx;
+  bottom: 20rpx;
 }
