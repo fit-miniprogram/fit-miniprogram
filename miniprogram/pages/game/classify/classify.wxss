@@ -95,4 +95,16 @@
 
 .bottom{
   flex: 1;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 80rpx;
+  padding-right: 30rpx;
+  justify-content: flex-end;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }

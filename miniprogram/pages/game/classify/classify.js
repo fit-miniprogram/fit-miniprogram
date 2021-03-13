@@ -14,13 +14,23 @@ Page({
     windowWidth:'',
     openid:'',
     _id:'',
+    show: false,
     //游戏参数
     buttonAnswer:'',
     problemNumber:'',
     imageSrc:'',
     trueAnswer:'',
     answer:-1,
-    score:0
+    score:0,
+    tips:''
+  },
+
+
+  onClickShow() {
+    this.setData({ show: true });
+  },
+  onClickHide() {
+    this.setData({ show: false });
   },
 
   getsize(){
@@ -47,11 +57,23 @@ Page({
             score:this.data.score+1
           }
         })
+        wx.showToast({
+          title: '答对了',
+          icon: 'success',
+          duration: 1000
+        })
+        wx.vibrateShort({})
     }
     else{
       this.setData({
         answer:0
       })
+      wx.showToast({
+        title: this.data.tips,
+        icon: 'none',
+        duration: 2000
+      })
+      wx.vibrateLong({})
     }
 
   },
@@ -61,9 +83,10 @@ Page({
       buttonAnswer:'low'
     })
     this.addScore()
-    wx.navigateTo({
-      url: 'classify',
-    }) 
+    setTimeout(()=>{
+      this.onLoad()
+    },1000)
+    
   },
 
   button_high(){
@@ -71,15 +94,15 @@ Page({
       buttonAnswer:'high'
     })
     this.addScore()
-    wx.navigateTo({
-      url: 'classify',
-    }) 
+    setTimeout(()=>{
+      this.onLoad()
+    },2000)
   },
 
   getProblemPicture:function(){
     //生成随机数
     var Number;
-    Number = Math.floor(Math.random()+1).toString()
+    Number = Math.floor(Math.random()*2+1).toString()
     console.log(Number)
     //从数据库中获取相应编号的题目
     db.collection('classifyGameBank').where({
@@ -89,7 +112,8 @@ Page({
         //console.log(res.data[0].src)
         this.setData({
           imageSrc:res.data[0].src,
-          trueAnswer:res.data[0].highOrLow
+          trueAnswer:res.data[0].highOrLow,
+          tips:res.data[0].tips
         })
       },
       fail: err =>{
@@ -136,6 +160,10 @@ Page({
   onLoad: function (options) {
     this.getOpenid();//获取用户的openid
     this.getsize();
+    this.setData({
+      answer:-1,
+      tips:''
+    })
     this.getProblemPicture();
   },
 
