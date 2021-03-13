@@ -1,42 +1,98 @@
 /* miniprogram/pages/game/classify/classify.wxss */
 .whole{
-  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.left{
+  flex:2;
+  display: flex;
+  flex-direction: column;
+  margin: 30rpx;
+}
+
+.right{
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.back{
-  flex: 7;
-  border: 1px solid #000;
-}
-
 .tagLow{
-  border: 1px solid #000;
-  border-radius: 20rpx;
+  flex: 1;
+  align-self: center;
+  display: flex;
+  align-items: center;
 }
 
+.textLow{
+  display: flex;
+  width: 250rpx;
+  height: 100rpx;
+  justify-content: center; 
+  align-items: center;
+  font-size: 40rpx;
+  border-radius: 50rpx;
+  background-color: #000;
+  color: #fff;
+}
+
+.picture{
+  flex: 5;
+  display: flex;
+  align-items: center;
+}
 
 .tagHigh{
-  border: 1px solid #000;
-  border-radius: 20rpx;
+  flex: 1;
+  align-self: center;
+  display: flex;
+  align-items: center;
+}
+
+.textHigh{
+  display: flex;
+  width: 250rpx;
+  height: 100rpx;
+  justify-content: center; 
+  align-items: center;
+  font-size: 40rpx;
+  border-radius: 50rpx;
+  background-color: #000;
+  color: #fff;
+}
+.score{
+  flex: 1;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  font-size: 35rpx;
+}
+
+.middle{
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.up{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.imageSrc{
+  flex: 4;
+  display: flex;
+  align-items: center;
+}
+
+.down{
+  flex:1;
+  display: flex;
+  justify-content: center;
 }
 
 .bottom{
-  flex:1;
-  border: 1px solid #000;
-  display: flex;
-}
-
-.low{
   flex: 1;
-  align-self: center;
-  justify-content: center;
-  display: flex;
-}
-
-.high{
-  flex: 1;
-  align-self: center;
-  justify-content: center;
-  display: flex;
 }

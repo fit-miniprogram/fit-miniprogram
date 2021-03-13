@@ -86,7 +86,7 @@ Page({
       number:Number
     }).get({
       success: (res) => {
-        console.log(res.data[0].src)
+        //console.log(res.data[0].src)
         this.setData({
           imageSrc:res.data[0].src,
           trueAnswer:res.data[0].highOrLow
