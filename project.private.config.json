@@ -69,6 +69,13 @@
         {
           "name": "pages/game/catch/catch",
           "pathName": "pages/game/catch/catch",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/game/classify/classify",
+          "pathName": "pages/game/classify/classify",
+          "query": "",
           "scene": null
         }
       ]
