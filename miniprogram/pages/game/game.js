@@ -18,18 +18,22 @@ Page({
     wx.vibrateShort({
       success: (res) => {},
     })
-    wx.navigateTo({
-      url: '../game/catch/catch',
-    }) 
+    setTimeout(function(){
+      wx.navigateTo({
+        url: '../game/catch/catch',
+      }) 
+    },500)
   },
 
   classifyShock : function(){
     wx.vibrateShort({
       success: (res) => {},
     })
-    wx.navigateTo({
-      url: '../game/classify/classify',
-    }) 
+    setTimeout(function(){
+      wx.navigateTo({
+        url: '../game/classify/classify',
+      }) 
+    },500)
   },
    /* setTimeout({
       function(){
