@@ -5,8 +5,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+     
   },
+
+
 
   shock : function(){
     wx.vibrateShort({
@@ -15,6 +17,17 @@ Page({
   },
   
   catchShock : function(){
+    var that = this
+    var animation1 = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease',
+      delay: 0
+     });
+     animation1.scale(0.8,0.8).step()
+     animation1.scale(1,1).step()
+     that.setData({
+      animation1: animation1.export()
+     })
     wx.vibrateShort({
       success: (res) => {},
     })
@@ -26,6 +39,17 @@ Page({
   },
 
   classifyShock : function(){
+    var that = this
+    var animation2 = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease',
+      delay: 0
+     });
+     animation2.scale(0.8,0.8).step()
+     animation2.scale(1,1).step()
+     that.setData({
+      animation2: animation2.export()
+     })
     wx.vibrateShort({
       success: (res) => {},
     })
@@ -47,7 +71,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    getApp().loadFont();
   },
 
   /**

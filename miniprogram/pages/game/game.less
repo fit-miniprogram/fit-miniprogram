@@ -63,15 +63,17 @@
 .game{
   position: relative;
   top: 50rpx;
-  height: 750rpx;
+  height: 1000rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  font-family: 'Bitstream';
+  //justify-content: space-around;
   .game-button{
-    height: 150rpx;
+    margin: 60rpx;
+    height: 220rpx;
     width: 75%;
-    border-radius: 25rpx;
+    border-radius: 50rpx;
     box-shadow: 0 0 10rpx #888888;
     background-color: white;
     display: flex;
@@ -86,17 +88,13 @@
       height: 80rpx;
     }
     .content{
-      font-size: 30rpx;
+      font-size: 50rpx;
       font-weight: bolder;
     }
   }
   
 }
 
-.taptap{
-  transform: scale(0.8, 0.8) !important;
-  box-shadow:0px 0px 10px #bbbec4 inset; 
-}
 
 @keyframes gamePlayer{
   0%   {transform:rotate(0deg);}

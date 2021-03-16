@@ -83,6 +83,11 @@
           "pathName": "pages/list/list",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "prepages",
+          "pathName": "pages/prePages/prePage/prePage",
+          "scene": null
         }
       ]
     }

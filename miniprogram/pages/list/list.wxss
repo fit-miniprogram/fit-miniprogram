@@ -62,7 +62,7 @@ page {
   content: '';
   position: fixed;
   left: -10rpx;
-  top: 85rpx;
+  top: 80rpx;
   width: 0;
   height: 85rpx;
   z-index: -2;
@@ -90,7 +90,7 @@ page {
   content: '';
   position: fixed;
   left: -10rpx;
-  top: 170rpx;
+  top: 160rpx;
   width: 0;
   height: 85rpx;
   z-index: -2;
@@ -118,7 +118,7 @@ page {
   content: '';
   position: fixed;
   left: -10rpx;
-  top: 255rpx;
+  top: 240rpx;
   width: 0;
   height: 85rpx;
   z-index: -2;
@@ -146,7 +146,7 @@ page {
   content: '';
   position: fixed;
   left: -10rpx;
-  top: 340rpx;
+  top: 330rpx;
   width: 0;
   height: 85rpx;
   z-index: -2;
