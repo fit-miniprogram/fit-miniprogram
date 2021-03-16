@@ -1,0 +1,97 @@
+.outter{
+    height: 800rpx;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    transform: translateY( -800rpx); 
+    -ms-transform: translateY( -800rpx); 
+    -webkit-transform: translateY( -800rpx); 
+}
+.inner{
+    transform-style: preserve-3d;
+    position: relative;
+    height: 700rpx;
+    width: 90%;
+    border-style: solid;
+    box-shadow: 0rpx 0rpx 8rpx 8rpx #DDDDDD;
+    border-width: 0rpx;
+    border-radius: 20rpx;
+}
+.continue_btn{
+    width: 100%;
+    height: 200rpx;
+    bottom: 0;
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    transform: translateY( 200rpx); 
+    -ms-transform: translateY( 200rpx); 
+    -webkit-transform: translateY( 200rpx); 
+}
+.btn_icon{
+    height: 64%;
+    width: 128rpx;
+    background: url("http://r.photo.store.qq.com/psc?/V10siXyS0lL9dw/TmEUgtj9EK6.7V8ajmQrELrZ36yEJLDuDTEHvc1hKMTwRQWNavkn*92hKF48HxGlSS0PBfR27kY81eI3bFcTb3i4.dZDpzN5oqR93klKoHo!/r");
+    background-size: 100% 100%;
+}
+.btn_icon:after{
+    content: "";
+    background: #999;
+    position: absolute; 
+    width: 750rpx;
+    height: 750rpx;
+    left: calc(50% - 375rpx);
+    top: calc(25% - 375rpx);
+    opacity: 0;
+    margin: auto;
+    border-radius: 50%;
+    transform: scale(1);
+    transition: all 0.5s ease-in-out;
+   }
+.btn_icon:active:after {
+    transform: scale(0);
+    opacity: 1;
+    transition: 0s;
+}
+.title{
+    width: 100%;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    font-weight: bold;
+    font-size: 40rpx;
+    color: #000000;
+}
+.front_img{
+    position: absolute;
+    width: 506.25rpx;           /* 750*0.9*0.75 */
+    height: 550rpx;
+    margin-left: 84.375rpx;     /* 750*0.9*0.125 */
+    margin-right: 84.375rpx;    /* 750*0.9*0.125 */
+    background-size: 100% 100%;
+}
+.back_img{
+    position: absolute;
+    width: 506.25rpx;           /* 750*0.9*0.75 */
+    height: 550rpx;
+    margin-left: 84.375rpx;     /* 750*0.9*0.125 */
+    margin-right: 84.375rpx;    /* 750*0.9*0.125 */
+}
+.front{
+    animation:front 1s linear 1;
+    backface-visibility: hidden;}
+.back{
+    animation:back 1s linear 1;
+}
+@keyframes front{from{transform: rotateY(0deg);}  to{transform: rotateY(180deg);}}
+@keyframes back{from{transform: rotateY(-180deg);}  to{transform: rotateY(0deg);}}
+.z1{
+    z-index: 6;
+}
+.z2{
+    z-index: 5;
+}

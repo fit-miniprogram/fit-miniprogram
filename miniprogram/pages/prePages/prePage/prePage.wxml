@@ -1,0 +1,11 @@
+<view class="container" style="width: 100%; height: 100%">
+  <view class="logo">
+  </view>
+  <view class="title_text">
+    <view class="title1">Fit</view>
+    <view class="title2">健康生活每一天</view>
+  </view>
+  <view class="btn_box">
+    <button class="btn1" style="opacity: {{ishided}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">点击进入</button>
+  </view>
+</view>

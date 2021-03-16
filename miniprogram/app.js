@@ -40,6 +40,52 @@ App({
     this.loadFont()
     
   },
+  //渐入，渐出实现 
+  show : function(that,param,opacity){
+    var animation = wx.createAnimation({
+    //持续时间800ms
+    duration: 800,
+    timingFunction: 'ease',
+    });
+    //var animation = this.animation
+    animation.opacity(opacity).step()
+    //将param转换为key
+    var json = '{"' + param + '":""}'
+    json = JSON.parse(json);
+    json[param] = animation.export()
+    //设置动画
+    that.setData(json)
+  },
+   
+  //上下滑动渐入渐出
+  slideupshow:function(that,param,px,opacity,duratime){
+      var animation = wx.createAnimation({
+      duration: duratime,
+      timingFunction: 'ease',
+      });
+      animation.translateY(px).opacity(opacity).step()
+      //将param转换为key
+      var json = '{"' + param + '":""}'
+      json = JSON.parse(json);
+      json[param] = animation.export()
+      //设置动画
+      that.setData(json)
+  },
+   
+  //左右滑动渐入渐出
+  sliderightshow: function (that, param, px, opacity, duratime) {
+      var animation = wx.createAnimation({
+      duration: duratime,
+      timingFunction: 'ease',
+      });
+      animation.translateX(px).opacity(opacity).step()
+      //将param转换为key
+      var json = '{"' + param + '":""}'
+      json = JSON.parse(json);
+      json[param] = animation.export()
+      //设置动画
+      that.setData(json)
+  },
 
   loadFont() {
     wx.loadFontFace({
@@ -84,6 +130,19 @@ App({
       }
     })
 
+    wx.loadFontFace({
+      family: 'Bitstream',
+      source: 'url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/ArtBold.ttf?sign=1c44791b6492de91bbb21fc15a232a29&t=1615685846")',
+      success(res){
+        console.log('res', res)
+      },
+      fail(err){
+        console.log('err', err)
+      },
+      complete(res){
+        console.log('complete', res)
+      }
+    })
   }
 
 

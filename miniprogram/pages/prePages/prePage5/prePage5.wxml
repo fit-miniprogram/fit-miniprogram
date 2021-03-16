@@ -1,0 +1,12 @@
+<view class="sentence" animation="{{slide_right}}">
+  <span class="word">即</span>
+  <span class="word">刻</span>
+  <span class="word">畅</span>
+  <span class="word">享</span>
+  <span class="word">吧</span>
+  <span class="word">!</span>
+</view>
+
+<view class="continue_btn" animation="{{slide_right2}}">
+    <view class="btn_icon ripple" bindtap="gtNxtPg"></view>
+</view>

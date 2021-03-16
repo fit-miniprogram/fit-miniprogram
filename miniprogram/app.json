@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/prePages/prePage/prePage",
     "pages/homePage/homePage",
     "pages/game/game",
     "pages/mine/mine",
@@ -12,7 +13,12 @@
     "pages/mine/history/height/height",
     "pages/mine/history/weight/weight",
     "pages/game/catch/catch",
-    "pages/game/classify/classify"
+    "pages/game/classify/classify",
+    "pages/prePages/prePage1/prePage1",
+    "pages/prePages/prePage2/prePage2",
+    "pages/prePages/prePage3/prePage3",
+    "pages/prePages/prePage4/prePage4",
+    "pages/prePages/prePage5/prePage5"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

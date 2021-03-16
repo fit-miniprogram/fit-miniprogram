@@ -1,0 +1,3 @@
+<view class="message" style="opacity: {{msg_opacity}}" animation="{{slide_up1}}">嗨!</view>
+<view class="message shake1" style="opacity: {{msg_opacity}};display: {{block1}};" animation="{{slide_up2}}">初来乍到</view>
+<view class="message shake2" style="opacity: {{msg_opacity}};display: {{block2}};" animation="{{slide_up3}}">可别忘了这些有趣的小功能哦!</view>
