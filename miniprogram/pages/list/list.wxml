@@ -11,5 +11,15 @@
     </view>
 </view>
 
+<view class="content" wx:if="{{currentTab==0?true:flase}}">0</view>
+
+<view class="content" wx:if="{{currentTab==1?true:flase}}">1</view>
+
+<view class="content" wx:if="{{currentTab==2?true:flase}}">2</view>
+
+<view class="content" wx:if="{{currentTab==3?true:flase}}">3</view>
+
+<view class="content" wx:if="{{currentTab==4?true:flase}}">4</view>
+
 
 

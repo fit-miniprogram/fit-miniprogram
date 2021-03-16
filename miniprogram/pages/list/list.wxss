@@ -19,6 +19,12 @@ page {
   justify-content: center;
   width: 100%;
 }
+.content {
+  position: relative;
+  left: 25%;
+  z-index: 5;
+  font-size: 50rpx;
+}
 .border-color0 {
   border-left-width: 10rpx;
   border-left-style: solid;
