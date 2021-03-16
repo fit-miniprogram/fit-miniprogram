@@ -1,13 +1,27 @@
-// miniprogram/pages/list/list.js
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+      currentTab:0
   },
 
+  swichNav(e){
+    var that = this
+    that.setData({
+      currentTab:e.currentTarget.dataset.current
+    })
+  
+  },
+
+  wdnmd:function(){
+    var that = this
+    that.setData({
+      az:"wdnmd-hover"
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

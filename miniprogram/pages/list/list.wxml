@@ -1,2 +1,15 @@
-<!--miniprogram/pages/list/list.wxml-->
-<text>miniprogram/pages/list/list.wxml</text>
+ <view class="Tab">
+    <view class="tab-item border-color0  {{currentTab==0?'active0':''}}" data-current="0" bindtap="swichNav">谷薯类
+    </view>
+    <view class="tab-item border-color1  {{currentTab==1?'active1':''}}" data-current="1" bindtap="swichNav">蔬果类
+    </view>
+    <view class="tab-item border-color2  {{currentTab==2?'active2':''}}" data-current="2" bindtap="swichNav">动物类
+    </view>
+    <view class="tab-item border-color3  {{currentTab==3?'active3':''}}" data-current="3" bindtap="swichNav">大豆类
+    </view>
+    <view class="tab-item border-color4  {{currentTab==4?'active4':''}}" data-current="4" bindtap="swichNav">能量类
+    </view>
+</view>
+
+
+

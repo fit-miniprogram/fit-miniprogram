@@ -27,7 +27,6 @@
 
 </view>
 
-<!-- 此处移动时光标不第一时间移动的问题未解决 -->
 
 <view class="{{searchClass}} " wx:if="{{isShow}}">
   <view class="cu-bar search bg-white searchColor">
