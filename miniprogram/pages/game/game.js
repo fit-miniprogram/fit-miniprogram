@@ -10,10 +10,26 @@ Page({
 
 
 
-  shock : function(){
+  pullitshock : function(){
+    var that = this
+    var animation3 = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease',
+      delay: 0
+     });
+     animation3.scale(0.8,0.8).step()
+     animation3.scale(1,1).step()
+     that.setData({
+      animation3: animation3.export()
+     })
     wx.vibrateShort({
       success: (res) => {},
     })
+    setTimeout(function(){
+      wx.navigateTo({
+        url: '../game/pullit/pullit',
+      }) 
+    },500)
   },
   
   catchShock : function(){
