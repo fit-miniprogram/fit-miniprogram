@@ -36,6 +36,7 @@ Page({
 
     //渐显文字1 总耗时1秒 总耗时1.25+0.5=1.75
     this.opacity_fade(this,0);
+    this.app.shake(this,"slide_up1",0,125);
     setTimeout(function(){
       this.app.slideupshow(this,"slide_up1",-500,1,500);
     }.bind(this),1250)
@@ -48,6 +49,9 @@ Page({
       })
     }.bind(this),2000)
     setTimeout(function(){
+      this.app.shake(this,"slide_up2",0,125);
+    }.bind(this),2250)
+    setTimeout(function(){
       this.app.slideupshow(this,"slide_up2",-500,1,500);
     }.bind(this),3250)
 
@@ -58,6 +62,9 @@ Page({
         block2: "block"
       })
     }.bind(this),4000)
+    setTimeout(function(){
+      this.app.shake(this,"slide_up3",0,125);
+    }.bind(this),4250)
     setTimeout(function(){
       this.app.slideupshow(this,"slide_up3",-500,1,500);
     }.bind(this),5500)

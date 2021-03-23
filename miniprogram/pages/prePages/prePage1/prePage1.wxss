@@ -7,13 +7,13 @@
   width: 100%;
   font-family: 'Bitstream';
   text-align: center;
-  animation: shake .75s linear;
+  /* animation: shake .75s linear; */
 }
-.shake1{
+/* .shake1{
   animation-delay: 2.25s;
   animation: shake .75s linear;
-}
-.shake2{
+} */
+/* .shake2{
   top: 350rpx;
   animation-delay: 4.25s;
   animation: shake .75s linear;
@@ -31,5 +31,5 @@
   100% {
     rotate: 0deg;
   }
-}
+} */
 

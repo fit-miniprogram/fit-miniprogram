@@ -90,13 +90,14 @@ App({
   //shake 晃动
   shake: function(that, param, delay, duratime){
     var animation = wx.createAnimation({
+      delay: delay,
       duration: duratime,    
-      timingFunction: 'linear',
-      delay: delay
+      timingFunction: 'ease'
     });
-    animation.rotate(360).step();
-    animation.rotate(360).step();
-    animation.rotate(360).step();
+    animation.rotate(-60).step();
+    animation.rotate(0).step();
+    animation.rotate(30).step();
+    animation.rotate(0).step();
 
     //将param转换为key
     var json = '{"' + param + '":""}'
@@ -105,6 +106,7 @@ App({
     //设置动画
     that.setData(json)  
   },
+  
   loadFont() {
     wx.loadFontFace({
       family: 'logo',
