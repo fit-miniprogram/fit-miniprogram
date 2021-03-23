@@ -1,13 +1,11 @@
-// pages/prePage5/prePage5.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    msg_opacity: 0,
-    block1: "none",
-    block2: "none"
+    title_img_1: "front_img z1",
+    title_img_2: "bacl_img z2"
   },
 
   /**
@@ -15,68 +13,31 @@ Page({
    */
   onLoad: function (options) {
     this.app = getApp();
-    this.app.loadFont();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
-
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
     let that=this;
+    this.setData({imgurl:"http://r.photo.store.qq.com/psc?/V10siXyS0lL9dw/TmEUgtj9EK6.7V8ajmQrEKQZFCPi3X2mC6nifmcK*gIFminvhuzanRXNFmIQAMADO47Q3xdcz9Q5LBLeu2c5h5wXZ7rdhCsAN5aiCPQqrPg!/r"});
+    this.setData({imgOpacity:0});
     if (wx.canIUse('hideHomeButton')) {
       wx.hideHomeButton()
     }
 
-    //渐显文字1 总耗时1秒 总耗时1.25+0.5=1.75
-    this.opacity_fade(this,0);
+    //向下显示图片 总耗时1.25秒(等待0.05秒)
     setTimeout(function(){
-      this.app.slideupshow(this,"slide_up1",-500,1,500);
-    }.bind(this),1250)
+      this.app.slideupshow(this,'slide_down',0,1,1200);
+    }.bind(this),50);
 
-    //渐显文字2 总耗时3.75s
-    this.opacity_fade(this,2.25);
-    setTimeout(function(){
-      this.setData({
-        block1: "block"
-      })
-    }.bind(this),2000)
-    setTimeout(function(){
-      this.app.slideupshow(this,"slide_up2",-500,1,500);
-    }.bind(this),3250)
-
-    //渐显文字3 总耗时6s
-    this.opacity_fade(this,4.25);
-    setTimeout(function(){
-      this.setData({
-        block2: "block"
-      })
-    }.bind(this),4000)
-    setTimeout(function(){
-      this.app.slideupshow(this,"slide_up3",-500,1,500);
-    }.bind(this),5500)
-
-    //经过6s后进入下一个页面
-    setTimeout(function(){
-      wx.navigateTo({
-        url: '../prePage3/prePage3'
-      })
-    }.bind(this),6000);
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-  opacity_fade: function(that,time){
+    //渐显图片 总耗时2.25秒(等待1.25秒)
     setTimeout(function(){
       var alpha=0,speed=0.1;
       var timer=null;
@@ -87,15 +48,49 @@ Page({
           }
           else{
             alpha+=speed;
-            that.setData({msg_opacity:alpha});
+            that.setData({imgOpacity:alpha});
           }
         },100);
-    }.bind(this),time);    
+    }.bind(this),1250);
+
+    //翻转显示图片 总共耗时4.5秒
+    setTimeout(function(){
+      that.setData({
+        title_img_1: "front_img front",
+        title_img_2: "back_img back",
+      })
+      setTimeout(function () {
+        that.setData({
+          title_img_1: "front_img z2",
+          title_img_2: "back_img z1",
+        })
+      }, 1000);
+
+    }.bind(this),2500);
+
+    //向上弹出继续框 总耗时3.2秒(等待2秒)
+    setTimeout(function(){
+      that.app.slideupshow(this,'slide_up',0,1,1200);
+    }.bind(this),2000);
+    
+    // 延时显示继续按钮
+    // setTimeout(function() {
+    //   that.setData({ishided:"block"});
+    // }.bind(this),2000);
+  },
+  gtNxtPg: function(){
+    this.app.slideupshow(this,'slide_down',-400,0.5,1200);
+    this.app.slideupshow(this,'slide_up',200,0.5,1200);
+    setTimeout(function(){
+      wx.redirectTo({
+        url: '../prePage3/prePage3'
+      })
+    }.bind(this),1200);
   },
   /**
-   * 生命周期函数--监听页面卸载
+   * 生命周期函数--监听页面隐藏
    */
-  onUnload: function () {
-
-  }
+  onHide: function () {
+    console.log("closed");
+  },
 })

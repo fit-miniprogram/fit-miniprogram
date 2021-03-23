@@ -1,3 +1,12 @@
-<view class="message" style="opacity: {{msg_opacity}}" animation="{{slide_up1}}">嗨!</view>
-<view class="message shake1" style="opacity: {{msg_opacity}};display: {{block1}};" animation="{{slide_up2}}">初来乍到</view>
-<view class="message shake2" style="opacity: {{msg_opacity}};display: {{block2}};" animation="{{slide_up3}}">可别忘了这些有趣的小功能哦!</view>
+<view class="outter" animation="{{slide_down}}">
+    <view class="inner">
+      <view class="title">答对每日一题可获得积分</view>
+      <view class="{{title_img_1}}" style="background: url({{imgurl}});background-size: 100% 100%;opacity: {{imgOpacity}}"></view>
+      <view class="{{title_img_2}}" style="background: url(http://r.photo.store.qq.com/psc?/V10siXyS0lL9dw/TmEUgtj9EK6.7V8ajmQrEJj.KxKtia.Qdyn2R18fYhqUhCZbvMARHynsic0Ft5d5MwGp2t8BDi4Ed*zyCP6JTJabdkbFDvmDFb6Z3geDgvg!/r);background-size: 100% 100%;"></view>
+    </view>
+</view>
+
+<!-- <view class="continue_btn" animation="{{slide_up}}" style="display: {{ishided}}"> -->
+<view class="continue_btn" animation="{{slide_up}}">
+    <view class="btn_icon" bindtap="gtNxtPg"></view>
+</view>

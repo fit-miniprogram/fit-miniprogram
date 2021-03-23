@@ -74,19 +74,37 @@ App({
    
   //左右滑动渐入渐出
   sliderightshow: function (that, param, px, opacity, duratime) {
-      var animation = wx.createAnimation({
+    var animation = wx.createAnimation({
       duration: duratime,
       timingFunction: 'ease',
-      });
-      animation.translateX(px).opacity(opacity).step()
-      //将param转换为key
-      var json = '{"' + param + '":""}'
-      json = JSON.parse(json);
-      json[param] = animation.export()
-      //设置动画
-      that.setData(json)
+    });
+    animation.translateX(px).opacity(opacity).step()
+    //将param转换为key
+    var json = '{"' + param + '":""}'
+    json = JSON.parse(json);
+    json[param] = animation.export()
+    //设置动画
+    that.setData(json)
   },
 
+  //shake 晃动
+  shake: function(that, param, delay, duratime){
+    var animation = wx.createAnimation({
+      duration: duratime,    
+      timingFunction: 'linear',
+      delay: delay
+    });
+    animation.rotate(360).step();
+    animation.rotate(360).step();
+    animation.rotate(360).step();
+
+    //将param转换为key
+    var json = '{"' + param + '":""}'
+    json = JSON.parse(json);
+    json[param] = animation.export()
+    //设置动画
+    that.setData(json)  
+  },
   loadFont() {
     wx.loadFontFace({
       family: 'logo',

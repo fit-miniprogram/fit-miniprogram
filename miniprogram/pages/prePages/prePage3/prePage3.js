@@ -1,11 +1,13 @@
+// pages/prePage3/prePage3.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    title_img_1: "front_img z1",
-    title_img_2: "bacl_img z2"
+    outter_height: "500rpx",
+    inner_height: "275rpx",
+    title_opacity: "0"
   },
 
   /**
@@ -19,26 +21,28 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
+
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
     let that=this;
-    this.setData({imgurl:"http://r.photo.store.qq.com/psc?/V10siXyS0lL9dw/TmEUgtj9EK6.7V8ajmQrEKQZFCPi3X2mC6nifmcK*gIFminvhuzanRXNFmIQAMADO47Q3xdcz9Q5LBLeu2c5h5wXZ7rdhCsAN5aiCPQqrPg!/r"});
-    this.setData({imgOpacity:0});
     if (wx.canIUse('hideHomeButton')) {
       wx.hideHomeButton()
     }
-
-    //向下显示图片 总耗时1.25秒(等待0.05秒)
     setTimeout(function(){
       this.app.slideupshow(this,'slide_down',0,1,1200);
-    }.bind(this),50);
+    }.bind(this),50);  
 
-    //渐显图片 总耗时2.25秒(等待1.25秒)
     setTimeout(function(){
+      that.app.slideupshow(this,'slide_up',0,1,1200);
+    }.bind(this),2000);
+
+    //渐显字 等待2秒 持续1.1秒 总耗时3.1秒
+    setTimeout(function(){
+      that.setData({inner_height:"350rpx"});
       var alpha=0,speed=0.1;
       var timer=null;
       var opTarget=1;
@@ -48,36 +52,47 @@ Page({
           }
           else{
             alpha+=speed;
-            that.setData({imgOpacity:alpha});
+            that.setData({title_opacity:alpha});
           }
         },100);
-    }.bind(this),1250);
-
-    //翻转显示图片 总共耗时4.5秒
-    setTimeout(function(){
-      that.setData({
-        title_img_1: "front_img front",
-        title_img_2: "back_img back",
-      })
-      setTimeout(function () {
-        that.setData({
-          title_img_1: "front_img z2",
-          title_img_2: "back_img z1",
-        })
-      }, 1000);
-
-    }.bind(this),2500);
-
-    //向上弹出继续框 总耗时3.2秒(等待2秒)
-    setTimeout(function(){
-      that.app.slideupshow(this,'slide_up',0,1,1200);
     }.bind(this),2000);
-    
-    // 延时显示继续按钮
-    // setTimeout(function() {
-    //   that.setData({ishided:"block"});
-    // }.bind(this),2000);
   },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  },
+  //跳转到下一个页面
   gtNxtPg: function(){
     this.app.slideupshow(this,'slide_down',-400,0.5,1200);
     this.app.slideupshow(this,'slide_up',200,0.5,1200);
@@ -86,11 +101,5 @@ Page({
         url: '../prePage4/prePage4'
       })
     }.bind(this),1200);
-  },
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-    console.log("closed");
   },
 })

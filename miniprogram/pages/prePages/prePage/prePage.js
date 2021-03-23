@@ -64,7 +64,7 @@ Page({
             });
             //授权成功后，跳转进入小程序首次登录界面
             wx.redirectTo({
-              url: '../prePage2/prePage2'
+              url: '../prePage1/prePage1'
             })
         } else {
             //用户按了拒绝按钮

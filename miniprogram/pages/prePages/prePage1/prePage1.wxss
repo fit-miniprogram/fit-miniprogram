@@ -1,1 +1,35 @@
-/* pages/prePages/prePage1/prePage1.wxss */
+.message{
+  top: 450rpx;
+  position: fixed;
+  height: 175rpx;
+  line-height: 175rpx;
+  font-size: 100rpx;
+  width: 100%;
+  font-family: 'Bitstream';
+  text-align: center;
+  animation: shake .75s linear;
+}
+.shake1{
+  animation-delay: 2.25s;
+  animation: shake .75s linear;
+}
+.shake2{
+  top: 350rpx;
+  animation-delay: 4.25s;
+  animation: shake .75s linear;
+}
+@keyframes shake{
+  0% {
+    rotate:-60deg;
+  }
+  75% {
+    rotate: 0deg;
+  }
+  90% {
+    rotate: 30deg;
+  }
+  100% {
+    rotate: 0deg;
+  }
+}
+
