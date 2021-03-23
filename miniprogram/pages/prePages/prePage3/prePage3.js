@@ -36,7 +36,7 @@ Page({
     setTimeout(function(){
       this.app.slideupshow(this,'slide_down',0,1,1200);
     }.bind(this),50);  
-    // camera shake
+    // camera shaking
     setTimeout(function(){
       this.app.shake(this,'camera_shake',0,250);
     }.bind(this),1500);  
