@@ -4,6 +4,39 @@
   flex-direction: row;
 }
 
+.back{
+  z-index: -1;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+}
+
+.top{
+  flex: 1;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heiban{
+  width:450rpx;
+  height:350rpx;
+  background-repeat:no-repeat; /** 不重复*/
+  background-size:contain; /**等比例缩放*/
+  color: #fff;
+  font-size: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'cola';
+}
+
+.backImg{
+  flex: 2;
+  align-self: flex-end;
+}
+
 .left{
   flex:2;
   display: flex;
