@@ -40,8 +40,8 @@
   background-position: 50% 50%;
 
   /* 动画线性变化 等待1.5s 持续1s */
-  animation: shake 1s linear;
-  animation-delay: 1.5s;
+  /* animation: shake 1s linear;
+  animation-delay: 1.5s; */
 }
 .inner .result{
   width: 100%;

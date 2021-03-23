@@ -92,7 +92,7 @@ App({
     var animation = wx.createAnimation({
       delay: delay,
       duration: duratime,    
-      timingFunction: 'ease'
+      timingFunction: 'linear'
     });
     animation.rotate(-60).step();
     animation.rotate(0).step();

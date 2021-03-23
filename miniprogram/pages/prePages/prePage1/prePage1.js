@@ -72,9 +72,9 @@ Page({
     //经过6s后进入下一个页面
     setTimeout(function(){
       wx.navigateTo({
-        url: '../prePage3/prePage3'
+        url: '../prePage2/prePage2'
       })
-    }.bind(this),6000);
+    }.bind(this),6250);
   },
 
   /**
