@@ -64,12 +64,15 @@ Page({
             score:this.data.score+1
           }
         })
-        wx.showToast({
-          title: '答对了',
-          icon: 'success',
-          duration: 1000
-        })
-        wx.vibrateShort({})
+      this.setData({
+        score:this.data.score+1
+      })
+      wx.showToast({
+        title: '答对了',
+        icon: 'success',
+        duration: 1000
+      })
+      wx.vibrateShort({})
     }
     else{
       this.setData({
