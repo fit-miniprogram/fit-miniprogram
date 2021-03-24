@@ -5,7 +5,6 @@
 }
 
 .back{
-  z-index: -1;
   width: 100%;
   background-color: rgb(255, 255, 255);
   display: flex;
@@ -32,9 +31,44 @@
   font-family: 'cola';
 }
 
-.backImg{
+.table{
   flex: 2;
   align-self: flex-end;
+  background-repeat:no-repeat; /** 不重复*/
+  background-size:100% 100%; /**等比例缩放*/
+  display: flex;
+  flex-direction: column;
+}
+
+.transporter{
+  flex: 4;
+  border: 1px solid #000;
+  display: flex;
+  justify-content: center;
+}
+
+.food{
+  width: 150rpx;
+  border: 1px solid #000;
+}
+
+.Button{
+  flex: 1;
+  display: flex;
+}
+
+.leftButton{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  border: 1px solid #000;
+}
+
+.rightButton{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  border: 1px solid #000;
 }
 
 .left{
