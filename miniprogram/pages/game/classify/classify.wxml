@@ -5,11 +5,12 @@
   <view class="table" style="width:{{windowWidth}}px;background-image:url('{{backImg}}')">
     <view class=" transporter">
       <view class="food">
-        <image src="{{imageSrc[4]}}" mode="widthFix" style="width:100rpx"></image>
-        <image src="{{imageSrc[3]}}" mode="widthFix" style="width:100rpx"></image>
+        <view style="height:30rpx;"></view>
+        <image src="{{imageSrc[4]}}" mode="widthFix" style="width:50rpx"></image>
+        <image src="{{imageSrc[3]}}" mode="widthFix" style="width:70rpx"></image>
         <image src="{{imageSrc[2]}}" mode="widthFix" style="width:100rpx"></image>
-        <image src="{{imageSrc[1]}}" mode="widthFix" style="width:100rpx"></image>
-        <image src="{{imageSrc[0]}}" mode="widthFix" style="width:100rpx"></image>
+        <image src="{{imageSrc[1]}}" mode="widthFix" style="width:130rpx"></image>
+        <image src="{{imageSrc[0]}}" mode="widthFix" style="width:170rpx"></image>
       </view>
     </view>
     <view class="Button">

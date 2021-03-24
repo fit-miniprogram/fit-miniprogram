@@ -111,7 +111,7 @@ Page({
     setTimeout(function(){
       that.getProblem()//获取传送带上显示的图片
       that.start()
-    },3000)
+    },2000)
   },
 
   getProblemPicture:function(i,Number){

@@ -42,14 +42,15 @@
 
 .transporter{
   flex: 4;
-  border: 1px solid #000;
   display: flex;
   justify-content: center;
 }
 
 .food{
-  width: 150rpx;
-  border: 1px solid #000;
+  width: 200rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .Button{
@@ -61,117 +62,10 @@
   flex: 1;
   display: flex;
   justify-content: center;
-  border: 1px solid #000;
 }
 
 .rightButton{
   flex: 1;
   display: flex;
   justify-content: center;
-  border: 1px solid #000;
-}
-
-.left{
-  flex:2;
-  display: flex;
-  flex-direction: column;
-  margin: 30rpx;
-}
-
-.right{
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.tagLow{
-  flex: 1;
-  align-self: center;
-  display: flex;
-  align-items: center;
-}
-
-.textLow{
-  display: flex;
-  width: 250rpx;
-  height: 100rpx;
-  justify-content: center; 
-  align-items: center;
-  font-size: 40rpx;
-  border-radius: 50rpx;
-  background-color: #000;
-  color: #fff;
-}
-
-.picture{
-  flex: 5;
-  display: flex;
-  align-items: center;
-}
-
-.tagHigh{
-  flex: 1;
-  align-self: center;
-  display: flex;
-  align-items: center;
-}
-
-.textHigh{
-  display: flex;
-  width: 250rpx;
-  height: 100rpx;
-  justify-content: center; 
-  align-items: center;
-  font-size: 40rpx;
-  border-radius: 50rpx;
-  background-color: #000;
-  color: #fff;
-}
-.score{
-  flex: 1;
-  display: flex;
-  align-self: center;
-  align-items: center;
-  font-size: 35rpx;
-}
-
-.middle{
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.up{
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
-.imageSrc{
-  flex: 4;
-  display: flex;
-  align-items: center;
-}
-
-.down{
-  flex:1;
-  display: flex;
-  justify-content: center;
-}
-
-.bottom{
-  flex: 1;
-  display: flex;
-  align-items: flex-end;
-  padding-bottom: 80rpx;
-  padding-right: 30rpx;
-  justify-content: flex-end;
-}
-
-.wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
 }
