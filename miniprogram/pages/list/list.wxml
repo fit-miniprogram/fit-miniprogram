@@ -11,15 +11,73 @@
     </view>
 </view>
 
-<view class="content" wx:if="{{currentTab==0?true:flase}}">0</view>
 
-<view class="content" wx:if="{{currentTab==1?true:flase}}">1</view>
+<view class="content" wx:if="{{currentTab==0?true:flase}}">
+    <view id="gushuIntro" class="intro" >
+        <view id="gushuImg" class="introImgBack">
+            <image class="introImg" src="{{imgGushu}}"></image>
+        </view>
+        <view class="introContent">
+            <text class="content1">谷薯类食物</text>
+        </view>
+    </view>
+</view>
 
-<view class="content" wx:if="{{currentTab==2?true:flase}}">2</view>
 
-<view class="content" wx:if="{{currentTab==3?true:flase}}">3</view>
 
-<view class="content" wx:if="{{currentTab==4?true:flase}}">4</view>
+
+<view class="content" wx:if="{{currentTab==1?true:flase}}">
+    <view id="shuguoIntro" class="intro">
+        <view id="shuguoImg" class="introImgBack">
+            <image class="introImg" src="{{imgShuguo}}"></image>
+        </view>
+        <view class="introContent">
+            <text class="content1">蔬果类食物</text>
+        </view>
+    </view>
+</view>
+
+
+
+
+<view class="content" wx:if="{{currentTab==2?true:flase}}">
+    <view id="dongwuIntro" class="intro">
+        <view id="dongwuImg" class="introImgBack">
+            <image class="introImg" src="{{imgDongwu}}"></image>
+        </view>
+        <view class="introContent">
+            <text class="content1">动物类食物</text>
+        </view>
+    </view>
+</view>
+
+
+
+
+<view class="content" wx:if="{{currentTab==3?true:flase}}">
+    <view id="dadouIntro" class="intro">
+        <view id="dadouImg" class="introImgBack">
+            <image class="introImg" src="{{imgDadou}}"></image>
+        </view>
+        <view class="introContent">
+            <text class="content1">大豆类食物</text>
+        </view>
+    </view>
+</view>
+
+
+
+
+<view class="content" wx:if="{{currentTab==4?true:flase}}">
+    <view id="nengliangIntro" class="intro">
+        <view id="nengliangImg" class="introImgBack">
+            <image class="introImg" src="{{imgNengliang}}"></image>
+        </view>
+        <view class="introContent">
+            <text class="content1">能量类食物</text>
+        </view>
+    </view>
+</view>
 
 
 

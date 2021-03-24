@@ -25,6 +25,31 @@ page {
   z-index: 5;
   font-size: 50rpx;
 }
+.content .intro {
+  display: flex;
+  flex-direction: column;
+  margin-top: 37.5rpx;
+  border-radius: 20rpx;
+  align-items: center;
+  width: 525rpx;
+  height: 600rpx;
+  /* 后期建议删除！！！！！！！！！！！！！*/
+}
+.content .intro .introImgBack {
+  margin-top: 37.5rpx;
+  height: 200rpx;
+  width: 200rpx;
+  border-radius: 25rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.content .intro .introImgBack .introImg {
+  position: relative;
+  left: 10rpx;
+  height: 150rpx;
+  width: 150rpx;
+}
 .border-color0 {
   height: 85rpx;
   border-left-width: 10rpx;
@@ -58,7 +83,7 @@ page {
   height: 85rpx;
   border-left-width: 10rpx;
   border-left-style: solid;
-  border-left-color: yellowgreen;
+  border-left-color: #9acd32;
 }
 .border-color1:before {
   content: '';
@@ -169,4 +194,34 @@ page {
   width: 21%;
   background: #16A3FF;
   box-shadow: 10rpx 0rpx 10rpx #888888;
+}
+#gushuIntro {
+  background-color: #E4BB7C;
+}
+#gushuIntro #gushuImg {
+  background-color: #e49214;
+}
+#shuguoIntro {
+  background-color: #B4CD80;
+}
+#shuguoIntro #shuguoImg {
+  background-color: yellowgreen;
+}
+#dongwuIntro {
+  background-color: #E58A85;
+}
+#dongwuIntro #dongwuImg {
+  background-color: #E52F24;
+}
+#dadouIntro {
+  background-color: #C0C000;
+}
+#dadouIntro #dadouImg {
+  background-color: #808000;
+}
+#nengliangIntro {
+  background-color: #8BD1FF;
+}
+#nengliangIntro #nengliangImg {
+  background-color: #16A3FF;
 }
