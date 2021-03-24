@@ -15,10 +15,12 @@
 <view class="content" wx:if="{{currentTab==0?true:flase}}">
     <view id="gushuIntro" class="intro" >
         <view id="gushuImg" class="introImgBack">
-            <image class="introImg" src="{{imgGushu}}"></image>
+            <image id="gushuImgg" class="introImg" src="{{imgGushu}}"></image>
         </view>
         <view class="introContent">
             <text class="content1">谷薯类食物</text>
+            <text class="content2" decode="true">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;传统意义的主食,提供人体所需能量的一半，也是碳水化合物，蛋白质，维生素B族和膳食纤维的重要来源。</text>
+            <text class="content3" decode="true">&nbsp;建议摄入量：每天250~400g</text>
         </view>
     </view>
 </view>
@@ -29,10 +31,15 @@
 <view class="content" wx:if="{{currentTab==1?true:flase}}">
     <view id="shuguoIntro" class="intro">
         <view id="shuguoImg" class="introImgBack">
-            <image class="introImg" src="{{imgShuguo}}"></image>
+            <image id="shuguoImgg" class="introImg" src="{{imgShuguo}}"></image>
         </view>
         <view class="introContent">
             <text class="content1">蔬果类食物</text>
+            <text class="content2" decode="true">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;重要的食物来源,水分含量高，能量较低，几乎不含蛋白质和脂肪，但是微量营养素维生素，矿物质含量较高，且具有一定的膳食纤维。</text>
+            <text style="margin-bottom:0rpx;" class="content3" decode="true">&nbsp;建议水果摄入量：100g~200g
+            </text>
+            <text style="margin-top:0rpx;" class="content3" decode="true">&nbsp;建议蔬菜摄入量：300g~500g
+            </text>
         </view>
     </view>
 </view>
@@ -43,10 +50,15 @@
 <view class="content" wx:if="{{currentTab==2?true:flase}}">
     <view id="dongwuIntro" class="intro">
         <view id="dongwuImg" class="introImgBack">
-            <image class="introImg" src="{{imgDongwu}}"></image>
+            <image id="dongwuImgg" class="introImg" src="{{imgDongwu}}"></image>
         </view>
         <view class="introContent">
             <text class="content1">动物类食物</text>
+            <text class="content2" decode="true">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动物来源的食物，包括畜禽肉、蛋类、水产品、奶及其制品等，主要为人体提供蛋白质、脂肪、矿物质、维生素A和B族维生素。</text>
+            <text style="margin-bottom:0rpx;" class="content3" decode="true">&nbsp;建议肉蛋类摄入量：100g~200g
+            </text>
+            <text style="margin-top:0rpx;" class="content3" decode="true">&nbsp;建议奶类摄入量：200g~300g
+            </text>
         </view>
     </view>
 </view>
@@ -57,10 +69,12 @@
 <view class="content" wx:if="{{currentTab==3?true:flase}}">
     <view id="dadouIntro" class="intro">
         <view id="dadouImg" class="introImgBack">
-            <image class="introImg" src="{{imgDadou}}"></image>
+            <image id="dadouImgg" class="introImg" src="{{imgDadou}}"></image>
         </view>
         <view class="introContent">
             <text class="content1">大豆类食物</text>
+            <text class="content2" decode="true">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;包括黄豆，黑豆等，主要的特点为高蛋白，高脂肪和低碳水化合物，和其他豆类，比如蚕豆，红豆，绿豆，蚕豆等，他们大多为高碳水化合物（50%~70%），高蛋白质和低脂肪。</text>
+            <text class="content3" decode="true">&nbsp;建议摄入量：每天15g~25g</text>
         </view>
     </view>
 </view>
@@ -71,10 +85,12 @@
 <view class="content" wx:if="{{currentTab==4?true:flase}}">
     <view id="nengliangIntro" class="intro">
         <view id="nengliangImg" class="introImgBack">
-            <image class="introImg" src="{{imgNengliang}}"></image>
+            <image id="nengliangImgg" class="introImg" src="{{imgNengliang}}"></image>
         </view>
         <view class="introContent">
             <text class="content1">能量类食物</text>
+            <text class="content2" decode="true">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主要提供能量和必需脂肪酸.它包括油脂.糖类.酒类三大类,油脂又分成动牧油和植物油两种</text>
+            <text class="content3" decode="true">&nbsp;建议摄入量：每天不超过30g</text>
         </view>
     </view>
 </view>

@@ -112,13 +112,13 @@ App({
       family: 'logo',
       source: 'url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/Commercialscript.ttf?sign=523f4c1144673cd9928e56e4710cfc6b&t=1612446808")',
       success(res){
-        console.log('res', res)
+       
       },
       fail(err){
-        console.log('err', err)
+ 
       },
       complete(res){
-        console.log('complete', res)
+      
       }
     })
 
@@ -126,13 +126,13 @@ App({
       family: 'songti',
       source: 'url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/fzzj-hfxsjw.ttf?sign=a833fc8ef7876ff3e03b1debf6c9d3d4&t=1614821008")',
       success(res){
-        console.log('res', res)
+        
       },
       fail(err){
-        console.log('err', err)
+   
       },
       complete(res){
-        console.log('complete', res)
+    
       }
     })
 
@@ -140,13 +140,13 @@ App({
       family: 'cola',
       source: 'url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/Coca-ColaCareFontKaiTi.ttf?sign=24c2c64c1476ab771789664d06bd58af&t=1615555621")',
       success(res){
-        console.log('res', res)
+      
       },
       fail(err){
-        console.log('err', err)
+      
       },
       complete(res){
-        console.log('complete', res)
+        
       }
     })
 
@@ -154,13 +154,27 @@ App({
       family: 'Bitstream',
       source: 'url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/ArtBold.ttf?sign=1c44791b6492de91bbb21fc15a232a29&t=1615685846")',
       success(res){
-        console.log('res', res)
+       
       },
       fail(err){
-        console.log('err', err)
+       
       },
       complete(res){
-        console.log('complete', res)
+        
+      }
+    })
+
+    wx.loadFontFace({
+      family: 'jianti',
+      source: 'url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/FZQKBYSJW.ttf?sign=3d7b84bbf9c9932fd8f0ff46b604343c&t=1616570648")',
+      success(res){
+       
+      },
+      fail(err){
+       
+      },
+      complete(res){
+        
       }
     })
   }

@@ -30,24 +30,44 @@ page{
     flex-direction: column;
     margin-top: 37.5rpx;
     border-radius: 20rpx;
+    
     align-items: center;
     width: 525rpx;
-    height: 600rpx;/* 后期建议删除！！！！！！！！！！！！！*/
-    
+    //height: 600rpx;/* 后期建议删除！！！！！！！！！！！！！*/
     .introImgBack{
       margin-top:37.5rpx ;
-      height: 200rpx;
-      width: 200rpx;
+      height: 150rpx;
+      width: 150rpx;
       border-radius: 25rpx;
       display: flex;
       justify-content: center;
       align-items: center;
-      
       .introImg{
         position: relative;
-        left: 10rpx;
-        height: 150rpx;
-        width: 150rpx;
+        height: 100rpx;
+        width: 100rpx;
+      }
+    }
+    .introContent{
+      margin: 20rpx;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-direction: column;
+      .content1{
+        font-weight: bolder;
+        font-family: 'jianti';
+      }
+      .content2{
+        margin-top: 20rpx;
+        font-size: 30rpx;
+        
+      }
+      .content3{
+        margin-top: 20rpx;
+        margin-bottom: 30rpx;
+        font-size: 30rpx;
+        font-weight: bolder;
       }
     }
   }
@@ -225,6 +245,10 @@ page{
   background-color: #E4BB7C;
   #gushuImg{
     background-color: rgb(228,146,20);
+    #gushuImgg{
+      position: relative; 
+      left: 5rpx;
+    }
   }  
 }
 
@@ -232,26 +256,49 @@ page{
   background-color: #B4CD80;
   #shuguoImg{
     background-color: yellowgreen;
+    #shuguoImgg{
+      position: relative; 
+      left: 5rpx;
+      bottom: 10rpx;
+      width: 135rpx;
+      height: 135rpx;
+    }
   }
 }
 
 #dongwuIntro{
   background-color: #E58A85;
   #dongwuImg{
-    background-color: #E52F24
+    background-color: #E52F24;
+    #dongwuImgg{
+      position: relative; 
+      left: 5rpx;
+      width: 150rpx;
+      height: 150rpx;
+    }
   }
 }
 
 #dadouIntro{
   background-color: #C0C000;
   #dadouImg{
-    background-color: #808000
+    background-color: #808000;
+    #dadouImgg{
+      position: relative; 
+      width: 150rpx;
+      height: 150rpx;
+    }
   }
 }
 
 #nengliangIntro{
   background-color: #8BD1FF;
   #nengliangImg{
-    background-color: #16A3FF
+    background-color: #16A3FF;
+    #nengliangImgg{
+      position: relative; 
+      width: 135rpx;
+      height: 135rpx;
+    }
   }
 }
