@@ -69,3 +69,18 @@
   display: flex;
   justify-content: center;
 }
+
+.rule{
+  position: absolute;
+  top:0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  color: #fff;
+  font-size: 50rpx;
+  font-family: 'cola';/***************手机上字体不对*/
+  line-height: 70rpx;
+}

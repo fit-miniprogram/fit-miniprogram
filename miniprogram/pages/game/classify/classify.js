@@ -14,7 +14,8 @@ Page({
     windowWidth:'',
     openid:'',
     _id:'',
-    show: false,
+    showRule: 1,
+    showGameOver:0,
     //图片
     heiban:'https://6669-fit-gc46z-1304760622.tcb.qcloud.la/classify/heiban.png?sign=861bfac560e58856f7d928a33e5a0faf&t=1616589394',
     backImg:'https://6669-fit-gc46z-1304760622.tcb.qcloud.la/classify/zhuozi.png?sign=c48fae9669b11d72ee779a3f29470bfe&t=1616589427',
@@ -29,15 +30,10 @@ Page({
     answer:-1,
     score:0,
     tips:'',
-    currentNum:0
-  },
-
-
-  onClickShow() {
-    this.setData({ show: true });
-  },
-  onClickHide() {
-    this.setData({ show: false });
+    currentNum:0,
+    timer1:'',
+    timer2:'',
+    timer3:''
   },
 
   getsize(){
@@ -108,10 +104,34 @@ Page({
 
   start:function(){
     var that = this;
-    setTimeout(function(){
+    that.setData({
+      showRule:0,
+      showGameOver:0
+    })
+    that.gameStart()
+  },
+
+  gameStart:function(){
+    var that = this;
+    that.data.timer1 =setTimeout(function(){
       that.getProblem()//获取传送带上显示的图片
-      that.start()
+      that.gameStart()
     },2000)
+    that.data.timer2= setTimeout(function () {
+          that.stopGame()
+          console.log('过10000毫秒执行一次任务')
+        }, 10000);   
+    
+  },
+
+  stopGame:function(){
+    var that = this;
+    //有bug！！！！！！！！！！！
+    clearTimeout(that.data.timer2)//结束定时器2
+    clearTimeout(that.data.timer1)//结束定时器1
+    that.setData({
+      showGameOver:1
+    })
   },
 
   getProblemPicture:function(i,Number){
@@ -204,6 +224,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
     this.getOpenid();//获取用户的openid
     this.getsize();
     var i = 0;
@@ -213,13 +234,14 @@ Page({
       numberAll[i] = Math.floor(Math.random()*6+1).toString()
     }
     this.setData({
+      show:1,
       answer:-1,
       tips:'',
       problemNumberAll:numberAll,
       currentNum:0//记录当前传送带上第一张图片在数组problemNumberAll中的位置
     })
-    console.log(this.data.problemNumberAll)
-    this.start();
+    that.getProblem()//获取传送带上显示的图片
+    //this.gameStart();
   },
 
   /**
@@ -247,7 +269,8 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    clearTimeout(that.data.timer2)//结束定时器2
+    clearTimeout(that.data.timer1)//结束定时器1
   },
 
   /**

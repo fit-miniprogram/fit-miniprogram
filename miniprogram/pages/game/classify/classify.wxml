@@ -24,3 +24,28 @@
   </view>
 </view>
 
+<!--还没加动画-->
+<view wx:if="{{showRule==1}}" class="rule" style="height:{{windowHeight}}px;width:{{windowWidth}}px;opacity:{{0.7}}">
+  <text class="rule1">每局游戏总时长60秒
+
+  </text>
+  <text class="rule2">餐桌左侧为高热量食物</text>
+  <text class="rule3">右侧为低热量食物
+
+  </text>
+  <text class="rule4">请根据食物热量范围</text>
+  <text class="rule5">点击左右按钮对其分类
+
+  </text>
+  <text class="rule6">答对一题积一分
+
+  </text>
+  <text class="start" bindtap="start">开始游戏吧！</text>
+</view>
+
+<view wx:if="{{showGameOver==1}}" class="rule" style="height:{{windowHeight}}px;width:{{windowWidth}}px;opacity:{{0.7}}">
+  <text class="rule1">游戏结束
+
+  </text>
+  <text class="start" bindtap="start">再来一局</text>
+</view>
