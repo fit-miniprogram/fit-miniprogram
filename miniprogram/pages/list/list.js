@@ -26,7 +26,7 @@ Page({
     var num = that.data.gushuList[index].num
     var temp = 'gushuList[' + index + '].num'
     num++
-    that.setData({
+    that.setData({  //为什么是这种写法
       [temp]: num
     })
   },
@@ -34,7 +34,7 @@ Page({
     var that = this
     var index = e.currentTarget.dataset.index
     var num = that.data.gushuList[index].num
-    var temp = 'gushuList[' + index + '].num'
+    var temp = 'gushuList[' + index + '].num' 
     if(num == 0)
     {
       return
