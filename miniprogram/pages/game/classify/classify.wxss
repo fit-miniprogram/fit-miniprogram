@@ -84,3 +84,10 @@
   font-family: 'cola';/***************手机上字体不对*/
   line-height: 70rpx;
 }
+
+.start{
+  border: 1px solid #000;
+  background-color: dimgrey;
+  border-radius: 20rpx;
+  padding: 20rpx 30rpx;
+}
