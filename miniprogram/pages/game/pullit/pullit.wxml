@@ -1,0 +1,14 @@
+<view class="top_area">
+  <!-- <view class="top_shadow" style="display: {{ishided1}};opacity: {{opacity1}}"></view> -->
+  <view class="top_shadow" style="opacity: {{opacity1}}"></view>
+</view>
+<view class="drag">
+  <view class="drag_item" id="drag_item" bindtap="getlocation">
+    <view class="drag_img"></view>
+    <view class="drag_content">52大卡/100g</view>
+  </view>
+</view>
+<view class="bottom_area">
+  <!-- <view class="bottom_shadow" style="display: {{ishided2}};opacity: {{opacity2}}"></view> -->
+  <view class="bottom_shadow" style="opacity: {{opacity2}}"></view>
+</view>

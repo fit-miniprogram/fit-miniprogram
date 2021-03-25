@@ -1,24 +1,21 @@
-// miniprogram/pages/game/pullit/pullit.js
+// pages/pullit/pullit.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    // ishided1: "block",
+    // ishided2: "none",
+    opacity1: 0,
+    opacity2: 0,
+    top_distance: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
 
   },
 
@@ -42,25 +39,14 @@ Page({
   onUnload: function () {
 
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  getlocation: function() {
+    let that=this;
+    wx.createSelectorQuery().select('#drag_item').boundingClientRect(function(res){
+      that.setData({
+        top_distance: res.top
+        // opacity1: 0.5
+      });
+    }).exec()
+    console.log(this.data.top_distance);
   }
 })
