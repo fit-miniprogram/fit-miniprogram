@@ -15,10 +15,10 @@
     </view>
     <view class="Button">
       <view class="leftButton" bindtap="buttonLeft">
-        <image src="{{left}}" mode="widthFix" style="width:100rpx"></image>
+        <image src="{{left}}" mode="widthFix" style="width:100rpx;border-radius: 50rpx;box-shadow: -5px 5px 3px rgba(0, 0, 0, 0.1);"></image>
       </view>
       <view class="rightButton" bindtap="buttonRight">
-        <image src="{{right}}" mode="widthFix" style="width:100rpx"></image>
+        <image src="{{right}}" mode="widthFix" style="width:100rpx;border-radius: 50rpx;box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.1);"></image>
       </view>
     </view>
   </view>
@@ -26,26 +26,26 @@
 
 <!--还没加动画-->
 <view wx:if="{{showRule==1}}" class="rule" style="height:{{windowHeight}}px;width:{{windowWidth}}px;opacity:{{0.7}}">
-  <text class="rule1">每局游戏总时长60秒
+  <text class="rule1" animation="{{animation1}}" style="opacity: 0;">每局游戏总时长60秒
 
   </text>
-  <text class="rule2">餐桌左侧为高热量食物</text>
-  <text class="rule3">右侧为低热量食物
+  <text animation="{{animation2}}" style="opacity: 0;">餐桌左侧为高热量食物</text>
+  <text animation="{{animation2}}" style="opacity: 0;">右侧为低热量食物
 
   </text>
-  <text class="rule4">请根据食物热量范围</text>
-  <text class="rule5">点击左右按钮对其分类
+  <text animation="{{animation3}}" style="opacity: 0;">请根据食物热量范围</text>
+  <text animation="{{animation3}}" style="opacity: 0;">点击左右按钮对其分类
 
   </text>
-  <text class="rule6">答对一题积一分
+  <text animation="{{animation4}}" style="opacity: 0;">答对一题积一分
 
   </text>
-  <text class="start" bindtap="start">开始游戏吧！</text>
+  <text class="start" bindtap="start" animation="{{animation5}}" style="opacity: 0;">开始游戏</text>
 </view>
 
 <view wx:if="{{showGameOver==1}}" class="rule" style="height:{{windowHeight}}px;width:{{windowWidth}}px;opacity:{{0.7}}">
-  <text class="rule1">游戏结束
+  <text class="rule1" animation="{{animation6}}" style="opacity: 0;">游戏结束
 
   </text>
-  <text class="start" bindtap="start">再来一局</text>
+  <text class="start" bindtap="start" animation="{{animation7}}" style="opacity: 0;">再来一局</text>
 </view>
