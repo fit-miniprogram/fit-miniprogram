@@ -3,7 +3,9 @@
     <view class="top_shadow" style="opacity: {{opacity1}}"></view>
   </view>
   <movable-view class="drag" direction="all" bindchange="onChange" out-of-bounds="true"
-    bindtouchend="isconfirm">
+    bindtouchend="isconfirm"
+    x="{{moveX}}" y="{{moveY}}"
+    >
     <view class="drag_item" id="drag_item">
       <view class="drag_img"></view>
       <view class="drag_content">52大卡/100g</view>

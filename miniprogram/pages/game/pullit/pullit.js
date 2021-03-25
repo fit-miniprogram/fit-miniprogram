@@ -9,7 +9,10 @@ Page({
     opacity2: 0,
     top_distance: 0,
     bottom_distance: 0,
-    pageHeight: 0
+    pageHeight: 0,
+    moveX: 0,
+    moveY: 0,
+    TOF: true,  //是否正确
   },
 
   /**
@@ -68,6 +71,60 @@ Page({
   },
   //是否确认了
   isconfirm: function(){
-    // console.log(12);
+    var that=this;
+    //选择的选项为错误
+    if(that.data.top_distance<134.4){
+      if(that.data.TOF==false){
+        wx.showToast({
+          title: '正确!',
+          icon: 'success'
+        })
+      }
+      else{
+        wx.showToast({
+          title: '错误!',
+          icon: 'error'
+        })      
+        wx.vibrateShort({
+          success: (res) => {},
+        })
+      }
+      //复原
+      that.setData({
+        moveX: 0,
+        moveY: 0
+      })
+    }
+    //选择的选项为正确
+    else if(that.data.bottom_distance<134.4){
+      if(that.data.TOF==true){
+        wx.showToast({
+          title: '正确!',
+          icon: 'success'
+        })
+      }
+      else{
+        wx.showToast({
+          title: '错误!',
+          icon: 'error'
+        })      
+        wx.vibrateShort({
+          success: (res) => {},
+        })
+      }
+      //复原
+      that.setData({
+        moveX: 0,
+        moveY: 0
+      })
+    }
+    else{
+      //复原
+      that.setData({
+        moveX: 0,
+        moveY: 0
+      }) 
+    }
   }
+
 })
