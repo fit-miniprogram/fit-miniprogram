@@ -81,7 +81,7 @@
   background-color: #000;
   color: #fff;
   font-size: 50rpx;
-  font-family: 'cola';/***************手机上字体不对*/
+  font-family: 'cola';
   line-height: 70rpx;
 }
 

@@ -10,7 +10,7 @@
         <image src="{{imageSrc[3]}}" mode="widthFix" style="width:70rpx"></image>
         <image src="{{imageSrc[2]}}" mode="widthFix" style="width:100rpx"></image>
         <image src="{{imageSrc[1]}}" mode="widthFix" style="width:130rpx"></image>
-        <image src="{{imageSrc[0]}}" mode="widthFix" style="width:170rpx"></image>
+        <image src="{{imageSrc[0]}}" mode="widthFix" style="width:170rpx;"></image>
       </view>
     </view>
     <view class="Button">
@@ -24,9 +24,8 @@
   </view>
 </view>
 
-<!--还没加动画-->
 <view wx:if="{{showRule==1}}" class="rule" style="height:{{windowHeight}}px;width:{{windowWidth}}px;opacity:{{0.7}}">
-  <text class="rule1" animation="{{animation1}}" style="opacity: 0;">每局游戏总时长60秒
+  <text animation="{{animation1}}" style="opacity: 0;">每局游戏总时长60秒
 
   </text>
   <text animation="{{animation2}}" style="opacity: 0;">餐桌左侧为高热量食物</text>
@@ -44,7 +43,7 @@
 </view>
 
 <view wx:if="{{showGameOver==1}}" class="rule" style="height:{{windowHeight}}px;width:{{windowWidth}}px;opacity:{{0.7}}">
-  <text class="rule1" animation="{{animation6}}" style="opacity: 0;">游戏结束
+  <text animation="{{animation6}}" style="opacity: 0;">游戏结束
 
   </text>
   <text class="start" bindtap="start" animation="{{animation7}}" style="opacity: 0;">再来一局</text>

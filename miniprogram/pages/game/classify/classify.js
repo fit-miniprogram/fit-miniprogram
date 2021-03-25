@@ -5,6 +5,58 @@ const db = wx.cloud.database({
 
 Page({
 
+  rule:function(){
+    var animation1 = wx.createAnimation({
+      duration: 1500,
+      timingFunction: 'ease',
+      delay: 0
+     });
+     animation1.opacity(1).step()
+     this.setData({
+      animation1: animation1.export()
+     })
+ 
+     var animation2 = wx.createAnimation({
+       duration: 1500,
+       timingFunction: 'ease',
+       delay: 1000
+      });
+      animation2.opacity(1).step()
+      this.setData({
+       animation2: animation2.export()
+      })
+ 
+      var animation3 = wx.createAnimation({
+       duration: 1500,
+       timingFunction: 'ease',
+       delay: 2000
+      });
+      animation3.opacity(1).step()
+      this.setData({
+       animation3: animation3.export()
+      })
+
+      var animation4 = wx.createAnimation({
+        duration: 1500,
+        timingFunction: 'ease',
+        delay: 3000
+       });
+       animation4.opacity(1).step()
+       this.setData({
+        animation4: animation4.export()
+       })
+
+       var animation5 = wx.createAnimation({
+        duration: 1500,
+        timingFunction: 'ease',
+        delay: 4000
+       });
+       animation5.opacity(1).step()
+       this.setData({
+        animation5: animation5.export()
+       })
+  },
+
   /**
    * 页面的初始数据
    */
@@ -16,6 +68,7 @@ Page({
     _id:'',
     showRule: 1,
     showGameOver:0,
+    bottom:0,
     //图片
     heiban:'https://6669-fit-gc46z-1304760622.tcb.qcloud.la/classify/heiban.png?sign=861bfac560e58856f7d928a33e5a0faf&t=1616589394',
     backImg:'https://6669-fit-gc46z-1304760622.tcb.qcloud.la/classify/zhuozi.png?sign=c48fae9669b11d72ee779a3f29470bfe&t=1616589427',
@@ -32,8 +85,7 @@ Page({
     tips:'',
     currentNum:0,
     timer1:'',
-    timer2:'',
-    timer3:''
+    timer2:''
   },
 
   getsize(){
@@ -91,6 +143,7 @@ Page({
     })
     console.log("buttonAnswer:" + that.data.buttonAnswer)
     this.addScore()
+
   },
 
   buttonRight:function(){
@@ -111,58 +164,6 @@ Page({
     that.gameStart()
   },
 
-  rule:function(){
-    var animation1 = wx.createAnimation({
-      duration: 1500,
-      timingFunction: 'ease',
-      delay: 0
-     });
-     animation1.opacity(1).step()
-     this.setData({
-      animation1: animation1.export()
-     })
- 
-     var animation2 = wx.createAnimation({
-       duration: 1500,
-       timingFunction: 'ease',
-       delay: 1000
-      });
-      animation2.opacity(1).step()
-      this.setData({
-       animation2: animation2.export()
-      })
- 
-      var animation3 = wx.createAnimation({
-       duration: 1500,
-       timingFunction: 'ease',
-       delay: 2000
-      });
-      animation3.opacity(1).step()
-      this.setData({
-       animation3: animation3.export()
-      })
-
-      var animation4 = wx.createAnimation({
-        duration: 1500,
-        timingFunction: 'ease',
-        delay: 3000
-       });
-       animation4.opacity(1).step()
-       this.setData({
-        animation4: animation4.export()
-       })
-
-       var animation5 = wx.createAnimation({
-        duration: 1500,
-        timingFunction: 'ease',
-        delay: 4000
-       });
-       animation5.opacity(1).step()
-       this.setData({
-        animation5: animation5.export()
-       })
-  },
-
   gameStart:function(){
     var that = this;
     that.data.timer1 =setInterval(function(){
@@ -172,8 +173,7 @@ Page({
     that.data.timer2= setTimeout(function () {
           that.stopGame()
           console.log('过40000毫秒执行一次任务')
-        }, 60000);   
-    
+        }, 60000);
   },
 
   stopGame:function(){
@@ -196,7 +196,7 @@ Page({
      var animation7 = wx.createAnimation({
        duration: 1500,
        timingFunction: 'ease',
-       delay: 1000
+       delay: 2000
       });
       animation7.opacity(1).step()
       this.setData({
@@ -295,15 +295,17 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    this.getOpenid();//获取用户的openid
+    that.rule()
     this.getsize();
+    this.getOpenid();//获取用户的openid
+    getApp().loadFont();
     var i = 0;
     //生成100个随机数放入数组
     var numberAll=[]
     for(i = 0 ; i < 100 ; i ++){
       numberAll[i] = Math.floor(Math.random()*6+1).toString()
     }
-    this.setData({
+    that.setData({
       show:1,
       answer:-1,
       tips:'',
@@ -311,8 +313,8 @@ Page({
       currentNum:0//记录当前传送带上第一张图片在数组problemNumberAll中的位置
     })
     that.getProblem()//获取传送带上显示的图片
-    that.rule()
-    //this.gameStart();
+    setTimeout(function(){
+    },5500)
   },
 
   /**
