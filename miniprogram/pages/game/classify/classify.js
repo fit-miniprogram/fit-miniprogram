@@ -6,13 +6,14 @@ const db = wx.cloud.database({
 Page({
 
   rule:function(){
+    var that = this
     var animation1 = wx.createAnimation({
       duration: 1500,
       timingFunction: 'ease',
       delay: 0
      });
      animation1.opacity(1).step()
-     this.setData({
+     that.setData({
       animation1: animation1.export()
      })
  
@@ -22,7 +23,7 @@ Page({
        delay: 1000
       });
       animation2.opacity(1).step()
-      this.setData({
+      that.setData({
        animation2: animation2.export()
       })
  
@@ -32,7 +33,7 @@ Page({
        delay: 2000
       });
       animation3.opacity(1).step()
-      this.setData({
+      that.setData({
        animation3: animation3.export()
       })
 
@@ -42,7 +43,7 @@ Page({
         delay: 3000
        });
        animation4.opacity(1).step()
-       this.setData({
+       that.setData({
         animation4: animation4.export()
        })
 
@@ -52,7 +53,7 @@ Page({
         delay: 4000
        });
        animation5.opacity(1).step()
-       this.setData({
+       that.setData({
         animation5: animation5.export()
        })
   },
@@ -103,17 +104,17 @@ Page({
   addScore(){
     var that = this
     if(that.data.buttonAnswer == that.data.trueAnswer){
-      this.setData({
+      that.setData({
         answer:1
       })
       db.collection('userScore').doc(that.data._id)
         .update({
           data:{
-            score:this.data.score+1
+            score:that.data.score+1
           }
         })
-      this.setData({
-        score:this.data.score+1
+        that.setData({
+        score:that.data.score+1
       })
       wx.showToast({
         title: '答对了',
@@ -123,11 +124,11 @@ Page({
       wx.vibrateShort({})
     }
     else{
-      this.setData({
+      that.setData({
         answer:0
       })
       wx.showToast({
-        title: this.data.tips,
+        title: that.data.tips,
         icon: 'none',
         duration: 2000
       })
@@ -138,21 +139,21 @@ Page({
 
   buttonLeft:function(){
     var that = this;
-    this.setData({
+    that.setData({
       buttonAnswer:'high'
     })
     console.log("buttonAnswer:" + that.data.buttonAnswer)
-    this.addScore()
+    that.addScore()
 
   },
 
   buttonRight:function(){
     var that = this;
-    this.setData({
+    that.setData({
       buttonAnswer:'low'
     })
     console.log("buttonAnswer:" + that.data.buttonAnswer)
-    this.addScore()
+    that.addScore()
   },
 
   start:function(){
@@ -296,8 +297,8 @@ Page({
   onLoad: function (options) {
     var that = this
     that.rule()
-    this.getsize();
-    this.getOpenid();//获取用户的openid
+    that.getsize();
+    that.getOpenid();//获取用户的openid
     getApp().loadFont();
     var i = 0;
     //生成100个随机数放入数组
