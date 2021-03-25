@@ -23,7 +23,27 @@
             <text class="content3" decode="true">&nbsp;建议摄入量：每天250~400g</text>
         </view>
     </view>
+    <!-- 加减的基本思路：在每一个view上设置data，text中有value属性，https://www.jianshu.com/p/7ebfe748ca17 -->
+    <view class="item" wx:for="{{gushuList}}" wx:for-item="list" wx:for-index="index" >
+        <view class="itemPic">
+            <image class="pic" src="{{list.src}}"></image>
+        </view>
+        <view class="itemContent">
+            <view class="name">{{list.name}}</view>
+            <view class="cal">{{list.cal}}</view>
+        </view>
+        <view class="PAM" data-wdnmd="1">
+            <view data-index="{{index}}" bindtap="minus" class="minus" style="opacity:{{list.num==0?0:1}};">
+                <image class="minusPic" src="{{plusPic}}"></image>
+            </view>
+            <input type="text" class="num" value="{{list.num==0?'':list.num}}" disabled="true"></input>
+            <view data-index="{{index}}" bindtap="plus" class="plus">
+                <image class="plusPic" src="{{minusPic}}" ></image>
+            </view>
+        </view>
+    </view>
 </view>
+
 
 
 
