@@ -65,3 +65,64 @@
   margin-left: -75rpx;       /*450-375*/
   z-index: 4;
 }
+
+.rule_btn{
+  z-index: 7;
+  width: 220rpx;
+  height: 75rpx;
+  text-align: center;
+  display: flex;
+  line-height: 75rpx;
+  box-shadow: 0rpx 0rpx 8rpx 8rpx #DDDDDD;
+  background: rgb(255,255,255);
+  top: 20%;
+  position: fixed;
+  border-top-right-radius: 30rpx;
+  border-bottom-right-radius: 30rpx;
+}
+.rule_btn .title{
+  width: 150rpx;
+  font-size: 35rpx;
+}
+.rule_btn .showmore_arrow{
+  height: 64rpx;
+  width: 64rpx;
+  margin-top: 5.5rpx;
+  margin-bottom: 5.5rpx;
+  background: url("http://r.photo.store.qq.com/psc?/V10siXyS0lL9dw/TmEUgtj9EK6.7V8ajmQrEGm5xP2dQxLOOMOKj83gOT*nPA0jVE9sVnn.yyAd9hgKI4ZNBIo1MBT2oAjrsMTr.2YSxMa2pwEYvuIyeUc.FpA!/r");
+  background-size: 100% 100%;
+}
+.rule_btn .showless_arrow{
+  height: 64rpx;
+  width: 64rpx;
+  margin-top: 5.5rpx;
+  margin-bottom: 5.5rpx;
+  background: url("http://r.photo.store.qq.com/psc?/V10siXyS0lL9dw/TmEUgtj9EK6.7V8ajmQrEAKHmjS6r45B3zTQGEJk3KtPpgZ2PVuJVhXnfJ7tD6tXxjjlr4.F3nsEA4ny4FZtZHiDunkmve1Pg1cZkI6H5Xk!/r");
+  background-size: 100% 100%;
+}
+
+.rule_content{
+  z-index: 7;
+  display: none;
+  width: 100%;
+  height: 500rpx;
+  top: 20%;
+  margin-top: 75rpx;
+  position: fixed;
+  box-shadow: 0rpx 0rpx 8rpx 8rpx #DDDDDD;
+  background: rgb(255,255,255);
+}
+/* 考虑是否加上显示动画 */
+.rule_content .sentence{
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+}
+.shadow_page{
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: 6;
+  background: rgb(51, 49, 49);
+}

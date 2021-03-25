@@ -4,8 +4,7 @@
   </view>
   <movable-view class="drag" direction="all" bindchange="onChange" out-of-bounds="true"
     bindtouchend="isconfirm"
-    x="{{moveX}}" y="{{moveY}}"
-    >
+    x="{{moveX}}" y="{{moveY}}">
     <view class="drag_item" id="drag_item">
       <view class="drag_img"></view>
       <view class="drag_content">52大卡/100g</view>
@@ -14,4 +13,16 @@
   <view class="bottom_area">
     <view class="bottom_shadow" style="opacity: {{opacity2}}"></view>
   </view>
+  <view class="rule_btn">
+      <view class="title">游戏规则</view>
+      <view class="{{arrow_type}}" bindtap="showmore"></view>
+  </view>
+  <view class="rule_content" style="display: {{content_is_blocked}}">
+    <view class="sentence">判断所给出的热量是否正确</view>
+    <view class="sentence">图标可以自由拖拽</view>
+    <view class="sentence">将图标向上拖拽给出判断为错误</view>
+    <view class="sentence">将图标向下拖拽给出判断为正确</view>
+    <view class="sentence">判断正确可获得积分奖励！</view>
+  </view>
 </movable-area>
+<view class="shadow_page" style="display:{{shadow_displayed}}"></view>

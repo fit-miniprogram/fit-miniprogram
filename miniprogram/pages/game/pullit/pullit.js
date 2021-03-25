@@ -13,6 +13,9 @@ Page({
     moveX: 0,
     moveY: 0,
     TOF: true,  //是否正确
+    arrow_type: "showmore_arrow",
+    content_is_blocked: "none",
+    shadow_displayed: "none"
   },
 
   /**
@@ -125,6 +128,25 @@ Page({
         moveY: 0
       }) 
     }
-  }
+  },
+  showmore: function(){
+    var that=this;
+    //展开规则说明
+    if(that.data.arrow_type=="showmore_arrow"){
+      that.setData({
+        arrow_type: "showless_arrow",
+        content_is_blocked: "block",
+        shadow_displayed: "block"
+      })
 
+    }
+    //收起规则说明
+    else{
+      that.setData({
+        arrow_type: "showmore_arrow",
+        content_is_blocked: "none",
+        shadow_displayed: "none"
+      })
+    }
+  }
 })
