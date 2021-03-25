@@ -71,10 +71,10 @@ Page({
 
     //经过6s后进入下一个页面
     setTimeout(function(){
-      wx.navigateTo({
+      wx.redirectTo({
         url: '../prePage2/prePage2'
       })
-    }.bind(this),6250);
+    }.bind(this),6500);
   },
 
   /**
