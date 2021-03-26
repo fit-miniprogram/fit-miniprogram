@@ -4,6 +4,9 @@ const db = wx.cloud.database({
 }); //用db代替数据库
 Page({
      data: {
+       //设备宽高
+      windowHeight:'',
+      windowWidth:'',
        year: 0,
        month: 0,
        date: ['日', '一', '二', '三', '四', '五', '六'],
@@ -104,12 +107,26 @@ Page({
     })
   },
 
+  getsize(){
+    let that=this;
+    wx.getSystemInfo({
+      success(res) {
+        that.setData({
+          windowHeight:res.windowHeight,
+          windowWidth:res.windowWidth
+        })
+      },
+    })
+  },
+
  onShow:function(){
    this.getOpenid()
 
  },
-   onLoad: function () {
-      this.authorizeWeRun();
+  onLoad: function () {
+    getApp().loadFont();
+    this.getsize();
+    this.authorizeWeRun();
      let now = new Date();
      let year = now.getFullYear();
      let month = now.getMonth() + 1;

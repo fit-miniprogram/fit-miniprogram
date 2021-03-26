@@ -505,6 +505,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    getApp().loadFont();
     this.getOpenid()//获取用户的openid
   },
   /**

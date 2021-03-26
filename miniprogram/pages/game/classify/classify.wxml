@@ -25,26 +25,26 @@
 </view>
 
 <view wx:if="{{showRule==1}}" class="rule" style="height:{{windowHeight}}px;width:{{windowWidth}}px;opacity:{{0.7}}">
-  <text animation="{{animation1}}" style="opacity: 0;">每局游戏总时长60秒
+  <text class="rule1">每局游戏总时长60秒
 
   </text>
-  <text animation="{{animation2}}" style="opacity: 0;">餐桌左侧为高热量食物</text>
-  <text animation="{{animation2}}" style="opacity: 0;">右侧为低热量食物
+  <text class="rule2">餐桌左侧为高热量食物</text>
+  <text class="rule2">右侧为低热量食物
 
   </text>
-  <text animation="{{animation3}}" style="opacity: 0;">请根据食物热量范围</text>
-  <text animation="{{animation3}}" style="opacity: 0;">点击左右按钮对其分类
+  <text class="rule3">请根据食物热量范围</text>
+  <text class="rule3">点击左右按钮对其分类
 
   </text>
-  <text animation="{{animation4}}" style="opacity: 0;">答对一题积一分
+  <text class="rule4">答对一题积一分
 
   </text>
-  <text class="start" bindtap="start" animation="{{animation5}}" style="opacity: 0;">开始游戏</text>
+  <text class="start" bindtap="start" >开始游戏</text>
 </view>
 
 <view wx:if="{{showGameOver==1}}" class="rule" style="height:{{windowHeight}}px;width:{{windowWidth}}px;opacity:{{0.7}}">
-  <text animation="{{animation6}}" style="opacity: 0;">游戏结束
+  <text class="rule5">游戏结束
 
   </text>
-  <text class="start" bindtap="start" animation="{{animation7}}" style="opacity: 0;">再来一局</text>
+  <text class="start" bindtap="start">再来一局</text>
 </view>

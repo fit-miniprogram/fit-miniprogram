@@ -5,6 +5,8 @@ page{
 
 .cell{
   position: relative;
-  margin-bottom: 30rpx;
-  margin-top: 30rpx;
+  font-family: 'jianti';
+  margin: 30rpx;
+  border-radius: 30rpx;
+  box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.1);
 }

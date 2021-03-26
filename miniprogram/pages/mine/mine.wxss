@@ -3,10 +3,23 @@ page{
 }
 
 .profile{
+  position: relative;
   display: flex;
   flex-direction: column;
   background-color: #272727;
   color: #fff;
+  border-radius: 0 0 70% 70%;
+  padding-bottom: 50rpx;
+  box-shadow: 0 6px 10px rgba(19, 19, 19, 0.678);
+  animation: profileAnimation 1s ;
+}
+@keyframes profileAnimation {
+  from {
+      top:-200rpx
+  }
+  to {
+      top:0
+  }
 }
 
 .information{
@@ -30,6 +43,7 @@ page{
   color: #fff;
   align-self: center;
   margin: 20rpx;
+  font-size: 35rpx;
 }
 
 .title{
@@ -38,7 +52,8 @@ page{
   flex-direction: row;
   margin: 30rpx;
   margin-bottom: 0rpx;
-  font-size: 30rpx;
+  font-family: 'jianti';
+  font-size: 40rpx;
 }
 
 .height{
@@ -59,6 +74,8 @@ page{
   margin: 30rpx;
   margin-top: 20rpx;
   margin-bottom: 100rpx;
+  font-family: 'jianti';
+  font-size: 40rpx;
 }
 
 .height-data{
@@ -77,8 +94,10 @@ page{
 
 .cell{
   position: relative;
-  margin-bottom: 30rpx;
-  margin-top: 30rpx;
+  margin: 30rpx;
+  box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'jianti';
+  border-radius: 30rpx;
 }
 
 .date-show{

@@ -5,6 +5,7 @@
   background-color: #fff;
   margin: 20rpx;
   justify-content: space-between;
+  box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.1);
 }
 
 .title{
@@ -40,6 +41,7 @@
   background-color: #fff;
   margin: 20rpx;
   justify-content: space-between;
+  box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.1);
 }
 
 .data_left{

@@ -5,59 +5,6 @@ const db = wx.cloud.database({
 
 Page({
 
-  rule:function(){
-    var that = this
-    var animation1 = wx.createAnimation({
-      duration: 1500,
-      timingFunction: 'ease',
-      delay: 0
-     });
-     animation1.opacity(1).step()
-     that.setData({
-      animation1: animation1.export()
-     })
- 
-     var animation2 = wx.createAnimation({
-       duration: 1500,
-       timingFunction: 'ease',
-       delay: 1000
-      });
-      animation2.opacity(1).step()
-      that.setData({
-       animation2: animation2.export()
-      })
- 
-      var animation3 = wx.createAnimation({
-       duration: 1500,
-       timingFunction: 'ease',
-       delay: 2000
-      });
-      animation3.opacity(1).step()
-      that.setData({
-       animation3: animation3.export()
-      })
-
-      var animation4 = wx.createAnimation({
-        duration: 1500,
-        timingFunction: 'ease',
-        delay: 3000
-       });
-       animation4.opacity(1).step()
-       that.setData({
-        animation4: animation4.export()
-       })
-
-       var animation5 = wx.createAnimation({
-        duration: 1500,
-        timingFunction: 'ease',
-        delay: 4000
-       });
-       animation5.opacity(1).step()
-       that.setData({
-        animation5: animation5.export()
-       })
-  },
-
   /**
    * 页面的初始数据
    */
@@ -66,6 +13,7 @@ Page({
     windowHeight:'',
     windowWidth:'',
     openid:'',
+    //opacity:0,
     _id:'',
     showRule: 1,
     showGameOver:0,
@@ -160,7 +108,8 @@ Page({
     var that = this;
     that.setData({
       showRule:0,
-      showGameOver:0
+      showGameOver:0,
+      opacity:0
     })
     that.gameStart()
   },
@@ -184,7 +133,7 @@ Page({
     that.setData({
       showGameOver:1
     })
-    var animation6 = wx.createAnimation({
+    /*var animation6 = wx.createAnimation({
       duration: 1500,
       timingFunction: 'ease',
       delay: 0
@@ -202,7 +151,7 @@ Page({
       animation7.opacity(1).step()
       this.setData({
        animation7: animation7.export()
-      })
+      })*/
   },
 
   getProblemPicture:function(i,Number){
@@ -296,7 +245,6 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    that.rule()
     that.getsize();
     that.getOpenid();//获取用户的openid
     getApp().loadFont();
@@ -329,14 +277,24 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this
+    
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    that.setData({
+      showRule:0,
+      animation1:'',
+      animation2:'',
+      animation3:'',
+      animation4:'',
+      animation5:'',
+      animation6:'',
+      animation7:''
+    })
   },
 
   /**
@@ -346,6 +304,16 @@ Page({
     var that = this
     clearInterval(that.data.timer1)//结束定时器1
     clearTimeout(that.data.timer2)//结束定时器2
+    that.setData({
+      showRule:0,
+      animation1:'',
+      animation2:'',
+      animation3:'',
+      animation4:'',
+      animation5:'',
+      animation6:'',
+      animation7:''
+    })
   },
 
   /**

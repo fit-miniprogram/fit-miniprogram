@@ -85,9 +85,43 @@
   line-height: 70rpx;
 }
 
+.rule1{
+  opacity: 0;
+  animation: ruleAnimation 2s ;
+}
+.rule2{
+  opacity: 0;
+  animation: ruleAnimation 4s ;
+  animation-delay: 2s;
+}
+.rule3{
+  opacity: 0;
+  animation: ruleAnimation 4s ;
+  animation-delay: 6s;
+}
+.rule4{
+  opacity: 0;
+  animation: ruleAnimation 2s ;
+  animation-delay: 10s;
+}
+
+.rule5{
+  animation: ruleAnimation 2s ;
+}
+
 .start{
   border: 1px solid #000;
   background-color: dimgrey;
   border-radius: 20rpx;
   padding: 20rpx 30rpx;
+}
+
+@keyframes ruleAnimation {
+  from {
+      opacity: 0;
+  }
+
+  to {
+      opacity: 1;
+  }
 }

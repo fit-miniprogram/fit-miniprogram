@@ -36,6 +36,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    getApp().loadFont();
     //接收mine界面传来的openid
     this.setData({
       openid:options.openid

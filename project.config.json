@@ -94,6 +94,12 @@
         {
           "name": "pages/game/classify/classify",
           "pathName": "pages/game/classify/classify",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/sign/sign",
+          "pathName": "pages/mine/sign/sign",
           "scene": null
         }
       ]

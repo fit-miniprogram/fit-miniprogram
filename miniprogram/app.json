@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/prePages/prePage/prePage",
     "pages/homePage/homePage",
+    "pages/prePages/prePage/prePage",
     "pages/game/game",
     "pages/mine/mine",
     "pages/list/list",
