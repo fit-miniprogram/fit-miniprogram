@@ -13,7 +13,6 @@ Page({
     windowHeight:'',
     windowWidth:'',
     openid:'',
-    //opacity:0,
     _id:'',
     showRule: 1,
     showGameOver:0,
@@ -92,7 +91,6 @@ Page({
     })
     console.log("buttonAnswer:" + that.data.buttonAnswer)
     that.addScore()
-
   },
 
   buttonRight:function(){
@@ -118,11 +116,9 @@ Page({
     var that = this;
     that.data.timer1 =setInterval(function(){
       that.getProblem()//获取传送带上显示的图片
-      //that.gameStart()
     },2000)
     that.data.timer2= setTimeout(function () {
           that.stopGame()
-          console.log('过40000毫秒执行一次任务')
         }, 60000);
   },
 
@@ -133,25 +129,6 @@ Page({
     that.setData({
       showGameOver:1
     })
-    /*var animation6 = wx.createAnimation({
-      duration: 1500,
-      timingFunction: 'ease',
-      delay: 0
-     });
-     animation6.opacity(1).step()
-     this.setData({
-      animation6: animation6.export()
-     })
- 
-     var animation7 = wx.createAnimation({
-       duration: 1500,
-       timingFunction: 'ease',
-       delay: 2000
-      });
-      animation7.opacity(1).step()
-      this.setData({
-       animation7: animation7.export()
-      })*/
   },
 
   getProblemPicture:function(i,Number){
@@ -277,7 +254,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this
     
   },
 
@@ -285,16 +261,9 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    that.setData({
-      showRule:0,
-      animation1:'',
-      animation2:'',
-      animation3:'',
-      animation4:'',
-      animation5:'',
-      animation6:'',
-      animation7:''
-    })
+    var that = this
+    clearInterval(that.data.timer1)//结束定时器1
+    clearTimeout(that.data.timer2)//结束定时器2
   },
 
   /**
@@ -304,16 +273,6 @@ Page({
     var that = this
     clearInterval(that.data.timer1)//结束定时器1
     clearTimeout(that.data.timer2)//结束定时器2
-    that.setData({
-      showRule:0,
-      animation1:'',
-      animation2:'',
-      animation3:'',
-      animation4:'',
-      animation5:'',
-      animation6:'',
-      animation7:''
-    })
   },
 
   /**
