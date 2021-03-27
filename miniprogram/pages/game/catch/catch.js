@@ -107,7 +107,6 @@ Page({
             TOF: res.list[0].TOF
           })
          })
-
   },
 
 

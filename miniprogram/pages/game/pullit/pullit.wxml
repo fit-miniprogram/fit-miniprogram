@@ -2,19 +2,23 @@
   <view class="top_area">
     <view class="top_shadow" style="opacity: {{opacity1}}"></view>
   </view>
+  <!-- 移动的图标 -->
   <movable-view class="drag" direction="all" bindchange="onChange" out-of-bounds="true"
     bindtouchend="isconfirm"
-    x="{{moveX}}" y="{{moveY}}">
+    x="{{moveX}}" y="{{moveY}}"
+    style="display: {{drag_block}}"
+    >
     <view class="drag_item" id="drag_item">
-      <view class="drag_img"></view>
-      <view class="drag_content">52大卡/100g</view>
+      <view class="drag_img" style="background: url({{src}});background-size: 100% 100%;"></view>
+      <view class="drag_content">{{content}}</view>
     </view>
   </movable-view>
   <view class="bottom_area">
     <view class="bottom_shadow" style="opacity: {{opacity2}}"></view>
   </view>
-  <view class="rule_btn">
-      <view class="title">游戏规则</view>
+  <!-- 游戏规则 -->
+  <view class="rule_btn" style="box-shadow: {{btnboxshadow}};background: {{rlbtn_bcg}};color: {{rlbtn_col}}">
+      <view class="title" style="display: {{tt0block}}">游戏规则</view>
       <view class="{{arrow_type}}" bindtap="showmore"></view>
   </view>
   <view class="rule_content" style="display: {{content_is_blocked}}">
@@ -24,5 +28,11 @@
     <view class="sentence">将图标向下拖拽给出判断为正确</view>
     <view class="sentence">判断正确可获得积分奖励！</view>
   </view>
+  <!-- 积分 -->
+  <view class="score_btn" style="display: {{scbtn_block}}">
+    <view class="title" style="display: {{ttblock}}">积分: {{score}}分</view>
+    <view class="{{arrow_type2}}" bindtap="oporba"></view>
+  </view>
 </movable-area>
+<!-- 阴影 -->
 <view class="shadow_page" style="display:{{shadow_displayed}}"></view>
