@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "badge": "../../miniprogram_npm/@vant/weapp/badge"
+  },
   "navigationStyle": "default",
   "navigationBarTextStyle":"white",
   "navigationBarBackgroundColor": "#282828"

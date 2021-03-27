@@ -20,6 +20,56 @@ page{
   }
 }
 
+.bowl{
+  z-index: 6;
+  position: fixed;
+  left: 15rpx;
+  bottom: 200rpx;
+  width: 125rpx;
+  height: 125rpx;
+  background-color: #fff;
+  box-shadow: 0 0 10rpx #888888;
+  border-radius: 80rpx;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  .bowlPic{
+    position: relative;
+    left: 12rpx;
+    top: 5rpx;
+    width: 100rpx;
+    height: 100rpx;
+  }
+}
+
+.bowlPage-unfold{
+  z-index: 10;
+  position: fixed;
+  height: 1000rpx;
+  width: 560rpx;
+  left: 23%;
+  bottom: 300rpx;
+  opacity: 0.9;
+  background-color: #fff;
+  border-radius: 30rpx;
+  transition: all 0.5s ease-in-out;
+  .bowlScroll{
+    height: 1000rpx;
+  }
+}
+
+.bowlPage-fold{
+  z-index: 5;
+  position: fixed;
+  opacity: 0;
+  background-color: #fff;
+  bottom: 220rpx;
+  height: 10rpx;
+  width: 10rpx;
+  left: 15%;
+  transition: all 0.5s ease-in-out;
+}
+
 .content{
   position: relative;
   left: 25%;
@@ -142,6 +192,8 @@ page{
     }
   }
 }
+
+
 
 
 

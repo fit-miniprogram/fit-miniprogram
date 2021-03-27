@@ -12,6 +12,26 @@
 </view>
 
 
+<view class="bowl" bindtap="showBowl">
+    <badge count = "{{totalCount}}">
+        <image class="bowlPic" src="{{bowlPic}}"></image>
+    </badge>
+</view>
+
+<view class="{{bowlPage}}">
+    <scroll-view scroll-y="true" class="bowlScroll" style="opacity:1;">
+       
+    
+    </scroll-view>
+</view>
+
+
+
+<!-- 以上内容为列表外内容 -->
+<!-- 以下内容为列表内内容 -->
+
+
+
 <view class="content" wx:if="{{currentTab==0?true:flase}}">
     <view id="gushuIntro" class="intro" >
         <view id="gushuImg" class="introImgBack">
@@ -32,19 +52,18 @@
             <view class="name">{{list.name}}</view>
             <view class="cal">{{list.cal}}</view>
         </view>
+        <!-- dataset里面的自定义值不能区分大小写，垃圾微信 -->
         <view class="PAM" data-wdnmd="1">
-            <view data-index="{{index}}" bindtap="minus" class="minus" style="opacity:{{list.num==0?0:1}};">
+            <view data-index="{{index}}" data-goodsId="{{list._id}}" bindtap="minus" class="minus" style="opacity:{{list.num==0?0:1}};">
                 <image class="minusPic" src="{{plusPic}}"></image>
             </view>
             <input type="text" class="num" value="{{list.num==0?'':list.num}}" disabled="true"></input>
-            <view data-index="{{index}}" bindtap="plus" class="plus">
+            <view data-index="{{index}}" data-goodsId="{{list._id}}" bindtap="plus" class="plus">
                 <image class="plusPic" src="{{minusPic}}" ></image>
             </view>
         </view>
     </view>
 </view>
-
-
 
 
 
