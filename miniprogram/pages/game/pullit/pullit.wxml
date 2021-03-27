@@ -9,8 +9,8 @@
     style="display: {{drag_block}}"
     >
     <view class="drag_item" id="drag_item">
-      <view class="drag_img"></view>
-      <view class="drag_content">52大卡/100g</view>
+      <view class="drag_img" style="background: url({{src}});background-size: 100% 100%;"></view>
+      <view class="drag_content">{{content}}</view>
     </view>
   </movable-view>
   <view class="bottom_area">
@@ -30,7 +30,7 @@
   </view>
   <!-- 积分 -->
   <view class="score_btn" style="display: {{scbtn_block}}">
-    <view class="title" style="display: {{ttblock}}">积分:3250分</view>
+    <view class="title" style="display: {{ttblock}}">积分: {{score}}分</view>
     <view class="{{arrow_type2}}" bindtap="oporba"></view>
   </view>
 </movable-area>

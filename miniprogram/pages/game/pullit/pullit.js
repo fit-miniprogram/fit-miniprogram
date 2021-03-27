@@ -1,3 +1,6 @@
+const db = wx.cloud.database({
+  env: 'fit-gc46z'
+});  //用db代替数据库
 // pages/pullit/pullit.js
 Page({
 
@@ -12,7 +15,6 @@ Page({
     pageHeight: 0,
     moveX: 0,
     moveY: 0,
-    TOF: true,  //是否正确
     arrow_type: "showmore_arrow",
     arrow_type2: "open",
     ttblock: "none",
@@ -23,7 +25,15 @@ Page({
     scbtn_block: "flex",
     tt0block: "none",
     rlbtn_bcg: "rgb(255,255,255)",
-    rlbtn_col: "rgb(0,0,0)"
+    rlbtn_col: "rgb(0,0,0)",
+    /* 用户分数和id */
+    openid:'',
+    _id:'',
+    score: 0,
+    /* 图标 */
+    TOF: true,  //是否正确
+    content: "",
+    src: ""
   },
 
   /**
@@ -37,27 +47,73 @@ Page({
         pageHeight: res.bottom
       });
     }).exec()
+    getApp().loadFont();
+    this.getOpenid();
+    this.getAQuestion();
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  getOpenid:function() {
+    let that = this;
+    wx.cloud.callFunction({ //调用getOpenid云函数
+      name: 'getOpenid',
+      data:{},
+      config:{env:"fit-gc46z"}
+    })
+    .then(res => { //调用getOpenid成功进行以下操作
+      console.log(res);
+      that.setData({
+        openid:res.result.openid
+      })
+      //从数据库中获取计分记录的id
+      db.collection('userScore').where({
+        openid:this.data.openid
+      }).get({
+        success: (res) => {
+          this.setData({
+            _id:res.data[0]._id,
+            score:res.data[0].score
+          })
+        },
+        fail: err =>{
+          console.log("错误")
+        }
+      })
+    })
+      .catch(err => { //调用getOpenid失败打印错误信息
+      console.log(err);
+    });
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  /* 增加积分 */
+  addScore(){
+    var that = this
+    //更新数据库
+    db.collection('userScore').doc(that.data._id)
+      .update({
+        data:{
+          score:that.data.score+1
+        }
+      })
+      that.setData({
+      score:that.data.score+1
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
+  /* 更换题目 */
+  getAQuestion: function(){
+    var that = this 
+    db.collection('catchGameBank')
+      .aggregate()
+      .sample({
+        size:1
+      })
+      .end().then(  res => {  
+          console.log(res.list);
+          that.setData({
+            content: res.list[0].content,
+            src :res.list[0].src,
+            TOF: res.list[0].TOF
+          })
+      })
   },
+  /* 监听图标移动动作 */
   onChange:function(){
     this.getedgedistance();
   },
@@ -87,13 +143,15 @@ Page({
     if(that.data.top_distance<134.4){
       if(that.data.TOF==false){
         wx.showToast({
-          title: '正确!',
+          title: '回答正确!',
           icon: 'success'
         })
+        that.addScore();
+        that.getAQuestion();
       }
       else{
         wx.showToast({
-          title: '错误!',
+          title: '回答错误!',
           icon: 'error'
         })      
         wx.vibrateShort({
@@ -110,13 +168,15 @@ Page({
     else if(that.data.bottom_distance<134.4){
       if(that.data.TOF==true){
         wx.showToast({
-          title: '正确!',
+          title: '回答正确!',
           icon: 'success'
         })
+        that.addScore();
+        that.getAQuestion();
       }
       else{
         wx.showToast({
-          title: '错误!',
+          title: '回答错误!',
           icon: 'error'
         })      
         wx.vibrateShort({
