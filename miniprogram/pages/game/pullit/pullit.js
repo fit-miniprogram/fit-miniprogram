@@ -14,8 +14,16 @@ Page({
     moveY: 0,
     TOF: true,  //是否正确
     arrow_type: "showmore_arrow",
+    arrow_type2: "open",
+    ttblock: "none",
     content_is_blocked: "none",
-    shadow_displayed: "none"
+    shadow_displayed: "none",
+    btnboxshadow: "0rpx 0rpx 8rpx 8rpx #DDDDDD",
+    drag_block: "block",
+    scbtn_block: "flex",
+    tt0block: "none",
+    rlbtn_bcg: "rgb(255,255,255)",
+    rlbtn_col: "rgb(0,0,0)"
   },
 
   /**
@@ -129,14 +137,26 @@ Page({
       }) 
     }
   },
+  // 查看更多
   showmore: function(){
     var that=this;
+    wx.vibrateShort({
+      success: (res) => {},
+    })
     //展开规则说明
     if(that.data.arrow_type=="showmore_arrow"){
       that.setData({
         arrow_type: "showless_arrow",
         content_is_blocked: "block",
-        shadow_displayed: "block"
+        shadow_displayed: "block",
+        drag_block: "none",
+        scbtn_block: "none",
+        tt0block: "block",
+        ttblock: "none",
+        ar2block: "none",
+        rlbtn_bcg: "#969696",             /* 修改规则说明盒子背景颜色和字体颜色*/
+        rlbtn_col: "rgb(255,255,255)",
+        btnboxshadow: ""
       })
 
     }
@@ -145,8 +165,35 @@ Page({
       that.setData({
         arrow_type: "showmore_arrow",
         content_is_blocked: "none",
-        shadow_displayed: "none"
+        shadow_displayed: "none",
+        drag_block: "block",
+        scbtn_block: "flex",              /* 整个积分盒子 */
+        tt0block: "none",
+        ttblock: "none",                  /* 积分标题盒子 */
+        arrow_type2: "open",
+        rlbtn_bcg: "rgb(255,255,255)",    /* 修改规则说明盒子背景颜色和字体颜色*/
+        rlbtn_col: "rgb(0,0,0)",
+        btnboxshadow: "0rpx 0rpx 8rpx 8rpx #DDDDDD"
       })
+    }
+  },
+  //展开或收起
+  oporba: function(){
+    var that=this;
+    wx.vibrateShort({
+      success: (res) => {},
+    })
+    if(that.data.arrow_type2=="open"){
+      that.setData({
+        ttblock: "block",
+        arrow_type2: "back"
+      })   
+    }
+    else{
+      that.setData({
+        ttblock: "none",
+        arrow_type2: "open"
+      }) 
     }
   }
 })

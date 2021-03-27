@@ -1,6 +1,3 @@
-/* page{
-  height: 100%
-} */
 .move_area{
   height: 100vh;
   width: 100%;
@@ -68,17 +65,20 @@
 
 .rule_btn{
   z-index: 7;
-  width: 220rpx;
+  /* width: 220rpx; */
   height: 75rpx;
   text-align: center;
   display: flex;
   line-height: 75rpx;
-  box-shadow: 0rpx 0rpx 8rpx 8rpx #DDDDDD;
-  background: rgb(255,255,255);
-  top: 20%;
+  /* box-shadow: 0rpx 0rpx 8rpx 8rpx #DDDDDD; */
+  /* background: rgb(255,255,255); */
+  top: 15%;
   position: fixed;
   border-top-right-radius: 30rpx;
   border-bottom-right-radius: 30rpx;
+  /* 用于显示更多内容时 */
+  /* background: #969696; */
+  /* color: white; */
 }
 .rule_btn .title{
   width: 150rpx;
@@ -89,7 +89,7 @@
   width: 64rpx;
   margin-top: 5.5rpx;
   margin-bottom: 5.5rpx;
-  background: url("http://r.photo.store.qq.com/psc?/V10siXyS0lL9dw/TmEUgtj9EK6.7V8ajmQrEGm5xP2dQxLOOMOKj83gOT*nPA0jVE9sVnn.yyAd9hgKI4ZNBIo1MBT2oAjrsMTr.2YSxMa2pwEYvuIyeUc.FpA!/r");
+  background: url("http://r.photo.store.qq.com/psc?/V10siXyS0lL9dw/TmEUgtj9EK6.7V8ajmQrEG4QAE064Zkpl8Ig6TX5iQlnhwojl*ng6*pqbBgLp9K2bwAQ3apKkPeDJ7OOKQd7fkK0CVKnMxMZ5wlbm3Cg3wI!/r");
   background-size: 100% 100%;
 }
 .rule_btn .showless_arrow{
@@ -100,29 +100,91 @@
   background: url("http://r.photo.store.qq.com/psc?/V10siXyS0lL9dw/TmEUgtj9EK6.7V8ajmQrEAKHmjS6r45B3zTQGEJk3KtPpgZ2PVuJVhXnfJ7tD6tXxjjlr4.F3nsEA4ny4FZtZHiDunkmve1Pg1cZkI6H5Xk!/r");
   background-size: 100% 100%;
 }
-
 .rule_content{
   z-index: 7;
   display: none;
   width: 100%;
   height: 500rpx;
-  top: 20%;
-  margin-top: 75rpx;
+  top: 50%;
+  margin-top: -250rpx;
   position: fixed;
-  box-shadow: 0rpx 0rpx 8rpx 8rpx #DDDDDD;
-  background: rgb(255,255,255);
+  color: white;
+  font-family: 'cola';
 }
 /* 考虑是否加上显示动画 */
 .rule_content .sentence{
   width: 100%;
   height: 100rpx;
   line-height: 100rpx;
+  font-size: 35rpx;
   text-align: center;
+  animation: fade linear 1s;
+  opacity: 1;
+}
+/* 积分按钮 */
+.score_btn{
+  z-index: 6;
+  /* width: 220rpx; */
+  height: 75rpx;
+  text-align: center;
+  display: flex;
+  line-height: 75rpx;
+  box-shadow: 0rpx 0rpx 8rpx 8rpx #DDDDDD;
+  background: rgb(255,255,255);
+  top: 15%;
+  margin-top: 90rpx;
+  position: fixed;
+  border-top-right-radius: 30rpx;
+  border-bottom-right-radius: 30rpx;
+  font-size: 35rpx;
+}
+.score_btn .open{
+  height: 64rpx;            /*总宽度74*/
+  width: 64rpx;
+  margin-top: 5.5rpx;
+  margin-bottom: 5.5rpx;
+  background: url("http://r.photo.store.qq.com/psc?/V10siXyS0lL9dw/TmEUgtj9EK6.7V8ajmQrEG4QAE064Zkpl8Ig6TX5iQlnhwojl*ng6*pqbBgLp9K2bwAQ3apKkPeDJ7OOKQd7fkK0CVKnMxMZ5wlbm3Cg3wI!/r");
+  background-size: 100% 100%;
+}
+.score_btn .back{
+  height: 64rpx;
+  width: 64rpx;
+  margin-top: 5.5rpx;
+  margin-bottom: 5.5rpx;
+  background: url("http://r.photo.store.qq.com/psc?/V10siXyS0lL9dw/TmEUgtj9EK6.7V8ajmQrEHewEH3Reyr0CLCN1YHw7gwLEwzXfq9xRcOhRhtdsT6N0zRZP8zBBdh7i8AP66jVroAsfpeeEjYbsDXL1V7C2Mg!/r");
+  background-size: 100% 100%;
 }
 .shadow_page{
   height: 100vh;
   width: 100%;
-  position: fixed;
   z-index: 6;
-  background: rgb(51, 49, 49);
+  background: rgb(73, 71, 71);
+}
+@keyframes fade{
+  0% {
+    opacity: 0;
+    color: yellow;
+  }
+  100% {
+    opacity: 1;
+    color: green;
+  }
+}
+.sentence:nth-child(1){
+  animation-delay: 0s;
+}
+.sentence:nth-child(2){
+  animation-delay: 1s;
+}
+.sentence:nth-child(3){
+  animation-delay: 2s;
+}
+.sentence:nth-child(4){
+  animation-delay: 3s;
+}
+.sentence:nth-child(5){
+  animation-delay: 4s;
+}
+.sentence:nth-child(6){
+  animation-delay: 5s;
 }
