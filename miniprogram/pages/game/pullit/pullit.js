@@ -105,7 +105,6 @@ Page({
         size:1
       })
       .end().then(  res => {  
-          console.log(res.list);
           that.setData({
             content: res.list[0].content,
             src :res.list[0].src,
