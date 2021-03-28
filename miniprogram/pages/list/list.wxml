@@ -19,7 +19,11 @@
 </view>
 
 <view class="{{bowlPage}}">
+    <view class="title">
+        <text class="titleContent">准备转化为热量的食物:</text>
+    </view>
     <scroll-view scroll-y="true" class="bowlScroll" style="opacity:1">
+      <view class="noFood" wx:if="{{totalCount==0?true:false}}"><text>碗里面还没有东西,\n\n去列表里面添加一点吧。</text></view>  
      <view class="bowlList" wx:for="{{gushuList}}" wx:for-item="list" wx:if="{{list.num==0?false:true}}">
         <view class="bowlItemPic">
             <image class="pic" src="{{list.src}}"></image>
@@ -32,6 +36,7 @@
             </view>
         </view>
      </view>  
+     
      <view class="submit" bindtap="submit" hover-class="submit-hover" wx:if="{{totalCount==0?false:true}}">
          <text class="submitContent">提交</text>
      </view>
