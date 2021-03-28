@@ -14,8 +14,9 @@ Page({
     dateString:'',
     dateString_record:[],//标记修改信息的日期
     signInDate_record:[],//标记登录的日期
-    flag_height:'',//标记当天是否修改w过身高
+    flag_height:'',//标记当天是否修改过身高
     flag_weight:'',//标记当天是否修改过体重
+    time:'',//当前时间
     //基本信息
     height_choose: ['150', '151', '152', '153', '154','155','156','157','158','159','160','161','162','163','164','165','166','167','168','169','170','171','172','173','174','175','176','177', '178', '179','180','181','182','183','184','185','186','187','188','189','190','191','192','193','194','195'],
     show_height: false,
@@ -32,7 +33,14 @@ Page({
     user:[],
     _id:'',
     openid:'',
-    targetRun:0
+    targetRun:0,
+    calorie_breakfast:0,
+    calorie_lunch:0,
+    calorie_dinner:0,
+    calorie_get:0,
+    calorie_burn:0,
+    dabiao:'---',
+    dabiao_color:''
   },
 
   target:function(){
@@ -367,12 +375,15 @@ Page({
               calorie_breakfast:0,
               calorie_lunch:0,
               calorie_dinner:0,
+              calorie_burn:0,
               targetRun:5000
             },
             success: res => {
               console.log(res); 
               that.setData({
-                _id:res._id
+                _id:res._id,
+                dabiao:'---',
+                dabiao_color:'rgba(48, 47, 47, 0.658)'
               })
               this.getDate()//获取当天日期
             },
@@ -393,7 +404,12 @@ Page({
             signInDate_record:res.data[0].signInDate_record,
             flag_height:res.data[0].flag_height,
             flag_weight:res.data[0].flag_weight,
-            targetRun:res.data[0].targetRun
+            targetRun:res.data[0].targetRun,
+            calorie_burn:res.data[0].calorie_burn,
+            calorie_breakfast:res.data[0].calorie_breakfast,
+            calorie_lunch:res.data[0].calorie_lunch,
+            calorie_dinner:res.data[0].calorie_dinner,
+            calorie_get:res.data[0].calorie_breakfast + res.data[0].calorie_lunch + res.data[0].calorie_dinner 
           })
           //显示用户身高、体重、BMI
           if(res.data[0].height==0 || res.data[0].weight==0){
@@ -424,6 +440,25 @@ Page({
               weight:res.data[0].weight,
               height:res.data[0].height,
               BMI:res.data[0].BMI
+            })
+          }
+          //判断卡路里是否达标
+          if(that.data.calorie_breakfast != 0 && that.data.calorie_lunch != 0 && that.data.calorie_dinner != 0 && that.data.calorie_burn >= that.data.calorie_get){
+            that.setData({
+              dabiao:'达标',
+              dabiao_color:'#9FE6B8'
+            })
+          }
+          else if(that.data.calorie_breakfast != 0 && that.data.calorie_lunch != 0 && that.data.calorie_dinner != 0 && that.data.calorie_burn < that.data.calorie_get){
+            that.setData({
+              dabiao:'未达标',
+              dabiao_color:'#f7a483'
+            })
+          }
+          else{
+            that.setData({
+              dabiao:'---',
+              dabiao_color:'rgba(48, 47, 47, 0.658)'
             })
           }
           this.getDate()//获取当天日期
@@ -485,7 +520,14 @@ Page({
     if(!singIn||that.data.signInDate_record.length==0){//当天没有登录过
       that.setData({
         flag_height:0,
-        flag_weight:0
+        flag_weight:0,
+        calorie_breakfast:0,
+        calorie_lunch:0,
+        calorie_dinner:0,
+        calorie_get:0,
+        calorie_burn:0,
+        dabiao:'---',
+        dabiao_color:'rgba(48, 47, 47, 0.658)'
       })
       db.collection('user').doc(that.data._id)
       .update({
@@ -495,10 +537,54 @@ Page({
           signInDate_record:that.data.signInDate_record.concat(dateString),
           calorie_breakfast:0,
           calorie_lunch:0,
-          calorie_dinner:0
+          calorie_dinner:0,
+          calorie_burn:0,
         }
       })
     }
+  },
+
+  getCalorie:function(){
+    var that = this
+    db.collection('user')
+    .where({
+      openid: that.data.openid
+    }).get({
+      success: (res) => {
+          console.log(res)
+          that.setData({
+            _id:res.data[0]._id,
+            calorie_burn:res.data[0].calorie_burn,
+            calorie_breakfast:res.data[0].calorie_breakfast,
+            calorie_lunch:res.data[0].calorie_lunch,
+            calorie_dinner:res.data[0].calorie_dinner,
+            calorie_get:res.data[0].calorie_breakfast + res.data[0].calorie_lunch + res.data[0].calorie_dinner 
+          })
+          //判断卡路里是否达标
+          if(that.data.calorie_breakfast != 0 && that.data.calorie_lunch != 0 && that.data.calorie_dinner != 0 && that.data.calorie_burn >= that.data.calorie_get){
+            that.setData({
+              dabiao:'达标',
+              dabiao_color:'#9FE6B8'
+            })
+          }
+          else if(that.data.calorie_breakfast != 0 && that.data.calorie_lunch != 0 && that.data.calorie_dinner != 0 && that.data.calorie_burn < that.data.calorie_get){
+            that.setData({
+              dabiao:'未达标',
+              dabiao_color:'#f7a483'
+            })
+          }
+          else{
+            that.setData({
+              dabiao:'---',
+              dabiao_color:'rgba(48, 47, 47, 0.658)'
+            })
+          }
+        
+      },
+      fail: err =>{
+        console.log("错误")
+      }
+    })
   },
 
   /**
@@ -519,12 +605,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that = this
     if (typeof this.getTabBar === 'function' &&
-    this.getTabBar()) {
-    this.getTabBar().setData({
-      selected: 3
-    })
-  }
+    that.getTabBar()) {
+      that.getTabBar().setData({
+        selected: 3
+      })
+    }
+    if(that.data.openid != '')
+      that.getCalorie()
   },
 
   /**
