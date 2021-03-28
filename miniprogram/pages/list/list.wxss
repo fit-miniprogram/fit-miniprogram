@@ -71,6 +71,7 @@ page {
   justify-content: space-between;
 }
 .bowlList .itemContent .detail .num {
+  color: #d10000;
   font-weight: bolder;
 }
 .bowlPage-unfold {
@@ -118,11 +119,11 @@ page {
 }
 .bowlPage-fold .submit {
   position: fixed;
-  height: 70rpx;
-  width: 120rpx;
+  height: 1rpx;
+  width: 1rpx;
   right: 650rpx;
-  bottom: 250rpx;
-  font-size: 45rpx;
+  bottom: 100rpx;
+  font-size: 1rpx;
   margin-right: 20rpx;
   margin-bottom: 20rpx ;
   background-color: #ffc300;
