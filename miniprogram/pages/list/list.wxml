@@ -19,10 +19,24 @@
 </view>
 
 <view class="{{bowlPage}}">
-    <scroll-view scroll-y="true" class="bowlScroll" style="opacity:1;">
-       
-    
+    <scroll-view scroll-y="true" class="bowlScroll" style="opacity:1">
+     <view class="bowlList" wx:for="{{gushuList}}" wx:for-item="list" wx:if="{{list.num==0?false:true}}">
+        <view class="bowlItemPic">
+            <image class="pic" src="{{list.src}}"></image>
+        </view>
+        <view class="itemContent">
+            <view class="name">{{list.name}}</view>
+            <view class="detail">
+                <view class="cal">{{list.cal}}</view>
+                <view class="num">{{list.num}}份</view>
+            </view>
+        </view>
+     </view>  
+     <view class="submit" bindtap="submit" hover-class="submit-hover" wx:if="{{totalCount==0?false:true}}">
+         <text class="submitContent">提交</text>
+     </view>
     </scroll-view>
+    
 </view>
 
 
@@ -54,11 +68,11 @@
         </view>
         <!-- dataset里面的自定义值不能区分大小写，垃圾微信 -->
         <view class="PAM" data-wdnmd="1">
-            <view data-index="{{index}}" data-goodsId="{{list._id}}" bindtap="minus" class="minus" style="opacity:{{list.num==0?0:1}};">
+            <view data-index="{{index}}" data-goodsId="{{list._id}}" bindtap="gushuMinus" class="minus" style="opacity:{{list.num==0?0:1}};">
                 <image class="minusPic" src="{{plusPic}}"></image>
             </view>
             <input type="text" class="num" value="{{list.num==0?'':list.num}}" disabled="true"></input>
-            <view data-index="{{index}}" data-goodsId="{{list._id}}" bindtap="plus" class="plus">
+            <view data-index="{{index}}" data-goodsId="{{list._id}}" bindtap="gushuPlus" class="plus">
                 <image class="plusPic" src="{{minusPic}}" ></image>
             </view>
         </view>
