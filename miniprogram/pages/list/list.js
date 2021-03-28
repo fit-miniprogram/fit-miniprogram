@@ -11,6 +11,8 @@ Page({
       currentTab:0,
       totalCount:0,
       gushuList:[],
+      dongwuList:[],
+      nengliangList:[],
       bowlList:[],
       bowlListFlag:0,
       bowlPage:'bowlPage-fold',
@@ -119,6 +121,150 @@ submit(){
     })
   },
 
+
+  /**
+   * 动物类
+   */
+  dongwuPlus(e){
+    var that = this
+    var index = e.currentTarget.dataset.index //这里的index是指模块的序列，非数组的下标
+    var goodsId = e.currentTarget.dataset.goodsid //注意dataset里面的自定义值不能区分大小写
+    var num = that.data.dongwuList[index].num
+    var bowlListFlag = that.data.bowlListFlag
+    var dongwuListNum = 'dongwuList[' + index + '].num'
+    var dongwuListItem = that.data.dongwuList[index]
+    var bowlListItem = 'bowlList[' + bowlListFlag + ']'
+    var bowlListNum = 'bowlList[' + bowlListFlag + '].num'
+    num++
+    that.setData({  //注意写法
+      [dongwuListNum]: num,
+      totalCount:that.data.totalCount+1,
+    })
+    // if(!that.judge(goodsId))
+    // {
+    //   that.setData({
+    //   [bowlListItem]: gushuListItem,
+    //   bowlListFlag:that.data.bowlListFlag+1
+    //   })
+    // }
+    // else
+    // {
+    //     for(var i = 0;i<that.data.bowlList.length;i++)
+    //     {
+    //       console.log(i)
+    //       console.log(that.data.bowlList[i]._id)
+    //       console.log(goodsId)
+    //       if(that.data.bowlList[i]._id == goodsId)
+    //       {
+    //         that.setData({
+    //           [bowlListNum]:num
+    //         })
+    //         console.log(num)
+    //       }
+    //     }
+    // }
+  },
+  dongwuMinus(e){
+    var that = this
+    var index = e.currentTarget.dataset.index //这里的index是指模块的序列，非数组的下标
+    var num = that.data.dongwuList[index].num
+    var bowlListFlag = that.data.bowlListFlag
+    var dongwuListNum = 'dongwuList[' + index + '].num'
+    var bowlListItem = 'bowlList[' + bowlListFlag + ']' 
+    if(num == 0)
+    {
+      return
+    }
+    num--
+    that.setData({
+      [dongwuListNum]: num,
+      totalCount:that.data.totalCount-1
+    })
+    
+  },
+
+  getDongwuList(){
+    var that = this
+    db.collection("dongwuList").get({}).then(res=>{
+      console.log(res)
+      that.setData({
+        dongwuList: res.data
+      })
+    })
+  }, 
+
+
+  /**
+   * 能量类
+   */
+  nengliangPlus(e){
+    var that = this
+    var index = e.currentTarget.dataset.index //这里的index是指模块的序列，非数组的下标
+    var goodsId = e.currentTarget.dataset.goodsid //注意dataset里面的自定义值不能区分大小写
+    var num = that.data.nengliangList[index].num
+    var bowlListFlag = that.data.bowlListFlag
+    var nengliangListNum = 'nengliangList[' + index + '].num'
+    var nengliangListItem = that.data.nengliangList[index]
+    var bowlListItem = 'bowlList[' + bowlListFlag + ']'
+    var bowlListNum = 'bowlList[' + bowlListFlag + '].num'
+    num++
+    that.setData({  //注意写法
+      [nengliangListNum]: num,
+      totalCount:that.data.totalCount+1,
+    })
+    // if(!that.judge(goodsId))
+    // {
+    //   that.setData({
+    //   [bowlListItem]: gushuListItem,
+    //   bowlListFlag:that.data.bowlListFlag+1
+    //   })
+    // }
+    // else
+    // {
+    //     for(var i = 0;i<that.data.bowlList.length;i++)
+    //     {
+    //       console.log(i)
+    //       console.log(that.data.bowlList[i]._id)
+    //       console.log(goodsId)
+    //       if(that.data.bowlList[i]._id == goodsId)
+    //       {
+    //         that.setData({
+    //           [bowlListNum]:num
+    //         })
+    //         console.log(num)
+    //       }
+    //     }
+    // }
+  },
+  nengliangMinus(e){
+    var that = this
+    var index = e.currentTarget.dataset.index //这里的index是指模块的序列，非数组的下标
+    var num = that.data.nengliangList[index].num
+    var bowlListFlag = that.data.bowlListFlag
+    var nengliangListNum = 'nengliangList[' + index + '].num'
+    var bowlListItem = 'bowlList[' + bowlListFlag + ']' 
+    if(num == 0)
+    {
+      return
+    }
+    num--
+    that.setData({
+      [nengliangListNum]: num,
+      totalCount:that.data.totalCount-1
+    })
+    
+  },
+
+  getNengliangList(){
+    var that = this
+    db.collection("nengliangList").get({}).then(res=>{
+      console.log(res)
+      that.setData({
+        nengliangList: res.data
+      })
+    })
+  }, 
+
   swichNav(e){
     var that = this
     that.setData({
@@ -149,6 +295,8 @@ submit(){
   onLoad: function (options) {
     var that = this
     that.getGushuList();
+    that.getDongwuList();
+    that.getNengliangList();
     getApp().loadFont();
   },
 

@@ -119,6 +119,27 @@
             </text>
         </view>
     </view>
+
+    <!-- 加减的基本思路：在每一个view上设置data，text中有value属性，https://www.jianshu.com/p/7ebfe748ca17 -->
+    <view class="item" wx:for="{{dongwuList}}" wx:for-item="list" wx:for-index="index" >
+        <view class="itemPic">
+            <image class="pic" src="{{list.src}}"></image>
+        </view>
+        <view class="itemContent">
+            <view class="name">{{list.name}}</view>
+            <view class="cal">{{list.cal}}</view>
+        </view>
+        <!-- dataset里面的自定义值不能区分大小写，垃圾微信 -->
+        <view class="PAM" data-wdnmd="1">
+            <view data-index="{{index}}" data-goodsId="{{list._id}}" bindtap="dongwuMinus" class="minus" style="opacity:{{list.num==0?0:1}};">
+                <image class="minusPic" src="{{plusPic}}"></image>
+            </view>
+            <input type="text" class="num" value="{{list.num==0?'':list.num}}" disabled="true"></input>
+            <view data-index="{{index}}" data-goodsId="{{list._id}}" bindtap="dongwuPlus" class="plus">
+                <image class="plusPic" src="{{minusPic}}" ></image>
+            </view>
+        </view>
+    </view>
 </view>
 
 
@@ -149,6 +170,27 @@
             <text class="content1">能量类食物</text>
             <text class="content2" decode="true">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主要提供能量和必需脂肪酸.它包括油脂.糖类.酒类三大类,油脂又分成动牧油和植物油两种</text>
             <text class="content3" decode="true">&nbsp;建议摄入量：每天不超过30g</text>
+        </view>
+    </view>
+
+    <!-- 加减的基本思路：在每一个view上设置data，text中有value属性，https://www.jianshu.com/p/7ebfe748ca17 -->
+    <view class="item" wx:for="{{nengliangList}}" wx:for-item="list" wx:for-index="index" >
+        <view class="itemPic">
+            <image class="pic" src="{{list.src}}"></image>
+        </view>
+        <view class="itemContent">
+            <view class="name">{{list.name}}</view>
+            <view class="cal">{{list.cal}}</view>
+        </view>
+        <!-- dataset里面的自定义值不能区分大小写，垃圾微信 -->
+        <view class="PAM" data-wdnmd="1">
+            <view data-index="{{index}}" data-goodsId="{{list._id}}" bindtap="nengliangMinus" class="minus" style="opacity:{{list.num==0?0:1}};">
+                <image class="minusPic" src="{{plusPic}}"></image>
+            </view>
+            <input type="text" class="num" value="{{list.num==0?'':list.num}}" disabled="true"></input>
+            <view data-index="{{index}}" data-goodsId="{{list._id}}" bindtap="nengliangPlus" class="plus">
+                <image class="plusPic" src="{{minusPic}}" ></image>
+            </view>
         </view>
     </view>
 </view>
