@@ -224,12 +224,13 @@ Page({
           console.log(err);
         }
       })
+      setTimeout(function(){        
+        wx.redirectTo({
+          url: '/pages/mine/sign/sign',
+          })
+      },2000)
     }
-    setTimeout(function(){        
-      wx.redirectTo({
-        url: '/pages/mine/sign/sign',
-        })
-    },2000)
+    
   },
 
   dateInit: function (setYear, setMonth) {
