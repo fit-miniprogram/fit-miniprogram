@@ -51,41 +51,20 @@ submit(){
     }
     return false
   },
-
- gushuPlus(e){
+  // 获得索引值
+  getBowlListIndex(id){
     var that = this
-    var index = e.currentTarget.dataset.index //这里的index是指模块的序列，非数组的下标
-    var goodsId = e.currentTarget.dataset.goodsid //注意dataset里面的自定义值不能区分大小写
-    var num = that.data.gushuList[index].num
-    var bowlListFlag = that.data.bowlListFlag
-    var gushuListNum = 'gushuList[' + index + '].num'
-    var gushuListItem = that.data.gushuList[index]
-    var bowlListItem = 'bowlList[' + bowlListFlag + ']'
-    var bowlListNum = 'bowlList[' + bowlListFlag + '].num'
-    num++
-    that.setData({  //注意写法
-      [gushuListNum]: num,
-      totalCount:that.data.totalCount+1,
-    })
-  },
-  gushuMinus(e){
-    var that = this
-    var index = e.currentTarget.dataset.index //这里的index是指模块的序列，非数组的下标
-    var num = that.data.gushuList[index].num
-    var bowlListFlag = that.data.bowlListFlag
-    var gushuListNum = 'gushuList[' + index + '].num'
-    var bowlListItem = 'bowlList[' + bowlListFlag + ']' 
-    if(num == 0)
+    for(var i=0;i<that.data.bowlList.length;i++)
     {
-      return
+      if(that.data.bowlList[i]._id == id)
+        return i; 
     }
-    num--
-    that.setData({
-      [gushuListNum]: num,
-      totalCount:that.data.totalCount-1
-    })
-    
+    return -1;    
   },
+
+  /**
+   * 谷薯类
+   * **/
   getGushuList(){
     var that = this
     db.collection("gushuList").get({}).then(res=>{
@@ -95,6 +74,74 @@ submit(){
       })
     })
   },
+  gushuPlus(e){
+    var that = this
+    var index = e.currentTarget.dataset.index //这里的index是指模块的序列，非数组的下标
+    var goodsId = e.currentTarget.dataset.goodsid //注意dataset里面的自定义值不能区分大小写
+    var num = that.data.gushuList[index].num
+    var bowlListFlag = that.data.bowlListFlag
+    var bowlListItem = 'bowlList[' + bowlListFlag + ']'
+    var gushuListNum = 'gushuList[' + index + '].num'
+    var gushuListItem = that.data.gushuList[index]
+    num++
+    that.setData({  //注意写法
+      [gushuListNum]: num,
+      totalCount:that.data.totalCount+1,
+    })
+
+    // 第一次加入碗
+    if(!that.judge(goodsId))
+    {
+      that.setData({
+      [bowlListItem]: gushuListItem,
+      bowlListFlag:that.data.bowlListFlag+1
+      })
+    }
+    // 同类多次添加
+    else
+    {
+      var bowlindex=this.getBowlListIndex(goodsId);
+      var bowlListNum = 'bowlList[' + bowlindex + '].num';
+      that.setData({
+        [bowlListNum]: num,
+      })
+    }
+  },
+  gushuMinus(e){
+    var that = this
+    var index = e.currentTarget.dataset.index       //这里的index是指模块的序列，非数组的下标
+    var goodsId = e.currentTarget.dataset.goodsid   //注意dataset里面的自定义值不能区分大小写
+
+    var num = that.data.gushuList[index].num
+    var bowlListFlag = that.data.bowlListFlag
+    var gushuListNum = 'gushuList[' + index + '].num'
+    var bowlListItem = 'bowlList[' + bowlListFlag + ']' 
+    if(num == 0)
+      return
+    num--
+    that.setData({
+      [gushuListNum]: num,
+      totalCount:that.data.totalCount-1
+    })
+    //全部取消了，移除该元素
+    if(num==0){
+      var bowlindex=that.getBowlListIndex(goodsId);
+      that.data.bowlList.splice(bowlindex,1);
+      var tempList=that.data.bowlList;
+      that.setData({
+        bowlList: tempList,
+        bowlListFlag:that.data.bowlListFlag-1
+      })
+    }
+    else{
+      var bowlindex=this.getBowlListIndex(goodsId);
+      var bowlListNum = 'bowlList[' + bowlindex + '].num';
+      that.setData({
+        [bowlListNum]: num,
+      })
+    }
+  },
+
 
   /**
    * 蔬果类初始化列表已经操作
@@ -113,34 +160,69 @@ submit(){
     var index = e.currentTarget.dataset.index //这里的index是指模块的序列，非数组的下标
     var goodsId = e.currentTarget.dataset.goodsid //注意dataset里面的自定义值不能区分大小写
     var num = that.data.shuguoList[index].num
+
     var bowlListFlag = that.data.bowlListFlag
+    var bowlListItem = 'bowlList[' + bowlListFlag + ']'
+
     var shuguoListNum = 'shuguoList[' + index + '].num'
     var shuguoListItem = that.data.shuguoList[index]
-    var bowlListItem = 'bowlList[' + bowlListFlag + ']'
-    var bowlListNum = 'bowlList[' + bowlListFlag + '].num'
+
     num++
     that.setData({  //注意写法
       [shuguoListNum]: num,
       totalCount:that.data.totalCount+1,
     })
+
+    // 第一次加入碗
+    if(!that.judge(goodsId))
+    {
+      that.setData({
+      [bowlListItem]: shuguoListItem,
+      bowlListFlag:that.data.bowlListFlag+1
+      })
+    }
+    else
+    {
+      var bowlindex=this.getBowlListIndex(goodsId);
+      var bowlListNum = 'bowlList[' + bowlindex + '].num';
+      that.setData({
+        [bowlListNum]: num,
+      })
+    }
   },
   shuguoMinus(e){
     var that = this
-    var index = e.currentTarget.dataset.index //这里的index是指模块的序列，非数组的下标
+    var index = e.currentTarget.dataset.index       //这里的index是指模块的序列，非数组的下标
+    var goodsId = e.currentTarget.dataset.goodsid   //注意dataset里面的自定义值不能区分大小写
+
     var num = that.data.shuguoList[index].num
     var bowlListFlag = that.data.bowlListFlag
     var shuguoListNum = 'shuguoList[' + index + '].num'
     var bowlListItem = 'bowlList[' + bowlListFlag + ']' 
     if(num == 0)
-    {
       return
-    }
     num--
     that.setData({
       [shuguoListNum]: num,
       totalCount:that.data.totalCount-1
     })
-    
+    //全部取消了，移除该元素
+    if(num==0){
+      var bowlindex=that.getBowlListIndex(goodsId);
+      that.data.bowlList.splice(bowlindex,1);
+      var tempList=that.data.bowlList;
+      that.setData({
+        bowlList: tempList,
+        bowlListFlag:that.data.bowlListFlag-1
+      })
+    }
+    else{
+      var bowlindex=this.getBowlListIndex(goodsId);
+      var bowlListNum = 'bowlList[' + bowlindex + '].num';
+      that.setData({
+        [bowlListNum]: num,
+      })
+    }
   },
 
   /**
@@ -159,34 +241,69 @@ submit(){
     var index = e.currentTarget.dataset.index //这里的index是指模块的序列，非数组的下标
     var goodsId = e.currentTarget.dataset.goodsid //注意dataset里面的自定义值不能区分大小写
     var num = that.data.dadouList[index].num
+
     var bowlListFlag = that.data.bowlListFlag
+    var bowlListItem = 'bowlList[' + bowlListFlag + ']'
+
     var dadouListNum = 'dadouList[' + index + '].num'
     var dadouListItem = that.data.dadouList[index]
-    var bowlListItem = 'bowlList[' + bowlListFlag + ']'
-    var bowlListNum = 'bowlList[' + bowlListFlag + '].num'
+
     num++
     that.setData({  //注意写法
       [dadouListNum]: num,
       totalCount:that.data.totalCount+1,
     })
+
+    // 第一次加入碗
+    if(!that.judge(goodsId))
+    {
+      that.setData({
+      [bowlListItem]: dadouListItem,
+      bowlListFlag:that.data.bowlListFlag+1
+      })
+    }
+    else
+    {
+      var bowlindex=this.getBowlListIndex(goodsId);
+      var bowlListNum = 'bowlList[' + bowlindex + '].num';
+      that.setData({
+        [bowlListNum]: num,
+      })
+    }
   },
   dadouMinus(e){
     var that = this
-    var index = e.currentTarget.dataset.index //这里的index是指模块的序列，非数组的下标
+    var index = e.currentTarget.dataset.index       //这里的index是指模块的序列，非数组的下标
+    var goodsId = e.currentTarget.dataset.goodsid   //注意dataset里面的自定义值不能区分大小写
+
     var num = that.data.dadouList[index].num
     var bowlListFlag = that.data.bowlListFlag
     var dadouListNum = 'dadouList[' + index + '].num'
     var bowlListItem = 'bowlList[' + bowlListFlag + ']' 
     if(num == 0)
-    {
       return
-    }
     num--
     that.setData({
       [dadouListNum]: num,
       totalCount:that.data.totalCount-1
     })
-    
+    //全部取消了，移除该元素
+    if(num==0){
+      var bowlindex=that.getBowlListIndex(goodsId);
+      that.data.bowlList.splice(bowlindex,1);
+      var tempList=that.data.bowlList;
+      that.setData({
+        bowlList: tempList,
+        bowlListFlag:that.data.bowlListFlag-1
+      })
+    }
+    else{
+      var bowlindex=this.getBowlListIndex(goodsId);
+      var bowlListNum = 'bowlList[' + bowlindex + '].num';
+      that.setData({
+        [bowlListNum]: num,
+      })
+    }
   },
 
   /**
@@ -197,57 +314,69 @@ submit(){
     var index = e.currentTarget.dataset.index //这里的index是指模块的序列，非数组的下标
     var goodsId = e.currentTarget.dataset.goodsid //注意dataset里面的自定义值不能区分大小写
     var num = that.data.dongwuList[index].num
+
     var bowlListFlag = that.data.bowlListFlag
+    var bowlListItem = 'bowlList[' + bowlListFlag + ']'
+
     var dongwuListNum = 'dongwuList[' + index + '].num'
     var dongwuListItem = that.data.dongwuList[index]
-    var bowlListItem = 'bowlList[' + bowlListFlag + ']'
-    var bowlListNum = 'bowlList[' + bowlListFlag + '].num'
+
     num++
     that.setData({  //注意写法
       [dongwuListNum]: num,
       totalCount:that.data.totalCount+1,
     })
-    // if(!that.judge(goodsId))
-    // {
-    //   that.setData({
-    //   [bowlListItem]: gushuListItem,
-    //   bowlListFlag:that.data.bowlListFlag+1
-    //   })
-    // }
-    // else
-    // {
-    //     for(var i = 0;i<that.data.bowlList.length;i++)
-    //     {
-    //       console.log(i)
-    //       console.log(that.data.bowlList[i]._id)
-    //       console.log(goodsId)
-    //       if(that.data.bowlList[i]._id == goodsId)
-    //       {
-    //         that.setData({
-    //           [bowlListNum]:num
-    //         })
-    //         console.log(num)
-    //       }
-    //     }
-    // }
+
+    // 第一次加入碗
+    if(!that.judge(goodsId))
+    {
+      that.setData({
+      [bowlListItem]: dongwuListItem,
+      bowlListFlag:that.data.bowlListFlag+1
+      })
+    }
+    else
+    {
+      var bowlindex=this.getBowlListIndex(goodsId);
+      var bowlListNum = 'bowlList[' + bowlindex + '].num';
+      that.setData({
+        [bowlListNum]: num,
+      })
+    }
   },
   dongwuMinus(e){
     var that = this
-    var index = e.currentTarget.dataset.index //这里的index是指模块的序列，非数组的下标
+    var index = e.currentTarget.dataset.index       //这里的index是指模块的序列，非数组的下标
+    var goodsId = e.currentTarget.dataset.goodsid   //注意dataset里面的自定义值不能区分大小写
+
     var num = that.data.dongwuList[index].num
     var bowlListFlag = that.data.bowlListFlag
     var dongwuListNum = 'dongwuList[' + index + '].num'
     var bowlListItem = 'bowlList[' + bowlListFlag + ']' 
     if(num == 0)
-    {
       return
-    }
     num--
     that.setData({
       [dongwuListNum]: num,
       totalCount:that.data.totalCount-1
     })
-    
+    //全部取消了，移除该元素
+    if(num==0){
+      var bowlindex=that.getBowlListIndex(goodsId);
+      that.data.bowlList.splice(bowlindex,1);
+      var tempList=that.data.bowlList;
+      that.setData({
+        bowlList: tempList,
+        bowlListFlag:that.data.bowlListFlag-1
+      })
+    }
+    else{
+      var bowlindex=this.getBowlListIndex(goodsId);
+      var bowlListNum = 'bowlList[' + bowlindex + '].num';
+      that.setData({
+        [bowlListNum]: num,
+      })
+    }
   },
 
   getDongwuList(){
@@ -269,57 +398,69 @@ submit(){
     var index = e.currentTarget.dataset.index //这里的index是指模块的序列，非数组的下标
     var goodsId = e.currentTarget.dataset.goodsid //注意dataset里面的自定义值不能区分大小写
     var num = that.data.nengliangList[index].num
+
     var bowlListFlag = that.data.bowlListFlag
+    var bowlListItem = 'bowlList[' + bowlListFlag + ']'
+
     var nengliangListNum = 'nengliangList[' + index + '].num'
     var nengliangListItem = that.data.nengliangList[index]
-    var bowlListItem = 'bowlList[' + bowlListFlag + ']'
-    var bowlListNum = 'bowlList[' + bowlListFlag + '].num'
+
     num++
     that.setData({  //注意写法
       [nengliangListNum]: num,
       totalCount:that.data.totalCount+1,
     })
-    // if(!that.judge(goodsId))
-    // {
-    //   that.setData({
-    //   [bowlListItem]: gushuListItem,
-    //   bowlListFlag:that.data.bowlListFlag+1
-    //   })
-    // }
-    // else
-    // {
-    //     for(var i = 0;i<that.data.bowlList.length;i++)
-    //     {
-    //       console.log(i)
-    //       console.log(that.data.bowlList[i]._id)
-    //       console.log(goodsId)
-    //       if(that.data.bowlList[i]._id == goodsId)
-    //       {
-    //         that.setData({
-    //           [bowlListNum]:num
-    //         })
-    //         console.log(num)
-    //       }
-    //     }
-    // }
+
+    // 第一次加入碗
+    if(!that.judge(goodsId))
+    {
+      that.setData({
+      [bowlListItem]: nengliangListItem,
+      bowlListFlag:that.data.bowlListFlag+1
+      })
+    }
+    else
+    {
+      var bowlindex=this.getBowlListIndex(goodsId);
+      var bowlListNum = 'bowlList[' + bowlindex + '].num';
+      that.setData({
+        [bowlListNum]: num,
+      })
+    }
   },
   nengliangMinus(e){
     var that = this
-    var index = e.currentTarget.dataset.index //这里的index是指模块的序列，非数组的下标
+    var index = e.currentTarget.dataset.index       //这里的index是指模块的序列，非数组的下标
+    var goodsId = e.currentTarget.dataset.goodsid   //注意dataset里面的自定义值不能区分大小写
+
     var num = that.data.nengliangList[index].num
     var bowlListFlag = that.data.bowlListFlag
     var nengliangListNum = 'nengliangList[' + index + '].num'
     var bowlListItem = 'bowlList[' + bowlListFlag + ']' 
     if(num == 0)
-    {
       return
-    }
     num--
     that.setData({
       [nengliangListNum]: num,
       totalCount:that.data.totalCount-1
     })
-    
+    //全部取消了，移除该元素
+    if(num==0){
+      var bowlindex=that.getBowlListIndex(goodsId);
+      that.data.bowlList.splice(bowlindex,1);
+      var tempList=that.data.bowlList;
+      that.setData({
+        bowlList: tempList,
+        bowlListFlag:that.data.bowlListFlag-1
+      })
+    }
+    else{
+      var bowlindex=this.getBowlListIndex(goodsId);
+      var bowlListNum = 'bowlList[' + bowlindex + '].num';
+      that.setData({
+        [bowlListNum]: num,
+      })
+    }
   },
 
   getNengliangList(){

@@ -24,7 +24,7 @@
     </view>
     <scroll-view scroll-y="true" class="bowlScroll" style="opacity:1">
       <view class="noFood" wx:if="{{totalCount==0?true:false}}"><text>碗里面还没有东西,\n\n去列表里面添加一点吧。</text></view>  
-     <view class="bowlList" wx:for="{{gushuList}}" wx:for-item="list" wx:if="{{list.num==0?false:true}}">
+     <view class="bowlList" wx:for="{{bowlList}}" wx:for-item="list">
         <view class="bowlItemPic">
             <image class="pic" src="{{list.src}}"></image>
         </view>
