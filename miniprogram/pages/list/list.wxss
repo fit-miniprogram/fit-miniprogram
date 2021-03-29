@@ -78,6 +78,7 @@ page {
   z-index: 10;
   position: fixed;
   height: 1000rpx;
+  /* height: 750rpx; */
   width: 560rpx;
   left: 23%;
   bottom: 250rpx;
@@ -89,6 +90,7 @@ page {
 }
 .bowlPage-unfold .bowlScroll {
   height: 950rpx;
+  /* height: 700rpx; */
   width: 100%;
   transition: all 0.5s ease-in-out;
 }
