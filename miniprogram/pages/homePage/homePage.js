@@ -22,11 +22,55 @@ Page({
   },
 
   cameraTap:function(){
-    wx.showToast({
-      title: '还没做完，点锤子点',
-      icon: 'none',
-      duration: 2000
-    })
+      var that = this;
+      wx.showActionSheet({
+        itemList: ['拍照','从相册中选择'],
+        success(res) {
+          console.log(res.tapIndex)
+          if(res.tapIndex==0){ //0是拍照
+            wx.chooseImage({
+              count: 1,
+              sizeType: ['compressed'],
+              sourceType: ['camera'],
+              success: function (res) {
+                  let base64 = fileManager.readFileSync(res.tempFilePaths[0],'base64');
+                  that.setData({
+                    base64: base64,
+                    pic:res.tempFilePaths[0]
+                  })
+                  that.check()
+                  setTimeout(function () {
+                    that.gotoResult()
+                    //要延时执行的代码
+                   }, 2000)
+                  console.log(base64)
+                  console.log(that.data.pic) //这个是图片
+                  
+                  
+               },
+            })
+          } else if(res.tapIndex==1){
+            wx.chooseImage({
+              count: 1,
+              sizeType: ['compressed'],
+              sourceType: ['album'],
+              success: function(res) {
+                let base64 = fileManager.readFileSync(res.tempFilePaths[0],'base64');
+                  that.setData({
+                    base64: base64,
+                    pic:res.tempFilePaths[0]
+                  })
+                console.log(res.tempFilePaths[0])// 这个是图片
+                that.check()
+                setTimeout(function () {
+                  that.gotoResult()
+                  //要延时执行的代码
+                 }, 2000)
+              },
+            })
+          }
+        }
+      })
   },
 
   speechTap: function(){
@@ -244,99 +288,15 @@ Page({
 
   onLoad() {
     var that = this
-    
-  //   var p1 = new Promise(function(resolve, reject){
-  //     //做一些异步操作
-      
-  //         console.log('执行完成Promise');
-  //         resolve(that.searchAnswer());
-      
-  // });
-  //   p1.then(that.getQuestion(),console.log("wdnmd"));
-    // new Promise(
-    //   function(resolve,reject)
-    //   {
-    //     that.getQuestion()
-        
-    //     resolve(),     // 数据处理完成
-    //     reject()       // 数据处理出错
-    //   }
-    // ).then(that.searchAnswer(),)
     that.getDoYouKonwList();
     that.towerSwiper('swiperList');
     that.getNowTime();
     that.getOpenid();
-    // that.searchAnswer();
-   // that.getQuestion()
-    // that.searchAnswer();
-    // setTimeout(function() {
-    //   that.getQuestion();
-    // }, 250);
+    //that.getAnswerList();
     getApp().loadFont();
     
 
   },
-
-  
-
-
-  searchAnswer: function (e) {
-    var that = this;
-    console.log(that.data.currentOpenid)
-    db.collection("userAnswer").where({ 
-      openid:that.data.currentOpenid
-    }).get({
-      success(res) {
-        console.log(res.data.length)
-        if(res.data.length !=0 )
-        {
-          console.log("今日已回答")
-          that.setData({
-            answerDayArr : res.data
-          })   
-          
-          for(let i = 0 ; i<that.data.answerDayArr.length ; i++){    
-              if(that.data.answerDayArr[i].answerDay == that.data.today){
-                if(res.data[i].TOF == true)
-                    {
-                      
-                      that.setData({
-                        optionShow: false,
-                        answerTipTrueShow:true,
-                        isTodayAnswer:true,
-                        questionId:that.data.answerDayArr[i].answerQuestionId
-                      },() =>{ 
-                      })
-                    }
-                    else
-                    {
-                      that.setData({
-                        optionShow: false,
-                        answerTipErrorShow:true,
-                        isTodayAnswer:true,
-                        questionId:that.data.answerDayArr[i].answerQuestionId
-                      },() =>{
-                      })
-                    }
-              }
-          }
-          that.getOriginQuestion() 
-        }
-        else
-        {
-          console.log("今日未回答")
-          that.getRandomQuestion()
-        }
-        
-        },
-        error(err){
-          console.log(err)
-        }
-    })
-   },
-
-
-
 
   updateScore:function(e){
     var that = this
@@ -436,7 +396,7 @@ Page({
         that.setData({
           currentOpenid: res.result.openid
         },()=>{
-          that.searchAnswer()
+          that.getAnswerList()
         })
       })
       .catch(err => { //调用getOpenid失败打印错误信息
@@ -552,7 +512,159 @@ Page({
     }
 
     this.setData({ opacity });
+  },
+
+  getAnswerList: function () {
+    let that = this;
+    wx.cloud.callFunction({ 
+      name: 'getAnswerList',
+      data:{
+        openid:that.data.currentOpenid
+      },
+      config:{env:"fit-gc46z"}
+    })
+      .then(res => { 
+        console.log(res)
+          console.log(res.result.data.length)
+          if(res.result.data.length !=0 )
+          {
+            that.setData({
+              answerDayArr : res.result.data
+            })   
+            for(let i = 0 ; i<that.data.answerDayArr.length ; i++){    
+                if(that.data.answerDayArr[i].answerDay == that.data.today){
+                  console.log("今日已回答")
+                  if(res.result.data[i].TOF == true)
+                      {
+                        that.setData({
+                          optionShow: false,
+                          answerTipTrueShow:true,
+                          isTodayAnswer:true,
+                          questionId:that.data.answerDayArr[i].answerQuestionId
+                        },() =>{ 
+                        })
+                      }
+                      else
+                      {
+                        that.setData({
+                          optionShow: false,
+                          answerTipErrorShow:true,
+                          isTodayAnswer:true,
+                          questionId:that.data.answerDayArr[i].answerQuestionId
+                        },() =>{
+                        })
+                      }
+                }
+            }
+            that.getOriginQuestion() 
+          }
+          else
+          {
+            console.log("今日未回答")
+            that.getRandomQuestion()
+          }
+          
+      })
+      .catch(err => { 
+        console.log(err);
+      });
+  },
+
+  check(){
+    var that = this;
+    wx.showLoading({
+      title: '识别中',
+    })
+    let token = wx.getStorageSync("token");
+    if (token){
+      //token存在，直接去图库搜索图片
+      wx.request({
+        url: 'https://aip.baidubce.com/rest/2.0/image-classify/v2/advanced_general?access_token=' + token,
+        method: 'POST',
+        data: {
+          image: that.data.base64,
+          baike_num:1
+        },
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        success: res => {
+          wx.hideLoading();
+          console.log(res)
+          //个人对返回数据做的判断，可以按自己的需要编写相应逻辑
+          if (res.data.result_num > 0) {
+            let obj = res.data.result[0].keyword;
+            // wx.showModal({
+            //   title: obj
+            // })//显示弹窗
+            that.setData({
+              keyword:res.data.result[0].keyword,
+              description:res.data.result[0].baike_info.description
+            })
+            console.log("token"+that.data.keyword)
+            console.log("token"+that.data.description)
+          } else {
+            this.showToast("识别未成功")
+          }
+        },
+        fail: err => {
+          wx.hideLoading();
+          this.showToast("调用失败,请稍后重试")
+        }
+      });
+    }else{
+      //没有token，调api去拿
+      wx.request({
+        url: 'https://aip.baidubce.com/oauth/2.0/token', //真实的接口地址
+        data: {
+          grant_type: 'client_credentials',//固定的	
+          client_id: 'ZNCRM1vSi6jOtLZVjuhe46RO',//自己应用实例的AppID，在应用列表可以找到
+          client_secret: 's53ZEmXzlNkcYjbyHAmbNcvzBLGKAZdG'//自己应用实例的API Key
+        },
+        header: {
+          'Content-Type': 'application/json'
+        },
+        success: res => {
+          wx.setStorageSync("token", res.data.access_token);
+          wx.request({
+            url: 'https://aip.baidubce.com/rest/2.0/image-classify/v2/advanced_general?access_token=' + res.data.access_token,
+            method: 'POST',
+            data: {
+              image: that.data.base64,
+              baike_num:1
+            },
+            header: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            success: res => {
+              wx.hideLoading();
+              console.log(res)
+              if (res.data.result_num > 0) {
+                let obj = res.data.result[0].keyword;
+                // wx.showModal({
+                //   title: obj
+                // })//显示弹窗
+                that.setData({
+                  keyword:res.data.result[0].keyword,
+                  description:res.data.result[0].baike_info.description
+                })
+                console.log(that.data.keyword)
+                console.log(that.data.description)
+              } else {
+                that.showToast("识别未成功")
+              }
+            },
+            fail: err => {
+              wx.hideLoading();
+              that.showToast("调用失败,请稍后重试")
+            }
+          });
+        }
+      })
+    }
   }
+
+  
 })
 
 
