@@ -120,6 +120,7 @@
             </view>
         </view>
     </view>
+    <view style="width: 525rpx;height: 200rpx;"></view>
 </view>
 
 
@@ -196,6 +197,7 @@
             </view>
         </view>
     </view>
+    <view style="width: 525rpx;height: 200rpx;"></view>
 </view>
 
 
