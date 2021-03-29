@@ -10,8 +10,8 @@ Page({
   data: {
     opacity1: 0,
     opacity2: 0,
-    top_distance: 0,
-    bottom_distance: 0,
+    top_distance: 135,
+    bottom_distance: 135,
     pageHeight: 0,
     moveX: 0,
     moveY: 0,
@@ -105,6 +105,7 @@ Page({
         size:1
       })
       .end().then(  res => {  
+          console.log(res.list);
           that.setData({
             content: res.list[0].content,
             src :res.list[0].src,

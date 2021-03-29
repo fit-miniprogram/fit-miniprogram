@@ -85,7 +85,7 @@
 </view>
 
 
-
+<!-- 蔬果类 -->
 <view class="content" wx:if="{{currentTab==1?true:flase}}">
     <view id="shuguoIntro" class="intro">
         <view id="shuguoImg" class="introImgBack">
@@ -98,6 +98,26 @@
             </text>
             <text style="margin-top:0rpx;" class="content3" decode="true">&nbsp;建议蔬菜摄入量：300g~500g
             </text>
+        </view>
+    </view>
+    <!-- 加减的基本思路：在每一个view上设置data，text中有value属性，https://www.jianshu.com/p/7ebfe748ca17 -->
+    <view class="item" wx:for="{{shuguoList}}" wx:for-item="list" wx:for-index="index" >
+        <view class="itemPic">
+            <image class="pic" src="{{list.src}}"></image>
+        </view>
+        <view class="itemContent">
+            <view class="name">{{list.name}}</view>
+            <view class="cal">{{list.cal}}</view>
+        </view>
+        <!-- dataset里面的自定义值不能区分大小写，垃圾微信 -->
+        <view class="PAM" data-wdnmd="1">
+            <view data-index="{{index}}" data-goodsId="{{list._id}}" bindtap="shuguoMinus" class="minus" style="opacity:{{list.num==0?0:1}};">
+                <image class="minusPic" src="{{plusPic}}"></image>
+            </view>
+            <input type="text" class="num" value="{{list.num==0?'':list.num}}" disabled="true"></input>
+            <view data-index="{{index}}" data-goodsId="{{list._id}}" bindtap="shuguoPlus" class="plus">
+                <image class="plusPic" src="{{minusPic}}" ></image>
+            </view>
         </view>
     </view>
 </view>
@@ -144,7 +164,7 @@
 
 
 
-
+<!-- 大豆类食物 -->
 <view class="content" wx:if="{{currentTab==3?true:flase}}">
     <view id="dadouIntro" class="intro">
         <view id="dadouImg" class="introImgBack">
@@ -154,6 +174,26 @@
             <text class="content1">大豆类食物</text>
             <text class="content2" decode="true">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;包括黄豆，黑豆等，主要的特点为高蛋白，高脂肪和低碳水化合物，和其他豆类，比如蚕豆，红豆，绿豆，蚕豆等，他们大多为高碳水化合物（50%~70%），高蛋白质和低脂肪。</text>
             <text class="content3" decode="true">&nbsp;建议摄入量：每天15g~25g</text>
+        </view>
+    </view>
+    <!-- 加减的基本思路：在每一个view上设置data，text中有value属性，https://www.jianshu.com/p/7ebfe748ca17 -->
+    <view class="item" wx:for="{{dadouList}}" wx:for-item="list" wx:for-index="index" >
+        <view class="itemPic">
+            <image class="pic" src="{{list.src}}"></image>
+        </view>
+        <view class="itemContent">
+            <view class="name">{{list.name}}</view>
+            <view class="cal">{{list.cal}}</view>
+        </view>
+        <!-- dataset里面的自定义值不能区分大小写，垃圾微信 -->
+        <view class="PAM" data-wdnmd="1">
+            <view data-index="{{index}}" data-goodsId="{{list._id}}" bindtap="dadouMinus" class="minus" style="opacity:{{list.num==0?0:1}};">
+                <image class="minusPic" src="{{plusPic}}"></image>
+            </view>
+            <input type="text" class="num" value="{{list.num==0?'':list.num}}" disabled="true"></input>
+            <view data-index="{{index}}" data-goodsId="{{list._id}}" bindtap="dadouPlus" class="plus">
+                <image class="plusPic" src="{{minusPic}}" ></image>
+            </view>
         </view>
     </view>
 </view>

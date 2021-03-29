@@ -11,6 +11,8 @@ Page({
       currentTab:0,
       totalCount:0,
       gushuList:[],
+      shuguoList:[],          //蔬果类列表
+      dadouList: [],          //大豆类列表
       dongwuList:[],
       nengliangList:[],
       bowlList:[],
@@ -35,8 +37,6 @@ submit(){
     })
 },
 
-
-
 //购物车bowlList与食物List分离方法未尝试成功，欢迎勇士继续修改，
 //现在的版本是直接将所有的食物List置入，num为0则不显示
 
@@ -52,7 +52,7 @@ submit(){
     return false
   },
 
-  gushuPlus(e){
+ gushuPlus(e){
     var that = this
     var index = e.currentTarget.dataset.index //这里的index是指模块的序列，非数组的下标
     var goodsId = e.currentTarget.dataset.goodsid //注意dataset里面的自定义值不能区分大小写
@@ -67,29 +67,6 @@ submit(){
       [gushuListNum]: num,
       totalCount:that.data.totalCount+1,
     })
-    // if(!that.judge(goodsId))
-    // {
-    //   that.setData({
-    //   [bowlListItem]: gushuListItem,
-    //   bowlListFlag:that.data.bowlListFlag+1
-    //   })
-    // }
-    // else
-    // {
-    //     for(var i = 0;i<that.data.bowlList.length;i++)
-    //     {
-    //       console.log(i)
-    //       console.log(that.data.bowlList[i]._id)
-    //       console.log(goodsId)
-    //       if(that.data.bowlList[i]._id == goodsId)
-    //       {
-    //         that.setData({
-    //           [bowlListNum]:num
-    //         })
-    //         console.log(num)
-    //       }
-    //     }
-    // }
   },
   gushuMinus(e){
     var that = this
@@ -109,8 +86,6 @@ submit(){
     })
     
   },
-  
-
   getGushuList(){
     var that = this
     db.collection("gushuList").get({}).then(res=>{
@@ -121,6 +96,98 @@ submit(){
     })
   },
 
+  /**
+   * 蔬果类初始化列表已经操作
+   * ***/
+  getShuguoList(){
+    var that = this
+    db.collection("shuguoList").get({}).then(res=>{
+      console.log(res)
+      that.setData({
+        shuguoList: res.data
+      })
+    })
+  },
+  shuguoPlus(e){
+    var that = this
+    var index = e.currentTarget.dataset.index //这里的index是指模块的序列，非数组的下标
+    var goodsId = e.currentTarget.dataset.goodsid //注意dataset里面的自定义值不能区分大小写
+    var num = that.data.shuguoList[index].num
+    var bowlListFlag = that.data.bowlListFlag
+    var shuguoListNum = 'shuguoList[' + index + '].num'
+    var shuguoListItem = that.data.shuguoList[index]
+    var bowlListItem = 'bowlList[' + bowlListFlag + ']'
+    var bowlListNum = 'bowlList[' + bowlListFlag + '].num'
+    num++
+    that.setData({  //注意写法
+      [shuguoListNum]: num,
+      totalCount:that.data.totalCount+1,
+    })
+  },
+  shuguoMinus(e){
+    var that = this
+    var index = e.currentTarget.dataset.index //这里的index是指模块的序列，非数组的下标
+    var num = that.data.shuguoList[index].num
+    var bowlListFlag = that.data.bowlListFlag
+    var shuguoListNum = 'shuguoList[' + index + '].num'
+    var bowlListItem = 'bowlList[' + bowlListFlag + ']' 
+    if(num == 0)
+    {
+      return
+    }
+    num--
+    that.setData({
+      [shuguoListNum]: num,
+      totalCount:that.data.totalCount-1
+    })
+    
+  },
+
+  /**
+   * 大豆类初始化列表以及操作
+   * ***/
+  getDadouList(){
+    var that = this
+    db.collection("dadouList").get({}).then(res=>{
+      that.setData({
+        dadouList: res.data
+      })
+    })
+  },
+  dadouPlus(e){
+    var that = this
+    var index = e.currentTarget.dataset.index //这里的index是指模块的序列，非数组的下标
+    var goodsId = e.currentTarget.dataset.goodsid //注意dataset里面的自定义值不能区分大小写
+    var num = that.data.dadouList[index].num
+    var bowlListFlag = that.data.bowlListFlag
+    var dadouListNum = 'dadouList[' + index + '].num'
+    var dadouListItem = that.data.dadouList[index]
+    var bowlListItem = 'bowlList[' + bowlListFlag + ']'
+    var bowlListNum = 'bowlList[' + bowlListFlag + '].num'
+    num++
+    that.setData({  //注意写法
+      [dadouListNum]: num,
+      totalCount:that.data.totalCount+1,
+    })
+  },
+  dadouMinus(e){
+    var that = this
+    var index = e.currentTarget.dataset.index //这里的index是指模块的序列，非数组的下标
+    var num = that.data.dadouList[index].num
+    var bowlListFlag = that.data.bowlListFlag
+    var dadouListNum = 'dadouList[' + index + '].num'
+    var bowlListItem = 'bowlList[' + bowlListFlag + ']' 
+    if(num == 0)
+    {
+      return
+    }
+    num--
+    that.setData({
+      [dadouListNum]: num,
+      totalCount:that.data.totalCount-1
+    })
+    
+  },
 
   /**
    * 动物类
@@ -295,6 +362,8 @@ submit(){
   onLoad: function (options) {
     var that = this
     that.getGushuList();
+    that.getShuguoList();         //获得蔬果类食物列表
+    that.getDadouList();          //获得大豆类食物列表
     that.getDongwuList();
     that.getNengliangList();
     getApp().loadFont();
