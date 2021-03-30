@@ -1,5 +1,6 @@
 import throttle from '../../gradient-bar/utils/throttle';
 const SCROLL_TOP_OFFSET = 200;
+const fileManager = wx.getFileSystemManager();
 const db = wx.cloud.database({
   env: 'fit-gc46z'
 }); 
@@ -23,54 +24,20 @@ Page({
 
   cameraTap:function(){
       var that = this;
-      wx.showActionSheet({
-        itemList: ['拍照','从相册中选择'],
-        success(res) {
-          console.log(res.tapIndex)
-          if(res.tapIndex==0){ //0是拍照
-            wx.chooseImage({
-              count: 1,
-              sizeType: ['compressed'],
-              sourceType: ['camera'],
-              success: function (res) {
-                  let base64 = fileManager.readFileSync(res.tempFilePaths[0],'base64');
-                  that.setData({
-                    base64: base64,
-                    pic:res.tempFilePaths[0]
-                  })
-                  that.check()
-                  setTimeout(function () {
-                    that.gotoResult()
-                    //要延时执行的代码
-                   }, 2000)
-                  console.log(base64)
-                  console.log(that.data.pic) //这个是图片
-                  
-                  
-               },
-            })
-          } else if(res.tapIndex==1){
-            wx.chooseImage({
-              count: 1,
-              sizeType: ['compressed'],
-              sourceType: ['album'],
-              success: function(res) {
-                let base64 = fileManager.readFileSync(res.tempFilePaths[0],'base64');
-                  that.setData({
-                    base64: base64,
-                    pic:res.tempFilePaths[0]
-                  })
-                console.log(res.tempFilePaths[0])// 这个是图片
-                that.check()
-                setTimeout(function () {
-                  that.gotoResult()
-                  //要延时执行的代码
-                 }, 2000)
-              },
-            })
+      wx.showModal({
+        title: '',
+        content: '会消耗10积分，继续吗',
+        success (res) {
+          if (res.confirm) {
+            that.selectOrTakePic()
+            console.log('用户点击确定')
+          } else if (res.cancel) {
+            console.log('用户点击取消')
           }
         }
       })
+ 
+      
   },
 
   speechTap: function(){
@@ -579,7 +546,7 @@ Page({
     if (token){
       //token存在，直接去图库搜索图片
       wx.request({
-        url: 'https://aip.baidubce.com/rest/2.0/image-classify/v2/advanced_general?access_token=' + token,
+        url: 'https://aip.baidubce.com/rest/2.0/image-classify/v2/dish?access_token=' + token,
         method: 'POST',
         data: {
           image: that.data.base64,
@@ -593,23 +560,23 @@ Page({
           console.log(res)
           //个人对返回数据做的判断，可以按自己的需要编写相应逻辑
           if (res.data.result_num > 0) {
-            let obj = res.data.result[0].keyword;
-            // wx.showModal({
-            //   title: obj
-            // })//显示弹窗
             that.setData({
-              keyword:res.data.result[0].keyword,
+              hasCakorie:res.data.result[0].has_calorie,
+              foodName:res.data.result[0].name,
+              calorie:res.data.result[0].calorie,
               description:res.data.result[0].baike_info.description
             })
-            console.log("token"+that.data.keyword)
-            console.log("token"+that.data.description)
           } else {
-            this.showToast("识别未成功")
+            wx.showToast({
+              title: '识别未成功',
+            })
           }
         },
         fail: err => {
           wx.hideLoading();
-          this.showToast("调用失败,请稍后重试")
+          wx.showToast({
+            title: '调用失败,请稍后重试',
+          })
         }
       });
     }else{
@@ -618,8 +585,8 @@ Page({
         url: 'https://aip.baidubce.com/oauth/2.0/token', //真实的接口地址
         data: {
           grant_type: 'client_credentials',//固定的	
-          client_id: 'ZNCRM1vSi6jOtLZVjuhe46RO',//自己应用实例的AppID，在应用列表可以找到
-          client_secret: 's53ZEmXzlNkcYjbyHAmbNcvzBLGKAZdG'//自己应用实例的API Key
+          client_id: 'exbhRBiOD36kQTGBukUiaUnd',//自己应用实例的Api key，在应用列表可以找到
+          client_secret: 'iTL2jO6xE0e4g44LgYSd1GmjPnKAgnYC'//自己应用实例的secrect Key
         },
         header: {
           'Content-Type': 'application/json'
@@ -627,7 +594,7 @@ Page({
         success: res => {
           wx.setStorageSync("token", res.data.access_token);
           wx.request({
-            url: 'https://aip.baidubce.com/rest/2.0/image-classify/v2/advanced_general?access_token=' + res.data.access_token,
+            url: 'https://aip.baidubce.com/rest/2.0/image-classify/v2/dish?access_token=' + res.data.access_token,
             method: 'POST',
             data: {
               image: that.data.base64,
@@ -640,28 +607,80 @@ Page({
               wx.hideLoading();
               console.log(res)
               if (res.data.result_num > 0) {
-                let obj = res.data.result[0].keyword;
-                // wx.showModal({
-                //   title: obj
-                // })//显示弹窗
                 that.setData({
-                  keyword:res.data.result[0].keyword,
+                  hasCakorie:res.data.result[0].has_calorie,
+                  foodName:res.data.result[0].name,
+                  calorie:res.data.result[0].calorie,
                   description:res.data.result[0].baike_info.description
                 })
-                console.log(that.data.keyword)
-                console.log(that.data.description)
               } else {
-                that.showToast("识别未成功")
+                wx.showToast({
+                  title: '识别未成功',
+                })
               }
             },
             fail: err => {
               wx.hideLoading();
-              that.showToast("调用失败,请稍后重试")
+              wx.showToast({
+                title: '调用失败,请稍后重试',
+              })
             }
           });
         }
       })
     }
+  },
+
+  selectOrTakePic(){
+    var that = this
+    wx.showActionSheet({
+      itemList: ['拍照','从相册中选择'],
+      success(res) {
+        console.log(res.tapIndex)
+        if(res.tapIndex==0){ //0是拍照
+          wx.chooseImage({
+            count: 1,
+            sizeType: ['compressed'],
+            sourceType: ['camera'],
+            success: function (res) {
+                let base64 = fileManager.readFileSync(res.tempFilePaths[0],'base64');
+                that.setData({
+                  base64: base64,
+                  pic:res.tempFilePaths[0]
+                })
+                that.check()
+                setTimeout(function () {
+                  //that.gotoResult()
+                  //要延时执行的代码
+                 }, 2000)
+                console.log(base64)
+                console.log(that.data.pic) //这个是图片
+                
+                
+             },
+          })
+        } else if(res.tapIndex==1){
+          wx.chooseImage({
+            count: 1,
+            sizeType: ['compressed'],
+            sourceType: ['album'],
+            success: function(res) {
+              let base64 = fileManager.readFileSync(res.tempFilePaths[0],'base64');
+                that.setData({
+                  base64: base64,
+                  pic:res.tempFilePaths[0]
+                })
+              console.log(res.tempFilePaths[0])// 这个是图片
+              that.check()
+              setTimeout(function () {
+                //that.gotoResult()
+                //要延时执行的代码
+               }, 2000)
+            },
+          })
+        }
+      }
+    })
   }
 
   
