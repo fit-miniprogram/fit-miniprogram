@@ -1,18 +1,49 @@
-// miniprogram/pages/homePage/camera/camera.js
+// miniprogram/pages/homePage/camera/detail/detail.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    calorie: "",
+    description: "",
+    foodName: "",
+    hasCalorie: "",
+    pic: ""
+    
   },
 
+  submit(){
+    var that = this
+      wx.vibrateShort({
+        success: (res) => {},
+      })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this
+    getApp().loadFont()
+    console.log(options)
+    if(options.hasCakorie == "false")
+    {
+      that.setData({
+        hasCakorie: false
+      })
+    }
+    else
+    {
+      that.setData({
+        hasCakorie: true
+      })
+    }
+    that.setData({
+      calorie: options.calorie,
+      description: options.description,
+      foodName: options.foodName,
+      pic: options.pic
+    })  
   },
 
   /**

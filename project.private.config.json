@@ -87,6 +87,12 @@
         {
           "name": "prepages",
           "pathName": "pages/prePages/prePage/prePage",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/homePage/camera/camera",
+          "pathName": "pages/homePage/camera/camera",
           "scene": null
         }
       ]

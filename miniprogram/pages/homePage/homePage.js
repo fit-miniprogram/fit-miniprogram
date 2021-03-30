@@ -24,6 +24,20 @@ Page({
 
   cameraTap:function(){
       var that = this;
+      var that = this
+    var animation3 = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease',
+      delay: 0
+     });
+     animation3.scale(0.8,0.8).step()
+     animation3.scale(1,1).step()
+     that.setData({
+      animation3: animation3.export()
+     })
+    wx.vibrateShort({
+      success: (res) => {},
+    })
       wx.showModal({
         title: '',
         content: '会消耗10积分，继续吗',
@@ -267,7 +281,7 @@ Page({
 
   updateScore:function(e){
     var that = this
-    console.log(e)
+    console.log("积分+"+e)
     that.judgeUser()
     db.collection('userScore').where({  	
       openid: that.data.currentOpenid
@@ -314,9 +328,6 @@ Page({
       success: (res) => {
        
         let user_get = res.data; //获取到的对象数组数据
-        // that.setData({
-        //   user_get: that.data.user.concat(res.data)
-        // });
         console.log(res)
         for (let i = 0; i < user_get.length; i++) { //遍历数据库对象集合
           if (that.data.currentOpenid === user_get[i].openid) { //Openid存在
@@ -568,6 +579,7 @@ Page({
             })
           } else {
             wx.showToast({
+              icon:'error',
               title: '识别未成功',
             })
           }
@@ -575,6 +587,7 @@ Page({
         fail: err => {
           wx.hideLoading();
           wx.showToast({
+            icon:'error',
             title: '调用失败,请稍后重试',
           })
         }
@@ -592,6 +605,7 @@ Page({
           'Content-Type': 'application/json'
         },
         success: res => {
+          wx.hideLoading();
           wx.setStorageSync("token", res.data.access_token);
           wx.request({
             url: 'https://aip.baidubce.com/rest/2.0/image-classify/v2/dish?access_token=' + res.data.access_token,
@@ -615,6 +629,7 @@ Page({
                 })
               } else {
                 wx.showToast({
+                  icon:'error',
                   title: '识别未成功',
                 })
               }
@@ -622,6 +637,7 @@ Page({
             fail: err => {
               wx.hideLoading();
               wx.showToast({
+                icon:'error',
                 title: '调用失败,请稍后重试',
               })
             }
@@ -650,7 +666,7 @@ Page({
                 })
                 that.check()
                 setTimeout(function () {
-                  //that.gotoResult()
+                  that.gotoResult()
                   //要延时执行的代码
                  }, 2000)
                 console.log(base64)
@@ -673,7 +689,7 @@ Page({
               console.log(res.tempFilePaths[0])// 这个是图片
               that.check()
               setTimeout(function () {
-                //that.gotoResult()
+                that.gotoResult()
                 //要延时执行的代码
                }, 2000)
             },
@@ -681,9 +697,20 @@ Page({
         }
       }
     })
-  }
+  },
 
-  
+  gotoResult:function(){//点击列表中的栏目，跳转到相应的详情页
+    var that = this;
+    console.log("goto "+that.data.pic)
+    console.log("goto "+that.data.description)
+    console.log("goto "+that.data.hasCakorie)
+    console.log("goto "+that.data.foodName)
+    console.log("goto "+that.data.calorie)
+    
+    wx.navigateTo({ //带参数页面跳转
+      url: "../homePage/camera/camera?pic=" + that.data.pic + "&description=" + that.data.description + "&hasCakorie="  + that.data.hasCakorie + "&foodName=" + that.data.foodName + "&calorie=" + that.data.calorie
+    })
+  },
 })
 
 
