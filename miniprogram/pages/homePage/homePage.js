@@ -37,7 +37,7 @@ Page({
      })
     wx.vibrateShort({
       success: (res) => {},
-    })
+    }) 
       wx.showModal({
         title: '',
         content: '会消耗10积分，继续吗',
