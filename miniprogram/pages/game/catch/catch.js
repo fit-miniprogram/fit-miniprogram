@@ -4,6 +4,7 @@ const db = wx.cloud.database({
 Page({
 
   showTip:function(){
+    var that=this;
     var animation1 = wx.createAnimation({
      duration: 1500,
      timingFunction: 'ease',
@@ -11,9 +12,7 @@ Page({
     });
     animation1.opacity(1).step()
     animation1.opacity(0).step()
-    this.setData({
-     animation1: animation1.export()
-    })
+
 
     var animation2 = wx.createAnimation({
       duration: 1500,
@@ -24,9 +23,7 @@ Page({
      animation2.opacity(0).step({
        delay:0
      })
-     this.setData({
-      animation2: animation2.export()
-     })
+
 
      var animation3 = wx.createAnimation({
       duration: 1500,
@@ -38,7 +35,13 @@ Page({
        delay:0
      })
      this.setData({
+      animation1: animation1.export(),
+      animation2: animation2.export(),
       animation3: animation3.export()
+     },function(){
+        setTimeout(function(){
+          that.fall()
+        },3500)
      })
   },
 
@@ -47,6 +50,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    stopflag: false,
     left:0,
     bottom:1200,
     score:0,
@@ -113,9 +117,6 @@ Page({
   gameStart(){
     var that = this
     that.showTip()
-    setTimeout(function(){
-        that.fall()
-    },3500)
   },
 
 
@@ -132,6 +133,8 @@ Page({
       isdisAble:false
     })
     var fallInterval = setInterval(function(){
+      if(that.data.stopflag==true)
+        clearInterval(that.data.fallInterval);
       that.setData({
         fallInterval: fallInterval,
         bottom: that.data.bottom - 50,
@@ -142,6 +145,7 @@ Page({
   },
 
   stop(){
+
     var that = this
     clearInterval(that.data.fallInterval)
     that.setData({
@@ -361,6 +365,9 @@ judgeUser:function(e){ //判断用户集合中是否存在当前用户
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
+    this.setData({
+      stopflag: true
+    })
     this.stop()
   },
 
@@ -368,7 +375,10 @@ judgeUser:function(e){ //判断用户集合中是否存在当前用户
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-      this.stop()
+    this.setData({
+      stopflag: true
+    })
+    this.stop()
   },
 
   /**

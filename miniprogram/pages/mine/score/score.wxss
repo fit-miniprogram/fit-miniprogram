@@ -1,0 +1,87 @@
+.self-area{
+  width: 100%;
+}
+.rank-list{
+  width: 100%;
+}
+.rank-item{
+  position: relative;
+  display: flex;
+  height: 160rpx;
+  box-shadow: 0rpx 2rpx 0rpx #DDDDDD;
+  margin-bottom: 2rpx;
+  margin-left: 15rpx;
+  margin-right: 15rpx;
+}
+.rank-item:last-child{
+  box-shadow: 0rpx 0rpx 0rpx 0rpx #DDDDDD;
+  margin-bottom: 0rpx;
+}
+.rank-item .rank{
+  width: 100rpx;
+  line-height: 64rpx;
+  text-align: center;
+  font-size: 48rpx;
+  color: #000000;
+  padding: 48rpx 18rpx;
+}
+.rank-item .rank .rank-content{
+  width: 100%;
+  height: 100%;
+}
+/* 奖牌 32x32 */
+.rank-item:nth-child(1) .rank .rank-content{
+  background: url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/mine/golenmedal.png?sign=d663b8e346482c96825db13c3433dccd&t=1617279288");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+
+}
+.rank-item:nth-child(2) .rank .rank-content{
+  background: url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/mine/silvermedal.png?sign=f48465464da30a971f4106884b6bf517&t=1617279610");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.rank-item:nth-child(3) .rank .rank-content{
+  background: url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/mine/coppermedal.png?sign=b04a70c0ba4cef0f34b4de2d57d81101&t=1617280207");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+/* 48*48 */
+.rank-item .profile{
+  width: 120rpx;
+  padding: 32rpx 12rpx;
+}
+.rank-item .profile .profile-content{
+  width: 100%;
+  height: 100%;
+  background: url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/mine/profile.png?sign=49634b5f3cec8dee7c142c76fb1d6eed&t=1617281360");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border-radius: 10rpx;
+}
+
+.rank-item .nickname{
+  line-height: 64rpx;
+  text-align: center;
+  font-size: 48rpx;
+  color: #000000;
+  padding: 48rpx 8rpx;
+}
+.rank-item .score{
+  right: 0;
+  position: absolute;
+  line-height: 64rpx;
+  text-align: center;
+  font-size: 48rpx;
+  color: #000000;
+  padding: 48rpx 48rpx;
+}
+.tip{
+  height: 120rpx;
+  width: 100%;
+  padding: 40rpx 0rpx;
+  line-height: 40rpx;
+  font-size: 30rpx;
+  text-align: center;
+}

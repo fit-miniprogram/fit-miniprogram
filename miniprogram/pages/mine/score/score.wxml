@@ -1,0 +1,96 @@
+<view class="self-area">我的积分</view>
+
+<view class="rank-list-title">强者排行榜</view>
+<view class="rank-list">
+  <!-- 加上一个防止last-child失效 -->
+  <view>
+    <view class="rank-item">
+      <view class="rank">
+        <view class="rank-content"></view>
+      </view>
+      <view class="profile">
+        <view class="profile-content"></view>
+      </view>
+      <view class="nickname">niuzhixing</view>
+      <view class="score">3230</view>
+    </view>
+
+    <view class="rank-item">
+      <view class="rank">
+        <view class="rank-content"></view>
+      </view>
+      <view class="profile">
+        <view class="profile-content"></view>
+      </view>
+      <view class="nickname">joker</view>
+      <view class="score">31231</view>
+    </view>
+
+    <view class="rank-item">
+      <view class="rank">
+        <view class="rank-content"></view>
+      </view>
+      <view class="profile">
+        <view class="profile-content"></view>
+      </view>
+      <view class="nickname">2</view>
+      <view class="score">3</view>
+    </view>
+
+    <view class="rank-item">
+      <view class="rank">
+        <view class="rank-content">4</view>
+      </view>
+      <view class="profile">
+        <view class="profile-content"></view>
+      </view>
+      <view class="nickname">2</view>
+      <view class="score">3</view>
+    </view>
+
+    <view class="rank-item">
+      <view class="rank">
+        <view class="rank-content">4</view>
+      </view>
+      <view class="profile">
+        <view class="profile-content"></view>
+      </view>
+      <view class="nickname">2</view>
+      <view class="score">3</view>
+    </view>
+
+    <view class="rank-item">
+      <view class="rank">
+        <view class="rank-content">4</view>
+      </view>
+      <view class="profile">
+        <view class="profile-content"></view>
+      </view>
+      <view class="nickname">2</view>
+      <view class="score">3</view>
+    </view>
+
+    <view class="rank-item">
+      <view class="rank">
+        <view class="rank-content">4</view>
+      </view>
+      <view class="profile">
+        <view class="profile-content"></view>
+      </view>
+      <view class="nickname">2</view>
+      <view class="score">3</view>
+    </view>
+
+    <view class="rank-item">
+      <view class="rank">
+        <view class="rank-content">4</view>
+      </view>
+      <view class="profile">
+        <view class="profile-content"></view>
+      </view>
+      <view class="nickname">2</view>
+      <view class="score">3</view>
+    </view>
+  </view>
+  <view class="tip">{{tip}}</view>
+</view>
