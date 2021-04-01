@@ -9,7 +9,8 @@ Page({
     description: "",
     foodName: "",
     hasCalorie: "",
-    pic: ""
+    pic: "",
+    showNocalContent:false
     
   },
 
@@ -36,6 +37,12 @@ Page({
     {
       that.setData({
         hasCakorie: true
+      })
+    }
+    if(options.hasCakorie==true||options.foodName=='非菜')
+    {
+      that.setData({
+        showNocalContent: true
       })
     }
     that.setData({

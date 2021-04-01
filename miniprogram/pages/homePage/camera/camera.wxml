@@ -11,10 +11,12 @@
 
 <view class="detail">
     <image class="pic" src="{{pic}}" mode="widthFix"></image>
-  <view class="name">{{foodName}}</view>
+  <view class="name" wx:if="{{foodName=='非菜'?false:true}}">{{foodName}}</view>
+  <view class="name" wx:if="{{foodName=='非菜'?true:false}}">这个好像不是菜品</view>
   <view class="cal" wx:if="{{hasCakorie}}">{{calorie}}大卡</view>
-  <view class="noCal" wx:if="{{!hasCakorie}}">还没有收录此食物的热量</view>
-  <view class="submit" bindtap="submit" hover-class="submit-hover" wx:if="{{hasCakorie}}">
-         <text class="submitContent">提交</text>
+  <view class="noCal" wx:if="{{showNocalContent}}">还没有收录这个菜的热量</view>
+  <view class="submit" bindtap="submit" hover-class="submit-hover">
+         <text class="submitContent"  wx:if="{{hasCakorie}}">提交</text>
+         <text class="submitContent"  wx:if="{{foodName=='非菜'?true:false}}">反馈</text>
  </view>
 </view>
