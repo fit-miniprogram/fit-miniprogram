@@ -13,10 +13,22 @@
     <image class="pic" src="{{pic}}" mode="widthFix"></image>
   <view class="name" wx:if="{{foodName=='非菜'?false:true}}">{{foodName}}</view>
   <view class="name" wx:if="{{foodName=='非菜'?true:false}}">这个好像不是菜品</view>
-  <view class="cal" wx:if="{{hasCakorie}}">{{calorie}}大卡</view>
-  <view class="noCal" wx:if="{{showNocalContent}}">还没有收录这个菜的热量</view>
-  <view class="submit" bindtap="submit" hover-class="submit-hover">
-         <text class="submitContent"  wx:if="{{hasCakorie}}">提交</text>
-         <text class="submitContent"  wx:if="{{foodName=='非菜'?true:false}}">反馈</text>
+  <view class="cal" wx:if="{{hasCakorie}}">
+    <text>{{calorie}}大卡</text>
+    <view class="PAM" data-wdnmd="1">
+            <view style="opacity:{{num==0?0:1}};" bindtap="minus" class="minus" >
+                <image class="minusPic" src="{{plusPic}}"></image>
+            </view>
+            <input type="text" class="num" value="{{num==0?'':num}}" disabled="true"></input>
+            <view  bindtap="plus" class="plus">
+                <image class="plusPic" src="{{minusPic}}" ></image>
+            </view>
  </view>
+  </view>
+  <view class="noCal" wx:if="{{showNocalContent}}">还没有收录这个菜的热量</view>
+  <view class="submit"  hover-class="submit-hover">
+         <text class="submitContent"  wx:if="{{hasCakorie}}" bindtap="submit" >提交</text>
+         <text class="submitContent"  wx:if="{{showNocalContent}}">反馈</text>
+ </view>
+
 </view>

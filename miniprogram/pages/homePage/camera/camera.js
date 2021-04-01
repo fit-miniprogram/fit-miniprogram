@@ -10,8 +10,33 @@ Page({
     foodName: "",
     hasCalorie: "",
     pic: "",
-    showNocalContent:false
+    num:0,
+    showNocalContent:false,
+    plusPic:"https://6669-fit-gc46z-1304760622.tcb.qcloud.la/listPAM/%E5%87%8F.png?sign=1064f19402ff135678866d50da47daed&t=1616664916",
+      minusPic:"https://6669-fit-gc46z-1304760622.tcb.qcloud.la/listPAM/%E5%8A%A0.png?sign=6e831360b53d6cab197934255433b29f&t=1616664903",
     
+  },
+
+  plus(){
+    var that = this
+    that.setData({
+      num:that.data.num+1
+    })
+  },
+
+  minus(){
+    var that = this
+    if(that.data.num !=0 )
+    {
+      that.setData({
+        num:that.data.num-1
+      })
+    }
+    else
+    {
+      return
+    }
+  
   },
 
   submit(){
@@ -39,7 +64,7 @@ Page({
         hasCakorie: true
       })
     }
-    if(options.hasCakorie==true||options.foodName=='非菜')
+    if(options.hasCakorie=='false'||options.foodName=='非菜')
     {
       that.setData({
         showNocalContent: true
