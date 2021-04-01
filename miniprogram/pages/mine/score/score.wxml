@@ -1,6 +1,7 @@
-<view class="self-area">我的积分</view>
 
-<view class="rank-list-title">强者排行榜</view>
+<!-- <view class="self-area">我的积分</view>
+
+<view class="rank-list-title">强者排行榜</view> -->
 <view class="rank-list">
   <!-- 加上一个防止last-child失效 -->
   <view>

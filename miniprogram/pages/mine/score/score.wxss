@@ -7,29 +7,29 @@
 .rank-item{
   position: relative;
   display: flex;
-  height: 160rpx;
-  box-shadow: 0rpx 2rpx 0rpx #DDDDDD;
+  height: 140rpx;
+  box-shadow: 0rpx 2rpx 0rpx rgb(231, 231, 231);
   margin-bottom: 2rpx;
   margin-left: 15rpx;
   margin-right: 15rpx;
 }
 .rank-item:last-child{
-  box-shadow: 0rpx 0rpx 0rpx 0rpx #DDDDDD;
+  box-shadow: 0rpx 0rpx 0rpx 0rpx rgb(231, 231, 231);
   margin-bottom: 0rpx;
 }
 .rank-item .rank{
   width: 100rpx;
-  line-height: 64rpx;
+  line-height: 60rpx;
   text-align: center;
-  font-size: 48rpx;
+  font-size: 35rpx;
   color: #000000;
-  padding: 48rpx 18rpx;
+  padding: 40rpx 20rpx;
 }
 .rank-item .rank .rank-content{
   width: 100%;
   height: 100%;
 }
-/* 奖牌 32x32 */
+/* 奖牌 60x60 */
 .rank-item:nth-child(1) .rank .rank-content{
   background: url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/mine/golenmedal.png?sign=d663b8e346482c96825db13c3433dccd&t=1617279288");
   background-size: 100% 100%;
@@ -47,10 +47,10 @@
   background-repeat: no-repeat;
 }
 
-/* 48*48 */
+/* 90*90 */
 .rank-item .profile{
   width: 120rpx;
-  padding: 32rpx 12rpx;
+  padding: 25rpx 15rpx;
 }
 .rank-item .profile .profile-content{
   width: 100%;
@@ -62,20 +62,20 @@
 }
 
 .rank-item .nickname{
-  line-height: 64rpx;
+  line-height: 60rpx;
   text-align: center;
-  font-size: 48rpx;
+  font-size: 35rpx;
   color: #000000;
-  padding: 48rpx 8rpx;
+  padding: 40rpx 20rpx;
 }
 .rank-item .score{
   right: 0;
   position: absolute;
-  line-height: 64rpx;
+  line-height: 60rpx;
   text-align: center;
-  font-size: 48rpx;
+  font-size: 35rpx;
   color: #000000;
-  padding: 48rpx 48rpx;
+  padding: 40rpx 20rpx;
 }
 .tip{
   height: 120rpx;
