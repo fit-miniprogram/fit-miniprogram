@@ -93,21 +93,43 @@ Page({
     /* var that = this
      setTimeout(function () {
        that.setData({isShow:true})},1)*/
-   
+   var that = this
+    setTimeout(function(){
+      that.setData({
+        swiperClass: 'swiper-init',
+        searchClass: 'searchPartInit',
+        searchClassReal:'searchPartInitReal',
+        cameraClass: 'camera-init',
+        speechClass: 'speech-init',
+        bottomClass: 'bottom-init',
+        sloganClass: 'slogan ',
+        isFocus:false,
+        searchShadowClass: 'searchShadow',
+        searchTipClass: 'searchTip-init',
+        placeHolderContent: "开 始 热 量 查 找",
+        //isShow: true,
+        inputValue: ''
+      })
+    },100)
+  },
+
+  searchConfirm(e){
+    console.log(e)
     this.setData({
-      swiperClass: 'swiper-init',
-      searchClass: 'searchPartInit',
-      searchClassReal:'searchPartInitReal',
-      cameraClass: 'camera-init',
-      speechClass: 'speech-init',
-      bottomClass: 'bottom-init',
-      sloganClass: 'slogan ',
-      isFocus:false,
-      searchShadowClass: 'searchShadow',
-      searchTipClass: 'searchTip-init',
-      placeHolderContent: "开 始 热 量 查 找",
-      //isShow: true,
-      inputValue: ''
+      swiperClass: 'swiper-init swiper-moved',
+      searchClass: 'searchPartInit searchPartMove',
+      searchClassReal:'searchPartInitReal searchPartMoveReal',
+      isFocus:true,
+      cameraClass: 'camera-init cameraMove',
+      speechClass: 'speech-init speechMove',
+      bottomClass: 'bottom-init bottomMove',
+      sloganClass: 'slogan slogan-move ',
+      searchShadowClass: 'searchShadow searchShadowMove',
+      searchTipClass: 'searchTip-init searchTipMove',
+      placeHolderContent: " "
+    })
+    wx.navigateTo({ //带参数页面跳转
+      url: "../homePage/search/search?value=" + e. detail.value
     })
   },
 

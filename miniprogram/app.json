@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/homePage/homePage",
     "pages/prePages/prePage/prePage",
+    "pages/homePage/homePage",
     "pages/game/game",
     "pages/mine/mine",
     "pages/list/list",
@@ -19,7 +19,8 @@
     "pages/prePages/prePage3/prePage3",
     "pages/prePages/prePage4/prePage4",
     "pages/game/pullit/pullit",
-    "pages/homePage/camera/camera"
+    "pages/homePage/camera/camera",
+    "pages/homePage/search/search"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
