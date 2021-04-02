@@ -61,7 +61,7 @@
       </view>
     </view>
     <view class="data_right">
-      <view class="dataTitle">消耗</view>
+      <view class="dataTitle">步数消耗</view>
       <view class="calorie_data" >
         <view class="calorie_data_number" style="color: #9FE6B8;">{{calorie_burn}}</view>
         <view class="calorie_data_unit">千卡</view>
