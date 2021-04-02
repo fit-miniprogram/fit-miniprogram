@@ -1,11 +1,13 @@
 .gameAnimation {
   position: relative;
-  top: 500rpx;
-  left: 500rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .gameAnimation .subject {
   transform: rotate(0deg);
   width: 50rpx;
+  position: relative;
   transform-origin: left bottom;
   animation-name: gamePlayer;
   animation-duration: 3s;

@@ -115,19 +115,19 @@ Page({
 
   searchConfirm(e){
     console.log(e)
-    this.setData({
-      swiperClass: 'swiper-init swiper-moved',
-      searchClass: 'searchPartInit searchPartMove',
-      searchClassReal:'searchPartInitReal searchPartMoveReal',
-      isFocus:true,
-      cameraClass: 'camera-init cameraMove',
-      speechClass: 'speech-init speechMove',
-      bottomClass: 'bottom-init bottomMove',
-      sloganClass: 'slogan slogan-move ',
-      searchShadowClass: 'searchShadow searchShadowMove',
-      searchTipClass: 'searchTip-init searchTipMove',
-      placeHolderContent: " "
-    })
+    // this.setData({
+    //   swiperClass: 'swiper-init swiper-moved',
+    //   searchClass: 'searchPartInit searchPartMove',
+    //   searchClassReal:'searchPartInitReal searchPartMoveReal',
+    //   isFocus:true,
+    //   cameraClass: 'camera-init cameraMove',
+    //   speechClass: 'speech-init speechMove',
+    //   bottomClass: 'bottom-init bottomMove',
+    //   sloganClass: 'slogan slogan-move ',
+    //   searchShadowClass: 'searchShadow searchShadowMove',
+    //   searchTipClass: 'searchTip-init searchTipMove',
+    //   placeHolderContent: " "
+    // })
     wx.navigateTo({ //带参数页面跳转
       url: "../homePage/search/search?value=" + e. detail.value
     })
