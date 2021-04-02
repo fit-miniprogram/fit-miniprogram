@@ -70,7 +70,7 @@ page {
   opacity: 0;
   top: 20rpx;
   width: 100%;
-  transition: opacity 1s;
+  transition: opacity 0.5s;
   transition-timing-function: ease-out;
 }
 .searchPartMoveReal {
@@ -80,7 +80,7 @@ page {
 .swiper-init {
   position: relative;
   top: 0rpx;
-  transition: all 1s;
+  transition: all 0.5s;
 }
 .swiper-moved {
   position: relative;
@@ -215,6 +215,7 @@ page {
 }
 .searchTip-init {
   opacity: 0;
+  z-index: -1;
   position: fixed;
   top: 150rpx;
   font-size: 35rpx;
@@ -222,7 +223,7 @@ page {
   justify-content: space-between;
   flex-direction: column;
   align-self: start;
-  left: -300rpx;
+  left: 30rpx;
   height: 300rpx;
   transition: all 1s;
 }
@@ -235,6 +236,29 @@ page {
   width: 200rpx;
   height: 50rpx;
 }
+.searchTip-init .history .content {
+  position: relative;
+  display: flex !important;
+  flex-direction: row;
+  top: 5rpx;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 700rpx;
+  left: 15rpx;
+}
+.searchTip-init .history .content .item {
+  margin-top: 20rpx;
+  border-radius: 20rpx;
+  box-shadow: 0 0 10rpx #888888;
+  padding: 20rpx;
+  margin-right: 15rpx;
+  background-color: #ffffff;
+}
+.searchTip-init .hot {
+  position: relative;
+  top: 20rpx;
+}
 .searchTip-init .hot .title {
   color: black;
   display: flex;
@@ -246,7 +270,33 @@ page {
 }
 .searchTipMove {
   opacity: 1;
+  z-index: 5;
   left: 30rpx;
+}
+.noHistory {
+  font-size: 45rpx;
+  font-family: 'cola';
+  position: relative;
+  top: 50rpx;
+  left: 50rpx;
+  color: #d10000;
+}
+.clear {
+  background-color: #ffffff;
+  box-shadow: 0 0 10rpx #888888;
+  width: 230rpx;
+  height: 60rpx;
+  position: relative;
+  border-radius: 20rpx;
+  justify-content: space-around;
+  display: flex;
+  align-items: center;
+  left: 450rpx;
+}
+.clear .clearPic {
+  position: relative;
+  width: 50rpx;
+  height: 50rpx;
 }
 .slogan {
   background-color: #272727;

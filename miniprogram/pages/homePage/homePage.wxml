@@ -95,12 +95,21 @@
 
 
 <view class="{{searchTipClass}}">
-  <view class="history" bindtap="wdnmd">
-    <view class="title">搜索历史</view>
+  <view class="history">
+    <view class="title">搜索历史:</view>
+    <view class="noHistory" wx:if="{{searchShowList.length==0?true:false}}">还没有搜索过东西</view>
+    <view class="content" wx:if="{{searchShowList.length==0?false:true}}">
+      <view class="item" wx:for="{{searchShowList}}" wx:for-item="list" data-value="{{list}}" bindtap="gotoHistoryDetail">{{list}}</view>
+    </view>
   </view>
-  <view class="hot">
+
+  <view class="clear" wx:if="{{searchShowList.length==0?false:true}}" bindtap="clearHistory">
+    <image class="clearPic" src="{{clearPic}}"></image>
+    <text>清空历史</text>
+  </view>
+  <!-- <view class="hot">
     <view class="title">热门搜索</view>
-  </view>
+  </view> -->
 </view>
 
 
