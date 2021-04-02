@@ -1,5 +1,6 @@
 .self-area{
   width: 100%;
+  box-shadow: 0rpx 20rpx 0rpx rgb(231, 231, 231);
 }
 .rank-list{
   width: 100%;
@@ -34,19 +35,26 @@
   background: url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/mine/golenmedal.png?sign=d663b8e346482c96825db13c3433dccd&t=1617279288");
   background-size: 100% 100%;
   background-repeat: no-repeat;
-
+}
+.rank-item:nth-child(1) .rank .rank-content .rank-number{
+  display: "none";
 }
 .rank-item:nth-child(2) .rank .rank-content{
   background: url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/mine/silvermedal.png?sign=f48465464da30a971f4106884b6bf517&t=1617279610");
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
+.rank-item:nth-child(2) .rank .rank-content .rank-number{
+  display: "none";
+}
 .rank-item:nth-child(3) .rank .rank-content{
   background: url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/mine/coppermedal.png?sign=b04a70c0ba4cef0f34b4de2d57d81101&t=1617280207");
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
-
+.rank-item:nth-child(3) .rank .rank-content .rank-number{
+  display: "none";
+}
 /* 90*90 */
 .rank-item .profile{
   width: 120rpx;
@@ -55,9 +63,9 @@
 .rank-item .profile .profile-content{
   width: 100%;
   height: 100%;
-  background: url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/mine/profile.png?sign=49634b5f3cec8dee7c142c76fb1d6eed&t=1617281360");
+  /* background: url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/mine/profile.png?sign=49634b5f3cec8dee7c142c76fb1d6eed&t=1617281360");
   background-size: 100% 100%;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
   border-radius: 10rpx;
 }
 
@@ -84,4 +92,12 @@
   line-height: 40rpx;
   font-size: 30rpx;
   text-align: center;
+}
+.rank-list-title{
+  width: 100%;
+  text-align: left;
+  height: 120rpx;
+  line-height: 120rpx;
+  font-size: 50rpx;
+  margin-left: 20rpx;
 }

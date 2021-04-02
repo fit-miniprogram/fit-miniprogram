@@ -58,7 +58,7 @@ Page({
     var _id = this.data._id;
     var targetRun = this.data.targetRun;
     wx.navigateTo({
-      url: '/pages/mine/score/score?info=' + openid + "|" + _id + "|" + targetRun,
+      url: '/pages/mine/score/score?info=' + openid,
     })
   },
 
