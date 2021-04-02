@@ -39,18 +39,42 @@ Page({
       wx.vibrateShort({
         success: (res) => {},
       }) 
-        wx.showModal({
-          title: '',
-          content: '会消耗10积分，继续吗',
-          success (res) {
-            if (res.confirm) {
-              that.selectOrTakePic()
-              console.log('用户点击确定')
-            } else if (res.cancel) {
-              console.log('用户点击取消')
-            }
+
+      db.collection('userScore').where({  	
+        openid: that.data.currentOpenid
+      }).get({
+        success: function(res) {
+          if(res.data[0].score < 10)
+          {
+            wx.showToast({
+              title: '积分不足',
+              icon:'error'
+            })
+            return
           }
-        })
+          else
+          {
+            wx.showModal({
+              title: '',
+              content: '会消耗10积分，继续吗',
+              success (res) {
+                if (res.confirm) {
+                  that.selectOrTakePic()
+                  that.updateScore(-10)
+                  console.log('用户点击确定')
+                } else if (res.cancel) {
+                  console.log('用户点击取消')
+                }
+              }
+            })
+          }
+        },
+        error: function(err){
+          console.log(err)
+        }
+      })
+
+       
      }
      else{
        console.log('wdnmd')
