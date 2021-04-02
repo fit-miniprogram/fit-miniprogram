@@ -226,7 +226,7 @@ page {
   height: 300rpx;
   transition: all 1s;
 }
-.searchTip-init .history .content {
+.searchTip-init .history .title {
   color: black;
   display: flex;
   background-color: whitesmoke;
@@ -235,7 +235,7 @@ page {
   width: 200rpx;
   height: 50rpx;
 }
-.searchTip-init .hot .content {
+.searchTip-init .hot .title {
   color: black;
   display: flex;
   background-color: whitesmoke;

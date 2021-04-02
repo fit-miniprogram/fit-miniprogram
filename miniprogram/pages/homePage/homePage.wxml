@@ -96,10 +96,10 @@
 
 <view class="{{searchTipClass}}">
   <view class="history" bindtap="wdnmd">
-    <text class="content">搜索历史</text>
+    <view class="title">搜索历史</view>
   </view>
   <view class="hot">
-    <text class="content">热门搜索</text>
+    <view class="title">热门搜索</view>
   </view>
 </view>
 
