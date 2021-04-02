@@ -43,7 +43,7 @@ page {
   position: relative;
   opacity: 1;
   top: -5rpx;
-  transition: opacity 0.5s;
+  transition: opacity 0.8s;
   transition-timing-function: ease-out;
 }
 .camera-speech {
@@ -70,7 +70,7 @@ page {
   opacity: 0;
   top: 20rpx;
   width: 100%;
-  transition: opacity 0.5s;
+  transition: opacity 0.8s;
   transition-timing-function: ease-out;
 }
 .searchPartMoveReal {
@@ -80,7 +80,7 @@ page {
 .swiper-init {
   position: relative;
   top: 0rpx;
-  transition: all 0.5s;
+  transition: all 0.8s;
 }
 .swiper-moved {
   position: relative;

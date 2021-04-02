@@ -72,93 +72,97 @@ Page({
     })
       .then(res => {
          console.log(res)
-         var gushulist = list.concat(res.result.data)
+         var gushulist = res.result.data
          that.setData({
            gushulist:gushulist,
-           list:gushulist,
            gushu:true
          })
-      })
-      .catch(err => {
-        console.log(err);
-    })
-    wx.cloud.callFunction({ 
-      name: 'searchdadouList',
-      data:{
-        value:that.data.value
-      },
-      config:{env:"fit-gc46z"}
-    })
-      .then(res => {
-        console.log(res)
-         var dadoulist = list.concat(res.result.data)
-         that.setData({
-          dadoulist:dadoulist,
-          list:dadoulist,
-          dadou:true
+         wx.cloud.callFunction({ 
+          name: 'searchdadouList',
+          data:{
+            value:that.data.value
+          },
+          config:{env:"fit-gc46z"}
+        })
+          .then(res => {
+            console.log(res)
+             var dadoulist = res.result.data
+             that.setData({
+              dadoulist:dadoulist,
+              dadou:true
+            })
+            wx.cloud.callFunction({ 
+              name: 'searchdongwuList',
+              data:{
+                value:that.data.value
+              },
+              config:{env:"fit-gc46z"}
+            })
+              .then(res => {
+                console.log(res)
+                 var dongwulist =res.result.data
+                 that.setData({
+                  dongwulist:dongwulist,
+                  dongwu:true
+                })
+                wx.cloud.callFunction({ 
+                  name: 'searchnengliangList',
+                  data:{
+                    value:that.data.value
+                  },
+                  config:{env:"fit-gc46z"}
+                })
+                  .then(res => {
+                    console.log(res)
+                     var nenglianglist = res.result.data
+                     that.setData({
+                      nenglianglist:nenglianglist,
+                      nengliang:true
+                    })
+                    wx.cloud.callFunction({ 
+                      name: 'searchshuguoList',
+                      data:{
+                        value:that.data.value
+                      },
+                      config:{env:"fit-gc46z"}
+                    })
+                      .then(res => {
+                        console.log(res)
+                        var shuguolist = res.result.data
+                        that.setData({
+                          shuguolist:shuguolist,
+                          shuguo:true
+                        })
+                        var temp = shuguolist.concat(nenglianglist,gushulist,dongwulist,dadoulist)
+                        that.setData({
+                          list:temp
+                        })
+                        console.log(temp)
+                      })
+                      .catch(err => {
+                        console.log(err);
+                    })
+                
+                  })
+                  .catch(err => {
+                    console.log(err);
+                })
+              })
+              .catch(err => {
+                console.log(err);
+            })
+          })
+          .catch(err => {
+            console.log(err);
         })
       })
       .catch(err => {
         console.log(err);
     })
-    wx.cloud.callFunction({ 
-      name: 'searchdongwuList',
-      data:{
-        value:that.data.value
-      },
-      config:{env:"fit-gc46z"}
-    })
-      .then(res => {
-        console.log(res)
-         var dongwulist =list.concat(res.result.data)
-         that.setData({
-          dongwulist:dongwulist,
-          list:dongwulist,
-          dongwu:true
-        })
-      })
-      .catch(err => {
-        console.log(err);
-    })
-    wx.cloud.callFunction({ 
-      name: 'searchnengliangList',
-      data:{
-        value:that.data.value
-      },
-      config:{env:"fit-gc46z"}
-    })
-      .then(res => {
-        console.log(res)
-         var nenglianglist = list.concat(res.result.data)
-         that.setData({
-          nenglianglist:nenglianglist,
-          list:nenglianglist,
-          nengliang:true
-        })
-      })
-      .catch(err => {
-        console.log(err);
-    })
-    wx.cloud.callFunction({ 
-      name: 'searchshuguoList',
-      data:{
-        value:that.data.value
-      },
-      config:{env:"fit-gc46z"}
-    })
-      .then(res => {
-        console.log(res)
-        var shuguolist = list.concat(res.result.data)
-        that.setData({
-          shuguolist:shuguolist,
-          list:shuguolist,
-          shuguo:true
-        })
-      })
-      .catch(err => {
-        console.log(err);
-    })
-
+    
+   
+    
+    
     // list = that.data.dadoulist.concat(that.data.dongwulist,that.data.gushulist,that.data.nenglianglist,that.data.shuguolist)
   },
 
