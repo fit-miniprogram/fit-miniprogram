@@ -11,15 +11,45 @@ Page({
     nenglianglist:[],
     dongwulist:[],
     list:[],
-    value:""
+    hasItem:false,
+    searchFinsh:false,
+    gushu:false,
+    dongwu:false,
+    shuguo:false,
+    nengliang:false,
+    dadou:false,
+    value:"肉",
+    plusPic:"https://6669-fit-gc46z-1304760622.tcb.qcloud.la/listPAM/%E5%87%8F.png?sign=1064f19402ff135678866d50da47daed&t=1616664916",
+    minusPic:"https://6669-fit-gc46z-1304760622.tcb.qcloud.la/listPAM/%E5%8A%A0.png?sign=6e831360b53d6cab197934255433b29f&t=1616664903"
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
 
-  gushu(){
-
+  cheakList(){
+  var that = this
+  var interval = setInterval(function(){
+      if(that.data.gushu&that.data.shuguo&that.data.nengliang&that.data.dadou&that.data.dongwu)
+          {
+            clearInterval(that.data.interval)
+            if(that.data.list.length!=0)
+            {
+              that.setData({
+                hasItem:true
+              })
+            }
+            that.setData({
+              searchFinsh:true,
+            })
+            wx.hideLoading({
+              success: (res) => {},
+            })
+          }
+      },100)
+  that.setData({
+    interval:interval
+  }) 
   },
 
 
@@ -39,7 +69,8 @@ Page({
          var gushulist = list.concat(res.result.data)
          that.setData({
            gushulist:gushulist,
-           list:gushulist
+           list:gushulist,
+           gushu:true
          })
       })
       .catch(err => {
@@ -57,7 +88,8 @@ Page({
          var dadoulist = list.concat(res.result.data)
          that.setData({
           dadoulist:dadoulist,
-          list:dadoulist
+          list:dadoulist,
+          dadou:true
         })
       })
       .catch(err => {
@@ -75,7 +107,8 @@ Page({
          var dongwulist =list.concat(res.result.data)
          that.setData({
           dongwulist:dongwulist,
-          list:dongwulist
+          list:dongwulist,
+          dongwu:true
         })
       })
       .catch(err => {
@@ -93,7 +126,8 @@ Page({
          var nenglianglist = list.concat(res.result.data)
          that.setData({
           nenglianglist:nenglianglist,
-          list:nenglianglist
+          list:nenglianglist,
+          nengliang:true
         })
       })
       .catch(err => {
@@ -111,7 +145,8 @@ Page({
         var shuguolist = list.concat(res.result.data)
         that.setData({
           shuguolist:shuguolist,
-          list:shuguolist
+          list:shuguolist,
+          shuguo:true
         })
       })
       .catch(err => {
@@ -122,9 +157,41 @@ Page({
   },
 
 
+  plus(e){
+    var that = this
+    var index = e.currentTarget.dataset.index //这里的index是指模块的序列，非数组的下标
+    var num = that.data.list[index].num
+    var listNum = 'list[' + index + '].num'
+    num++
+    that.setData({  //注意写法
+      [listNum]: num,
+    })
+  },
+
+  minus(e){
+    var that = this
+    var index = e.currentTarget.dataset.index //这里的index是指模块的序列，非数组的下标
+    var num = that.data.list[index].num
+    var listNum = 'list[' + index + '].num'
+    if(num==0)
+    {
+      return
+    }
+    num--
+    that.setData({  //注意写法
+      [listNum]: num,
+    })
+  },
+
+
   onLoad: function (options) {
     var that =this
+    that.cheakList()
+    getApp().loadFont()
     console.log(options)
+    wx.showLoading({
+      title:'搜索中'
+    })
     that.setData({
       value:options.value
     },()=>{
@@ -150,14 +217,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+      clearInterval(this.data.interval)
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    clearInterval(this.data.interval)
   },
 
   /**

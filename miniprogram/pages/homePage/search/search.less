@@ -1,0 +1,116 @@
+.title{
+  position: relative;
+  top: 50rpx;
+  margin: 50rpx;
+  .titleContent{
+      font-family: 'cola';
+      //font-weight: bolder;
+      font-size: 50rpx;
+  }
+}
+
+.Scroll{
+  height: 950rpx;
+  width: 100%;
+  margin: 50rpx;
+  .item{
+    margin-top: 30rpx;
+    margin-left: 5rpx;
+    box-shadow: 0 0 10rpx #888888;
+    border-radius: 25rpx;
+    width: 650rpx;
+    height: 200rpx;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    //height: 200rpx;
+    margin-bottom: 20rpx;
+    .itemPic{
+      width: 150rpx;
+      height: 150rpx;
+      margin: 30rpx;
+      .pic{
+        width: 150rpx;
+        height: 150rpx;
+      }
+    }
+    .itemContent{
+      position: relative;
+      right: 20rpx;
+      display: flex;
+      right: 5rpx;
+      justify-content: space-between;
+      flex-direction: column;
+      .name{
+        position: relative;
+        bottom: 20rpx;
+        font-weight: bolder;
+        font-size: 45rpx;
+      }
+      .cal{
+        position: relative;
+        top: 10rpx;
+        margin-top: 10rpx;
+        font-size: 30rpx;
+      }
+    }
+    .PAM{
+      position: relative;
+      top: -20rpx;
+      display: flex;
+      flex-direction: row;
+      align-self: flex-end;
+      .num{
+        font-size: 35rpx;
+        width: 35rpx;
+        position: relative;
+        left: 8rpx;
+        top: 5rpx;
+      }
+      .minus{
+        width: 50rpx;
+        height: 50rpx;
+        .minusPic{
+          width: 50rpx;
+         height: 50rpx;
+        }
+      }
+      .plus{
+        width: 50rpx;
+        height: 50rpx;
+        .plusPic{
+          width: 50rpx;
+          height: 50rpx;
+        }
+      }
+    }
+  }
+}
+
+.noFood{
+  margin: 50rpx;
+  font-size: 45rpx;
+  font-family: 'cola';
+  position: relative;
+  top: 200rpx;
+  color: rgb(209, 0, 0);
+  transition: all 0.5s ease-in-out;
+}
+
+.submit{
+  position: fixed;
+  height: 100rpx;
+  font-family:'cola' ;
+  width: 150rpx;
+  right: 30rpx;
+  bottom: 80rpx;
+  font-size: 55rpx;
+  margin-right: 20rpx;
+  margin-bottom:20rpx ;
+  background-color: rgb(255,195,0);
+  border-radius: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

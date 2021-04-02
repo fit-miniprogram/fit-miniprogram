@@ -93,6 +93,12 @@
         {
           "name": "pages/homePage/camera/camera",
           "pathName": "pages/homePage/camera/camera",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/homePage/search/search",
+          "pathName": "pages/homePage/search/search",
           "scene": null
         }
       ]

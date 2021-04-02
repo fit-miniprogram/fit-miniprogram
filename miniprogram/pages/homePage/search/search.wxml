@@ -1,0 +1,40 @@
+<view class="title" >
+  <text class="titleContent">根据输入的“{{value}}”搜素到以下内容：</text>
+</view>
+
+
+<view class="noFood" wx:if="{{searchFinsh&&!hasItem}}">
+  <text class="content">没有找到有关“{{value}}”的内容,\n\n\n请检查输入内容后重试。</text>
+</view>
+
+
+
+
+<scroll-view scroll-y="true" class="Scroll" style="opacity:1"  wx:if="{{hasItem}}">
+  <view class="item" wx:for="{{list}}" wx:for-item="list" wx:for-index="index" >
+        <view class="itemPic">
+            <image class="pic" src="{{list.src}}"></image>
+        </view>
+        <view class="itemContent">
+            <view class="name">{{list.name}}</view>
+            <view class="cal">{{list.cal}}</view>
+        </view>
+        <view class="PAM" data-wdnmd="1">
+            <view data-index="{{index}}" data-goodsId="{{list._id}}" bindtap="minus" class="minus" style="opacity:{{list.num==0?0:1}};">
+                <image class="minusPic" src="{{plusPic}}"></image>
+            </view>
+            <input type="text" class="num" value="{{list.num==0?'':list.num}}" disabled="true"></input>
+            <view data-index="{{index}}" data-goodsId="{{list._id}}" bindtap="plus" class="plus">
+                <image class="plusPic" src="{{minusPic}}" ></image>
+            </view>
+        </view>
+    </view>
+    </scroll-view>
+
+    <view class="submit" bindtap="submit" hover-class="submit-hover" wx:if="{{hasItem}}">
+         <text class="submitContent">提交</text>
+     </view>
+
+     <view class="submit" bindtap="feedback" hover-class="submit-hover" wx:if="{{searchFinsh&&!hasItem}}">
+         <text class="submitContent">反馈</text>
+     </view>
