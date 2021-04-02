@@ -40,7 +40,8 @@ Page({
     calorie_get:0,
     calorie_burn:0,
     dabiao:'---',
-    dabiao_color:''
+    dabiao_color:'',
+    stepToday:0//微信步数
   },
 
   target:function(){
@@ -602,12 +603,84 @@ Page({
     })
   },
 
+
+  /**
+   * 用户授权读取微信运动数据
+   */
+
+  authorizeWeRun(){
+    var that = this
+//首先获取用户的授权状态
+    wx.getSetting({
+      success(res){
+        // console.log(res)
+        if(!res.authSetting['scope.werun']){
+// 如果用户还未授权过，需要用户授权读取微信运动数据
+          wx.authorize({
+            scope: 'scope.werun',
+            success() {
+              //读取微信步数数据
+              that.getWeRunData()
+            },
+            fail() {
+              //如果用户拒绝授权，提示用户需要同意授权才能获取他的微信运动数据
+              wx.showModal({
+                title: '读取微信运动数据失败',
+                content: '请在小程序设置界面（「右上角」 - 「关于」 - 「右上角」 - 「设置」）中允许我们访问微信运动数据',
+              })
+            }
+          })
+
+        }else{
+           //如果用户已授权过，直接开始同步微信运动数据
+          //读取微信步数数据
+          that.getWeRunData()
+        }
+      }
+    })
+  },
+
+  /**
+   * 获取微信运动数据
+   */
+
+  getWeRunData(){
+    var that = this
+    wx.getWeRunData({
+      success(res){
+        //console.log(res)
+      wx.cloud.callFunction({
+        name:'desrundata',
+        data:{
+         weRunData: wx.cloud.CloudID(res.cloudID)  //直到云函数被替换
+        }
+      }).then(res=>{
+        console.log(res)
+        var stepToday = res.result.event.weRunData.data.stepInfoList[30].step;
+        var calorie_burn = ((0.0175 * parseInt(that.data.weight) * 3 * stepToday) / 1000).toFixed(2);
+        that.setData({
+          stepToday: stepToday,
+          calorie_burn:calorie_burn
+        })
+        db.collection('user').doc(that.data._id)
+        .update({
+          data:{
+            calorie_burn:calorie_burn
+          }
+        })
+      })
+      }
+    })
+  },
+
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     getApp().loadFont();
     this.getOpenid()//获取用户的openid
+    this.authorizeWeRun();//获取用户步数
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
