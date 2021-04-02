@@ -1,0 +1,15 @@
+<!--miniprogram/pages/mine/feedback/feedback.wxml-->
+<view class="wholePage" style="height:{{windowHeight}}px;width:{{windowWidth}}px;">
+  <view class="feedback-image">
+    <image 
+    src="https://6669-fit-gc46z-1304760622.tcb.qcloud.la/mine/feedback-icon.png?sign=ff6eae80a018bc9c89f70a75fda419b9&t=1617353365"
+    mode="widthFix"
+    style="width:250rpx;"
+    >
+    </image>
+  </view>
+  <view class="button-list">
+    <button open-type="feedback" class="feedback_button" size="mini" hover-class="button-hover" bindtap="btnFun">意见反馈</button>
+    <button open-type="contact" class="feedback_button" size="mini" hover-class="button-hover" bindtap="btnFun">联系客服</button>
+  </view>
+</view>

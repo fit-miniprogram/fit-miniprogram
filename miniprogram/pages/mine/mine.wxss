@@ -175,3 +175,8 @@ page{
   font-size: 25rpx;
   align-self: flex-end;
 }
+
+.feedback_button{
+  border: 1px solid #000;
+  
+}

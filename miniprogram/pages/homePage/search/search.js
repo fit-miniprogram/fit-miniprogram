@@ -23,6 +23,12 @@ Page({
     minusPic:"https://6669-fit-gc46z-1304760622.tcb.qcloud.la/listPAM/%E5%8A%A0.png?sign=6e831360b53d6cab197934255433b29f&t=1616664903"
   },
 
+  feedback:function(){
+    wx.navigateTo({
+      url: '/pages/mine/feedback/feedback',
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */

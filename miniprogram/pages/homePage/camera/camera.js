@@ -17,6 +17,12 @@ Page({
     
   },
 
+  feedback:function(){
+    wx.navigateTo({
+      url: '/pages/mine/feedback/feedback',
+    })
+  },
+
   plus(){
     var that = this
     that.setData({

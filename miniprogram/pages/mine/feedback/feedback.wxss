@@ -1,0 +1,44 @@
+.wholePage{
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.feedback-image{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.button-list{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.feedback_button{
+  background-color: #000;
+  color: #fff;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 300rpx !important;
+  margin: 50rpx !important;
+  height: 100rpx !important;
+  width: 350rpx !important;
+  border-radius: 50rpx;
+  font-size: 40rpx !important;
+  box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.247);
+  font-family: 'jianti' !important;
+}
+.button-hover{
+ opacity: 0.5;
+ box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.247) inset; 
+ transform: scale(0.95, 0.95);
+ position: relative;
+ top: 3rpx;
+ left: 3rpx;
+}
