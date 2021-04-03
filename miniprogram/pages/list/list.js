@@ -1,3 +1,4 @@
+const app = getApp();
 const db = wx.cloud.database({
   env: 'fit-gc46z'
 }); 
@@ -10,6 +11,8 @@ Page({
       num:0,
       currentTab:0,
       totalCount:0,
+      scrollHgt: 0,
+      bpgHgt: 0,
       gushuList:[],
       shuguoList:[],          //蔬果类列表
       dadouList: [],          //大豆类列表
@@ -882,8 +885,45 @@ submit(){
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+<<<<<<< Updated upstream
     var that = this
     that.getOpenid()              //获取用户的openid
+=======
+    var that=this;
+    //设置来适配全机型
+    wx.getSystemInfo({
+      success: function(res){
+        console.log(res.windowHeight);
+        //windows机型
+        if(res.model.indexOf("Windows")!=-1){
+          that.setData({
+            bpgHgt: 700,
+            scrollHgt: 650
+          })
+        }
+        //ipad机型
+        else if(res.model.indexOf("iPad")!=-1){
+          that.setData({
+            bpgHgt: 600,
+            scrollHgt: 550
+          })
+        }
+        //机型的高度小于iphone6plus 的高度，使用小的高度
+        else if(res.windowHeight<=672){
+          that.setData({
+            bpgHgt: 800,
+            scrollHgt: 750
+          })
+        }
+        else{
+          that.setData({
+            bpgHgt: 1000,
+            scrollHgt: 950
+          })         
+        }
+      }
+    })
+>>>>>>> Stashed changes
     that.getGushuList();
     that.getShuguoList();         //获得蔬果类食物列表
     that.getDadouList();          //获得大豆类食物列表

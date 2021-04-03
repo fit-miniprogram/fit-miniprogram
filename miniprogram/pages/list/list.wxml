@@ -18,12 +18,12 @@
     </badge>
 </view>
 
-<view class="{{bowlPage}}">
+<view class="{{bowlPage}}" style="height: {{bpgHgt}}rpx;">
     <view class="title">
         <!--<text class="titleContent">准备转化为热量的食物:</text>-->
         <text class="titleContent">{{bowlTips}}</text>
     </view>
-    <scroll-view scroll-y="true" class="bowlScroll" style="opacity:1">
+    <scroll-view scroll-y="true" class="bowlScroll" style="opacity:1;height: {{scrollHgt}}rpx;">
       <view class="noFood" wx:if="{{totalCount==0?true:false}}"><text>碗里面还没有东西,\n\n去列表里面添加一点吧。</text></view>  
      <view class="bowlList" wx:for="{{bowlList}}" wx:for-item="list" wx:key="_id">
         <view class="bowlItemPic">
