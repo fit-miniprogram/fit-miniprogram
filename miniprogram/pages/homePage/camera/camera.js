@@ -19,6 +19,7 @@ Page({
     calorie_dinner:0,
     calorie_lingshi:0,
     calorie: "",
+    allCalorie:0,
     description: "",
     foodName: "",
     hasCalorie: "",
@@ -60,9 +61,32 @@ Page({
 
   submit:function(){
     var that = this
+    var cal = that.data.calorie
+    var num = that.data.num
+    var allCalorie = 0;
+    allCalorie += cal * num
+    console.log(allCalorie)
     that.setData({
-      showSubmitChoice:true
+      allCalorie:allCalorie
     })
+    //提交食物为空
+    if(allCalorie == 0){
+      wx.showToast({
+        title: '未选择食物数量，请重新选择',
+        icon: 'none',
+        duration: 2000,
+        success: res => {
+          that.setData({
+            showSubmitChoice:false
+          })
+        }
+      })
+    }
+    else {
+      that.setData({
+        showSubmitChoice:true
+      })
+    }
   },
 
   onClose() {
@@ -70,16 +94,12 @@ Page({
   },
 
   submitToBreakfast(){
-    var that = this
     wx.showLoading({
       title: '提交中',
     })
+    var that = this
     var calorie_breakfast = that.data.calorie_breakfast
-    var cal = that.data.calorie
-    var num = that.data.num
-    var allCalorie = 0;
-    allCalorie += cal * num
-    console.log(allCalorie)
+    var allCalorie = that.data.allCalorie
     //提交早餐食物，修改数据库中早餐热量
     db.collection('user').doc(that.data._id)
       .update({
@@ -110,16 +130,12 @@ Page({
   },
 
   submitToLunch(){
-    var that = this
     wx.showLoading({
       title: '提交中',
     })
+    var that = this
     var calorie_lunch = that.data.calorie_lunch
-    var cal = that.data.calorie
-    var num = that.data.num
-    var allCalorie = 0;
-    allCalorie += cal * num
-    console.log(allCalorie)
+    var allCalorie = that.data.allCalorie
     //提交午餐食物，修改数据库午餐热量
     db.collection('user').doc(that.data._id)
       .update({
@@ -150,16 +166,12 @@ Page({
   },
 
   submitToDinner(){
-    var that = this
     wx.showLoading({
       title: '提交中',
     })
+    var that = this
     var calorie_dinner = that.data.calorie_dinner
-    var cal = that.data.calorie
-    var num = that.data.num
-    var allCalorie = 0;
-    allCalorie += cal * num
-    console.log(allCalorie)
+    var allCalorie = that.data.allCalorie
     //提交晚餐食物，修改数据库中晚餐热量
     db.collection('user').doc(that.data._id)
       .update({
@@ -190,16 +202,12 @@ Page({
   },
 
   submitToLingshi(){
-    var that = this
     wx.showLoading({
       title: '提交中',
     })
+    var that = this
     var calorie_lingshi = that.data.calorie_lingshi
-    var cal = that.data.calorie
-    var num = that.data.num
-    var allCalorie = 0;
-    allCalorie += cal * num
-    console.log(allCalorie)
+    var allCalorie = that.data.allCalorie
     //提交零食食物，修改数据库中零食热量
     db.collection('user').doc(that.data._id)
       .update({
