@@ -148,12 +148,26 @@ submit(){
    * ***/
   getShuguoList(){
     var that = this
-    db.collection("shuguoList").get({}).then(res=>{
-      console.log(res)
-      that.setData({
-        shuguoList: res.data
-      })
+    wx.cloud.callFunction({ //调用getOpenid云函数
+      name: 'getShuguoList',
+      data:{},
+      config:{env:"fit-gc46z"}
     })
+      .then(res => { //调用getOpenid成功进行以下操作
+        that.setData({
+          shuguoList: res.result.data
+        })
+      })
+      .catch(err => { //调用getOpenid失败打印错误信息
+        console.log(err);
+      });
+    // db.collection("shuguoList").limit(100).get({}).then(res=>{
+    //   console.log(res)
+    //   console.log(res.data)
+    //   that.setData({
+    //     shuguoList: res.data
+    //   })
+    // })
   },
   shuguoPlus(e){
     var that = this
