@@ -881,6 +881,35 @@ submit(){
     that.getBowlTips();           //获取碗中提示词
   },
 
+  //更新卡路里数据
+  getNewData(){
+    var that = this
+    wx.cloud.callFunction({ 
+      name: 'getUserList',
+      data:{
+        openid:that.data.openid
+      },
+      config:{env:"fit-gc46z"}
+    })
+      .then(res => { 
+        //获取用户早中晚摄入的卡路里
+        console.log(res)
+        if(res.result.data.nv_length != 0){
+          that.setData({
+            calorie_breakfast:res.result.data[0].calorie_breakfast,
+            calorie_lunch:res.result.data[0].calorie_lunch,
+            calorie_dinner:res.result.data[0].calorie_dinner,
+            calorie_lingshi:res.result.data[0].calorie_lingshi
+          },()=>{
+            that.getBowlTips();           //获取碗中提示词
+          })
+        }
+      })
+      .catch(err => { 
+        console.log(err);
+      });
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -939,12 +968,17 @@ submit(){
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that = this
     if (typeof this.getTabBar === 'function' &&
-    this.getTabBar()) {
-    this.getTabBar().setData({
-      selected: 1
-    })
-  }
+    that.getTabBar()) {
+      that.getTabBar().setData({
+        selected: 1
+      })
+    }
+    if(that.data.openid != ''){
+      console.log('显示')
+      that.getNewData()
+    }
   },
 
   /**
