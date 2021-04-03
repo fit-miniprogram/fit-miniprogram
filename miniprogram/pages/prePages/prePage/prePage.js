@@ -30,26 +30,41 @@ Page({
         }.bind(this),1000)
 
         //获取用户当前信息
-        wx.getUserInfo({
-            success: function(res){
-                var nickname=res.userInfo.nickName;
-                var profile=res.userInfo.avatarUrl;
-                console.log(nickname);
-                console.log(profile);
-                //设置昵称和头像
-                that.setData({
-                    nickname_cur: nickname,
-                    profile_cur: profile
+        wx.getSetting({
+            success:(res)=>{
+                console.log(res)
+                if(res.authSetting['scope.userInfo']) {     
+                wx.getUserInfo({                
+                     success: function(res) {
+                        var nickname=res.userInfo.nickName;
+                        var profile=res.userInfo.avatarUrl;
+                        console.log(nickname);
+                        console.log(profile);
+                        //设置昵称和头像
+                        that.setData({
+                            nickname_cur: nickname,
+                            profile_cur: profile
+                        })
+                    },
+                    fail: err =>{
+                        that.setData({
+                            need_authority: true
+                        })
+                    }
                 })
+                }
+                else{
+                    that.setData({
+                        need_authority: true
+                    })
+                    console.log("wdnmd")
+                }
             },
-            fail: err =>{
-                that.setData({
-                    need_authority: true
-                })
-                console.log("没有授权");
+            complete: (res)=>{
+                this.getOpenid(); 
             }
         })
-        this.getOpenid();
+
 
     },
     //点击授权按钮
@@ -122,7 +137,7 @@ Page({
           //从数据库中获取计分记录的id
           db.collection("userdata").where({
             // openid: od,
-            openid: "oBuvP4oi2qNtBtvpZf2c5-EGMR3c"
+            openid: od
           }).get({
             success: (res) => {
                 //找到了对应的id
@@ -181,7 +196,6 @@ Page({
                     }
                 }).then(res=>
                 {
-                    console.log(res)
                 })
             }
         })
