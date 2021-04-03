@@ -158,9 +158,10 @@ Page({
 
 gotoHistoryDetail(e)
 {
+  var that = this
   console.log(e)
   wx.navigateTo({ //带参数页面跳转
-    url: "../homePage/search/search?value=" + e.currentTarget.dataset.value
+    url: '../homePage/search/search?info=' + e.currentTarget.dataset.value + "|" + that.data.currentOpenid
   })
 },
 
@@ -184,7 +185,7 @@ gotoHistoryDetail(e)
       that.getSearchHistory()
     })
     wx.navigateTo({ //带参数页面跳转
-      url: "../homePage/search/search?value=" + e.detail.value
+      url: "../homePage/search/search?info=" + e.detail.value + "|" + that.data.currentOpenid
     })
   },
 
@@ -351,11 +352,10 @@ gotoHistoryDetail(e)
 
   onLoad() {
     var that = this
-    that.judgeHistory();
+    that.getOpenid();
     that.getDoYouKonwList();
     that.towerSwiper('swiperList');
     that.getNowTime();
-    that.getOpenid();
     //that.getAnswerList();
     getApp().loadFont();
     
@@ -464,6 +464,7 @@ gotoHistoryDetail(e)
     judgeHistory:function(e){ //判断用户集合中是否存在当前用户
       var that = this;
       let flag = false;
+      console.log(that.data.currentOpenid)
       db.collection('searchHistory') // 限制返回数量为 20 条
       .where({
         _openid: that.data.currentOpenid
@@ -472,11 +473,11 @@ gotoHistoryDetail(e)
           let user_get = res.data; //获取到的对象数组数据
           console.log(res)
           for (let i = 0; i < user_get.length; i++) { //遍历数据库对象集合
-            if (that.data.currentOpenid === user_get[i].openid) { //Openid存在
-              flag = true
+            if (that.data.currentOpenid === user_get[i]._openid) { //Openid存在
+              flag = true,
+              that.getSearchHistory()
             }
           }
-          that.getSearchHistory()
           if (flag === false) { //用户不存在
             console.log("用户不存在搜索集合")
             db.collection('searchHistory').add({ //将该用户加入用户集合
@@ -512,6 +513,7 @@ gotoHistoryDetail(e)
           currentOpenid: res.result.openid
         },()=>{
           that.getAnswerList()
+          that.judgeHistory();
         })
       })
       .catch(err => { //调用getOpenid失败打印错误信息

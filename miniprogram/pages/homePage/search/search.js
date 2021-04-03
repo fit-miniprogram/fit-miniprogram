@@ -1,10 +1,23 @@
 // miniprogram/pages/homePage/search/search.js
+const db = wx.cloud.database({
+  env: 'fit-gc46z'
+}); 
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    //设备宽高
+    windowHeight:'',
+    windowWidth:'',
+    showSubmitChoice:false,//标记提交选择是否显示
+    openid:'',
+    _id:'',
+    calorie_breakfast:0,
+    calorie_lunch:0,
+    calorie_dinner:0,
+    calorie_lingshi:0,
     gushulist:[],
     dadoulist:[],
     shuguolist:[],
@@ -21,6 +34,206 @@ Page({
     value:"肉",
     plusPic:"https://6669-fit-gc46z-1304760622.tcb.qcloud.la/listPAM/%E5%87%8F.png?sign=1064f19402ff135678866d50da47daed&t=1616664916",
     minusPic:"https://6669-fit-gc46z-1304760622.tcb.qcloud.la/listPAM/%E5%8A%A0.png?sign=6e831360b53d6cab197934255433b29f&t=1616664903"
+  },
+
+  submit:function(){
+    var that = this
+    that.setData({
+      showSubmitChoice:true
+    })
+  },
+
+  onClose() {
+    this.setData({ showSubmitChoice: false });
+  },
+
+  submitToBreakfast(){
+    var that = this
+    wx.showLoading({
+      title: '提交中',
+    })
+    console.log(that.data.list)
+    var calorie_breakfast = that.data.calorie_breakfast
+    var list = that.data.list
+    var allCalorie = 0;
+    for(var i = 0 ;i < list.nv_length;i ++){
+      var calSplited = list[i].cal.split("大");
+      var cal = parseInt(calSplited[0])             //该种食物每份的热量
+      allCalorie += list[i].num * cal
+    }
+    console.log(allCalorie)
+    //提交早餐食物，修改数据库中早餐热量
+    db.collection('user').doc(that.data._id)
+      .update({
+        data:{
+          calorie_breakfast:that.data.calorie_breakfast + allCalorie
+        },
+        success: res => {
+          wx.hideLoading({
+            success: (res) => {
+              wx.showToast({
+                title: '提交成功',
+              })
+              that.setData({
+                showSubmitChoice:false,
+                calorie_breakfast:calorie_breakfast + allCalorie
+              },()=>{
+                that.cleanPageList()
+              })
+            },
+          })
+        },
+        fail: err => {
+          wx.showToast({
+            title: '提交失败，请重试！',
+          })
+        }
+      })
+  },
+
+  submitToLunch(){
+    var that = this
+    wx.showLoading({
+      title: '提交中',
+    })
+    console.log(that.data.list)
+    var calorie_lunch = that.data.calorie_lunch
+    var list = that.data.list
+    var allCalorie = 0;
+    for(var i = 0 ;i < list.nv_length;i ++){
+      var calSplited = list[i].cal.split("大");
+      var cal = parseInt(calSplited[0])             //该种食物每份的热量
+      allCalorie += list[i].num * cal
+    }
+    console.log(allCalorie)
+    //提交午餐食物，修改数据库午餐热量
+    db.collection('user').doc(that.data._id)
+      .update({
+        data:{
+          calorie_lunch:that.data.calorie_lunch + allCalorie
+        },
+        success: res => {
+          wx.hideLoading({
+            success: (res) => {
+              wx.showToast({
+                title: '提交成功',
+              })
+              that.setData({
+                showSubmitChoice:false,
+                calorie_lunch:calorie_lunch + allCalorie
+              },()=>{
+                that.cleanPageList()
+              })
+            },
+          })
+        },
+        fail: err => {
+          wx.showToast({
+            title: '提交失败，请重试！',
+          })
+        }
+      })
+  },
+
+  submitToDinner(){
+    var that = this
+    wx.showLoading({
+      title: '提交中',
+    })
+    console.log(that.data.list)
+    var calorie_dinner = that.data.calorie_dinner
+    var list = that.data.list
+    var allCalorie = 0;
+    for(var i = 0 ;i < list.nv_length;i ++){
+      var calSplited = list[i].cal.split("大");
+      var cal = parseInt(calSplited[0])             //该种食物每份的热量
+      allCalorie += list[i].num * cal
+    }
+    console.log(allCalorie)
+    //提交晚餐食物，修改数据库中晚餐热量
+    db.collection('user').doc(that.data._id)
+      .update({
+        data:{
+          calorie_dinner:that.data.calorie_dinner + allCalorie
+        },
+        success: res => {
+          wx.hideLoading({
+            success: (res) => {
+              wx.showToast({
+                title: '提交成功',
+              })
+              that.setData({
+                showSubmitChoice:false,
+                calorie_dinner:calorie_dinner + allCalorie
+              },()=>{
+                that.cleanPageList()
+              })
+            },
+          })
+        },
+        fail: err => {
+          wx.showToast({
+            title: '提交失败，请重试！',
+          })
+        }
+      })
+  },
+
+  submitToLingshi(){
+    var that = this
+    wx.showLoading({
+      title: '提交中',
+    })
+    console.log(that.data.list)
+    var calorie_lingshi = that.data.calorie_lingshi
+    var list = that.data.list
+    var allCalorie = 0;
+    for(var i = 0 ;i < list.nv_length;i ++){
+      var calSplited = list[i].cal.split("大");
+      var cal = parseInt(calSplited[0])             //该种食物每份的热量
+      allCalorie += list[i].num * cal
+    }
+    console.log(allCalorie)
+    //提交早餐食物，修改数据库中零食热量
+    db.collection('user').doc(that.data._id)
+      .update({
+        data:{
+          calorie_lingshi:that.data.calorie_lingshi + allCalorie
+        },
+        success: res => {
+          wx.hideLoading({
+            success: (res) => {
+              wx.showToast({
+                title: '提交成功',
+              })
+              that.setData({
+                showSubmitChoice:false,
+                calorie_lingshi:calorie_lingshi + allCalorie
+              },()=>{
+                that.cleanPageList()
+              })
+            },
+          })
+        },
+        fail: err => {
+          wx.showToast({
+            title: '提交失败，请重试！',
+          })
+        }
+      })
+  },
+
+  //清除页面中列表数据
+  cleanPageList(){
+    var that = this
+    var list = that.data.list             //谷薯类列表
+    //清除列表中的数量
+    for(var i = 0 ;i < list.nv_length;i ++){
+      var listNumStr = 'list[' + i + '].num'
+      that.setData({
+        [listNumStr]:0
+      })
+    }
   },
 
   feedback:function(){
@@ -193,19 +406,156 @@ Page({
     })
   },
 
+  //获取设备宽高
+  getsize(){
+    let that=this;
+    wx.getSystemInfo({
+      success(res) {
+        that.setData({
+          windowHeight:res.windowHeight,
+          windowWidth:res.windowWidth
+        })
+      },
+    })
+  },
+
+  judgeUser:function(e){ //判断用户集合中是否存在当前用户
+    var that = this;
+    let flag = false;
+    wx.cloud.callFunction({ 
+      name: 'getUserList',
+      data:{
+        openid:that.data.openid
+      },
+      config:{env:"fit-gc46z"}
+    })
+      .then(res => { 
+        //用户存在，获取用户早中晚摄入的卡路里
+        console.log(res.result.data.nv_length)
+        console.log(res)
+        if(res.result.data.nv_length != 0){
+          console.log('用户存在')
+          that.setData({
+            _id:res.result.data[0]._id,
+            dateString_record:res.result.data[0].dateString_record,
+            signInDate_record:res.result.data[0].signInDate_record,
+            calorie_breakfast:res.result.data[0].calorie_breakfast,
+            calorie_lunch:res.result.data[0].calorie_lunch,
+            calorie_dinner:res.result.data[0].calorie_dinner,
+            calorie_lingshi:res.result.data[0].calorie_lingshi
+          })
+          that.getDate()//获取当天日期
+        }
+        else if(res.result.data.nv_length == 0){
+          //用户不存在，添加用户
+          console.log('用户不存在')
+          db.collection('user').add({ //将该用户加入用户集合
+            data: { 
+              openid: e.result.openid,
+              height:0,
+              weight:0,
+              BMI:0,
+              height_record:[],
+              weight_record:[],
+              BMI_record:[],
+              dateString_record:[],
+              signInDate_record:[],
+              flag_height:'',
+              flag_weight:'',
+              calorie_breakfast:0,
+              calorie_lunch:0,
+              calorie_dinner:0,
+              calorie_lingshi:0,
+              calorie_burn:0,
+              targetRun:5000
+            },
+            success: res => {
+              console.log(res); 
+              that.setData({
+                _id:res._id,
+                calorie_breakfast:0,
+                calorie_lunch:0,
+                calorie_dinner:0,
+                calorie_lingshi:0,
+              })
+              that.getDate()//获取当天日期
+            },
+            fail: err => {
+              console.log(err);
+            }
+          })
+        }
+      })
+      .catch(err => { 
+        console.log(err);
+      });
+    
+    },
+
+  //获取当天日期
+  getDate:function(){
+    var that=this;
+    var timestamp = Date.parse(new Date());
+    var date = new Date(timestamp);
+    var dateString = '';
+    //获取年份  
+    var Y =date.getFullYear();
+    //获取月份  
+    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+    //获取当日日期 
+    var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate(); 
+    //合并日期
+    dateString = Y + M + D;
+    that.setData({
+      dateString:dateString
+    })
+
+    //判断当天是否登录过
+    var singIn=0;
+    for(var i = 0 ; i < that.data.signInDate_record.length;i ++){
+      if(that.data.signInDate_record[i] == that.data.dateString){//当天登陆过
+        singIn=1;
+        console.log('当天登录过')
+      }
+    }
+    
+    if(!singIn||that.data.signInDate_record.length==0){//当天没有登录过
+      console.log('当天没有登录过')
+      that.setData({
+        calorie_breakfast:0,
+        calorie_lunch:0,
+        calorie_dinner:0,
+        calorie_lingshi:0
+      })
+      db.collection('user').doc(that.data._id)
+      .update({
+        data:{
+          signInDate_record:that.data.signInDate_record.concat(dateString),
+          calorie_breakfast:0,
+          calorie_lunch:0,
+          calorie_dinner:0,
+          calorie_lingshi:0
+        }
+      })
+    }
+  },
 
   onLoad: function (options) {
     var that =this
     that.cheakList()
     getApp().loadFont()
-    console.log(options)
+    that.getsize()
+    var optionsString = options.info.split("|");
+    console.log(optionsString)
     wx.showLoading({
       title:'搜索中'
     })
     that.setData({
-      value:options.value
+      value:optionsString[0],
+      openid:optionsString[1]
     },()=>{
         that.searchList()
+        that.judgeUser(that.data.openid)
     })
   },
 
