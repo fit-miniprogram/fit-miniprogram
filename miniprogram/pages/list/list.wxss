@@ -78,8 +78,7 @@ page {
 .bowlPage-unfold {
   z-index: 10;
   position: fixed;
-  /* height: 1000rpx; */
-  /* height: 800rpx; */
+  height: 1000rpx;
   width: 560rpx;
   left: 23%;
   bottom: 250rpx;
@@ -90,8 +89,7 @@ page {
   transition: all 0.5s ease-in-out;
 }
 .bowlPage-unfold .bowlScroll {
-  /* height: 950rpx; */
-  /* height: 750rpx; */
+  height: 950rpx;
   width: 100%;
   transition: all 0.5s ease-in-out;
 }
@@ -133,8 +131,8 @@ page {
   opacity: 0;
   background-color: #fff;
   bottom: 250rpx;
-  height: 10rpx;
-  width: 600rpx;
+  height: 10rpx !important;
+  width: 10rpx;
   left: 15%;
   transition: all 0.5s ease-in-out;
 }
@@ -277,13 +275,11 @@ page {
   align-self: flex-end;
 }
 .content .item .PAM .num {
-  height: 50rpx;
-  line-height: 50rpx;
-  font-size: 30rpx;
+  font-size: 35rpx;
   width: 35rpx;
   position: relative;
-  text-align: center;
-  /* top: 5rpx; */
+  left: 8rpx;
+  top: 5rpx;
 }
 .content .item .PAM .minus {
   width: 50rpx;

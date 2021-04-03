@@ -79,13 +79,6 @@ Page({
       
   },
 
-  speechTap: function(){
-    wx.showToast({
-      title: '还没做完，点锤子点',
-      icon: 'none',
-      duration: 2000
-    })
-  },
 
 
   clickMove: function (e) {
@@ -473,7 +466,7 @@ gotoHistoryDetail(e)
       let flag = false;
       db.collection('searchHistory') // 限制返回数量为 20 条
       .where({
-        openid: that.data.currentOpenid
+        _openid: that.data.currentOpenid
       }).get({
         success: (res) => {
           let user_get = res.data; //获取到的对象数组数据
