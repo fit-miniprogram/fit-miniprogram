@@ -846,7 +846,7 @@ gotoHistoryDetail(e)
     console.log("goto "+that.data.calorie)
     
     wx.navigateTo({ //带参数页面跳转
-      url: "../homePage/camera/camera?pic=" + that.data.pic + "&description=" + that.data.description + "&hasCakorie="  + that.data.hasCakorie + "&foodName=" + that.data.foodName + "&calorie=" + that.data.calorie
+      url: "../homePage/camera/camera?pic=" + that.data.pic + "&description=" + that.data.description + "&hasCakorie="  + that.data.hasCakorie + "&foodName=" + that.data.foodName + "&calorie=" + that.data.calorie + "&openid=" + that.data.currentOpenid
     })
   },
 })

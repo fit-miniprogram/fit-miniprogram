@@ -226,7 +226,7 @@ Page({
   //清除页面中列表数据
   cleanPageList(){
     var that = this
-    var list = that.data.list             //谷薯类列表
+    var list = that.data.list 
     //清除列表中的数量
     for(var i = 0 ;i < list.nv_length;i ++){
       var listNumStr = 'list[' + i + '].num'
