@@ -38,6 +38,7 @@ Page({
     calorie_lunch:0,
     calorie_dinner:0,
     calorie_get:0,
+    calorie_lingshi:0,
     calorie_burn:0,
     dabiao:'---',
     dabiao_color:'',
@@ -391,6 +392,7 @@ Page({
               calorie_breakfast:0,
               calorie_lunch:0,
               calorie_dinner:0,
+              calorie_lingshi:0,
               calorie_burn:0,
               targetRun:5000
             },
@@ -425,7 +427,8 @@ Page({
             calorie_breakfast:res.data[0].calorie_breakfast,
             calorie_lunch:res.data[0].calorie_lunch,
             calorie_dinner:res.data[0].calorie_dinner,
-            calorie_get:res.data[0].calorie_breakfast + res.data[0].calorie_lunch + res.data[0].calorie_dinner 
+            calorie_lingshi:res.data[0].calorie_lingshi,
+            calorie_get:res.data[0].calorie_breakfast + res.data[0].calorie_lunch + res.data[0].calorie_dinner + res.data[0].calorie_lingshi 
           })
           //显示用户身高、体重、BMI
           if(res.data[0].height==0 || res.data[0].weight==0){
@@ -540,6 +543,7 @@ Page({
         calorie_breakfast:0,
         calorie_lunch:0,
         calorie_dinner:0,
+        calorie_lingshi:0,
         calorie_get:0,
         calorie_burn:0,
         dabiao:'---',
@@ -554,6 +558,7 @@ Page({
           calorie_breakfast:0,
           calorie_lunch:0,
           calorie_dinner:0,
+          calorie_lingshi:0,
           calorie_burn:0,
         }
       })
@@ -574,7 +579,8 @@ Page({
             calorie_breakfast:res.data[0].calorie_breakfast,
             calorie_lunch:res.data[0].calorie_lunch,
             calorie_dinner:res.data[0].calorie_dinner,
-            calorie_get:res.data[0].calorie_breakfast + res.data[0].calorie_lunch + res.data[0].calorie_dinner 
+            calorie_lingshi:res.data[0].calorie_lingshi,
+            calorie_get:res.data[0].calorie_breakfast + res.data[0].calorie_lunch + res.data[0].calorie_dinner + res.data[0].calorie_lingshi 
           })
           //判断卡路里是否达标
           if(that.data.calorie_breakfast != 0 && that.data.calorie_lunch != 0 && that.data.calorie_dinner != 0 && that.data.calorie_burn >= that.data.calorie_get){

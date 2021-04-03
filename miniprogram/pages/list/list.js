@@ -18,7 +18,17 @@ Page({
       bowlList:[],
       bowlListFlag:0,
       bowlPage:'bowlPage-fold',
+      bowlTips:'',
       back:'back-fold',
+      calorie_breakfast:0,
+      calorie_lunch:0,
+      calorie_dinner:0,
+      calorie_lingshi:0,
+      openid:'',
+      _id:'',
+      dateString:'',//当天日期
+      dateString_record:[],
+      signInDate_record:[],
       bowlPic:"https://6669-fit-gc46z-1304760622.tcb.qcloud.la/listPAM/%E7%A2%97-01.png?sign=07a5bee2a756678c3c208f9ee6a3daf6&t=1616895598",
       plusPic:"https://6669-fit-gc46z-1304760622.tcb.qcloud.la/listPAM/%E5%87%8F.png?sign=1064f19402ff135678866d50da47daed&t=1616664916",
       minusPic:"https://6669-fit-gc46z-1304760622.tcb.qcloud.la/listPAM/%E5%8A%A0.png?sign=6e831360b53d6cab197934255433b29f&t=1616664903",
@@ -32,10 +42,194 @@ Page({
 
 submit(){
   var that = this
-    wx.vibrateShort({
-      success: (res) => {},
-    })
+  var bowlListNum = that.data.bowlList.nv_length  //碗列表中种类数，遍历碗列表用
+  var bowlList = that.data.bowlList               //碗列表
+  var calorieSubmit = 0;                          //提交食物的总热量
+  wx.vibrateShort({
+    success: (res) => {},
+  })
+  wx.showLoading({
+    title: '提交中',
+  })
+
+  for(var i = 0 ;i < bowlListNum; i ++){
+    //获取该种食物每份的热量
+    var calSplited = bowlList[i].cal.split("大");
+    var cal = parseInt(calSplited[0])             //该种食物每份的热量
+    calorieSubmit += bowlList[i].num * cal;       
+  }
+  if(that.data.calorie_breakfast == 0){
+    //提交早餐食物，修改数据库中早餐热量
+    db.collection('user').doc(that.data._id)
+      .update({
+        data:{
+          calorie_breakfast:calorieSubmit
+        },
+        success: res => {
+          that.setData({
+            calorie_breakfast:calorieSubmit
+          },() => {
+            that.getBowlTips()                    //修改碗中提示为午餐
+            that.cleanPageList()                  //清除页面数据
+            wx.hideLoading({
+              success: (res) => {
+                wx.showToast({
+                  title: '提交成功',
+                })
+                that.showBowl()                   //隐藏碗页面
+              },
+            })
+          })
+        },
+        fail: err => {
+          wx.showToast({
+            title: '提交失败，请重试！',
+          })
+        }
+      })
+  }
+  else if(that.data.calorie_lunch == 0){
+    //提交午餐食物，修改数据库午餐热量
+    db.collection('user').doc(that.data._id)
+      .update({
+        data:{
+          calorie_lunch:calorieSubmit
+        },
+        success: res => {
+          that.setData({
+            calorie_lunch:calorieSubmit
+          },() => {
+            that.getBowlTips()                    //修改碗中提示为晚餐
+            that.cleanPageList()                  //清除页面数据
+            wx.hideLoading({
+              success: (res) => {
+                wx.showToast({
+                  title: '提交成功',
+                })
+                that.showBowl()                   //隐藏碗页面
+              },
+            })
+          })
+        },
+        fail: err => {
+          wx.showToast({
+            title: '提交失败，请重试！',
+          })
+        }
+      })
+  }
+  else if(that.data.calorie_dinner == 0){
+    //提交晚餐食物，修改数据库晚餐热量
+    db.collection('user').doc(that.data._id)
+      .update({
+        data:{
+          calorie_dinner:calorieSubmit
+        },
+        success: res => {
+          that.setData({
+            calorie_dinner:calorieSubmit
+          },() => {
+            that.getBowlTips()                    //修改碗中提示为零食
+            that.cleanPageList()                  //清除页面数据
+            wx.hideLoading({
+              success: (res) => {
+                wx.showToast({
+                  title: '提交成功',
+                })
+                that.showBowl()                   //隐藏碗页面
+              },
+            })
+          })
+        },
+        fail: err => {
+          wx.showToast({
+            title: '提交失败，请重试！',
+          })
+        }
+      })
+  }
+  else{
+    //提交零食食物，修改数据库零食热量
+    db.collection('user').doc(that.data._id)
+      .update({
+        data:{
+          calorie_lingshi:calorieSubmit
+        },
+        success: res => {
+          that.setData({
+            calorie_lingshi:calorieSubmit
+          },()=>{
+            that.getBowlTips()                    //修改碗中提示为零食
+            that.cleanPageList()                  //清除页面数据
+            wx.hideLoading({
+              success: (res) => {
+                wx.showToast({
+                  title: '提交成功',
+                })
+                that.showBowl()                   //隐藏碗页面
+              },
+            })
+          })
+        },
+        fail: err => {
+          wx.showToast({
+            title: '提交失败，请重试！',
+          })
+        }
+      })
+  }
 },
+
+  //清除页面中所有列表及碗中数据
+  cleanPageList(){
+    var that = this
+    var gushuList = that.data.gushuList             //谷薯类列表
+    var shuguoList = that.data.shuguoList           //蔬果类列表
+    var dongwuList = that.data.dongwuList           //动物类列表
+    var dadouList = that.data.dadouList             //大豆类列表
+    var nengliangList = that.data.nengliangList     //能量类列表
+    //清除各类标记
+    that.setData({
+      bowlList:[],
+      bowlListFlag:0,
+      totalCount:0
+    })
+    //清除谷薯类列表中的数量
+    for(var i = 0 ;i < gushuList.nv_length;i ++){
+      var gushuNumStr = 'gushuList[' + i + '].num'
+      that.setData({
+        [gushuNumStr]:0
+      })
+    }
+    //清除蔬果类列表中的数量
+    for(var i = 0 ;i < shuguoList.nv_length;i ++){
+      var shuguoNumStr = 'shuguoList[' + i + '].num'
+      that.setData({
+        [shuguoNumStr]:0
+      })
+    }
+    //清除动物类列表中的数量
+    for(var i = 0 ;i < dongwuList.nv_length;i ++){
+      var dongwuNumStr = 'dongwuList[' + i + '].num'
+      that.setData({
+        [dongwuNumStr]:0
+      })
+    }
+    //清除大豆类列表中的数量
+    for(var i = 0 ;i < dadouList.nv_length;i ++){
+      var dadouNumStr = 'dadouList[' + i + '].num'
+      that.setData({
+        [dadouNumStr]:0
+      })
+    }
+    //清除能量类列表中的数量
+    for(var i = 0 ;i < nengliangList.nv_length;i ++){
+      var nengliangNumStr = 'nengliangList[' + i + '].num'
+      that.setData({
+        [nengliangNumStr]:0
+      })
+    }
+  },
 
 //购物车bowlList与食物List分离方法未尝试成功，欢迎勇士继续修改，
 //现在的版本是直接将所有的食物List置入，num为0则不显示
@@ -512,11 +706,184 @@ submit(){
       })
     }
   },
+
+  //根据早中晚摄入热量设置碗中提示
+  getBowlTips(){
+    var that = this
+    if(that.data.calorie_breakfast == 0){
+      that.setData({
+        bowlTips:'早餐'
+      })
+    }
+    else if(that.data.calorie_lunch == 0){
+      that.setData({
+        bowlTips:'午餐'
+      })
+    }
+    else if(that.data.calorie_dinner == 0){
+      that.setData({
+        bowlTips:'晚餐'
+      })
+    }
+    else{
+      that.setData({
+        bowlTips:'零食'
+      })
+    }
+  },
+
+  //获取用户openid
+  getOpenid:function() {
+    let that = this;
+    wx.cloud.callFunction({ //调用getOpenid云函数
+      name: 'getOpenid',
+      data:{},
+      config:{env:"fit-gc46z"}
+    })
+    .then(res => { //调用getOpenid成功进行以下操作
+      console.log(res);
+      that.setData({
+        openid:res.result.openid
+      })
+      that.judgeUser(res) //判断用户是否存在
+      
+    })
+      .catch(err => { //调用getOpenid失败打印错误信息
+      console.log(err);
+    });
+  },
+
+  
+  judgeUser:function(e){ //判断用户集合中是否存在当前用户
+    var that = this;
+    let flag = false;
+    wx.cloud.callFunction({ 
+      name: 'getUserList',
+      data:{
+        openid:that.data.openid
+      },
+      config:{env:"fit-gc46z"}
+    })
+      .then(res => { 
+        //用户存在，获取用户早中晚摄入的卡路里
+        console.log(res.result.data.nv_length)
+        console.log(res)
+        if(res.result.data.nv_length != 0){
+          console.log('用户存在')
+          that.setData({
+            _id:res.result.data[0]._id,
+            dateString_record:res.result.data[0].dateString_record,
+            signInDate_record:res.result.data[0].signInDate_record,
+            calorie_breakfast:res.result.data[0].calorie_breakfast,
+            calorie_lunch:res.result.data[0].calorie_lunch,
+            calorie_dinner:res.result.data[0].calorie_dinner,
+            calorie_lingshi:res.result.data[0].calorie_lingshi
+          })
+          that.getDate()//获取当天日期
+        }
+        else if(res.result.data.nv_length == 0){
+          //用户不存在，添加用户
+          console.log('用户不存在')
+          db.collection('user').add({ //将该用户加入用户集合
+            data: { 
+              openid: e.result.openid,
+              height:0,
+              weight:0,
+              BMI:0,
+              height_record:[],
+              weight_record:[],
+              BMI_record:[],
+              dateString_record:[],
+              signInDate_record:[],
+              flag_height:'',
+              flag_weight:'',
+              calorie_breakfast:0,
+              calorie_lunch:0,
+              calorie_dinner:0,
+              calorie_lingshi:0,
+              calorie_burn:0,
+              targetRun:5000
+            },
+            success: res => {
+              console.log(res); 
+              that.setData({
+                _id:res._id,
+                calorie_breakfast:0,
+                calorie_lunch:0,
+                calorie_dinner:0,
+                calorie_lingshi:0,
+              })
+              that.getDate()//获取当天日期
+            },
+            fail: err => {
+              console.log(err);
+            }
+          })
+        }
+      })
+      .catch(err => { 
+        console.log(err);
+      });
+    
+    },
+
+  //获取当天日期
+  getDate:function(){
+    var that=this;
+    var timestamp = Date.parse(new Date());
+    var date = new Date(timestamp);
+    var dateString = '';
+    //获取年份  
+    var Y =date.getFullYear();
+    //获取月份  
+    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+    //获取当日日期 
+    var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate(); 
+    //合并日期
+    dateString = Y + M + D;
+    that.setData({
+      dateString:dateString
+    })
+
+    //判断当天是否登录过
+    var singIn=0;
+    for(var i = 0 ; i < that.data.signInDate_record.length;i ++){
+      if(that.data.signInDate_record[i] == that.data.dateString){//当天登陆过
+        singIn=1;
+        console.log('当天登录过')
+      }
+    }
+    
+    if(!singIn||that.data.signInDate_record.length==0){//当天没有登录过
+      console.log('当天没有登录过')
+      that.setData({
+        calorie_breakfast:0,
+        calorie_lunch:0,
+        calorie_dinner:0,
+        calorie_lingshi:0,
+        calorie_get:0
+      })
+      db.collection('user').doc(that.data._id)
+      .update({
+        data:{
+          signInDate_record:that.data.signInDate_record.concat(dateString),
+          calorie_breakfast:0,
+          calorie_lunch:0,
+          calorie_dinner:0,
+          calorie_lingshi:0
+        }
+      })
+    }
+
+    that.getBowlTips();           //获取碗中提示词
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var that = this
+    that.getOpenid()              //获取用户的openid
     that.getGushuList();
     that.getShuguoList();         //获得蔬果类食物列表
     that.getDadouList();          //获得大豆类食物列表

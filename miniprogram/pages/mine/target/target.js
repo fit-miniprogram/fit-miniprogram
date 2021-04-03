@@ -17,13 +17,16 @@ Page({
     breakfast:0,
     lunch:0,
     dinner:0,
+    lingshi:0,
     show_breakfast: false,
     show_lunch: false,
     show_dinner: false,
+    show_lingshi: false,
     show_run: false,
     breakfast_get:'',
     lunch_get:'',
     dinner_get:'',
+    lingshi_get:'',
     run_get:'',
     _id:'',
     calorieToday:0,
@@ -84,7 +87,7 @@ Page({
     var that = this;
     this.setData({
       breakfast:parseInt(that.data.breakfast_get),
-      calorieToday:parseInt(that.data.breakfast_get) + that.data.lunch + that.data.dinner
+      calorieToday:parseInt(that.data.breakfast_get) + that.data.lunch + that.data.dinner + that.data.lingshi
     })
     db.collection('user').doc(that.data._id)
     .update({
@@ -119,7 +122,7 @@ Page({
     var that = this;
     this.setData({
       lunch:parseInt(that.data.lunch_get),
-      calorieToday:that.data.breakfast + parseInt(that.data.lunch_get) + that.data.dinner
+      calorieToday:that.data.breakfast + parseInt(that.data.lunch_get) + that.data.dinner + that.data.lingshi
     })
     db.collection('user').doc(that.data._id)
     .update({
@@ -155,7 +158,7 @@ Page({
     var that = this;
     this.setData({
       dinner:parseInt(that.data.dinner_get),
-      calorieToday:that.data.breakfast + that.data.lunch + parseInt(that.data.dinner_get)
+      calorieToday:that.data.breakfast + that.data.lunch + parseInt(that.data.dinner_get) + that.data.lingshi
     })
     db.collection('user').doc(that.data._id)
     .update({
@@ -172,6 +175,42 @@ Page({
     this.setData({ show_dinner: false });
   },
 
+  /**
+   * 零食
+   */
+  edit_lingshi(){
+    this.setData({ show_lingshi: true });
+  },
+
+  onChange_lingshi(event) {
+    // event.detail 为当前输入的值
+    this.setData({
+      lingshi_get:event.detail
+    })
+  },
+
+  confirm_lingshi(event) {
+    var that = this;
+    this.setData({
+      lingshi:parseInt(that.data.lingshi_get),
+      calorieToday:parseInt(that.data.lingshi_get) + that.data.lunch + that.data.dinner + that.data.breakfast
+    })
+    db.collection('user').doc(that.data._id)
+    .update({
+      data:{
+        calorie_lingshi:that.data.lingshi
+      }
+    })
+    this.setData({
+      valueCalorie:((that.data.calorieToday / that.data.targetCalorie)*100).toFixed(0)
+    })
+  },
+
+  onClose_lingshi() {
+    this.setData({ show_lingshi: false });
+  },
+
+
   //获取饮食数据
   getData:function(){
     db.collection('user') // 限制返回数量为 20 条
@@ -184,7 +223,8 @@ Page({
           breakfast:res.data[0].calorie_breakfast,
           lunch:res.data[0].calorie_lunch,
           dinner:res.data[0].calorie_dinner,
-          calorieToday:res.data[0].calorie_breakfast + res.data[0].calorie_lunch + res.data[0].calorie_dinner
+          lingshi:res.data[0].calorie_lingshi,
+          calorieToday:res.data[0].calorie_breakfast + res.data[0].calorie_lunch + res.data[0].calorie_dinner + res.data[0].calorie_lingshi
         })
         this.setData({
           valueCalorie:((that.data.calorieToday / that.data.targetCalorie)*100).toFixed(0)

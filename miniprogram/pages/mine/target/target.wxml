@@ -32,25 +32,37 @@
   </view>
   <view class="data">
     <view class="data_left">
-      <view class="calorie" bindtap="edit_breakfast">
-        <view style="height:40rpx;">早餐</view>
-        <view class="calorie_data">
-          <view style="font-size: 40rpx;">{{breakfast}}</view>
-          <view style="font-size: 20rpx;width:40rpx">千卡</view>
+      <view class="data_high">
+        <view class="calorie" bindtap="edit_breakfast">
+          <view style="height:40rpx;">早餐</view>
+          <view class="calorie_data">
+            <view style="font-size: 40rpx;">{{breakfast}}</view>
+            <view style="font-size: 20rpx;width:40rpx">千卡</view>
+          </view>
+        </view>
+        <view class="calorie" bindtap="edit_lunch">
+          <view style="height:40rpx;">中餐</view>
+          <view class="calorie_data">
+            <view style="font-size: 40rpx;">{{lunch}}</view>
+            <view style="font-size: 20rpx;width:40rpx">千卡</view>
+          </view>
         </view>
       </view>
-      <view class="calorie" bindtap="edit_lunch">
-        <view style="height:40rpx;">中餐</view>
-        <view class="calorie_data">
-          <view style="font-size: 40rpx;">{{lunch}}</view>
-          <view style="font-size: 20rpx;width:40rpx">千卡</view>
+      
+      <view class="data_low">
+        <view class="calorie" bindtap="edit_dinner">
+          <view style="height:40rpx;">晚餐</view>
+          <view class="calorie_data">
+            <view style="font-size: 40rpx;">{{dinner}}</view>
+            <view style="font-size: 20rpx;width:40rpx">千卡</view>
+          </view>
         </view>
-      </view>
-      <view class="calorie" bindtap="edit_dinner">
-        <view style="height:40rpx;">晚餐</view>
-        <view class="calorie_data">
-          <view style="font-size: 40rpx;">{{dinner}}</view>
-          <view style="font-size: 20rpx;width:40rpx">千卡</view>
+        <view class="calorie" bindtap="edit_lingshi">
+          <view style="height:40rpx;">零食</view>
+          <view class="calorie_data">
+            <view style="font-size: 40rpx;">{{lingshi}}</view>
+            <view style="font-size: 20rpx;width:40rpx">千卡</view>
+          </view>
         </view>
       </view>
     </view>
@@ -128,5 +140,22 @@
     placeholder="请输入晚餐摄入卡路里"
     border="{{ false }}"
     bind:change="onChange_dinner"
+  />
+</van-dialog>
+
+<van-dialog
+  use-slot
+  title="零食"
+  show="{{ show_lingshi }}"
+  show-cancel-button
+  confirm-button-open-type="confirm_lingshi"
+  bind:close="onClose_lingshi"
+  bind:confirm="confirm_lingshi"
+>
+  <van-field
+    value="{{ lingshi_get }}"
+    placeholder="请输入摄入零食的卡路里"
+    border="{{ false }}"
+    bind:change="onChange_lingshi"
   />
 </van-dialog>
