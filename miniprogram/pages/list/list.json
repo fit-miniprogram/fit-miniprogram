@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "badge": "../../miniprogram_npm/@vant/weapp/badge"
+    "badge": "../../miniprogram_npm/@vant/weapp/badge",
+    "van-popup": "../../../miniprogram_npm/@vant/weapp/popup/index"
   },
   "navigationStyle": "default",
   "navigationBarTextStyle":"white",

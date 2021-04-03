@@ -39,10 +39,10 @@
 <van-popup show="{{ showSubmitChoice }}" bind:close="onClose" >
     <view class="massage" style="width: {{windowWidth}}px;">
         <view class="Text">
-            <view class="cell" bindtap="submitToBreakfast">到早餐</view>
-            <view class="cell" bindtap="submitToLunch">到午餐</view>
-            <view class="cell" bindtap="submitToDinner">到晚餐</view>
-            <view class="cell" bindtap="submitToLingshi">到零食</view>
+            <view class="cell" bindtap="submitToBreakfast" style="border: none;" hover-class="cell-clik">到早餐</view>
+            <view class="cell" bindtap="submitToLunch" hover-class="cell-clik">到午餐</view>
+            <view class="cell" bindtap="submitToDinner" hover-class="cell-clik">到晚餐</view>
+            <view class="cell" bindtap="submitToLingshi" hover-class="cell-clik">到零食</view>
         </view>
         <view class="Angle"></view>
     </view>

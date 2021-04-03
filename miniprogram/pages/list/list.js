@@ -8,6 +8,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+      //设备宽高
+      windowHeight:'',
+      windowWidth:'',
       num:0,
       currentTab:0,
       totalCount:0,
@@ -32,6 +35,7 @@ Page({
       dateString:'',//当天日期
       dateString_record:[],
       signInDate_record:[],
+      showSubmitChoice: false,
       bowlPic:"https://6669-fit-gc46z-1304760622.tcb.qcloud.la/listPAM/%E7%A2%97-01.png?sign=07a5bee2a756678c3c208f9ee6a3daf6&t=1616895598",
       plusPic:"https://6669-fit-gc46z-1304760622.tcb.qcloud.la/listPAM/%E5%87%8F.png?sign=1064f19402ff135678866d50da47daed&t=1616664916",
       minusPic:"https://6669-fit-gc46z-1304760622.tcb.qcloud.la/listPAM/%E5%8A%A0.png?sign=6e831360b53d6cab197934255433b29f&t=1616664903",
@@ -43,126 +47,62 @@ Page({
   },
 
 
-submit(){
-  var that = this
-  var bowlListNum = that.data.bowlList.nv_length  //碗列表中种类数，遍历碗列表用
-  var bowlList = that.data.bowlList               //碗列表
-  var calorieSubmit = 0;                          //提交食物的总热量
-  wx.vibrateShort({
-    success: (res) => {},
-  })
-  wx.showLoading({
-    title: '提交中',
-  })
+  submit:function(){
+    var that = this
+    that.setData({
+      showSubmitChoice:true
+    })
+  },
 
-  for(var i = 0 ;i < bowlListNum; i ++){
-    //获取该种食物每份的热量
-    var calSplited = bowlList[i].cal.split("大");
-    var cal = parseInt(calSplited[0])             //该种食物每份的热量
-    calorieSubmit += bowlList[i].num * cal;       
-  }
-  if(that.data.calorie_breakfast == 0){
+  onClose() {
+    this.setData({ showSubmitChoice: false });
+  },
+
+  //获取设备宽高
+  getsize(){
+    let that=this;
+    wx.getSystemInfo({
+      success(res) {
+        that.setData({
+          windowHeight:res.windowHeight,
+          windowWidth:res.windowWidth
+        })
+      },
+    })
+  },
+  
+  submitToBreakfast(){
+    var that = this
+    wx.showLoading({
+      title: '提交中',
+    })
+    var bowlListNum = that.data.bowlList.nv_length  //碗列表中种类数，遍历碗列表用
+    var bowlList = that.data.bowlList               //碗列表
+    var calorieSubmit = 0;                          //提交食物的总热量
+    wx.vibrateShort({
+      success: (res) => {},
+    })
+    wx.showLoading({
+      title: '提交中',
+    })
+
+    for(var i = 0 ;i < bowlListNum; i ++){
+      //获取该种食物每份的热量
+      var calSplited = bowlList[i].cal.split("大");
+      var cal = parseInt(calSplited[0])             //该种食物每份的热量
+      calorieSubmit += bowlList[i].num * cal;       
+    }
     //提交早餐食物，修改数据库中早餐热量
     db.collection('user').doc(that.data._id)
       .update({
         data:{
-          calorie_breakfast:calorieSubmit
+          calorie_breakfast:that.data.calorie_breakfast + calorieSubmit
         },
         success: res => {
           that.setData({
-            calorie_breakfast:calorieSubmit
-          },() => {
-            that.getBowlTips()                    //修改碗中提示为午餐
-            that.cleanPageList()                  //清除页面数据
-            wx.hideLoading({
-              success: (res) => {
-                wx.showToast({
-                  title: '提交成功',
-                })
-                that.showBowl()                   //隐藏碗页面
-              },
-            })
-          })
-        },
-        fail: err => {
-          wx.showToast({
-            title: '提交失败，请重试！',
-          })
-        }
-      })
-  }
-  else if(that.data.calorie_lunch == 0){
-    //提交午餐食物，修改数据库午餐热量
-    db.collection('user').doc(that.data._id)
-      .update({
-        data:{
-          calorie_lunch:calorieSubmit
-        },
-        success: res => {
-          that.setData({
-            calorie_lunch:calorieSubmit
-          },() => {
-            that.getBowlTips()                    //修改碗中提示为晚餐
-            that.cleanPageList()                  //清除页面数据
-            wx.hideLoading({
-              success: (res) => {
-                wx.showToast({
-                  title: '提交成功',
-                })
-                that.showBowl()                   //隐藏碗页面
-              },
-            })
-          })
-        },
-        fail: err => {
-          wx.showToast({
-            title: '提交失败，请重试！',
-          })
-        }
-      })
-  }
-  else if(that.data.calorie_dinner == 0){
-    //提交晚餐食物，修改数据库晚餐热量
-    db.collection('user').doc(that.data._id)
-      .update({
-        data:{
-          calorie_dinner:calorieSubmit
-        },
-        success: res => {
-          that.setData({
-            calorie_dinner:calorieSubmit
-          },() => {
-            that.getBowlTips()                    //修改碗中提示为零食
-            that.cleanPageList()                  //清除页面数据
-            wx.hideLoading({
-              success: (res) => {
-                wx.showToast({
-                  title: '提交成功',
-                })
-                that.showBowl()                   //隐藏碗页面
-              },
-            })
-          })
-        },
-        fail: err => {
-          wx.showToast({
-            title: '提交失败，请重试！',
-          })
-        }
-      })
-  }
-  else{
-    //提交零食食物，修改数据库零食热量
-    db.collection('user').doc(that.data._id)
-      .update({
-        data:{
-          calorie_lingshi:calorieSubmit
-        },
-        success: res => {
-          that.setData({
-            calorie_lingshi:calorieSubmit
+            showSubmitChoice:false,
+            calorie_breakfast:that.data.calorie_breakfast + calorieSubmit
           },()=>{
-            that.getBowlTips()                    //修改碗中提示为零食
             that.cleanPageList()                  //清除页面数据
             wx.hideLoading({
               success: (res) => {
@@ -180,8 +120,163 @@ submit(){
           })
         }
       })
-  }
-},
+  },
+
+  //提交到午餐
+  submitToLunch(){
+    var that = this
+    wx.showLoading({
+      title: '提交中',
+    })
+    var bowlListNum = that.data.bowlList.nv_length  //碗列表中种类数，遍历碗列表用
+    var bowlList = that.data.bowlList               //碗列表
+    var calorieSubmit = 0;                          //提交食物的总热量
+    wx.vibrateShort({
+      success: (res) => {},
+    })
+    wx.showLoading({
+      title: '提交中',
+    })
+
+    for(var i = 0 ;i < bowlListNum; i ++){
+      //获取该种食物每份的热量
+      var calSplited = bowlList[i].cal.split("大");
+      var cal = parseInt(calSplited[0])             //该种食物每份的热量
+      calorieSubmit += bowlList[i].num * cal;       
+    }
+    //提交午餐食物，修改数据库中午餐热量
+    db.collection('user').doc(that.data._id)
+      .update({
+        data:{
+          calorie_lunch:that.data.calorie_lunch + calorieSubmit
+        },
+        success: res => {
+          that.setData({
+            showSubmitChoice:false,
+            calorie_lunch:that.data.calorie_lunch + calorieSubmit
+          },()=>{
+            that.cleanPageList()                  //清除页面数据
+            wx.hideLoading({
+              success: (res) => {
+                wx.showToast({
+                  title: '提交成功',
+                })
+                that.showBowl()                   //隐藏碗页面
+              },
+            })
+          })
+        },
+        fail: err => {
+          wx.showToast({
+            title: '提交失败，请重试！',
+          })
+        }
+      })
+  },
+
+  //提交到晚餐
+  submitToDinner(){
+    var that = this
+    wx.showLoading({
+      title: '提交中',
+    })
+    var bowlListNum = that.data.bowlList.nv_length  //碗列表中种类数，遍历碗列表用
+    var bowlList = that.data.bowlList               //碗列表
+    var calorieSubmit = 0;                          //提交食物的总热量
+    wx.vibrateShort({
+      success: (res) => {},
+    })
+    wx.showLoading({
+      title: '提交中',
+    })
+
+    for(var i = 0 ;i < bowlListNum; i ++){
+      //获取该种食物每份的热量
+      var calSplited = bowlList[i].cal.split("大");
+      var cal = parseInt(calSplited[0])             //该种食物每份的热量
+      calorieSubmit += bowlList[i].num * cal;       
+    }
+    //提交晚餐食物，修改数据库中晚餐热量
+    db.collection('user').doc(that.data._id)
+      .update({
+        data:{
+          calorie_dinner:that.data.calorie_dinner + calorieSubmit
+        },
+        success: res => {
+          that.setData({
+            showSubmitChoice:false,
+            calorie_dinner:that.data.calorie_dinner + calorieSubmit
+          },()=>{
+            that.cleanPageList()                  //清除页面数据
+            wx.hideLoading({
+              success: (res) => {
+                wx.showToast({
+                  title: '提交成功',
+                })
+                that.showBowl()                   //隐藏碗页面
+              },
+            })
+          })
+        },
+        fail: err => {
+          wx.showToast({
+            title: '提交失败，请重试！',
+          })
+        }
+      })
+  },
+
+  //提交到零食
+  submitToLingshi(){
+    var that = this
+    wx.showLoading({
+      title: '提交中',
+    })
+    var bowlListNum = that.data.bowlList.nv_length  //碗列表中种类数，遍历碗列表用
+    var bowlList = that.data.bowlList               //碗列表
+    var calorieSubmit = 0;                          //提交食物的总热量
+    wx.vibrateShort({
+      success: (res) => {},
+    })
+    wx.showLoading({
+      title: '提交中',
+    })
+
+    for(var i = 0 ;i < bowlListNum; i ++){
+      //获取该种食物每份的热量
+      var calSplited = bowlList[i].cal.split("大");
+      var cal = parseInt(calSplited[0])             //该种食物每份的热量
+      calorieSubmit += bowlList[i].num * cal;       
+    }
+    //提交零食，修改数据库中零食热量
+    db.collection('user').doc(that.data._id)
+      .update({
+        data:{
+          calorie_lingshi:that.data.calorie_lingshi + calorieSubmit
+        },
+        success: res => {
+          that.setData({
+            showSubmitChoice:false,
+            calorie_lingshi:that.data.calorie_lingshi + calorieSubmit
+          },()=>{
+            that.cleanPageList()                  //清除页面数据
+            wx.hideLoading({
+              success: (res) => {
+                wx.showToast({
+                  title: '提交成功',
+                })
+                that.showBowl()                   //隐藏碗页面
+              },
+            })
+          })
+        },
+        fail: err => {
+          wx.showToast({
+            title: '提交失败，请重试！',
+          })
+        }
+      })
+  },
 
   //清除页面中所有列表及碗中数据
   cleanPageList(){
@@ -916,6 +1011,7 @@ submit(){
   onLoad: function (options) {
     var that = this
     that.getOpenid()              //获取用户的openid
+    that.getsize()                //获取设备宽高
     //设置来适配全机型
     wx.getSystemInfo({
       success: function(res){
