@@ -24,7 +24,7 @@
     </view>
     <scroll-view scroll-y="true" class="bowlScroll" style="opacity:1">
       <view class="noFood" wx:if="{{totalCount==0?true:false}}"><text>碗里面还没有东西,\n\n去列表里面添加一点吧。</text></view>  
-     <view class="bowlList" wx:for="{{bowlList}}" wx:for-item="list">
+     <view class="bowlList" wx:for="{{bowlList}}" wx:for-item="list" wx:key="_id">
         <view class="bowlItemPic">
             <image class="pic" src="{{list.src}}"></image>
         </view>
@@ -63,7 +63,7 @@
         </view>
     </view>
     <!-- 加减的基本思路：在每一个view上设置data，text中有value属性，https://www.jianshu.com/p/7ebfe748ca17 -->
-    <view class="item" wx:for="{{gushuList}}" wx:for-item="list" wx:for-index="index" >
+    <view class="item" wx:for="{{gushuList}}" wx:for-item="list" wx:for-index="index" wx:key="_id">
         <view class="itemPic">
             <image class="pic" src="{{list.src}}"></image>
         </view>
@@ -102,7 +102,7 @@
         </view>
     </view>
     <!-- 加减的基本思路：在每一个view上设置data，text中有value属性，https://www.jianshu.com/p/7ebfe748ca17 -->
-    <view class="item" wx:for="{{shuguoList}}" wx:for-item="list" wx:for-index="index" >
+    <view class="item" wx:for="{{shuguoList}}" wx:for-item="list" wx:for-index="index" wx:key="_id">
         <view class="itemPic">
             <image class="pic" src="{{list.src}}"></image>
         </view>
@@ -143,7 +143,7 @@
     </view>
 
     <!-- 加减的基本思路：在每一个view上设置data，text中有value属性，https://www.jianshu.com/p/7ebfe748ca17 -->
-    <view class="item" wx:for="{{dongwuList}}" wx:for-item="list" wx:for-index="index" >
+    <view class="item" wx:for="{{dongwuList}}" wx:for-item="list" wx:for-index="index" wx:key="_id">
         <view class="itemPic">
             <image class="pic" src="{{list.src}}"></image>
         </view>
@@ -180,7 +180,7 @@
         </view>
     </view>
     <!-- 加减的基本思路：在每一个view上设置data，text中有value属性，https://www.jianshu.com/p/7ebfe748ca17 -->
-    <view class="item" wx:for="{{dadouList}}" wx:for-item="list" wx:for-index="index" >
+    <view class="item" wx:for="{{dadouList}}" wx:for-item="list" wx:for-index="index" wx:key="_id">
         <view class="itemPic">
             <image class="pic" src="{{list.src}}"></image>
         </view>
@@ -218,7 +218,7 @@
     </view>
 
     <!-- 加减的基本思路：在每一个view上设置data，text中有value属性，https://www.jianshu.com/p/7ebfe748ca17 -->
-    <view class="item" wx:for="{{nengliangList}}" wx:for-item="list" wx:for-index="index" >
+    <view class="item" wx:for="{{nengliangList}}" wx:for-item="list" wx:for-index="index" wx:key="_id">
         <view class="itemPic">
             <image class="pic" src="{{list.src}}"></image>
         </view>

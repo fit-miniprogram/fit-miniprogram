@@ -75,7 +75,7 @@
   </view>
 
 
-  <view class="doYouKonw " wx:for="{{doYouKonwList}}" wx:for-item="list">
+  <view class="doYouKonw " wx:for="{{doYouKonwList}}" wx:for-item="list" wx:key="_id">
     <view class="title">
       <image class="titleImage" src="{{titleImageBase64Konw}}"></image>
       <text class="titleContent" decode="true" space="emsp">{{list.title}}</text>
@@ -99,7 +99,7 @@
     <view class="title">搜索历史:</view>
     <view class="noHistory" wx:if="{{searchShowList.length==0?true:false}}">还没有搜索过东西</view>
     <view class="content" wx:if="{{searchShowList.length==0?false:true}}">
-      <view class="item" wx:for="{{searchShowList}}" wx:for-item="list" data-value="{{list}}" bindtap="gotoHistoryDetail">{{list}}</view>
+      <view class="item" wx:for="{{searchShowList}}" wx:for-item="list" data-value="{{list}}" bindtap="gotoHistoryDetail" wx:key="_id">{{list}}</view>
     </view>
   </view>
 
