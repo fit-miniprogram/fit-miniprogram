@@ -885,11 +885,8 @@ submit(){
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-<<<<<<< Updated upstream
     var that = this
     that.getOpenid()              //获取用户的openid
-=======
-    var that=this;
     //设置来适配全机型
     wx.getSystemInfo({
       success: function(res){
@@ -923,7 +920,6 @@ submit(){
         }
       }
     })
->>>>>>> Stashed changes
     that.getGushuList();
     that.getShuguoList();         //获得蔬果类食物列表
     that.getDadouList();          //获得大豆类食物列表
