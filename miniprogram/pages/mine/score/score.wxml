@@ -3,12 +3,17 @@
 </loading>
 <view style="display: {{isblocked}}">
   <view class="self-area">
-    <view class="rank-list-title">我的积分</view>
+    <view class="rank-list-title" style="display: flex;position: relative;">
+      <view>我的积分</view>
+      <view style="right: 0;position: absolute">
+        <button class="btn1" open-type="getUserInfo" lang="zh_CN" bindtap="bindGetUserInfo">刷新个人头像和昵称</button>
+      </view>
+    </view>
     <view class="rank-item">
       <view class="profile">
-        <view class="profile-content" style="background: url({{self_profile}});background-size:100% 100%;background-repeat: no-repeat"></view>
+        <view class="profile-content" style="background: url({{profile_db}});background-size:100% 100%;background-repeat: no-repeat"></view>
       </view>
-      <view class="nickname">{{self_nickname}}</view>
+      <view class="nickname">{{nickname_db}}</view>
       <view class="score" style="color: #4FAB60" wx:if="{{self_score >=1000}}">{{self_score}}</view>
       <view class="score" style="color: #ECA352" wx:elif="{{self_score <1000}}">{{self_score}}</view>
     </view>
