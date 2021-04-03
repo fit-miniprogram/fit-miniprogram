@@ -24,7 +24,7 @@ Page({
       bowlList:[],
       bowlListFlag:0,
       bowlPage:'bowlPage-fold',
-      bowlTips:'',
+      //bowlTips:'',
       back:'back-fold',
       calorie_breakfast:0,
       calorie_lunch:0,
@@ -805,31 +805,6 @@ Page({
     }
   },
 
-  //根据早中晚摄入热量设置碗中提示
-  getBowlTips(){
-    var that = this
-    if(that.data.calorie_breakfast == 0){
-      that.setData({
-        bowlTips:'早餐'
-      })
-    }
-    else if(that.data.calorie_lunch == 0){
-      that.setData({
-        bowlTips:'午餐'
-      })
-    }
-    else if(that.data.calorie_dinner == 0){
-      that.setData({
-        bowlTips:'晚餐'
-      })
-    }
-    else{
-      that.setData({
-        bowlTips:'零食'
-      })
-    }
-  },
-
   //获取用户openid
   getOpenid:function() {
     let that = this;
@@ -973,7 +948,6 @@ Page({
       })
     }
 
-    that.getBowlTips();           //获取碗中提示词
   },
 
   //更新卡路里数据
@@ -995,8 +969,6 @@ Page({
             calorie_lunch:res.result.data[0].calorie_lunch,
             calorie_dinner:res.result.data[0].calorie_dinner,
             calorie_lingshi:res.result.data[0].calorie_lingshi
-          },()=>{
-            that.getBowlTips();           //获取碗中提示词
           })
         }
       })
