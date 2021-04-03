@@ -1,10 +1,16 @@
 {
   "pages": [
     "pages/prePages/prePage/prePage",
-    "pages/homePage/homePage",
-    "pages/game/game",
-    "pages/mine/mine",
+    "pages/prePages/prePage3/prePage3",
     "pages/list/list",
+    "pages/homePage/homePage",
+    "pages/mine/mine",
+
+    "pages/prePages/prePage1/prePage1",
+    "pages/prePages/prePage2/prePage2",
+    "pages/prePages/prePage4/prePage4",
+    "pages/mine/score/score",
+    "pages/game/game",
     "pages/mine/target/target",
     "pages/mine/history/history",
     "pages/mine/sign/sign",
@@ -14,15 +20,10 @@
     "pages/mine/history/weight/weight",
     "pages/game/catch/catch",
     "pages/game/classify/classify",
-    "pages/prePages/prePage1/prePage1",
-    "pages/prePages/prePage2/prePage2",
-    "pages/prePages/prePage3/prePage3",
-    "pages/prePages/prePage4/prePage4",
     "pages/game/pullit/pullit",
     "pages/homePage/camera/camera",
     "pages/homePage/search/search",
-    "pages/mine/feedback/feedback",
-    "pages/mine/score/score"
+    "pages/mine/feedback/feedback"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

@@ -34,6 +34,8 @@ Page({
             success: function(res){
                 var nickname=res.userInfo.nickName;
                 var profile=res.userInfo.avatarUrl;
+                console.log(nickname);
+                console.log(profile);
                 //设置昵称和头像
                 that.setData({
                     nickname_cur: nickname,
@@ -132,6 +134,7 @@ Page({
                     })
                     //有授权
                     if(!that.data.need_authority){
+                        console.log("wori")
                         //数据需要更新
                         if(that.isNeedUpdate())
                             that.UpdateUserData();
@@ -169,14 +172,20 @@ Page({
                     nickname: nickname,
                     profile: profile
                 })
+                db.collection('userdata').where({
+                    openid: that.data.openid
+                  }).update({
+                    data:{
+                        profile: that.data.profile_cur,
+                        nickname: that.data.nickname_cur
+                    }
+                }).then(res=>
+                {
+                    console.log(res)
+                })
             }
         })
-        db.collection('useradata').where({
-            openid: that.data.openid
-          }).update({
-            profile: that.data.profile_cur,
-            nickname: that.data.nickname_cur
-          })
+
     },
     //插入数据库
     InsertUserData: function(){
@@ -197,6 +206,11 @@ Page({
     },
     //判断数据库中的数据是否需要更新
     isNeedUpdate:function(){
+        console.log(this.data.nickname_cur);
+        console.log(this.data.nickname_db)
+        console.log(this.data.profile_cur);
+        console.log(this.data.profile_db)
+            
         if(this.data.nickname_cur!=this.data.nickname_db)
             return true              
         else if(this.data.profile_cur!=this.data.profile_db)
