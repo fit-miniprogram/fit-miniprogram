@@ -72,7 +72,7 @@ Page({
     //经过6s后进入下一个页面
     setTimeout(function(){
       wx.redirectTo({
-        url: '../prePage2/prePage2'
+        url: '../prePage3/prePage3'
       })
     }.bind(this),6500);
   },

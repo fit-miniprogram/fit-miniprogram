@@ -1,9 +1,8 @@
-<view class="outter" animation="{{slide_down}}" style="height: {{outter_height}}">
-    <view class="inner" style="height: {{inner_height}}">
-      <view class="title">积分可用于拍照识别</view>
-      <view class="camera_img" animation="{{camera_shake}}"></view>
-      <view class="title" style="opacity: {{title_opacity}}">显示出目标物品所含热量</view>
-      <!-- <view class="title">显示出目标物品所含热量</view> -->
+<view class="outter" animation="{{slide_down}}">
+    <view class="inner">
+      <view class="title">答对每日一题可获得积分</view>
+      <view class="{{title_img_1}}" style="background: url({{imgurl}});background-size: 100% 100%;opacity: {{imgOpacity}}"></view>
+      <view class="{{title_img_2}}" style="background: url(http://r.photo.store.qq.com/psc?/V10siXyS0lL9dw/TmEUgtj9EK6.7V8ajmQrEJj.KxKtia.Qdyn2R18fYhqUhCZbvMARHynsic0Ft5d5MwGp2t8BDi4Ed*zyCP6JTJabdkbFDvmDFb6Z3geDgvg!/r);background-size: 100% 100%;"></view>
     </view>
 </view>
 

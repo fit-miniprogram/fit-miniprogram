@@ -1,12 +1,14 @@
-<view class="sentence" animation="{{slide_right}}">
-  <span class="word">即</span>
-  <span class="word">刻</span>
-  <span class="word">畅</span>
-  <span class="word">享</span>
-  <span class="word">吧</span>
-  <span class="word">!</span>
+<view class="outter" animation="{{slide_down}}" style="height: {{outter_height}}">
+    <view class="inner" style="height: {{inner_height}}">
+      <view class="title">积分可用于拍照识别</view>
+      <view class="camera_img" animation="{{camera_shake}}"></view>
+      <view class="title" style="opacity: {{title_opacity}}">显示出目标物品所含热量</view>
+      <view class="identify_img" style="opacity: {{img_opacity}}"></view>
+      <!-- <view class="title">显示出目标物品所含热量</view> -->
+    </view>
 </view>
 
-<view class="continue_btn" animation="{{slide_right2}}">
-    <view class="btn_icon ripple" bindtap="gtNxtPg"></view>
+<!-- <view class="continue_btn" animation="{{slide_up}}" style="display: {{ishided}}"> -->
+<view class="continue_btn" animation="{{slide_up}}">
+    <view class="btn_icon" bindtap="gtNxtPg"></view>
 </view>

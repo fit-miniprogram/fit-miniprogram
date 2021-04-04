@@ -1,11 +1,14 @@
-// pages/prePage4/prePage4.js
+// pages/prePage3/prePage3.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    outter_height: "500rpx",
+    inner_height: "275rpx",
+    title_opacity: "0",
+    img_opacity: "0"
   },
 
   /**
@@ -30,26 +33,36 @@ Page({
     if (wx.canIUse('hideHomeButton')) {
       wx.hideHomeButton()
     }
-    setTimeout(function(){
-      that.app.sliderightshow(this,'slide_right',0,1,2400);
-    }.bind(this),50);
 
     setTimeout(function(){
-      that.app.sliderightshow(this,'slide_right2',0,1,1200);
-    }.bind(this),1250);
-    // var text="即刻畅享吧!";
-    // var i=0;
-    // var single_time=300;
-    // //逐渐显示每一个字
-    // var time=setInterval(function(){
-    //   var sentence=text.substring(0,i);
-    //   i++;
-    //   that.setData({sentence:sentence});
-    //   if(sentence.length==text.length){
-    //     clearInterval(time);
-    //   }
-    //   single_time-=50;
-    // },single_time);
+      this.app.slideupshow(this,'slide_down',0,1,1200);
+    }.bind(this),50);  
+    // camera shaking
+    setTimeout(function(){
+      this.app.shake(this,'camera_shake',0,250);
+    }.bind(this),1500);  
+    setTimeout(function(){
+      that.app.slideupshow(this,'slide_up',0,1,1200);
+    }.bind(this),2000);
+
+    //渐显字 等待2秒 持续1.1秒 总耗时3.1秒
+    setTimeout(function(){
+      that.setData({outter_height:"800rpx"});
+      that.setData({inner_height:"650rpx"});
+      var alpha=0,speed=0.1;
+      var timer=null;
+      var opTarget=1;
+      timer = setInterval(function(){
+          if(alpha>=opTarget){
+            clearInterval(timer);
+          }
+          else{
+            alpha+=speed;
+            that.setData({title_opacity:alpha});
+            that.setData({img_opacity:alpha});
+          }
+        },100);
+    }.bind(this),2000);
   },
 
   /**
@@ -86,12 +99,14 @@ Page({
   onShareAppMessage: function () {
 
   },
-
+  //跳转到下一个页面
   gtNxtPg: function(){
+    this.app.slideupshow(this,'slide_down',-400,0.5,1200);
+    this.app.slideupshow(this,'slide_up',200,0.5,1200);
     setTimeout(function(){
-      wx.switchTab({
-        url: '../../homePage/homePage'
-      })    
-    }.bind(this),500); 
-  }
+      wx.redirectTo({
+        url: '../prePage5/prePage5'
+      })
+    }.bind(this),1200);
+  },
 })

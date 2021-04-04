@@ -14,7 +14,7 @@
   <view class="name" wx:if="{{foodName=='非菜'?false:true}}">{{foodName}}</view>
   <view class="name" wx:if="{{foodName=='非菜'?true:false}}">这个好像不是菜品</view>
   <view class="cal" wx:if="{{hasCakorie}}">
-    <text>{{calorie}}大卡</text>
+    <text>{{calorie}}大卡/100g</text>
     <view class="PAM" data-wdnmd="1">
             <view style="opacity:{{num==0?0:1}};" bindtap="minus" class="minus" >
                 <image class="minusPic" src="{{plusPic}}"></image>
