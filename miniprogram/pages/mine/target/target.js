@@ -294,6 +294,10 @@ Page({
         that.setData({
           stepToday: res.result.event.weRunData.data.stepInfoList[30].step,
           vauleRun:vauleRunTemp.toFixed(0),
+        },()=>{
+          wx.hideLoading({
+            success: (res) => {},
+          })
         })
       })
       }
@@ -304,17 +308,33 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
+    wx.showLoading({
+      title: '加载中',
+    })
     //接收mine界面传来的openid
     var str = options.info;
     var info = str.split("|");
     console.log(info[0]);
     this.setData({
       openid:info[0],
-      _id:info[1],
-      targetRun:parseInt(info[2])
+      _id:info[1]
     })
-    this.getData();
-    this.authorizeWeRun();
+    db.collection('user') // 限制返回数量为 20 条
+    .where({
+      openid: that.data.openid
+    }).get({
+      success: (res) => {
+        that.setData({
+          targetRun:res.data[0].targetRun
+        })
+      },
+      fail: err =>{
+        console.log("错误")
+      }
+    })
+    that.getData();
+    that.authorizeWeRun();
   },
 
   /**
