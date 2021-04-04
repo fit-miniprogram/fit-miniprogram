@@ -13,7 +13,7 @@
       <view style="font-size: 40rpx;">{{stepToday}}</view>
       <view style="font-size: 20rpx;">步</view>
     </view>
-    <van-circle
+    <van-circle class="van-circle"
       value="{{ vauleRun }}"
       layer-color="#eeeeee"
       color="#33ff33"

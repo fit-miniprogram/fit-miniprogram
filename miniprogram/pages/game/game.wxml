@@ -1,4 +1,4 @@
-<view class="gameAnimation" style="position: relative; left: 0rpx; top: 3rpx">
+<view class="gameAnimation" style="position: relative; left: 0rpx; top: 50rpx">
   <view class="subject" style="position: relative; left: 284rpx; top: -10rpx">
     <view class="head" style="position: relative; left: -50rpx; top: 24rpx"></view>
     <view class="pole" style="position: relative; "></view>

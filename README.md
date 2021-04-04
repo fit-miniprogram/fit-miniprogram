@@ -1,3 +1,4 @@
 fit miniprogram
 
-基于colorUI开发
+部分组件基于colorUI、weapp以及echart开发
+

@@ -5,7 +5,7 @@
   <view class="self-area">
     <view class="rank-list-title" style="display: flex;position: relative;">
       <view>我的积分</view>
-      <view style="right: 0;position: absolute">
+      <view style="right: 0;position: absolute;font-family:'cola';">
         <button class="btn1" open-type="getUserInfo" lang="zh_CN" bindtap="bindGetUserInfo">刷新个人头像和昵称</button>
       </view>
     </view>

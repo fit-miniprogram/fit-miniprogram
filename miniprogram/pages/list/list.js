@@ -82,10 +82,6 @@ Page({
     wx.vibrateShort({
       success: (res) => {},
     })
-    wx.showLoading({
-      title: '提交中',
-    })
-
     for(var i = 0 ;i < bowlListNum; i ++){
       //获取该种食物每份的热量
       var calSplited = bowlList[i].cal.split("大");
@@ -133,9 +129,6 @@ Page({
     var calorieSubmit = 0;                          //提交食物的总热量
     wx.vibrateShort({
       success: (res) => {},
-    })
-    wx.showLoading({
-      title: '提交中',
     })
 
     for(var i = 0 ;i < bowlListNum; i ++){
@@ -186,9 +179,6 @@ Page({
     wx.vibrateShort({
       success: (res) => {},
     })
-    wx.showLoading({
-      title: '提交中',
-    })
 
     for(var i = 0 ;i < bowlListNum; i ++){
       //获取该种食物每份的热量
@@ -237,9 +227,6 @@ Page({
     var calorieSubmit = 0;                          //提交食物的总热量
     wx.vibrateShort({
       success: (res) => {},
-    })
-    wx.showLoading({
-      title: '提交中',
     })
 
     for(var i = 0 ;i < bowlListNum; i ++){
