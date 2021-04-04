@@ -40,7 +40,7 @@
 </van-popup>
 
 <!--卡路里-->
-<view class="calorieCard">
+<view class="calorieCard" bindtap="target">
   <view class="calorieTitle">
     <view class="logo_text">
       <view class="logo">
@@ -71,7 +71,6 @@
 </view>
 
 <!--功能列表-->
-<van-cell icon="https://6669-fit-gc46z-1304760622.tcb.qcloud.la/mine/target.png?sign=538f4ba3e7910c79dcd1399acb16f151&t=1613961020" title="我的目标" is-link bindtap="target" class="cell"/>
 <van-cell icon="https://6669-fit-gc46z-1304760622.tcb.qcloud.la/mine/history.png?sign=5c67e2f05bc4c9b5c3b4ea35db026d7d&t=1613961031" title="我的历史" is-link bindtap="history" class="cell"/>
 <van-cell icon="https://6669-fit-gc46z-1304760622.tcb.qcloud.la/mine/sign.png?sign=565707d7ba4eaa8d39f8da7b189f64e0&t=1613961042" title="签到" is-link bindtap="sign" class="cell"/>
 <van-cell icon="https://6669-fit-gc46z-1304760622.tcb.qcloud.la/mine/score.png?sign=b49bb8c11ebc033202a9e18674da9897&t=1617272256" title="我的积分" is-link bindtap="score" class="cell"/>
