@@ -79,6 +79,9 @@ Page({
     wx.showLoading({
       title: '提交中',
     })
+    wx.vibrateShort({
+      success: (res) => {},
+    })
     var that = this
     var calorie_breakfast = that.data.calorie_breakfast
     var allCalorie = that.data.allCalorie
@@ -114,6 +117,9 @@ Page({
   submitToLunch(){
     wx.showLoading({
       title: '提交中',
+    })
+    wx.vibrateShort({
+      success: (res) => {},
     })
     var that = this
     var calorie_lunch = that.data.calorie_lunch
@@ -151,6 +157,9 @@ Page({
     wx.showLoading({
       title: '提交中',
     })
+    wx.vibrateShort({
+      success: (res) => {},
+    })
     var that = this
     var calorie_dinner = that.data.calorie_dinner
     var allCalorie = that.data.allCalorie
@@ -186,6 +195,9 @@ Page({
   submitToLingshi(){
     wx.showLoading({
       title: '提交中',
+    })
+    wx.vibrateShort({
+      success: (res) => {},
     })
     var that = this
     var calorie_lingshi = that.data.calorie_lingshi
