@@ -1,11 +1,10 @@
 {
   "pages": [
+    "pages/mine/mine",
     "pages/prePages/prePage/prePage",
     "pages/prePages/prePage3/prePage3",
     "pages/list/list",
     "pages/homePage/homePage",
-    "pages/mine/mine",
-
     "pages/prePages/prePage1/prePage1",
     "pages/prePages/prePage2/prePage2",
     "pages/prePages/prePage4/prePage4",

@@ -61,11 +61,11 @@
   font-family: 'jianti';
 }
 .detail .submit {
-  position: relative;
+  position: fixed;
   height: 100rpx;
   font-family: 'cola';
   width: 150rpx;
-  top: 50rpx;
+  bottom: 80rpx;
   font-size: 60rpx;
   margin-right: 20rpx;
   margin-bottom: 20rpx ;
@@ -75,3 +75,45 @@
   justify-content: center;
   align-items: center;
 }
+
+
+.massage{
+  bottom: 180rpx;
+  height: 400rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.Text{
+  flex: 15;
+  background-color: #fff;
+  border-radius: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.cell{
+  width: 100%;
+  flex: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid rgba(173, 173, 173, 0.26);
+  font-size: 30rpx;
+}
+
+.cell-clik{
+  opacity: 0.5;
+  background-color:#f2f3f5;
+}
+
+.Angle {
+  flex: 1;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 10px solid #fff;
+  margin-left: 50%;
+}
+

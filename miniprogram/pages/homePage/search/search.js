@@ -32,15 +32,43 @@ Page({
     nengliang:false,
     dadou:false,
     value:"肉",
+    allCalorie:0,
     plusPic:"https://6669-fit-gc46z-1304760622.tcb.qcloud.la/listPAM/%E5%87%8F.png?sign=1064f19402ff135678866d50da47daed&t=1616664916",
     minusPic:"https://6669-fit-gc46z-1304760622.tcb.qcloud.la/listPAM/%E5%8A%A0.png?sign=6e831360b53d6cab197934255433b29f&t=1616664903"
   },
 
   submit:function(){
     var that = this
+    console.log(that.data.list)
+    var list = that.data.list
+    var allCalorie = 0;
+    for(var i = 0 ;i < list.nv_length;i ++){
+      var calSplited = list[i].cal.split("大");
+      var cal = parseInt(calSplited[0])             //该种食物每份的热量
+      allCalorie += list[i].num * cal
+    }
+    console.log(allCalorie)
     that.setData({
-      showSubmitChoice:true
+      allCalorie:allCalorie
     })
+    //提交食物为空
+    if(allCalorie == 0){
+      wx.showToast({
+        title: '未选择食物数量，请重新选择',
+        icon: 'none',
+        duration: 2000,
+        success: res => {
+          that.setData({
+            showSubmitChoice:false
+          })
+        }
+      })
+    }
+    else{
+      that.setData({
+        showSubmitChoice:true
+      })
+    }
   },
 
   onClose() {
@@ -48,64 +76,54 @@ Page({
   },
 
   submitToBreakfast(){
-    var that = this
     wx.showLoading({
       title: '提交中',
     })
-    console.log(that.data.list)
+    wx.vibrateShort({
+      success: (res) => {},
+    })
+    var that = this
     var calorie_breakfast = that.data.calorie_breakfast
-    var list = that.data.list
-    var allCalorie = 0;
-    for(var i = 0 ;i < list.nv_length;i ++){
-      var calSplited = list[i].cal.split("大");
-      var cal = parseInt(calSplited[0])             //该种食物每份的热量
-      allCalorie += list[i].num * cal
-    }
-    console.log(allCalorie)
+    var allCalorie = that.data.allCalorie
     //提交早餐食物，修改数据库中早餐热量
     db.collection('user').doc(that.data._id)
-      .update({
-        data:{
-          calorie_breakfast:that.data.calorie_breakfast + allCalorie
+    .update({
+      data:{
+        calorie_breakfast:that.data.calorie_breakfast + allCalorie
+      },
+      success: res => {
+        wx.hideLoading({
+          success: (res) => {
+            wx.showToast({
+              title: '提交成功',
+            })
+            that.setData({
+              showSubmitChoice:false,
+              calorie_breakfast:calorie_breakfast + allCalorie
+            },()=>{
+              that.cleanPageList()
+            })
         },
-        success: res => {
-          wx.hideLoading({
-            success: (res) => {
-              wx.showToast({
-                title: '提交成功',
-              })
-              that.setData({
-                showSubmitChoice:false,
-                calorie_breakfast:calorie_breakfast + allCalorie
-              },()=>{
-                that.cleanPageList()
-              })
-            },
-          })
-        },
-        fail: err => {
-          wx.showToast({
-            title: '提交失败，请重试！',
-          })
-        }
-      })
+        })
+      },
+      fail: err => {
+        wx.showToast({
+          title: '提交失败，请重试！',
+        })
+      }
+    })
   },
 
   submitToLunch(){
-    var that = this
     wx.showLoading({
       title: '提交中',
     })
-    console.log(that.data.list)
+    wx.vibrateShort({
+      success: (res) => {},
+    })
+    var that = this
     var calorie_lunch = that.data.calorie_lunch
-    var list = that.data.list
-    var allCalorie = 0;
-    for(var i = 0 ;i < list.nv_length;i ++){
-      var calSplited = list[i].cal.split("大");
-      var cal = parseInt(calSplited[0])             //该种食物每份的热量
-      allCalorie += list[i].num * cal
-    }
-    console.log(allCalorie)
+    var allCalorie = that.data.allCalorie
     //提交午餐食物，修改数据库午餐热量
     db.collection('user').doc(that.data._id)
       .update({
@@ -136,20 +154,15 @@ Page({
   },
 
   submitToDinner(){
-    var that = this
     wx.showLoading({
       title: '提交中',
     })
-    console.log(that.data.list)
+    wx.vibrateShort({
+      success: (res) => {},
+    })
+    var that = this
     var calorie_dinner = that.data.calorie_dinner
-    var list = that.data.list
-    var allCalorie = 0;
-    for(var i = 0 ;i < list.nv_length;i ++){
-      var calSplited = list[i].cal.split("大");
-      var cal = parseInt(calSplited[0])             //该种食物每份的热量
-      allCalorie += list[i].num * cal
-    }
-    console.log(allCalorie)
+    var allCalorie = that.data.allCalorie
     //提交晚餐食物，修改数据库中晚餐热量
     db.collection('user').doc(that.data._id)
       .update({
@@ -180,20 +193,15 @@ Page({
   },
 
   submitToLingshi(){
-    var that = this
     wx.showLoading({
       title: '提交中',
     })
-    console.log(that.data.list)
+    wx.vibrateShort({
+      success: (res) => {},
+    })
+    var that = this
     var calorie_lingshi = that.data.calorie_lingshi
-    var list = that.data.list
-    var allCalorie = 0;
-    for(var i = 0 ;i < list.nv_length;i ++){
-      var calSplited = list[i].cal.split("大");
-      var cal = parseInt(calSplited[0])             //该种食物每份的热量
-      allCalorie += list[i].num * cal
-    }
-    console.log(allCalorie)
+    var allCalorie = that.data.allCalorie
     //提交早餐食物，修改数据库中零食热量
     db.collection('user').doc(that.data._id)
       .update({
@@ -226,7 +234,7 @@ Page({
   //清除页面中列表数据
   cleanPageList(){
     var that = this
-    var list = that.data.list             //谷薯类列表
+    var list = that.data.list 
     //清除列表中的数量
     for(var i = 0 ;i < list.nv_length;i ++){
       var listNumStr = 'list[' + i + '].num'

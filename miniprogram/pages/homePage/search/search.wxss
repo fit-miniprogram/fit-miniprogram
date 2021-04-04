@@ -132,8 +132,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid rgba(173, 173, 173, 0.26);
+  border-top: 1px solid rgba(173, 173, 173, 0.26);
   font-size: 30rpx;
+}
+
+.cell-clik{
+  opacity: 0.5;
+  background-color:#f2f3f5;
 }
 
 .Angle {

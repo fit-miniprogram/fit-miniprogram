@@ -1,132 +1,123 @@
 {
-  "miniprogramRoot": "miniprogram/",
-  "cloudfunctionRoot": "cloudfunctions/",
-  "setting": {
-    "urlCheck": true,
-    "es6": true,
-    "enhance": true,
-    "postcss": true,
-    "preloadBackgroundData": false,
-    "minified": true,
-    "newFeature": false,
-    "coverView": true,
-    "nodeModules": false,
-    "autoAudits": false,
-    "showShadowRootInWxmlPanel": true,
-    "scopeDataCheck": false,
-    "uglifyFileName": false,
-    "checkInvalidKey": true,
-    "checkSiteMap": true,
-    "uploadWithSourceMap": true,
-    "compileHotReLoad": false,
-    "useMultiFrameRuntime": true,
-    "useApiHook": true,
-    "useApiHostProcess": false,
-    "babelSetting": {
-      "ignore": [],
-      "disablePlugins": [],
-      "outputPath": ""
-    },
-    "enableEngineNative": false,
-    "bundle": false,
-    "useIsolateContext": true,
-    "useCompilerModule": true,
-    "userConfirmedUseCompilerModuleSwitch": false,
-    "userConfirmedBundleSwitch": false,
-    "packNpmManually": false,
-    "packNpmRelationList": [],
-    "minifyWXSS": true
-  },
-  "appid": "wxd04c5db27cc6adea",
-  "projectname": "fit",
-  "libVersion": "2.15.0",
-  "simulatorType": "wechat",
-  "simulatorPluginLibVersion": {},
-  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
-  "condition": {
-    "plugin": {
-      "list": []
-    },
-    "game": {
-      "list": []
-    },
-    "gamePlugin": {
-      "list": []
-    },
-    "miniprogram": {
-      "list": [
-        {
-          "id": -1,
-          "name": "db guide",
-          "pathName": "pages/databaseGuide/databaseGuide",
-          "query": ""
-        },
-        {
-          "name": "pages/homePage/homePage",
-          "pathName": "pages/homePage/homePage",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/mine/mine",
-          "pathName": "pages/mine/mine",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/mine/history/height/height",
-          "pathName": "pages/mine/history/height/height",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/mine/history/weight/weight",
-          "pathName": "pages/mine/history/weight/weight",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/mine/history/BMI/BMI",
-          "pathName": "pages/mine/history/BMI/BMI",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/mine/history/history",
-          "pathName": "pages/mine/history/history",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/mine/target/target",
-          "pathName": "pages/mine/target/target",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/game/classify/classify",
-          "pathName": "pages/game/classify/classify",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/mine/sign/sign",
-          "pathName": "pages/mine/sign/sign",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/list/list",
-          "pathName": "pages/list/list",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/homePage/search/search",
-          "pathName": "pages/homePage/search/search",
-          "scene": null
-        }
-      ]
-    }
-  }
+	"miniprogramRoot": "miniprogram/",
+	"cloudfunctionRoot": "cloudfunctions/",
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"enhance": true,
+		"postcss": true,
+		"preloadBackgroundData": false,
+		"minified": true,
+		"newFeature": false,
+		"coverView": true,
+		"nodeModules": false,
+		"autoAudits": false,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
+		"uglifyFileName": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		},
+		"bundle": false,
+		"compileHotReLoad": false,
+		"useMultiFrameRuntime": false,
+		"useApiHook": true,
+		"useIsolateContext": true,
+		"useCompilerModule": true,
+		"userConfirmedUseCompilerModuleSwitch": false,
+		"packNpmManually": false,
+		"packNpmRelationList": [],
+		"minifyWXSS": true
+	},
+	"appid": "wxd04c5db27cc6adea",
+	"projectname": "fit",
+	"libVersion": "2.16.0",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
+	"condition": {
+		"plugin": {
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"gamePlugin": {
+			"list": []
+		},
+		"miniprogram": {
+			"list": [
+				{
+					"id": -1,
+					"name": "db guide",
+					"pathName": "pages/databaseGuide/databaseGuide",
+					"query": ""
+				},
+				{
+					"name": "pages/homePage/homePage",
+					"pathName": "pages/homePage/homePage",
+					"query": "",
+					"scene": null
+				},
+				{
+					"name": "pages/mine/mine",
+					"pathName": "pages/mine/mine",
+					"query": "",
+					"scene": null
+				},
+				{
+					"name": "pages/mine/history/height/height",
+					"pathName": "pages/mine/history/height/height",
+					"query": "",
+					"scene": null
+				},
+				{
+					"name": "pages/mine/history/weight/weight",
+					"pathName": "pages/mine/history/weight/weight",
+					"query": "",
+					"scene": null
+				},
+				{
+					"name": "pages/mine/history/BMI/BMI",
+					"pathName": "pages/mine/history/BMI/BMI",
+					"query": "",
+					"scene": null
+				},
+				{
+					"name": "pages/mine/history/history",
+					"pathName": "pages/mine/history/history",
+					"query": "",
+					"scene": null
+				},
+				{
+					"name": "pages/mine/target/target",
+					"pathName": "pages/mine/target/target",
+					"query": "",
+					"scene": null
+				},
+				{
+					"name": "pages/game/classify/classify",
+					"pathName": "pages/game/classify/classify",
+					"query": "",
+					"scene": null
+				},
+				{
+					"name": "pages/mine/sign/sign",
+					"pathName": "pages/mine/sign/sign",
+					"query": "",
+					"scene": null
+				},
+				{
+					"name": "pages/list/list",
+					"pathName": "pages/list/list",
+					"scene": null
+				}
+			]
+		}
+	}
 }

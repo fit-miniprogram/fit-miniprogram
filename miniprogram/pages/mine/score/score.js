@@ -20,8 +20,10 @@ Page({
 
     openid: "",
     self_score: 0,
-    self_nickname: "",
-    self_profile: ""
+    nickname_db: "",
+    profile_db: "",
+    nickname_cur: "",
+    profile_cur: ""
   },
 
   /**
@@ -68,8 +70,8 @@ Page({
     }).get({
       success: (res)=>{
         that.setData({
-          self_nickname: res.data[0].nickname,
-          self_profile: res.data[0].profile
+          nickname_db: res.data[0].nickname,
+          profile_db: res.data[0].profile
         })
       },
       fail: (res)=>{
@@ -113,4 +115,69 @@ Page({
     }catch(e){
     }
   },
+  bindGetUserInfo: function (e) {
+    let that=this;
+    that.setData({ishided: 0.5});
+    setTimeout(function() {
+        that.setData({ishided: 1});
+    }.bind(this),100);
+
+    wx.getUserProfile({
+        desc: '获取您的头像和昵称',
+        success: function(res){
+            var nickname=res.userInfo.nickName;
+            var profile=res.userInfo.avatarUrl;
+            //设置昵称和头像
+            that.setData({
+                nickname_cur: nickname,
+                profile_cur: profile
+            })
+            if(that.isNeedUpdate())
+              that.UpdateUserData();
+            else{
+              console.log("no need to update")
+            }
+        },
+        fail: function(res){
+            console.log(res)
+        }
+    })
+  },
+  UpdateUserData: function(){
+    console.log("数据发生了更新")
+    let that=this;
+    db.collection('userdata').where({
+        openid: that.data.openid
+        }).update({
+        data:{
+            profile: that.data.profile_cur,
+            nickname: that.data.nickname_cur
+        }
+    }).then(res=>{    
+      that.setData({
+        nickname_db: that.data.nickname_cur,
+        profile_db: that.data.profile_cur
+      })
+      var temp=that.data.rank_list_nickandprofile;
+      for(var i=0;i<temp.length;i++){
+        //匹配id,查看用户在不在榜上
+        if(temp[i].openid==that.data.openid){
+          temp[i].profile=that.data.profile_cur;
+          temp[i].nickname=that.data.nickname_cur;
+          that.setData({
+            rank_list_nickandprofile: temp
+          })
+          break;
+        }
+      }
+    })
+  },
+  //判断数据库中的数据是否需要更新
+  isNeedUpdate:function(){ 
+    if(this.data.nickname_cur!=this.data.nickname_db)
+        return true              
+    else if(this.data.profile_cur!=this.data.profile_db)
+        return true
+    return false
+  }
 })

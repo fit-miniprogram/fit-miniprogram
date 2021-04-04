@@ -28,44 +28,7 @@ Page({
             btndisplay: "block"
         })
         }.bind(this),1000)
-
-        //获取用户当前信息
-        wx.getSetting({
-            success:(res)=>{
-                console.log(res)
-                if(res.authSetting['scope.userInfo']) {     
-                wx.getUserInfo({                
-                     success: function(res) {
-                        var nickname=res.userInfo.nickName;
-                        var profile=res.userInfo.avatarUrl;
-                        console.log(nickname);
-                        console.log(profile);
-                        //设置昵称和头像
-                        that.setData({
-                            nickname_cur: nickname,
-                            profile_cur: profile
-                        })
-                    },
-                    fail: err =>{
-                        that.setData({
-                            need_authority: true
-                        })
-                    }
-                })
-                }
-                else{
-                    that.setData({
-                        need_authority: true
-                    })
-                    console.log("wdnmd")
-                }
-            },
-            complete: (res)=>{
-                this.getOpenid(); 
-            }
-        })
-
-
+        this.getOpenid(); 
     },
     //点击授权按钮
     bindGetUserInfo: function (e) {
@@ -75,51 +38,26 @@ Page({
             that.setData({ishided: 1});
         }.bind(this),100);
 
-        //授权成功后，跳转进入小程序首次登录界面
-        if (e.detail.userInfo) {
-            wx.getUserInfo({
-                success: function(res){
-                    var nickname=res.userInfo.nickName;
-                    var profile=res.userInfo.avatarUrl;
-                    //设置昵称和头像
-                    that.setData({
-                        nickname_cur: nickname,
-                        profile_cur: profile
-                    })
-                    //已经有了数据,只需要授权,不需要插入数据以及观看开屏动画
-                    if(that.data.is_havedata){
-                        //数据需要更新
-                        if(that.isNeedUpdate()){
-                            // console.log("yes")
-                            that.UpdateUserData();
-                        }
-                        wx.switchTab({
-                            url: '../../homePage/homePage',
-                        })
-                    }
-                    else{
-                        //插入数据后进入到开屏动画
-                        that.InsertUserData();
-                        wx.redirectTo({
-                            url: '../prePage1/prePage1'
-                        })
-                    }
-                }
-            })
-        } else {
-            //用户按了拒绝按钮
-            wx.showModal({
-                title:'警告',
-                content:'您点击了拒绝授权，将无法进入小程序，请授权之后再进入!!!',
-                showCancel:false,
-                confirmText:'返回授权',
-                success:function(res){
-                    if (res.confirm) {
-                        console.log('用户点击了“返回授权”')
-                    } 
-                }
-            })
-        }
+        wx.getUserProfile({
+            desc: '获取您的头像和昵称',
+            success: function(res){
+                var nickname=res.userInfo.nickName;
+                var profile=res.userInfo.avatarUrl;
+                //设置昵称和头像
+                that.setData({
+                    nickname_cur: nickname,
+                    profile_cur: profile
+                })
+                //插入数据后进入到开屏动画
+                that.InsertUserData();
+                wx.redirectTo({
+                    url: '../prePage1/prePage1'
+                })
+            },
+            fail: function(res){
+                console.log(res)
+            }
+        })
     },
     //获取用户的Openid，并且查询用户的信息
     getOpenid: function(){
@@ -142,27 +80,9 @@ Page({
             success: (res) => {
                 //找到了对应的id
                 if(res.data.length>0){
-                    //获得数据库中存着的昵称和头像
-                    that.setData({
-                        nickname_db: res.data[0].nickname,
-                        profile_db: res.data[0].profile
-                    })
-                    //有授权
-                    if(!that.data.need_authority){
-                        console.log("wori")
-                        //数据需要更新
-                        if(that.isNeedUpdate())
-                            that.UpdateUserData();
-                            wx.switchTab({
-                                url: '../../homePage/homePage',
-                            })                   
-                    }
-                    //没授权
-                    if(that.data.need_authority){
-                        that.setData({
-                            is_havedata: true
-                        })
-                    }
+                    wx.switchTab({
+                        url: '../../homePage/homePage',
+                    })                   
                 }
             },
             fail: err =>{
@@ -178,28 +98,16 @@ Page({
     UpdateUserData: function(){
         console.log("数据发生了更新")
         let that=this;
-        wx.getUserInfo({
-            success: function(res){
-                var nickname=res.userInfo.nickName;
-                var profile=res.userInfo.avatarUrl;
-                //设置昵称和头像
-                that.setData({
-                    nickname: nickname,
-                    profile: profile
-                })
-                db.collection('userdata').where({
-                    openid: that.data.openid
-                  }).update({
-                    data:{
-                        profile: that.data.profile_cur,
-                        nickname: that.data.nickname_cur
-                    }
-                }).then(res=>
-                {
-                })
+        db.collection('userdata').where({
+            openid: that.data.openid
+            }).update({
+            data:{
+                profile: that.data.profile_cur,
+                nickname: that.data.nickname_cur
             }
+        }).then(res=>
+        {
         })
-
     },
     //插入数据库
     InsertUserData: function(){
@@ -219,12 +127,7 @@ Page({
         })
     },
     //判断数据库中的数据是否需要更新
-    isNeedUpdate:function(){
-        console.log(this.data.nickname_cur);
-        console.log(this.data.nickname_db)
-        console.log(this.data.profile_cur);
-        console.log(this.data.profile_db)
-            
+    isNeedUpdate:function(){ 
         if(this.data.nickname_cur!=this.data.nickname_db)
             return true              
         else if(this.data.profile_cur!=this.data.profile_db)
