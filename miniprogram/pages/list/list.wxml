@@ -225,7 +225,7 @@
         </view>
         <view class="introContent">
             <text class="content1">能量类食物</text>
-            <text class="content2" decode="true">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主要提供能量和必需脂肪酸.它包括油脂.糖类.酒类三大类,油脂又分成动牧油和植物油两种</text>
+            <text class="content2" decode="true">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主要提供能量和必需脂肪酸.它包括油脂.糖类.酒类三大类,油脂又分成动物油和植物油两种</text>
             <text class="content3" decode="true">&nbsp;建议摄入量：每天不超过30g</text>
         </view>
     </view>

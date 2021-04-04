@@ -83,6 +83,9 @@ Page({
         for(var i = 0 ; i < res.data[0].dateString_record.length; i ++){
           dateAll[i] = res.data[0].dateString_record[i].slice(4,6) + '/' + res.data[0].dateString_record[i].slice(6,8)
         }
+        wx.hideLoading({
+          success: (res) => {},
+        })
         //console.log(dateAll);
         this.initGraph3(BMIAll,dateAll)
       },
@@ -106,6 +109,8 @@ initGraph3: function (BMIAll,dateAll) {
     this.chart3 = chart3;
     chart3.setOption(option);
     return chart3;
+  },()=>{
+    
   });
  },
 
@@ -114,6 +119,9 @@ initGraph3: function (BMIAll,dateAll) {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中',
+    })
     //接收history界面传来的openid
     this.setData({
       openid:options.openid
