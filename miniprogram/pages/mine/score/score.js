@@ -36,7 +36,7 @@ Page({
     })
     this.getselfdata();
     this.getRankList();
-
+    app.loadFont()
     this.setData({
       loadingHidden: false
     });
