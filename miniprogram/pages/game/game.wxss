@@ -67,7 +67,7 @@
 }
 .game {
   position: relative;
-  top: 50rpx;
+  top: 100rpx;
   height: 1000rpx;
   display: flex;
   flex-direction: column;

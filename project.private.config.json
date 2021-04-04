@@ -99,6 +99,18 @@
         {
           "name": "pages/homePage/search/search",
           "pathName": "pages/homePage/search/search",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/target/target",
+          "pathName": "pages/mine/target/target",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/mine",
+          "pathName": "pages/mine/mine",
           "scene": null
         }
       ]
