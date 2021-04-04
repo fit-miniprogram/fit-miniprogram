@@ -294,6 +294,10 @@ Page({
         that.setData({
           stepToday: res.result.event.weRunData.data.stepInfoList[30].step,
           vauleRun:vauleRunTemp.toFixed(0),
+        },()=>{
+          wx.hideLoading({
+            success: (res) => {},
+          })
         })
       })
       }
@@ -305,6 +309,9 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    wx.showLoading({
+      title: '加载中',
+    })
     //接收mine界面传来的openid
     var str = options.info;
     var info = str.split("|");
@@ -318,7 +325,7 @@ Page({
       openid: that.data.openid
     }).get({
       success: (res) => {
-        this.setData({
+        that.setData({
           targetRun:res.data[0].targetRun
         })
       },
@@ -326,8 +333,8 @@ Page({
         console.log("错误")
       }
     })
-    this.getData();
-    this.authorizeWeRun();
+    that.getData();
+    that.authorizeWeRun();
   },
 
   /**

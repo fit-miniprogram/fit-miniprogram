@@ -123,6 +123,9 @@ Page({
   },
 
   onLoad: function () {
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this
     getApp().loadFont();
     that.getsize();
@@ -189,6 +192,9 @@ Page({
             // }
           }
         }
+        wx.hideLoading({
+          success: (res) => {},
+        })
       }  
     })
   },

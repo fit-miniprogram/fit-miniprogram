@@ -74,6 +74,9 @@ Page({
           dateAll[i] = res.data[0].dateString_record[i].slice(4,6) + '/' + res.data[0].dateString_record[i].slice(6,8)
         }
         //console.log(dateAll);
+        wx.hideLoading({
+          success: (res) => {},
+        })
         this.initGraph(heightAll,dateAll);
       },
       fail: err =>{
@@ -102,6 +105,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中',
+    })
     //接收history界面传来的openid
     this.setData({
       openid:options.openid
