@@ -1,2 +1,4 @@
 <!--miniprogram/pages/mine/history/calorie/calorie.wxml-->
-<text>miniprogram/pages/mine/history/calorie/calorie.wxml</text>
+<view class="container4" >
+  <ec-canvas id="mychartlineCalorie" canvas-id="mychart-line" ec="{{ ec4 }}"></ec-canvas>
+</view>

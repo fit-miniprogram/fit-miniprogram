@@ -8,7 +8,7 @@ const db = wx.cloud.database({
 function initChart2(chart2, weightAll,dateAll) {
   var option = {
     title: {
-      text: '体重',
+      text: '体重(kg)',
       left: 'center'
     },
     color: ["#67E0E3"],

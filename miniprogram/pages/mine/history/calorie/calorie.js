@@ -1,15 +1,16 @@
 // miniprogram/pages/mine/history/calorie/calorie.js
+import * as echarts from '../../../../ec-canvas/echarts';
 const db = wx.cloud.database({
   env: 'fit-gc46z'
 });  //用db代替数据库
 
-function initChart4(chart4, calorieAll,dateAll) {
+function initChart4(chart4, calorieAll, dateAll) {
   var option = {
     title: {
-      text: '卡路里',
-      left: 'center'
+      text: '摄入卡路里(大卡)',
+      left: 'center',
     },
-    color: ["#9FE6B8"],
+    color: ["#f56363"],
     grid: {
       containLabel: true
     },
@@ -21,33 +22,25 @@ function initChart4(chart4, calorieAll,dateAll) {
       type: 'category',
       boundaryGap: false,
       data: dateAll,
-      nameLocation:'center'
     },
     yAxis: [{
       x: 'center',
       type: 'value',
       position:'left',
-      min:7,
-      max:30,
+      min:0,
+      max:4000,
       splitLine: {
         lineStyle: {
           type: 'dashed'
         }
       }
     }],
-    visualMap: {//区间内控制显示颜色
-      show: false,
-      dimension: 1,
-      pieces: [{gte: 18.5, lte: 22.9, color: '#9FE6B8'}],
-      outOfRange: {
-          color: '#f7a483'
-      }
-    },
-    series: [ {
+    series: [{
       name: '卡路里',
       type: 'line',
       smooth: true,
-      data: calorieAll
+      data: calorieAll,
+      yAxisIndex:0
     }]
   };
   return option;
@@ -77,9 +70,9 @@ Page({
     }).get({
       success: (res) => {
         //console.log(res.data)
-        calorieAll = res.data[0].BMI_record;
-        for(var i = 0 ; i < res.data[0].dateString_record.length; i ++){
-          dateAll[i] = res.data[0].dateString_record[i].slice(4,6) + '/' + res.data[0].dateString_record[i].slice(6,8)
+        calorieAll = res.data[0].calorie_record;
+        for(var i = 0 ; i < res.data[0].dateStirngOfCalorie_record.length; i ++){
+          dateAll[i] = res.data[0].dateStirngOfCalorie_record[i].slice(4,6) + '/' + res.data[0].dateStirngOfCalorie_record[i].slice(6,8)
         }
         wx.hideLoading({
           success: (res) => {},
