@@ -13,7 +13,7 @@
     "van-cell": "../../miniprogram_npm/@vant/weapp/cell/index",
     "van-cell-group": "../../miniprogram_npm/@vant/weapp/cell-group/index"
   },
-  "navigationBarTitleText": "FIT",
+  "navigationBarTitleText": "Fit · 我",
   "navigationBarBackgroundColor": "#272727",
   "navigationBarTextStyle": "white"
   

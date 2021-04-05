@@ -190,7 +190,7 @@ Page({
         title: '不要浪费食物！',
         icon: 'error'
       })
-      wx.vibrateShort({
+      wx.vibrateLong({
         success: (res) => {},
       })
     }
@@ -204,6 +204,9 @@ Page({
       wx.showToast({
         title: '接对了!',
       })
+      wx.vibrateShort({
+        success: (res) => {},
+      })
     }
     else
     {
@@ -211,7 +214,7 @@ Page({
         title: '接错了！',
         icon:'error'
       })
-      wx.vibrateShort({
+      wx.vibrateLong({
         success: (res) => {},
       })
     }

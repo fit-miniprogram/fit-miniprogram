@@ -4,6 +4,7 @@
   },
   "navigationStyle": "default",
   "navigationBarTextStyle":"white",
+  "navigationBarTitleText": "Fit · 主页",
   "navigationBarBackgroundColor": "#282828"
   
 }
