@@ -30,6 +30,8 @@ Page({
     weight_flag:0,
     BMI:'---',
     BMI_record:[],
+    calorie_record:[],
+    dateStirngOfCalorie_record:[],
     user:[],
     _id:'',
     openid:'',
@@ -385,7 +387,9 @@ Page({
               height_record:[],
               weight_record:[],
               BMI_record:[],
+              calorie_record:[],
               dateString_record:[],
+              dateStirngOfCalorie_record:[],
               signInDate_record:[],
               flag_height:'',
               flag_weight:'',
@@ -418,7 +422,9 @@ Page({
             height_record:res.data[0].height_record,
             weight_record:res.data[0].weight_record,
             BMI_record:res.data[0].BMI_record,
+            calorie_record:res.data[0].calorie_record,
             dateString_record:res.data[0].dateString_record,
+            dateStirngOfCalorie_record:res.data[0].dateStirngOfCalorie_record,
             signInDate_record:res.data[0].signInDate_record,
             flag_height:res.data[0].flag_height,
             flag_weight:res.data[0].flag_weight,
@@ -537,6 +543,22 @@ Page({
     }
     
     if(!singIn||that.data.signInDate_record.length==0){//当天没有登录过
+      console.log('未登录')
+      //获取前一次登录时当天的卡路里数据，供画图用
+      var calorie_get = that.data.calorie_get
+      var dateAdd = that.data.signInDate_record[that.data.signInDate_record.length - 1]
+      console.log(dateAdd)
+      if(calorie_get != 0){
+        //前一次登录的当天卡路里不为零，把那一天的卡路里和日期加入记录数组
+        db.collection('user').doc(that.data._id)
+        .update({
+          data:{
+            calorie_record:that.data.calorie_record.concat(calorie_get),
+            dateStirngOfCalorie_record:that.data.dateStirngOfCalorie_record.concat(dateAdd)
+          }
+        })
+      }
+
       that.setData({
         flag_height:0,
         flag_weight:0,

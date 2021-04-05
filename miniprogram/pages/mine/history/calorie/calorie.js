@@ -1,17 +1,16 @@
-// miniprogram/pages/mine/history/weight/weight.js
+// miniprogram/pages/mine/history/calorie/calorie.js
 import * as echarts from '../../../../ec-canvas/echarts';
-
 const db = wx.cloud.database({
   env: 'fit-gc46z'
 });  //用db代替数据库
 
-function initChart2(chart2, weightAll,dateAll) {
+function initChart4(chart4, calorieAll, dateAll) {
   var option = {
     title: {
-      text: '体重(kg)',
-      left: 'center'
+      text: '摄入卡路里(大卡)',
+      left: 'center',
     },
-    color: ["#67E0E3"],
+    color: ["#f56363"],
     grid: {
       containLabel: true
     },
@@ -28,19 +27,20 @@ function initChart2(chart2, weightAll,dateAll) {
       x: 'center',
       type: 'value',
       position:'left',
-      min:35,
-      max:130,
+      min:0,
+      max:4000,
       splitLine: {
         lineStyle: {
           type: 'dashed'
         }
       }
     }],
-    series: [ {
-      name: '体重',
+    series: [{
+      name: '卡路里',
       type: 'line',
       smooth: true,
-      data: weightAll
+      data: calorieAll,
+      yAxisIndex:0
     }]
   };
   return option;
@@ -52,8 +52,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    ec2: {
-      onInit: initChart2
+    ec4: {
+      onInit: initChart4
     },
     openid:''
   },
@@ -62,7 +62,7 @@ Page({
 
   //获取图表数据
   getData:function(){
-    var weightAll=[],dateAll=[]
+    var calorieAll=[],dateAll=[]
 
     db.collection('user') // 限制返回数量为 20 条
     .where({
@@ -70,15 +70,15 @@ Page({
     }).get({
       success: (res) => {
         //console.log(res.data)
-        weightAll = res.data[0].weight_record;
-        for(var i = 0 ; i < res.data[0].dateString_record.length; i ++){
-          dateAll[i] = res.data[0].dateString_record[i].slice(4,6) + '/' + res.data[0].dateString_record[i].slice(6,8)
+        calorieAll = res.data[0].calorie_record;
+        for(var i = 0 ; i < res.data[0].dateStirngOfCalorie_record.length; i ++){
+          dateAll[i] = res.data[0].dateStirngOfCalorie_record[i].slice(4,6) + '/' + res.data[0].dateStirngOfCalorie_record[i].slice(6,8)
         }
-        //console.log(dateAll);
         wx.hideLoading({
           success: (res) => {},
         })
-        this.initGraph2(weightAll,dateAll);
+        //console.log(dateAll);
+        this.initGraph4(calorieAll,dateAll)
       },
       fail: err =>{
         console.log("错误")
@@ -87,21 +87,23 @@ Page({
   },
 
   
-  //初始化图表2
-  initGraph2: function (weightAll,dateAll) {
-    this.oneComponent2.init((canvas2, width, height) => {
-      const chart2 = echarts.init(canvas2, null, {
-        width: width,
-        height: height
-      });
-   
-      var option;
-      option = initChart2(chart2, weightAll,dateAll);
-      this.chart2 = chart2;
-      chart2.setOption(option);
-      return chart2;
+  //初始化图表4
+initGraph4: function (calorieAll,dateAll) {
+  this.oneComponent4.init((canvas4, width, height) => {
+    const chart4 = echarts.init(canvas4, null, {
+      width: width,
+      height: height
     });
-  },
+   
+    var option;
+    option = initChart4(chart4, calorieAll,dateAll);
+    this.chart4 = chart4;
+    chart4.setOption(option);
+    return chart4;
+  },()=>{
+    
+  });
+ },
 
 
   /**
@@ -115,7 +117,7 @@ Page({
     this.setData({
       openid:options.openid
     })
-    this.oneComponent2 = this.selectComponent('#mychartlineWeight');
+    this.oneComponent4 = this.selectComponent('#mychartlineCalorie');
     //获取图表数据
     this.getData()
   },

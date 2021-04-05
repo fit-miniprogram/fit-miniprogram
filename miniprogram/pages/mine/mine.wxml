@@ -7,7 +7,7 @@
     <open-data type="userNickName" class="information-name"></open-data>
   </view>
   <view class="title">
-    <view class="height">身高(m)</view>
+    <view class="height">身高(cm)</view>
     <view class="weight">体重(kg)</view>
     <view class="BMI">BMI</view>
   </view>
