@@ -3,8 +3,8 @@
     "gradient-bar": "../../gradient-bar/index"
   },
   "navigationStyle": "default",
-  "navigationBarTextStyle":"white",
+  "navigationBarTextStyle":"black",
   "navigationBarTitleText": "Fit · 主页",
-  "navigationBarBackgroundColor": "#282828"
+  "navigationBarBackgroundColor":"#4169E1"
   
 }

@@ -33,7 +33,7 @@ page {
   background-color: #ffffff !important;
 }
 .swipercolor {
-  background-image: linear-gradient(#282828, #f6f8f7);
+  background-image: linear-gradient(#4169e1, #f6f8f7);
 }
 .searchPartInit {
   display: flex;
