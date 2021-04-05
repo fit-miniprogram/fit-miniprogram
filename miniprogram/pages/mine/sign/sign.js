@@ -209,13 +209,13 @@ Page({
         duration: 2000
       })
     }
-    else if(that.data.calorieToday > 1200){
+    /*else if(that.data.calorieToday > 1200){
       wx.showToast({
         title: '摄入卡路里超标，无法签到！',
         icon: 'none',
         duration: 2000
       })
-    }
+    }*/
     else{
       db.collection('sigh').add({
         data: {
