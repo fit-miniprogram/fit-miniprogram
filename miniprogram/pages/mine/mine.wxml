@@ -57,14 +57,14 @@
       <view class="dataTitle">摄入</view>
       <view class="calorie_data" >
         <view class="calorie_data_number" style="color: #f7a483;">{{calorie_get}}</view>
-        <view class="calorie_data_unit">千卡</view>
+        <view class="calorie_data_unit">大卡</view>
       </view>
     </view>
     <view class="data_right">
       <view class="dataTitle">步数消耗</view>
       <view class="calorie_data" >
         <view class="calorie_data_number" style="color: #9FE6B8;">{{calorie_burn}}</view>
-        <view class="calorie_data_unit">千卡</view>
+        <view class="calorie_data_unit">大卡</view>
       </view>
     </view>
   </view>
