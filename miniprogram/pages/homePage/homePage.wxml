@@ -11,7 +11,7 @@
 </view> -->
 <!-- 以上内容作废 -->
 
-<view class=" {{swiperClass}} swipercolor">
+<!-- <view class=" {{swiperClass}} swipercolor">
   <view class="home-swiper">
     <swiper class="card-swiper" indicator-dots="{{false}}" circular="true" autoplay="true" interval="5000"
       duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
@@ -25,13 +25,13 @@
     </swiper>
   </view>
 
-</view>
+</view> -->
 
 
 <view class="{{searchClass}} " wx:if="{{isShow}}">
   <view class="cu-bar search bg-white searchColor">
 
-    <view class="search-form round searchInColor {{searchShadowClass}}" >
+    <view class="search-form  searchInColor {{searchShadowClass}}" >
       <text class="cuIcon-search"></text>
       <input type="text" placeholder="{{placeHolderContent}}" confirm-type="search" bindtap="clickMove" 
         disabled="false" value="{{inputValue}}"></input>
