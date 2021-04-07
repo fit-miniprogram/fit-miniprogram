@@ -66,9 +66,16 @@
       <image class="questionPic" src="{{questionPicBase}}"></image>
     <view class="questionStem">{{stem}}</view>
     <view class="option" wx:if="{{optionShow}}">
-      <button class=" lines-gray shadow optionButton " data-option="one" bindtap="questionTap">{{optionOne}}</button>
-      <button class=" lines-gray shadow optionButton" data-option="two" bindtap="questionTap">{{optionTwo}}</button>
-      <button class=" lines-gray shadow optionButton" data-option="three" bindtap="questionTap">{{optionThree}}</button>
+      <view class=" lines-gray shadow optionButton "
+      style="height: 100rpx;line-height: 100rpx;text-align:center;width: 27%"
+      data-option="one" bindtap="questionTap">{{optionOne}}</view>
+      <view class=" lines-gray shadow optionButton" 
+      style="height: 100rpx;line-height: 100rpx;text-align:center;width: 27%"
+      data-option="two" bindtap="questionTap">{{optionTwo}}
+      </view>
+      <view class=" lines-gray shadow optionButton" 
+      style="height: 100rpx;line-height: 100rpx;text-align:center;width: 27%"
+      data-option="three" bindtap="questionTap">{{optionThree}}</view>
     </view>
     <view class="answerTip" wx:if="{{answerTipErrorShow}}">回答错误！正确答案：{{rightAnswer}}</view>
     <view class="answerTip" wx:if="{{answerTipTrueShow}}">回答正确！积分+10</view>

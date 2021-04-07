@@ -27,7 +27,7 @@ Page({
         this.setData({
             btndisplay: "block"
         })
-        }.bind(this),1000)
+        }.bind(this),1500)
         this.getOpenid(); 
     },
     //点击授权按钮
