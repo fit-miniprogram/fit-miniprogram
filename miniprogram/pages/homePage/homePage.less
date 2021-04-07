@@ -1,5 +1,5 @@
 page {
-  background-color: rgb(246,248,247);
+  background-color: #ffffff;
 }
 
 .searchColor{
@@ -8,10 +8,10 @@ page {
 }
 .searchInColor{
   background-color: #ffffff !important;
-  margin: 0 0rpx !important;
+  margin: 0 20rpx !important;
   height: 80rpx !important;
   position: relative;
-  left: 50rpx;
+ // left: 50rpx;
 }
 
 
@@ -51,19 +51,21 @@ page {
   background-image: linear-gradient(rgb(65,105,225),rgb(246,248,247));
 }
 .searchPartInit {
-
+  margin-bottom: 0rpx !important;
   position: relative;
   opacity: 1;
-  top: 20rpx;
-  margin-top: 50rpx;
-  transition: opacity 0.8s;
+  top: 80rpx;
+  //margin-top: 50rpx;
+  transition: all 0.8s;
   transition-timing-function:ease-out ;
   width: 100%;
 }
 .camera-speech{
   background-color: rgb(255, 255, 255);
   position: relative;
-  right: 50rpx;
+ // right: 50rpx;
+ bottom: 90rpx;
+ left: 650rpx;
   z-index: 5;
   width: 80rpx;
   height: 80rpx;
@@ -71,7 +73,7 @@ page {
   justify-content: center ;
   align-items: center;
   border-radius: 50rpx;
-  box-shadow: 0 0 20rpx #888888;
+  //box-shadow: 0 0 20rpx #888888;
   .camera-init{
     width: 60rpx;
     height: 60rpx;
@@ -82,8 +84,8 @@ page {
 
 .searchPartMove {
   position: relative;
-  opacity: 0;
-  //top: -420rpx;
+  //opacity: 0;
+  top: -420rpx;
 }
 
 .searchPartInitReal {
@@ -251,8 +253,9 @@ page {
 }
 
 .bottomMove {
-  opacity: 0;
-
+  opacity: 1;
+  bottom: -2000rpx;
+  transition: all 1s;
 }
 
 .blank {
