@@ -8,7 +8,7 @@ const db = wx.cloud.database({
 function initChart(chart, heightAll, dateAll) {
   var option = {
     title: {
-      text: '身高',
+      text: '身高(cm)',
       left: 'center',
     },
     color: ["#37A2DA"],

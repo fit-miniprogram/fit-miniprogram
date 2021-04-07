@@ -32,6 +32,12 @@ Page({
     })
   },
 
+  calorie:function(){
+    wx.navigateTo({
+      url: 'calorie/calorie?openid=' + this.data.openid,
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */

@@ -853,6 +853,8 @@ Page({
               height_record:[],
               weight_record:[],
               BMI_record:[],
+              calorie_record:[],
+              dateStirngOfCalorie_record:[],
               dateString_record:[],
               signInDate_record:[],
               flag_height:'',

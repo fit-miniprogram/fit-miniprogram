@@ -152,7 +152,7 @@ Page({
     .then(res => { //调用getOpenid成功进行以下操作
       console.log(res);
       that.setData({
-        currentOpenid: res
+        currentOpenid: res.result.event.userInfo.openId
       })
       that.searchSigh(res);
       that.getCalorie(res);
@@ -162,7 +162,49 @@ Page({
     });
   },
 
-  searchSigh: function (e) {
+
+
+  searchSigh(e){
+    var that  = this
+    wx.cloud.callFunction({ 
+      name: 'searchSigh',
+      data:{
+        openid: e.result.openid
+      },
+      config:{env:"fit-gc46z"}
+    })
+    .then(
+      res=>{
+        console.log(res.result.data),
+        that.setData({
+          sighArr : res.result.data
+        })   
+        for(let i = 0 ; i<that.data.sighArr.length ; i++){
+          for(let j = 0 ; j<that.data.arrLen ; j++){
+            if(that.data.dateArr[j].isToday == that.data.sighArr[i].sighDays){
+              var wdnmd = "dateArr["+j+"].isSigh"
+              that.setData({
+                [wdnmd] : true
+              })
+              if(that.data.sighArr[i].sighDays==that.data.isToday)
+              {
+                that.setData({
+                  isTodaySigh:true
+                })
+              }
+            }
+          }
+        }
+        wx.hideLoading({
+          success: (res) => {},
+        })
+      }
+    )
+  },
+
+
+
+  xsearchSigh: function (e) {
     var that = this;
     db.collection("sigh").where({  	
       _openid: e.result.openid
@@ -185,11 +227,7 @@ Page({
                   isTodaySigh:true
                 })
               }
-              // console.log([wdnmd])
             }
-            // else{
-            //   console.log(j+"no")
-            // }
           }
         }
         wx.hideLoading({
@@ -209,13 +247,13 @@ Page({
         duration: 2000
       })
     }
-    else if(that.data.calorieToday > 1200){
+    /*else if(that.data.calorieToday > 1200){
       wx.showToast({
         title: '摄入卡路里超标，无法签到！',
         icon: 'none',
         duration: 2000
       })
-    }
+    }*/
     else{
       db.collection('sigh').add({
         data: {
