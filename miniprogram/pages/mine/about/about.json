@@ -1,7 +1,7 @@
 {
   "usingComponents": {},
   "navigationStyle": "default",
-  "navigationBarTitleText": "Fit",
+  "navigationBarTitleText": "Fits",
   "navigationBarTextStyle":"white",
   "navigationBarBackgroundColor": "#282828"
 }
