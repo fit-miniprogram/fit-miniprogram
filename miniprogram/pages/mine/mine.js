@@ -353,31 +353,76 @@ Page({
     this.setData({ show_weight: false });
   },
 
-
   judgeUser:function(e){ //判断用户集合中是否存在当前用户
     var that = this;
-    let flag = false;
-    //let x = this.data.user + 20
-    db.collection('user') // 限制返回数量为 20 条
-    .where({
-      openid: e.result.openid
-    }).get({
-      success: (res) => {
-        let user_get = res.data; //获取到的对象数组数据
-        this.setData({
-          user_get: this.data.user.concat(res.data)
-          //users_num: x
-        });
-         
-        console.log(user_get);
-        console.log(e.result.openid);
-        for (let i = 0; i < user_get.length; i++) { //遍历数据库对象集合
-          if (e.result.openid === user_get[i].openid) { //Openid存在
-            flag = true
+    wx.cloud.callFunction({ 
+      name: 'getUserList',
+      data:{
+        openid:that.data.openid
+      },
+      config:{env:"fit-gc46z"}
+    })
+      .then(res => { 
+        //用户存在，获取用户早中晚摄入的卡路里
+        console.log(res.result.data.nv_length)
+        console.log(res)
+        if(res.result.data.nv_length != 0){
+          console.log("用户存在")
+          console.log(res)
+          that.setData({
+            _id:res.result.data[0]._id,
+            height_record:res.result.data[0].height_record,
+            weight_record:res.result.data[0].weight_record,
+            BMI_record:res.result.data[0].BMI_record,
+            calorie_record:res.result.data[0].calorie_record,
+            dateString_record:res.result.data[0].dateString_record,
+            dateStirngOfCalorie_record:res.result.data[0].dateStirngOfCalorie_record,
+            signInDate_record:res.result.data[0].signInDate_record,
+            flag_height:res.result.data[0].flag_height,
+            flag_weight:res.result.data[0].flag_weight,
+            targetRun:res.result.data[0].targetRun,
+            calorie_burn:res.result.data[0].calorie_burn,
+            calorie_breakfast:res.result.data[0].calorie_breakfast,
+            calorie_lunch:res.result.data[0].calorie_lunch,
+            calorie_dinner:res.result.data[0].calorie_dinner,
+            calorie_lingshi:res.result.data[0].calorie_lingshi,
+            calorie_get:res.result.data[0].calorie_breakfast + res.result.data[0].calorie_lunch + res.result.data[0].calorie_dinner + res.result.data[0].calorie_lingshi 
+          })
+          //显示用户身高、体重、BMI
+          if(res.result.data[0].height==0 || res.result.data[0].weight==0){
+            this.setData({
+              BMI:'---'
+            })
+            if(res.result.data[0].height==0 && res.result.data[0].weight!=0){
+              this.setData({
+                height:'---',
+                weight:res.result.data[0].weight
+              })
+            }
+            else if(res.result.data[0].weight==0 && res.result.data[0].height!=0){
+              this.setData({
+                weight:'---',
+                height:res.result.data[0].height
+              })
+            }
+            else{
+              this.setData({
+                weight:'---',
+                height:'---'
+              })
+            }
           }
+          else{
+            this.setData({
+              weight:res.result.data[0].weight,
+              height:res.result.data[0].height,
+              BMI:res.result.data[0].BMI
+            })
+          }
+          this.getDate()//获取当天日期
         }
-        console.log(flag);
-        if (flag === false) { //用户不存在
+        else if(res.result.data.nv_length == 0){
+          //用户不存在，添加用户
           console.log("用户不存在")
           db.collection('user').add({ //将该用户加入用户集合
             data: { 
@@ -415,67 +460,10 @@ Page({
             }
           })
         }
-        else {
-          console.log("用户存在")
-          console.log(res)
-          that.setData({
-            _id:res.data[0]._id,
-            height_record:res.data[0].height_record,
-            weight_record:res.data[0].weight_record,
-            BMI_record:res.data[0].BMI_record,
-            calorie_record:res.data[0].calorie_record,
-            dateString_record:res.data[0].dateString_record,
-            dateStirngOfCalorie_record:res.data[0].dateStirngOfCalorie_record,
-            signInDate_record:res.data[0].signInDate_record,
-            flag_height:res.data[0].flag_height,
-            flag_weight:res.data[0].flag_weight,
-            targetRun:res.data[0].targetRun,
-            calorie_burn:res.data[0].calorie_burn,
-            calorie_breakfast:res.data[0].calorie_breakfast,
-            calorie_lunch:res.data[0].calorie_lunch,
-            calorie_dinner:res.data[0].calorie_dinner,
-            calorie_lingshi:res.data[0].calorie_lingshi,
-            calorie_get:res.data[0].calorie_breakfast + res.data[0].calorie_lunch + res.data[0].calorie_dinner + res.data[0].calorie_lingshi 
-          })
-          //显示用户身高、体重、BMI
-          if(res.data[0].height==0 || res.data[0].weight==0){
-            this.setData({
-              BMI:'---'
-            })
-            if(res.data[0].height==0 && res.data[0].weight!=0){
-              this.setData({
-                height:'---',
-                weight:res.data[0].weight
-              })
-            }
-            else if(res.data[0].weight==0 && res.data[0].height!=0){
-              this.setData({
-                weight:'---',
-                height:res.data[0].height
-              })
-            }
-            else{
-              this.setData({
-                weight:'---',
-                height:'---'
-              })
-            }
-          }
-          else{
-            this.setData({
-              weight:res.data[0].weight,
-              height:res.data[0].height,
-              BMI:res.data[0].BMI
-            })
-          }
-          this.getDate()//获取当天日期
-        }
-        
-      },
-      fail: err =>{
-        console.log("错误")
-      }
-    })
+      })
+      .catch(err => { 
+        console.log(err);
+      });
     
     },
 
