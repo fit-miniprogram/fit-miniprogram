@@ -35,7 +35,7 @@
   <view class="title">
     <view style="width:100rpx">饮食</view>
     <view class="edit">
-      <view style="width:180rpx;">点击下方数据可修改摄入热量</view>
+      <view style="width:580rpx;">点击下方数据可修改摄入热量</view>
     </view>
   </view>
   <view class="data">

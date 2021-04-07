@@ -17,7 +17,7 @@
 }
 
 .edit{
-  width: 150rpx;
+  width: 350rpx;
   display: flex;
   justify-content: start;
   font-size: 18rpx;
