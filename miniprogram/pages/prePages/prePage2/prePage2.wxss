@@ -39,8 +39,8 @@
 }
 .inner .cal_img{
   width: 600rpx;
-  height: 316.07rpx;
-  background-image: url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/prepage/%E9%A5%AE%E9%A3%9F.png?sign=49cc26a8526b64a30946e78ba51b93db&t=1617502043");
+  height: 316.8rpx;
+  background-image: url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/prepage/%E6%91%84%E5%85%A5.png?sign=a388365669dd0b8c26288aa8234b58e0&t=1617798137");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   margin-left: 37.5rpx;
