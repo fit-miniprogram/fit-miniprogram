@@ -44,7 +44,8 @@ Page({
     calorie_burn:0,
     dabiao:'---',
     dabiao_color:'',
-    stepToday:0//微信步数
+    stepToday:0,//微信步数
+    runVaule:0
   },
 
   target:function(){
@@ -404,8 +405,8 @@ Page({
               console.log(res); 
               that.setData({
                 _id:res._id,
-                dabiao:'---',
-                dabiao_color:'rgba(48, 47, 47, 0.658)'
+                dabiao:'步数未达标',
+                dabiao_color:'#f7a483'
               })
               this.getDate()//获取当天日期
             },
@@ -465,25 +466,6 @@ Page({
               weight:res.data[0].weight,
               height:res.data[0].height,
               BMI:res.data[0].BMI
-            })
-          }
-          //判断卡路里是否达标
-          if(that.data.calorie_breakfast != 0 && that.data.calorie_lunch != 0 && that.data.calorie_dinner != 0 && that.data.calorie_burn >= that.data.calorie_get){
-            that.setData({
-              dabiao:'达标',
-              dabiao_color:'#9FE6B8'
-            })
-          }
-          else if(that.data.calorie_breakfast != 0 && that.data.calorie_lunch != 0 && that.data.calorie_dinner != 0 && that.data.calorie_burn < that.data.calorie_get){
-            that.setData({
-              dabiao:'未达标',
-              dabiao_color:'#f7a483'
-            })
-          }
-          else{
-            that.setData({
-              dabiao:'---',
-              dabiao_color:'rgba(48, 47, 47, 0.658)'
             })
           }
           this.getDate()//获取当天日期
@@ -568,8 +550,8 @@ Page({
         calorie_lingshi:0,
         calorie_get:0,
         calorie_burn:0,
-        dabiao:'---',
-        dabiao_color:'rgba(48, 47, 47, 0.658)'
+        dabiao:'步数未达标',
+        dabiao_color:'#f7a483'
       })
       db.collection('user').doc(that.data._id)
       .update({
@@ -587,48 +569,9 @@ Page({
     }
   },
 
-  getCalorie:function(){
+  getRun:function(){
     var that = this
-    db.collection('user')
-    .where({
-      openid: that.data.openid
-    }).get({
-      success: (res) => {
-          console.log(res)
-          that.setData({
-            _id:res.data[0]._id,
-            calorie_burn:res.data[0].calorie_burn,
-            calorie_breakfast:res.data[0].calorie_breakfast,
-            calorie_lunch:res.data[0].calorie_lunch,
-            calorie_dinner:res.data[0].calorie_dinner,
-            calorie_lingshi:res.data[0].calorie_lingshi,
-            calorie_get:res.data[0].calorie_breakfast + res.data[0].calorie_lunch + res.data[0].calorie_dinner + res.data[0].calorie_lingshi 
-          })
-          //判断卡路里是否达标
-          if(that.data.calorie_breakfast != 0 && that.data.calorie_lunch != 0 && that.data.calorie_dinner != 0 && that.data.calorie_burn >= that.data.calorie_get){
-            that.setData({
-              dabiao:'达标',
-              dabiao_color:'#9FE6B8'
-            })
-          }
-          else if(that.data.calorie_breakfast != 0 && that.data.calorie_lunch != 0 && that.data.calorie_dinner != 0 && that.data.calorie_burn < that.data.calorie_get){
-            that.setData({
-              dabiao:'未达标',
-              dabiao_color:'#f7a483'
-            })
-          }
-          else{
-            that.setData({
-              dabiao:'---',
-              dabiao_color:'rgba(48, 47, 47, 0.658)'
-            })
-          }
-        
-      },
-      fail: err =>{
-        console.log("错误")
-      }
-    })
+    
   },
 
 
@@ -686,14 +629,43 @@ Page({
         console.log(res)
         var stepToday = res.result.event.weRunData.data.stepInfoList[30].step;
         var calorie_burn = ((0.0175 * parseInt(that.data.weight) * 3 * stepToday) / 1000).toFixed(2);
-        that.setData({
-          stepToday: stepToday,
-          calorie_burn:calorie_burn
-        })
         db.collection('user').doc(that.data._id)
         .update({
           data:{
             calorie_burn:calorie_burn
+          }
+        })
+        db.collection('user')
+        .where({
+          openid: that.data.openid
+        }).get({
+          success: (res) => {
+            console.log(res)
+            that.setData({
+              _id:res.data[0]._id,
+              targetRun:res.data[0].targetRun,
+            })
+            var runVaule =(( stepToday / that.data.targetRun) * 100).toFixed(0)
+            that.setData({
+              stepToday: stepToday,
+              runVaule:runVaule
+            })
+            //判断步数是否达标
+            if(runVaule >= 100){
+              that.setData({
+                dabiao:'步数达标',
+                dabiao_color:'#9FE6B8'
+              })
+            }
+            else{
+              that.setData({
+                dabiao:'步数未达标',
+                dabiao_color:'#f7a483'
+              })
+            }
+          },
+          fail: err =>{
+            console.log("错误")
           }
         })
       })
@@ -728,8 +700,9 @@ Page({
         selected: 3
       })
     }
-    if(that.data.openid != '')
-      that.getCalorie()
+    if(that.data.openid != ''){
+      this.authorizeWeRun();//获取用户步数
+    }
   },
 
   /**
