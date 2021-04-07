@@ -80,8 +80,8 @@ Page({
       success: (res) => {
         //console.log(res.data)
         BMIAll = res.data[0].BMI_record;
-        for(var i = 0 ; i < res.data[0].dateString_record.length; i ++){
-          dateAll[i] = res.data[0].dateString_record[i].slice(4,6) + '/' + res.data[0].dateString_record[i].slice(6,8)
+        for(var i = 0 ; i < res.data[0].dateStirngOfBMI_record.length; i ++){
+          dateAll[i] = res.data[0].dateStirngOfBMI_record[i].slice(4,6) + '/' + res.data[0].dateStirngOfBMI_record[i].slice(6,8)
         }
         wx.hideLoading({
           success: (res) => {},

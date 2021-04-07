@@ -71,8 +71,8 @@ Page({
       success: (res) => {
         //console.log(res.data)
         weightAll = res.data[0].weight_record;
-        for(var i = 0 ; i < res.data[0].dateString_record.length; i ++){
-          dateAll[i] = res.data[0].dateString_record[i].slice(4,6) + '/' + res.data[0].dateString_record[i].slice(6,8)
+        for(var i = 0 ; i < res.data[0].dateStirngOfWeight_record.length; i ++){
+          dateAll[i] = res.data[0].dateStirngOfWeight_record[i].slice(4,6) + '/' + res.data[0].dateStirngOfWeight_record[i].slice(6,8)
         }
         //console.log(dateAll);
         wx.hideLoading({
