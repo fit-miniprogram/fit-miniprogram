@@ -461,15 +461,17 @@ Page({
         else if(res.result.data.nv_length == 0){
           //用户不存在，添加用户
           console.log('用户不存在')
+          console.log(e)
           db.collection('user').add({ //将该用户加入用户集合
             data: { 
-              openid: e.result.openid,
+              openid: e,
               height:0,
               weight:0,
               BMI:0,
               height_record:[],
               weight_record:[],
               BMI_record:[],
+              calorie_record:[],
               //dateString_record:[],
               dateStirngOfHeight_record:[],
               dateStirngOfWeight_record:[],

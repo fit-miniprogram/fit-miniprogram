@@ -123,7 +123,7 @@ Page({
           flag_height:1
         }
       })
-      if(!that.data.flag_weight){//如果没有修改过体重，加入修改日期到记录数组
+      if(!that.data.flag_weight ){//如果没有修改过体重，加入修改日期到记录数组
         this.setData({
           dateStirngOfBMI_record:that.data.dateStirngOfBMI_record.concat(that.data.dateString)
         })
@@ -162,7 +162,12 @@ Page({
         var weight = that.data.weight;
         BMI = weight / ((height/100) * (height/100));    
         var BMI_record_temp = that.data.BMI_record;
-        BMI_record_temp[BMI_record_temp.length - 1] = BMI.toFixed(2);
+        if(BMI_record_temp.length == 0){
+          BMI_record_temp[0] = BMI.toFixed(2);
+        }
+        else{
+          BMI_record_temp[BMI_record_temp.length - 1] = BMI.toFixed(2);
+        }
         this.setData({
           BMI:BMI.toFixed(2),
           BMI_record:BMI_record_temp
@@ -232,14 +237,17 @@ Page({
   onConfirm_weight(event) {
     var that = this;
     const { picker, value, index } = event.detail;
+    var calorie_burn = ((0.0175 * parseInt(value) * 3 * that.data.stepToday) / 1000).toFixed(2);
     this.setData({
       weight:value,
-      weight_flag:1
+      weight_flag:1,
+      calorie_burn:calorie_burn
     })
     db.collection('user').doc(that.data._id)
     .update({
       data:{
-        weight:value
+        weight:value,
+        calorie_burn:calorie_burn
       }
     })
     //是当天首次修改体重，往记录数组中添加信息
@@ -289,13 +297,20 @@ Page({
       }
       //当天修改过身高，修改BMI数组
       if(that.data.height!='---' && that.data.weight!='---' && that.data.flag_height){
+        console.log('BMI')
         //计算BMI
         var BMI;
         var height = that.data.height;
         var weight = that.data.weight;
         BMI = weight / ((height/100) * (height/100));    
         var BMI_record_temp = that.data.BMI_record;
-        BMI_record_temp[BMI_record_temp.length - 1] = BMI.toFixed(2);
+        console.log(BMI_record_temp.length)
+        if(BMI_record_temp.length == 0){
+          BMI_record_temp[0] = BMI.toFixed(2);
+        }
+        else{
+          BMI_record_temp[BMI_record_temp.length - 1] = BMI.toFixed(2);
+        }
         this.setData({
           BMI:BMI.toFixed(2),
           BMI_record:BMI_record_temp
@@ -463,7 +478,8 @@ Page({
               that.setData({
                 _id:res._id,
                 dabiao:'步数未达标',
-                dabiao_color:'#f7a483'
+                dabiao_color:'#f7a483',
+                calorie_burn:'---'
               })
               this.getDate()//获取当天日期
             },
@@ -671,16 +687,31 @@ Page({
       }).then(res=>{
         console.log(res)
         var stepToday = res.result.event.weRunData.data.stepInfoList[30].step;
-        var calorie_burn = ((0.0175 * parseInt(that.data.weight) * 3 * stepToday) / 1000).toFixed(2);
-        that.setData({
-          calorie_burn:calorie_burn
-        })
-        db.collection('user').doc(that.data._id)
-        .update({
-          data:{
+        console.log(that.data.weight)
+        if(that.data.weight == '---' ){
+          that.setData({
+            calorie_burn:'---'
+          })
+          db.collection('user').doc(that.data._id)
+          .update({
+            data:{
+              calorie_burn:0
+            }
+          })
+        }
+        else{
+          var calorie_burn = ((0.0175 * parseInt(that.data.weight) * 3 * stepToday) / 1000).toFixed(2);
+          that.setData({
             calorie_burn:calorie_burn
-          }
-        })
+          })
+          db.collection('user').doc(that.data._id)
+          .update({
+            data:{
+              calorie_burn:calorie_burn
+            }
+          })
+        }
+        
         db.collection('user')
         .where({
           openid: that.data.openid
