@@ -69,7 +69,7 @@ Page({
       _openid: this.data.openid
     }).get({
       success: (res) => {
-        //console.log(res.data)
+        console.log(res.data)
         calorieAll = res.data[0].calorie_record;
         for(var i = 0 ; i < res.data[0].dateStirngOfCalorie_record.length; i ++){
           dateAll[i] = res.data[0].dateStirngOfCalorie_record[i].slice(4,6) + '/' + res.data[0].dateStirngOfCalorie_record[i].slice(6,8)

@@ -111,6 +111,18 @@
         {
           "name": "pages/mine/mine",
           "pathName": "pages/mine/mine",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/about/about",
+          "pathName": "pages/mine/about/about",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/sign/sign",
+          "pathName": "pages/mine/sign/sign",
           "scene": null
         }
       ]

@@ -1,1 +1,13 @@
-/* miniprogram/pages/mine/about/about.wxss */
+.abab{
+  top: 200rpx;
+  position: relative;
+  left: 150rpx;
+  width: 450rpx;
+}
+
+.abab .content{
+  position: relative;
+  top: 50rpx;
+  font-family: 'cola';
+  font-size: 50rpx;
+}

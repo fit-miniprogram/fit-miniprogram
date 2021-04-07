@@ -10,6 +10,6 @@
   </view>
   <view class="button-list">
     <button open-type="feedback" class="feedback_button" size="mini" hover-class="button-hover" bindtap="btnFun">意见反馈</button>
-    <button open-type="contact" class="feedback_button" size="mini" hover-class="button-hover" bindtap="btnFun">联系客服</button>
+    <button open-type="contact" class="feedback_button" size="mini" hover-class="button-hover" bindtap="btnFun">联系我们</button>
   </view>
 </view>

@@ -101,6 +101,7 @@ Page({
   clickMove: function (e) {
     var that = this
     this.setData({
+      topColorClass:'topColor-moved',
       swiperClass: 'swiper-init swiper-moved',
       searchClass: 'searchPartInit searchPartMove',
       searchClassReal:'searchPartInitReal searchPartMoveReal',
@@ -125,6 +126,7 @@ Page({
    var that = this
     setTimeout(function(){
       that.setData({
+        topColorClass:'topColor-init',
         swiperClass: 'swiper-init',
         searchClass: 'searchPartInit',
         searchClassReal:'searchPartInitReal',
@@ -223,6 +225,7 @@ gotoHistoryDetail(e)
     placeHolderContent: "开 始 热 量 查 找",
     searchClass: 'searchPartInit',
     sloganClass: 'slogan ',
+    topColorClass:'topColor-init',
     swiperClass: 'swiper-init ',
     cameraClass: 'camera-init',
     speechClass: 'speech-init',

@@ -4,8 +4,8 @@
       <view style="padding: 20rpx 0rpx;height: 110rpx;">
         <view class="submit_button" style="display: {{sub_dis}}">提交</view>
       </view>
-      <view class="title" style="display: {{title_2_dis}};opacity: {{title_2_opa}}">提交后可在个人主页"我的目标"中</view>
-      <view class="title" style="margin-top: -40rpx;display: {{title_2_dis}};opacity: {{title_2_opa}}">饮食一栏查看每餐热量</view>
+      <view class="title" style="display: {{title_2_dis}};opacity: {{title_2_opa}}">提交后在个人主页中点击"摄入"</view>
+      <view class="title" style="margin-top: -40rpx;display: {{title_2_dis}};opacity: {{title_2_opa}}">在饮食一栏查看每餐热量</view>
       <view class="img_box" style="padding: 30rpx 0rpx;display:{{img_block}}" animation="{{slide_right2}}">
         <view class="cal_img"></view>
       </view>
