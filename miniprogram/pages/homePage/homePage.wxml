@@ -27,8 +27,8 @@
 
 </view> -->
 
-
-<view class="{{searchClass}} " wx:if="{{isShow}}">
+<view class="{{topColorClass}}"></view>
+<view class="{{searchClass}} " wx:if="{{isShow}}" >
   <view class="cu-bar search bg-white searchColor">
 
     <view class="search-form  searchInColor {{searchShadowClass}}" >
@@ -113,6 +113,5 @@
 </view>
 
 
-<view style="height:200rpx;"></view>
 
 
