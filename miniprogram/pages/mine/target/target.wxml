@@ -13,21 +13,29 @@
       <view style="font-size: 40rpx;">{{stepToday}}</view>
       <view style="font-size: 20rpx;">步</view>
     </view>
-    <van-circle class="van-circle"
+    <!--<van-circle class="van-circle"
       value="{{ vauleRun }}"
       layer-color="#eeeeee"
       color="#33ff33"
       text="{{targetRun}}"
       class="circle"
-    />
+    />-->
   </view>
+  
+  <view class="flex">
+    <view class="cu-progress round margin-top striped active" style="margin-bottom:30rpx">
+      <view class="bg-green" style="width:{{vauleRun}}%;">{{vauleRun}}%</view>
+    </view>
+    <text class="cuIcon-roundcheckfill text-green margin-left-sm" wx:if="{{vauleRun >= 100}}" style="display:flex;align-self:center"></text>
+  </view>
+  
 </view>
 
 <view class="diet">
   <view class="title">
     <view style="width:100rpx">饮食</view>
     <view class="edit">
-      <view style="width:180rpx;">推荐摄入1200千卡</view>
+      <view style="width:180rpx;">点击下方数据可修改摄入热量</view>
     </view>
   </view>
   <view class="data">
@@ -37,42 +45,50 @@
           <view style="height:40rpx;">早餐</view>
           <view class="calorie_data">
             <view style="font-size: 40rpx;">{{breakfast}}</view>
-            <view style="font-size: 20rpx;width:40rpx">千卡</view>
+            <view style="font-size: 20rpx;width:40rpx">大卡</view>
           </view>
         </view>
         <view class="calorie" bindtap="edit_lunch">
           <view style="height:40rpx;">中餐</view>
           <view class="calorie_data">
             <view style="font-size: 40rpx;">{{lunch}}</view>
-            <view style="font-size: 20rpx;width:40rpx">千卡</view>
+            <view style="font-size: 20rpx;width:40rpx">大卡</view>
           </view>
         </view>
-      </view>
-      
-      <view class="data_low">
         <view class="calorie" bindtap="edit_dinner">
           <view style="height:40rpx;">晚餐</view>
           <view class="calorie_data">
             <view style="font-size: 40rpx;">{{dinner}}</view>
-            <view style="font-size: 20rpx;width:40rpx">千卡</view>
+            <view style="font-size: 20rpx;width:40rpx">大卡</view>
           </view>
         </view>
         <view class="calorie" bindtap="edit_lingshi">
           <view style="height:40rpx;">零食</view>
           <view class="calorie_data">
             <view style="font-size: 40rpx;">{{lingshi}}</view>
-            <view style="font-size: 20rpx;width:40rpx">千卡</view>
+            <view style="font-size: 20rpx;width:40rpx">大卡</view>
           </view>
         </view>
       </view>
+      
+      <view class="data_low">
+        
+      </view>
     </view>
-    <van-circle
+    <!--<van-circle
       value="{{ valueCalorie }}"
       layer-color="#eeeeee"
       color="#99ccff"
       text="{{targetCalorie}}"
       class="circle"
-    />
+    />-->
+  </view>
+  
+  <view class="cu-progress radius striped active" style="margin-bottom:30rpx">
+    <view class="bg-red" style="width:{{valueBreakfast}}%;">{{valueBreakfast}}%</view>
+    <view class="bg-yellow" style="width:{{valueLunch}}%;">{{valueLunch}}%</view>
+    <view class="bg-cyan" style="width:{{valueDinner}}%;">{{valueDinner}}%</view>
+    <view class="bg-mauve" style="width:{{valueLingshi}}%;">{{valueLingshi}}%</view>
   </view>
 </view>
 

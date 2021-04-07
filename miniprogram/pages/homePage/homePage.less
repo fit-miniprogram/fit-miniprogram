@@ -1,6 +1,21 @@
 page {
   background-color: #ffffff;
 }
+
+
+.topColor-init{
+    background-image: linear-gradient(rgb(40,40,40,),rgb(255,255,255));
+    height: 200rpx;
+    z-index: -1;
+}
+
+.topColor-moved{
+  // background-image: linear-gradient(rgb(40,40,40,),rgb(255,255,255));
+  height: 200rpx;
+  z-index: -1;
+}
+
+
 .searchColor{
   flex-grow: 0.8;
   background-color: transparent;
@@ -53,9 +68,9 @@ page {
   margin-bottom: 0rpx !important;
   position: relative;
   opacity: 1;
-  top: 80rpx;
+  top: -120rpx;
   //margin-top: 50rpx;
-  transition: all 0.8s;
+  transition: all 0.5s;
   transition-timing-function:ease-out ;
   width: 100%;
 }
@@ -93,7 +108,7 @@ page {
   opacity: 0;
   top: 20rpx;
   width: 100%;
-  transition: opacity 0.8s;
+  transition: opacity 0.1s;
   transition-timing-function:ease-out ;
 
 }
@@ -120,7 +135,7 @@ page {
 
 .bottom-init {
   position: relative;
-  bottom: 0rpx;
+  bottom: 200rpx;
   display: flex;
   flex-direction: column;
   opacity: 1;

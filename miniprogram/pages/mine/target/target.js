@@ -1,4 +1,5 @@
 // miniprogram/pages/mine/target/target.js
+const app = getApp();
 const db = wx.cloud.database({
   env: 'fit-gc46z'
 });  //用db代替数据库
@@ -10,6 +11,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    ColorList: app.globalData.ColorList,
+    color:'red',
     stepToday:0,
     targetRun:0,
     valueRun:0,
@@ -31,7 +34,33 @@ Page({
     _id:'',
     calorieToday:0,
     targetCalorie:1200,
-    valueCalorie:0
+    valueCalorie:0,
+    valueBreakfast:0,
+    valueLunch:0,
+    valueDinner:0,
+    valueLingshi:0,
+  },
+
+  showModal(e) {
+    this.setData({
+      modalName: e.currentTarget.dataset.target
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
+  },
+  SetColor(e) {
+    this.setData({
+      color: e.currentTarget.dataset.color,
+      modalName: null
+    })
+  },
+  SetActive(e) {
+    this.setData({
+      active: e.detail.value
+    })
   },
 
   /**
@@ -85,9 +114,19 @@ Page({
 
   confirm_breakfast(event) {
     var that = this;
+    var breakfast = parseInt(that.data.breakfast_get)
+    var calorieToday = parseInt(that.data.breakfast_get) + that.data.lunch + that.data.dinner + that.data.lingshi
+    var valueBreakfast = ((breakfast / calorieToday) * 100).toFixed(0)
+    var valueLunch = ((that.data.lunch / calorieToday) * 100).toFixed(0)
+    var valueDinner = ((that.data.dinner / calorieToday) * 100).toFixed(0)
+    var valueLingshi = ((that.data.lingshi / calorieToday) * 100).toFixed(0)
     this.setData({
-      breakfast:parseInt(that.data.breakfast_get),
-      calorieToday:parseInt(that.data.breakfast_get) + that.data.lunch + that.data.dinner + that.data.lingshi
+      breakfast:breakfast,
+      calorieToday:calorieToday,
+      valueBreakfast:valueBreakfast,
+      valueLunch:valueLunch,
+      valueDinner:valueDinner,
+      valueLingshi:valueLingshi
     })
     db.collection('user').doc(that.data._id)
     .update({
@@ -120,9 +159,19 @@ Page({
 
   confirm_lunch(event) {
     var that = this;
+    var lunch = parseInt(that.data.lunch_get)
+    var calorieToday = that.data.breakfast + parseInt(that.data.lunch_get) + that.data.dinner + that.data.lingshi
+    var valueLunch = ((lunch / calorieToday) * 100).toFixed(0)
+    var valueBreakfast = ((that.data.breakfast / calorieToday) * 100).toFixed(0)
+    var valueDinner = ((that.data.dinner / calorieToday) * 100).toFixed(0)
+    var valueLingshi = ((that.data.lingshi / calorieToday) * 100).toFixed(0)
     this.setData({
-      lunch:parseInt(that.data.lunch_get),
-      calorieToday:that.data.breakfast + parseInt(that.data.lunch_get) + that.data.dinner + that.data.lingshi
+      lunch:lunch,
+      calorieToday:calorieToday,
+      valueBreakfast:valueBreakfast,
+      valueLunch:valueLunch,
+      valueDinner:valueDinner,
+      valueLingshi:valueLingshi
     })
     db.collection('user').doc(that.data._id)
     .update({
@@ -156,9 +205,19 @@ Page({
 
   confirm_dinner(event) {
     var that = this;
+    var dinner = parseInt(that.data.dinner_get)
+    var calorieToday = that.data.breakfast + that.data.lunch + parseInt(that.data.dinner_get) + that.data.lingshi
+    var valueDinner = ((dinner / calorieToday) * 100).toFixed(0)
+    var valueBreakfast = ((that.data.breakfast / calorieToday) * 100).toFixed(0)
+    var valueLunch = ((that.data.lunch / calorieToday) * 100).toFixed(0)
+    var valueLingshi = ((that.data.lingshi / calorieToday) * 100).toFixed(0)
     this.setData({
-      dinner:parseInt(that.data.dinner_get),
-      calorieToday:that.data.breakfast + that.data.lunch + parseInt(that.data.dinner_get) + that.data.lingshi
+      dinner:dinner,
+      calorieToday:calorieToday,
+      valueBreakfast:valueBreakfast,
+      valueLunch:valueLunch,
+      valueDinner:valueDinner,
+      valueLingshi:valueLingshi
     })
     db.collection('user').doc(that.data._id)
     .update({
@@ -191,9 +250,19 @@ Page({
 
   confirm_lingshi(event) {
     var that = this;
+    var lingshi = parseInt(that.data.lingshi_get)
+    var calorieToday = parseInt(that.data.lingshi_get) + that.data.lunch + that.data.dinner + that.data.breakfast
+    var valueLingshi = ((lingshi / calorieToday) * 100).toFixed(0)
+    var valueDinner = ((that.data.dinner / calorieToday) * 100).toFixed(0)
+    var valueBreakfast = ((that.data.breakfast / calorieToday) * 100).toFixed(0)
+    var valueLunch = ((that.data.lunch / calorieToday) * 100).toFixed(0)
     this.setData({
-      lingshi:parseInt(that.data.lingshi_get),
-      calorieToday:parseInt(that.data.lingshi_get) + that.data.lunch + that.data.dinner + that.data.breakfast
+      lingshi:lingshi,
+      calorieToday:calorieToday,
+      valueBreakfast:valueBreakfast,
+      valueLunch:valueLunch,
+      valueDinner:valueDinner,
+      valueLingshi:valueLingshi
     })
     db.collection('user').doc(that.data._id)
     .update({
@@ -226,9 +295,26 @@ Page({
           lingshi:res.data[0].calorie_lingshi,
           calorieToday:res.data[0].calorie_breakfast + res.data[0].calorie_lunch + res.data[0].calorie_dinner + res.data[0].calorie_lingshi
         })
+        var breakfast = that.data.breakfast
+        var lunch = that.data.lunch
+        var dinner = that.data.dinner
+        var lingshi = that.data.lingshi
+        var calorieToday = breakfast + lunch + dinner + lingshi
+        var valueBreakfast = ((breakfast / calorieToday) * 100).toFixed(0)
+        var valueLunch = ((lunch / calorieToday) * 100).toFixed(0)
+        var valueDinner = ((dinner / calorieToday) * 100).toFixed(0)
+        var valueLingshi = ((lingshi / calorieToday) * 100).toFixed(0)
         this.setData({
-          valueCalorie:((that.data.calorieToday / that.data.targetCalorie)*100).toFixed(0)
+          valueCalorie:((that.data.calorieToday / that.data.targetCalorie)*100).toFixed(0),
+          valueBreakfast:valueBreakfast,
+          valueLunch:valueLunch,
+          valueDinner:valueDinner,
+          valueLingshi:valueLingshi
         })
+        console.log('valueCalorie:' + that.data.valueBreakfast)
+        console.log('valueLunch:' + that.data.valueLunch)
+        console.log('valueDinner:' + that.data.valueDinner)
+        console.log('valueLingshi:' + that.data.valueLingshi)
       },
       fail: err =>{
         console.log("错误")
@@ -298,6 +384,8 @@ Page({
           wx.hideLoading({
             success: (res) => {},
           })
+          
+    console.log(that.data.vauleRun)
         })
       })
       }
@@ -309,6 +397,11 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    setTimeout(function() {
+      that.setData({
+        loading: true
+      })
+    }, 500)
     wx.showLoading({
       title: '加载中',
     })

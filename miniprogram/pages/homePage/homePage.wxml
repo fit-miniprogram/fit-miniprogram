@@ -27,8 +27,8 @@
 
 </view> -->
 
-
-<view class="{{searchClass}} " wx:if="{{isShow}}">
+<view class="{{topColorClass}}"></view>
+<view class="{{searchClass}} " wx:if="{{isShow}}" >
   <view class="cu-bar search bg-white searchColor">
 
     <view class="search-form  searchInColor {{searchShadowClass}}" >
@@ -118,8 +118,7 @@
     <view class="title">热门搜索</view>
   </view> -->
 </view>
+ 
 
-
-<view style="height:200rpx;"></view>
 
 
