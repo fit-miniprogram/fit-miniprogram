@@ -35,8 +35,8 @@ Page({
     }
 
     //渐显文字1 总耗时1秒 总耗时1.25+0.5=1.75
-    // this.opacity_fade(this,0.1);
-    this.app.shake(this,"slide_up1",0,125);
+    this.opacity_fade(this,1);
+    // this.app.shake(this,"slide_up1",0,125);
     setTimeout(function(){
       this.app.slideupshow(this,"slide_up1",-500,1,500);
     }.bind(this),1250)
