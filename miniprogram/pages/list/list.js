@@ -349,12 +349,19 @@ Page({
    * **/
   getGushuList(){
     var that = this
-    db.collection("gushuList").get({}).then(res=>{
-      console.log(res)
-      that.setData({
-        gushuList: res.data
-      })
+    wx.cloud.callFunction({ //调用getOpenid云函数
+      name: 'getGushuList',
+      data:{},
+      config:{env:"fit-gc46z"}
     })
+      .then(res => { //调用getOpenid成功进行以下操作
+        that.setData({
+          gushuList: res.result.data
+        })
+      })
+      .catch(err => { //调用getOpenid失败打印错误信息
+        console.log(err);
+      });
   },
   gushuPlus(e){
     var that = this
@@ -678,12 +685,19 @@ Page({
 
   getDongwuList(){
     var that = this
-    db.collection("dongwuList").get({}).then(res=>{
-      console.log(res)
-      that.setData({
-        dongwuList: res.data
-      })
+    wx.cloud.callFunction({ //调用getOpenid云函数
+      name: 'getDongwuList',
+      data:{},
+      config:{env:"fit-gc46z"}
     })
+      .then(res => { //调用getOpenid成功进行以下操作
+        that.setData({
+          dongwuList: res.result.data
+        })
+      })
+      .catch(err => { //调用getOpenid失败打印错误信息
+        console.log(err);
+      });
   }, 
 
 
@@ -762,12 +776,19 @@ Page({
 
   getNengliangList(){
     var that = this
-    db.collection("nengliangList").get({}).then(res=>{
-      console.log(res)
-      that.setData({
-        nengliangList: res.data
-      })
+    wx.cloud.callFunction({ //调用getOpenid云函数
+      name: 'getNengliangList',
+      data:{},
+      config:{env:"fit-gc46z"}
     })
+      .then(res => { //调用getOpenid成功进行以下操作
+        that.setData({
+          nengliangList: res.result.data
+        })
+      })
+      .catch(err => { //调用getOpenid失败打印错误信息
+        console.log(err);
+      });
   }, 
 
   swichNav(e){
