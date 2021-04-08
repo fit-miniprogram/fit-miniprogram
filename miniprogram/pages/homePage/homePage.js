@@ -458,9 +458,9 @@ gotoHistoryDetail(e)
     }).then(res=>{
       console.log(res)
       that.getSearchHistory()
-      setTimeout(function(){
-        that.moveBack()
-      },100)
+      // setTimeout(function(){
+      //   that.moveBack()
+      // },100)
     })
     },
 
