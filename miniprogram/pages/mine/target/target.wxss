@@ -37,6 +37,17 @@
   margin-top: 20rpx;
 }
 
+.mubiao{
+  display: flex;
+  margin-right: 50rpx;
+  align-items: center;
+}
+
+.mubiao_data{
+  display: flex;
+  margin-left: 20rpx;
+}
+
 .line{
   display: flex;
 }

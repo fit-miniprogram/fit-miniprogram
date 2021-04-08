@@ -13,13 +13,13 @@
       <view style="font-size: 40rpx;">{{stepToday}}</view>
       <view style="font-size: 20rpx;">步</view>
     </view>
-    <!--<van-circle class="van-circle"
-      value="{{ vauleRun }}"
-      layer-color="#eeeeee"
-      color="#33ff33"
-      text="{{targetRun}}"
-      class="circle"
-    />-->
+    <view class="mubiao">
+      <view style="height:40rpx;">目标步数:</view>
+      <view class="mubiao_data">
+        <view style="font-size: 40rpx;">{{targetRun}}</view>
+        <view style="font-size: 20rpx;width:40rpx">步</view>
+      </view>
+    </view>
   </view>
   
   <view class="flex">

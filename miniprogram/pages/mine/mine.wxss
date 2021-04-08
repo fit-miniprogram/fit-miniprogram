@@ -39,7 +39,6 @@ page{
 }
 
 .information-name{
-  width: 130rpx;
   color: #fff;
   align-self: center;
   margin: 20rpx;

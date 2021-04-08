@@ -82,16 +82,32 @@ Page({
     this.setData({
       targetRun:parseInt(that.data.run_get)
     })
-    db.collection('user').doc(that.data._id)
-    .update({
-      data:{
-        targetRun:that.data.targetRun
-      }
-    })
-    var vauleRunTemp = (that.data.stepToday / that.data.targetRun) * 100
-    that.setData({
-      vauleRun:vauleRunTemp.toFixed(0),
-    })
+    console.log(that.data.run_get)
+    if(that.data.run_get == '' ){
+      wx.showToast({
+        title: '输入为空，请重新输入',
+        icon:'none'
+      })
+    }
+    else if(that.data.run_get == '0'){
+      wx.showToast({
+        title: '目标步数不可为0，请重新输入',
+        icon:'none'
+      })
+    }
+    else{
+      db.collection('user').doc(that.data._id)
+      .update({
+        data:{
+          targetRun:that.data.targetRun
+        }
+      })
+      var vauleRunTemp = (that.data.stepToday / that.data.targetRun) * 100
+      that.setData({
+        vauleRun:vauleRunTemp.toFixed(0),
+      })
+    }
+    
   },
 
   onClose_run() {
@@ -115,29 +131,37 @@ Page({
 
   confirm_breakfast(event) {
     var that = this;
-    var breakfast = parseInt(that.data.breakfast_get)
-    var calorieToday = parseInt(that.data.breakfast_get) + that.data.lunch + that.data.dinner + that.data.lingshi
-    var valueBreakfast = ((breakfast / calorieToday) * 100).toFixed(0)
-    var valueLunch = ((that.data.lunch / calorieToday) * 100).toFixed(0)
-    var valueDinner = ((that.data.dinner / calorieToday) * 100).toFixed(0)
-    var valueLingshi = ((that.data.lingshi / calorieToday) * 100).toFixed(0)
-    this.setData({
-      breakfast:breakfast,
-      calorieToday:calorieToday,
-      valueBreakfast:valueBreakfast,
-      valueLunch:valueLunch,
-      valueDinner:valueDinner,
-      valueLingshi:valueLingshi
-    })
-    db.collection('user').doc(that.data._id)
-    .update({
-      data:{
-        calorie_breakfast:that.data.breakfast
-      }
-    })
-    this.setData({
-      valueCalorie:((that.data.calorieToday / that.data.targetCalorie)*100).toFixed(0)
-    })
+    if(that.data.breakfast_get == '' ){
+      wx.showToast({
+        title: '输入为空，请重新输入',
+        icon:'none'
+      })
+    }
+    else{
+      var breakfast = parseInt(that.data.breakfast_get)
+      var calorieToday = parseInt(that.data.breakfast_get) + that.data.lunch + that.data.dinner + that.data.lingshi
+      var valueBreakfast = ((breakfast / calorieToday) * 100).toFixed(0)
+      var valueLunch = ((that.data.lunch / calorieToday) * 100).toFixed(0)
+      var valueDinner = ((that.data.dinner / calorieToday) * 100).toFixed(0)
+      var valueLingshi = ((that.data.lingshi / calorieToday) * 100).toFixed(0)
+      this.setData({
+        breakfast:breakfast,
+        calorieToday:calorieToday,
+        valueBreakfast:valueBreakfast,
+        valueLunch:valueLunch,
+        valueDinner:valueDinner,
+        valueLingshi:valueLingshi
+      })
+      db.collection('user').doc(that.data._id)
+      .update({
+          data:{
+          calorie_breakfast:that.data.breakfast
+        }
+      })
+      this.setData({
+        valueCalorie:((that.data.calorieToday / that.data.targetCalorie)*100).toFixed(0)
+      })
+    }
   },
 
   onClose_breakfast() {
@@ -160,30 +184,39 @@ Page({
 
   confirm_lunch(event) {
     var that = this;
-    var lunch = parseInt(that.data.lunch_get)
-    var calorieToday = that.data.breakfast + parseInt(that.data.lunch_get) + that.data.dinner + that.data.lingshi
-    var valueLunch = ((lunch / calorieToday) * 100).toFixed(0)
-    var valueBreakfast = ((that.data.breakfast / calorieToday) * 100).toFixed(0)
-    var valueDinner = ((that.data.dinner / calorieToday) * 100).toFixed(0)
-    var valueLingshi = ((that.data.lingshi / calorieToday) * 100).toFixed(0)
-    this.setData({
-      lunch:lunch,
-      calorieToday:calorieToday,
-      valueBreakfast:valueBreakfast,
-      valueLunch:valueLunch,
-      valueDinner:valueDinner,
-      valueLingshi:valueLingshi
-    })
-    db.collection('user').doc(that.data._id)
-    .update({
-      data:{
-        calorie_lunch:that.data.lunch
-      }
-    })
-    this.setData({
-      valueCalorie:((that.data.calorieToday / that.data.targetCalorie)*100).toFixed(0)
-    })
-    console.log(that.data.calorieToday)
+    if(that.data.lunch_get == '' ){
+      wx.showToast({
+        title: '输入为空，请重新输入',
+        icon:'none'
+      })
+    }
+    else{
+      var lunch = parseInt(that.data.lunch_get)
+      var calorieToday = that.data.breakfast + parseInt(that.data.lunch_get) + that.data.dinner + that.data.lingshi
+      var valueLunch = ((lunch / calorieToday) * 100).toFixed(0)
+      var valueBreakfast = ((that.data.breakfast / calorieToday) * 100).toFixed(0)
+      var valueDinner = ((that.data.dinner / calorieToday) * 100).toFixed(0)
+      var valueLingshi = ((that.data.lingshi / calorieToday) * 100).toFixed(0)
+      this.setData({
+        lunch:lunch,
+        calorieToday:calorieToday,
+        valueBreakfast:valueBreakfast,
+        valueLunch:valueLunch,
+        valueDinner:valueDinner,
+        valueLingshi:valueLingshi
+      })
+      db.collection('user').doc(that.data._id)
+      .update({
+        data:{
+          calorie_lunch:that.data.lunch
+        }
+      })
+      this.setData({
+        valueCalorie:((that.data.calorieToday / that.data.targetCalorie)*100).toFixed(0)
+      })
+      console.log(that.data.calorieToday)
+    }
+    
   },
 
   onClose_lunch() {
@@ -206,29 +239,38 @@ Page({
 
   confirm_dinner(event) {
     var that = this;
-    var dinner = parseInt(that.data.dinner_get)
-    var calorieToday = that.data.breakfast + that.data.lunch + parseInt(that.data.dinner_get) + that.data.lingshi
-    var valueDinner = ((dinner / calorieToday) * 100).toFixed(0)
-    var valueBreakfast = ((that.data.breakfast / calorieToday) * 100).toFixed(0)
-    var valueLunch = ((that.data.lunch / calorieToday) * 100).toFixed(0)
-    var valueLingshi = ((that.data.lingshi / calorieToday) * 100).toFixed(0)
-    this.setData({
-      dinner:dinner,
-      calorieToday:calorieToday,
-      valueBreakfast:valueBreakfast,
-      valueLunch:valueLunch,
-      valueDinner:valueDinner,
-      valueLingshi:valueLingshi
-    })
-    db.collection('user').doc(that.data._id)
-    .update({
-      data:{
-        calorie_dinner:that.data.dinner
-      }
-    })
-    this.setData({
-      valueCalorie:((that.data.calorieToday / that.data.targetCalorie)*100).toFixed(0)
-    })
+    if(that.data.dinner_get == '' ){
+      wx.showToast({
+        title: '输入为空，请重新输入',
+        icon:'none'
+      })
+    }
+    else {
+      var dinner = parseInt(that.data.dinner_get)
+      var calorieToday = that.data.breakfast + that.data.lunch + parseInt(that.data.dinner_get) + that.data.lingshi
+      var valueDinner = ((dinner / calorieToday) * 100).toFixed(0)
+      var valueBreakfast = ((that.data.breakfast / calorieToday) * 100).toFixed(0)
+      var valueLunch = ((that.data.lunch / calorieToday) * 100).toFixed(0)
+      var valueLingshi = ((that.data.lingshi / calorieToday) * 100).toFixed(0)
+      this.setData({
+        dinner:dinner,
+        calorieToday:calorieToday,
+        valueBreakfast:valueBreakfast,
+        valueLunch:valueLunch,
+        valueDinner:valueDinner,
+        valueLingshi:valueLingshi
+      })
+      db.collection('user').doc(that.data._id)
+      .update({
+        data:{
+          calorie_dinner:that.data.dinner
+        }
+      })
+      this.setData({
+        valueCalorie:((that.data.calorieToday / that.data.targetCalorie)*100).toFixed(0)
+      })
+    }
+    
   },
 
   onClose_dinner() {
@@ -251,29 +293,37 @@ Page({
 
   confirm_lingshi(event) {
     var that = this;
-    var lingshi = parseInt(that.data.lingshi_get)
-    var calorieToday = parseInt(that.data.lingshi_get) + that.data.lunch + that.data.dinner + that.data.breakfast
-    var valueLingshi = ((lingshi / calorieToday) * 100).toFixed(0)
-    var valueDinner = ((that.data.dinner / calorieToday) * 100).toFixed(0)
-    var valueBreakfast = ((that.data.breakfast / calorieToday) * 100).toFixed(0)
-    var valueLunch = ((that.data.lunch / calorieToday) * 100).toFixed(0)
-    this.setData({
-      lingshi:lingshi,
-      calorieToday:calorieToday,
-      valueBreakfast:valueBreakfast,
-      valueLunch:valueLunch,
-      valueDinner:valueDinner,
-      valueLingshi:valueLingshi
-    })
-    db.collection('user').doc(that.data._id)
-    .update({
-      data:{
-        calorie_lingshi:that.data.lingshi
-      }
-    })
-    this.setData({
-      valueCalorie:((that.data.calorieToday / that.data.targetCalorie)*100).toFixed(0)
-    })
+    if(that.data.lingshi_get == '' ){
+      wx.showToast({
+        title: '输入为空，请重新输入',
+        icon:'none'
+      })
+    }
+    else {
+      var lingshi = parseInt(that.data.lingshi_get)
+      var calorieToday = parseInt(that.data.lingshi_get) + that.data.lunch + that.data.dinner + that.data.breakfast
+      var valueLingshi = ((lingshi / calorieToday) * 100).toFixed(0)
+      var valueDinner = ((that.data.dinner / calorieToday) * 100).toFixed(0)
+      var valueBreakfast = ((that.data.breakfast / calorieToday) * 100).toFixed(0)
+      var valueLunch = ((that.data.lunch / calorieToday) * 100).toFixed(0)
+      this.setData({
+        lingshi:lingshi,
+        calorieToday:calorieToday,
+        valueBreakfast:valueBreakfast,
+        valueLunch:valueLunch,
+        valueDinner:valueDinner,
+        valueLingshi:valueLingshi
+      })
+      db.collection('user').doc(that.data._id)
+      .update({
+        data:{
+          calorie_lingshi:that.data.lingshi
+        }
+      })
+      this.setData({
+        valueCalorie:((that.data.calorieToday / that.data.targetCalorie)*100).toFixed(0)
+      })
+    }
   },
 
   onClose_lingshi() {

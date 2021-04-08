@@ -1,6 +1,6 @@
 <input
   class="{{ utils.bem('field__control', [inputAlign, { disabled, error }]) }} input-class"
-  type="{{ type }}"
+  type="number"
   focus="{{ focus }}"
   cursor="{{ cursor }}"
   value="{{ innerValue }}"
