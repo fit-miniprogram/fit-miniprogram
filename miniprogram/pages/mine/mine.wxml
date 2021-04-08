@@ -6,7 +6,7 @@
     </view>
     <view class="information-name">
       <open-data type="userNickName" class="information-name"></open-data>
-      <view wx:if="{{weight === '---' || height === '---'}} " class="tips">记得填写身高体重哦~</view>
+      <view wx:if="{{height == '---'? 1: (weight == '---' ? 1 : 0)}}" class="tips">记得填写身高体重哦~</view>
       <!--<view wx:if="{{flag_showTips}} " class="tips">记得填写身高体重哦~</view>-->
       
     </view>

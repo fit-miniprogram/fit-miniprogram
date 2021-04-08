@@ -49,7 +49,7 @@
 
     <view class="search-form round {{searchShadowClass}}" >
       <text class="cuIcon-search"></text>
-      <input type="text" confirm-type="search" bindtap="clickMove" 
+      <input type="text" confirm-type="search" 
        focus="{{isFocus}}" disabled="{{isAble}}" bindblur="moveBack" value="{{inputValue}}" bindconfirm="searchConfirm"></input>
     </view>
   </view>
