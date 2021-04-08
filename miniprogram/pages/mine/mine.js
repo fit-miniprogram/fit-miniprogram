@@ -815,6 +815,7 @@ Page({
     if(that.data.openid != ''){
       that.getCalorie()//获取卡路里
     }
+    console.log(that.data.flag_getRunFail)
     if(that.data.openid != '' && that.data.flag_getRunFail == 0){
       this.authorizeWeRunOnShow();//获取用户步数
     }
@@ -824,7 +825,10 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    var that = this
+    that.setData({
+      flag_getRunFail:0
+    })
   },
 
   /**
