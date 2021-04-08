@@ -2,7 +2,7 @@
   <view class="logo">
   </view>
   <view class="title_text">
-    <view class="title1">Fit</view>
+    <view class="title1">Fits</view>
     <view class="title2">健康生活每一天</view>
   </view>
   <view class="btn_box" style="display: {{btndisplay}}">
