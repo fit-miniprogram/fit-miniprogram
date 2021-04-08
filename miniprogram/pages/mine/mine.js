@@ -12,7 +12,10 @@ Page({
    */
   data: {
     dateString:'',
-    dateString_record:[],//标记修改信息的日期
+    //dateString_record:[],//标记修改信息的日期
+    dateStirngOfHeight_record:[],
+    dateStirngOfWeight_record:[],
+    dateStirngOfBMI_record:[],
     signInDate_record:[],//标记登录的日期
     flag_height:'',//标记当天是否修改过身高
     flag_weight:'',//标记当天是否修改过体重
@@ -45,7 +48,8 @@ Page({
     dabiao:'---',
     dabiao_color:'',
     stepToday:0,//微信步数
-    runVaule:0
+    runVaule:0,
+    flag_getRunFail:0
   },
 
   target:function(){
@@ -108,23 +112,25 @@ Page({
     if(!that.data.flag_height){
       this.setData({
         height_record:that.data.height_record.concat(value),
+        dateStirngOfHeight_record:that.data.dateStirngOfHeight_record.concat(that.data.dateString),
         flag_height:1
       })
       db.collection('user').doc(that.data._id)
       .update({
         data:{
           height_record:that.data.height_record,
+          dateStirngOfHeight_record:that.data.dateStirngOfHeight_record,
           flag_height:1
         }
       })
-      if(!that.data.flag_weight){//如果没有修改过体重，加入修改日期到记录数组
+      if(!that.data.flag_weight ){//如果没有修改过体重，加入修改日期到记录数组
         this.setData({
-          dateString_record:that.data.dateString_record.concat(that.data.dateString)
+          dateStirngOfBMI_record:that.data.dateStirngOfBMI_record.concat(that.data.dateString)
         })
         db.collection('user').doc(that.data._id)
         .update({
           data:{
-            dateString_record:that.data.dateString_record
+            dateStirngOfBMI_record:that.data.dateStirngOfBMI_record
           }
         })
       }
@@ -156,7 +162,12 @@ Page({
         var weight = that.data.weight;
         BMI = weight / ((height/100) * (height/100));    
         var BMI_record_temp = that.data.BMI_record;
-        BMI_record_temp[BMI_record_temp.length - 1] = BMI.toFixed(2);
+        if(BMI_record_temp.length == 0){
+          BMI_record_temp[0] = BMI.toFixed(2);
+        }
+        else{
+          BMI_record_temp[BMI_record_temp.length - 1] = BMI.toFixed(2);
+        }
         this.setData({
           BMI:BMI.toFixed(2),
           BMI_record:BMI_record_temp
@@ -226,37 +237,42 @@ Page({
   onConfirm_weight(event) {
     var that = this;
     const { picker, value, index } = event.detail;
+    var calorie_burn = ((0.0175 * parseInt(value) * 3 * that.data.stepToday) / 1000).toFixed(2);
     this.setData({
       weight:value,
-      weight_flag:1
+      weight_flag:1,
+      calorie_burn:calorie_burn
     })
     db.collection('user').doc(that.data._id)
     .update({
       data:{
-        weight:value
+        weight:value,
+        calorie_burn:calorie_burn
       }
     })
     //是当天首次修改体重，往记录数组中添加信息
     if(!that.data.flag_weight){
       this.setData({
         weight_record:that.data.weight_record.concat(value),
+        dateStirngOfWeight_record:that.data.dateStirngOfWeight_record.concat(that.data.dateString),
         flag_weight:1
       })
       db.collection('user').doc(that.data._id)
       .update({
         data:{
           weight_record:that.data.weight_record,
+          dateStirngOfWeight_record:that.data.dateStirngOfWeight_record,
           flag_weight:1
         }
       })
       if(!that.data.flag_height){//如果没有修改过身高，加入修改日期到记录数组
         this.setData({
-          dateString_record:that.data.dateString_record.concat(that.data.dateString)
+          dateStirngOfBMI_record:that.data.dateStirngOfBMI_record.concat(that.data.dateString)
         })
         db.collection('user').doc(that.data._id)
         .update({
           data:{
-            dateString_record:that.data.dateString_record
+            dateStirngOfBMI_record:that.data.dateStirngOfBMI_record
           }
         })
       }
@@ -281,13 +297,20 @@ Page({
       }
       //当天修改过身高，修改BMI数组
       if(that.data.height!='---' && that.data.weight!='---' && that.data.flag_height){
+        console.log('BMI')
         //计算BMI
         var BMI;
         var height = that.data.height;
         var weight = that.data.weight;
         BMI = weight / ((height/100) * (height/100));    
         var BMI_record_temp = that.data.BMI_record;
-        BMI_record_temp[BMI_record_temp.length - 1] = BMI.toFixed(2);
+        console.log(BMI_record_temp.length)
+        if(BMI_record_temp.length == 0){
+          BMI_record_temp[0] = BMI.toFixed(2);
+        }
+        else{
+          BMI_record_temp[BMI_record_temp.length - 1] = BMI.toFixed(2);
+        }
         this.setData({
           BMI:BMI.toFixed(2),
           BMI_record:BMI_record_temp
@@ -375,7 +398,9 @@ Page({
             weight_record:res.result.data[0].weight_record,
             BMI_record:res.result.data[0].BMI_record,
             calorie_record:res.result.data[0].calorie_record,
-            dateString_record:res.result.data[0].dateString_record,
+            dateStirngOfHeight_record:res.result.data[0].dateStirngOfHeight_record,
+            dateStirngOfWeight_record:res.result.data[0].dateStirngOfWeight_record,
+            dateStirngOfBMI_record:res.result.data[0].dateStirngOfBMI_record,
             dateStirngOfCalorie_record:res.result.data[0].dateStirngOfCalorie_record,
             signInDate_record:res.result.data[0].signInDate_record,
             flag_height:res.result.data[0].flag_height,
@@ -434,11 +459,13 @@ Page({
               weight_record:[],
               BMI_record:[],
               calorie_record:[],
-              dateString_record:[],
               dateStirngOfCalorie_record:[],
+              dateStirngOfHeight_record:[],
+              dateStirngOfWeight_record:[],
+              dateStirngOfBMI_record:[],
               signInDate_record:[],
-              flag_height:'',
-              flag_weight:'',
+              flag_height:0,
+              flag_weight:0,
               calorie_breakfast:0,
               calorie_lunch:0,
               calorie_dinner:0,
@@ -451,7 +478,8 @@ Page({
               that.setData({
                 _id:res._id,
                 dabiao:'步数未达标',
-                dabiao_color:'#f7a483'
+                dabiao_color:'#f7a483',
+                calorie_burn:'---'
               })
               this.getDate()//获取当天日期
             },
@@ -557,11 +585,6 @@ Page({
     }
   },
 
-  getRun:function(){
-    var that = this
-    
-  },
-
 
   /**
    * 用户授权读取微信运动数据
@@ -574,7 +597,7 @@ Page({
       success(res){
         // console.log(res)
         if(!res.authSetting['scope.werun']){
-// 如果用户还未授权过，需要用户授权读取微信运动数据
+        // 如果用户还未授权过，需要用户授权读取微信运动数据
           wx.authorize({
             scope: 'scope.werun',
             success() {
@@ -586,10 +609,58 @@ Page({
               wx.showModal({
                 title: '读取微信运动数据失败',
                 content: '请在小程序设置界面（「右上角」 - 「关于」 - 「右上角」 - 「设置」）中允许我们访问微信运动数据',
+                success: function (res) {
+                  if (res.cancel) {
+                     //点击取消,默认隐藏弹框
+                     console.log('取消')
+                     that.setData({
+                       calorie_burn:'---',
+                       dabiao:'---',
+                       dabiao_color:'#272727b0'
+                     })
+                  } else {
+                     //点击确定
+                     console.log('确定')
+                     that.setData({
+                       calorie_burn:'---',
+                       dabiao:'---',
+                       dabiao_color:'#272727b0'
+                     })
+                  }
+               },
+               fail: function (res) {
+                 console.log(res)
+                 console.log('接口调用失败')
+               },//接口调用失败的回调函数
               })
             }
           })
 
+        }else{
+           //如果用户已授权过，直接开始同步微信运动数据
+          //读取微信步数数据
+          that.getWeRunData()
+        }
+      }
+    })
+  },
+
+  /**
+   * 每次显示时用户授权读取微信运动数据
+   */
+  authorizeWeRunOnShow(){
+    var that = this
+    //首先获取用户的授权状态
+    wx.getSetting({
+      success(res){
+         console.log(res)
+        if(!res.authSetting['scope.werun']){
+          // 如果用户还未授权过，需要用户授权读取微信运动数据
+          that.setData({
+            calorie_burn:'---',
+            dabiao:'---',
+            dabiao_color:'#272727b0'
+          })
         }else{
            //如果用户已授权过，直接开始同步微信运动数据
           //读取微信步数数据
@@ -607,22 +678,40 @@ Page({
     var that = this
     wx.getWeRunData({
       success(res){
-        //console.log(res)
+      console.log(res)
       wx.cloud.callFunction({
         name:'desrundata',
         data:{
-         weRunData: wx.cloud.CloudID(res.cloudID)  //直到云函数被替换
+          weRunData: wx.cloud.CloudID(res.cloudID)  //直到云函数被替换
         }
       }).then(res=>{
         console.log(res)
         var stepToday = res.result.event.weRunData.data.stepInfoList[30].step;
-        var calorie_burn = ((0.0175 * parseInt(that.data.weight) * 3 * stepToday) / 1000).toFixed(2);
-        db.collection('user').doc(that.data._id)
-        .update({
-          data:{
+        console.log(that.data.weight)
+        if(that.data.weight == '---' ){
+          that.setData({
+            calorie_burn:'---'
+          })
+          db.collection('user').doc(that.data._id)
+          .update({
+            data:{
+              calorie_burn:0
+            }
+          })
+        }
+        else{
+          var calorie_burn = ((0.0175 * parseInt(that.data.weight) * 3 * stepToday) / 1000).toFixed(2);
+          that.setData({
             calorie_burn:calorie_burn
-          }
-        })
+          })
+          db.collection('user').doc(that.data._id)
+          .update({
+            data:{
+              calorie_burn:calorie_burn
+            }
+          })
+        }
+        
         db.collection('user')
         .where({
           openid: that.data.openid
@@ -657,6 +746,18 @@ Page({
           }
         })
       })
+      },
+      fail(err){
+        console.log(err)
+        that.setData({
+          dabiao:'---',
+          dabiao_color:'#272727b0',
+          flag_getRunFail:1,
+          calorie_burn:'---'
+        })
+      },
+      complete(res){
+        console.log(res)
       }
     })
   },
@@ -666,6 +767,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
     getApp().loadFont();
     this.getOpenid()//获取用户的openid
     this.authorizeWeRun();//获取用户步数
@@ -682,14 +784,15 @@ Page({
    */
   onShow: function () {
     var that = this
+    console.log('onShow')
     if (typeof this.getTabBar === 'function' &&
     that.getTabBar()) {
       that.getTabBar().setData({
         selected: 3
       })
     }
-    if(that.data.openid != ''){
-      this.authorizeWeRun();//获取用户步数
+    if(that.data.openid != '' && that.data.flag_getRunFail == 0){
+      this.authorizeWeRunOnShow();//获取用户步数
     }
   },
 

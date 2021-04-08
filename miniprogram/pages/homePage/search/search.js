@@ -445,7 +445,11 @@ Page({
           console.log('用户存在')
           that.setData({
             _id:res.result.data[0]._id,
-            dateString_record:res.result.data[0].dateString_record,
+            //dateString_record:res.result.data[0].dateString_record,
+            dateStirngOfHeight_record:res.result.data[0].dateStirngOfHeight_record,
+            dateStirngOfWeight_record:res.result.data[0].dateStirngOfWeight_record,
+            dateStirngOfBMI_record:res.res.result.data[0].dateStirngOfBMI_record,
+            dateStirngOfCalorie_record:res.res.result.data[0].dateStirngOfCalorie_record,
             signInDate_record:res.result.data[0].signInDate_record,
             calorie_breakfast:res.result.data[0].calorie_breakfast,
             calorie_lunch:res.result.data[0].calorie_lunch,
@@ -457,19 +461,25 @@ Page({
         else if(res.result.data.nv_length == 0){
           //用户不存在，添加用户
           console.log('用户不存在')
+          console.log(e)
           db.collection('user').add({ //将该用户加入用户集合
             data: { 
-              openid: e.result.openid,
+              openid: e,
               height:0,
               weight:0,
               BMI:0,
               height_record:[],
               weight_record:[],
               BMI_record:[],
-              dateString_record:[],
+              calorie_record:[],
+              //dateString_record:[],
+              dateStirngOfHeight_record:[],
+              dateStirngOfWeight_record:[],
+              dateStirngOfBMI_record:[],
+              dateStirngOfCalorie_record:[],
               signInDate_record:[],
-              flag_height:'',
-              flag_weight:'',
+              flag_height:0,
+              flag_weight:0,
               calorie_breakfast:0,
               calorie_lunch:0,
               calorie_dinner:0,

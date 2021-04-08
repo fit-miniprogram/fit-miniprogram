@@ -9,5 +9,6 @@ exports.main = async (event, context) => {
   let weRunData = event.weRunData
   //同步运动数据
   let res = await GrowthValue(weRunData.data.stepInfoList)
+  console.log(res)
   return weRunData.data.stepInfoList
 }
