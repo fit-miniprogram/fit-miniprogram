@@ -182,6 +182,7 @@ gotoHistoryDetail(e)
   wx.navigateTo({ //带参数页面跳转
     url: '../homePage/search/search?info=' + e.currentTarget.dataset.value + "|" + that.data.currentOpenid
   })
+  that.moveBack()
 },
 
 
@@ -457,6 +458,9 @@ gotoHistoryDetail(e)
     }).then(res=>{
       console.log(res)
       that.getSearchHistory()
+      // setTimeout(function(){
+      //   that.moveBack()
+      // },100)
     })
     },
 
