@@ -49,8 +49,7 @@ Page({
     dabiao_color:'',
     stepToday:0,//微信步数
     runVaule:0,
-    flag_getRunFail:0,
-    flag_showTips:false
+    flag_getRunFail:0
   },
 
   target:function(){
@@ -583,12 +582,6 @@ Page({
           calorie_burn:0,
         }
       })
-
-      if(that.data.height == '---' || that.data.weight == '---'){
-        that.setData({
-          flag_showTips:true
-        })
-      }
     }
   },
 
@@ -819,13 +812,6 @@ Page({
         selected: 3
       })
     }
-    if(that.data.height == '---' || that.data.weight == '---'){
-      that.setData({
-        flag_showTips:true
-      })
-    }
-    console.log(that.data.height)
-    console.log(that.data.weight)
     if(that.data.openid != ''){
       that.getCalorie()//获取卡路里
     }
