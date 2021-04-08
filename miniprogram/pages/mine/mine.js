@@ -49,7 +49,8 @@ Page({
     dabiao_color:'',
     stepToday:0,//微信步数
     runVaule:0,
-    flag_getRunFail:0
+    flag_getRunFail:0,
+    flag_showTips:false
   },
 
   target:function(){
@@ -582,6 +583,12 @@ Page({
           calorie_burn:0,
         }
       })
+
+      if(that.data.height == '---' || that.data.weight == '---'){
+        that.setData({
+          flag_showTips:true
+        })
+      }
     }
   },
 
@@ -762,6 +769,25 @@ Page({
     })
   },
 
+  //每次显示是获取摄入卡路里
+  getCalorie(){
+    var that = this
+    db.collection('user')
+    .where({
+      openid: that.data.openid
+    }).get({
+      success: (res) => {
+        console.log(res)
+        that.setData({
+          calorie_get:res.data[0].calorie_breakfast + res.data[0].calorie_lunch + res.data[0].calorie_dinner + res.data[0].calorie_lingshi
+        })
+      },
+      fail: err =>{
+        console.log("获取卡路里失败")
+      }
+    })
+
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -771,6 +797,8 @@ Page({
     getApp().loadFont();
     this.getOpenid()//获取用户的openid
     this.authorizeWeRun();//获取用户步数
+    console.log(that.data.height)
+    console.log(that.data.weight)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -790,6 +818,16 @@ Page({
       that.getTabBar().setData({
         selected: 3
       })
+    }
+    if(that.data.height == '---' || that.data.weight == '---'){
+      that.setData({
+        flag_showTips:true
+      })
+    }
+    console.log(that.data.height)
+    console.log(that.data.weight)
+    if(that.data.openid != ''){
+      that.getCalorie()//获取卡路里
     }
     if(that.data.openid != '' && that.data.flag_getRunFail == 0){
       this.authorizeWeRunOnShow();//获取用户步数

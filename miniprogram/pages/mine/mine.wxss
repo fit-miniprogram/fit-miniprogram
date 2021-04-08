@@ -43,6 +43,13 @@ page{
   align-self: center;
   margin: 20rpx;
   font-size: 35rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.tips{
+  font-size: 20rpx;
+  font-family: 'jianti';
 }
 
 .title{

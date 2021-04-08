@@ -4,7 +4,12 @@
     <view class="information-img">
       <open-data type="userAvatarUrl" ></open-data>
     </view>
-    <open-data type="userNickName" class="information-name"></open-data>
+    <view class="information-name">
+      <open-data type="userNickName" class="information-name"></open-data>
+      <view wx:if="{{weight === '---' || height === '---'}} " class="tips">记得填写身高体重哦~</view>
+      <!--<view wx:if="{{flag_showTips}} " class="tips">记得填写身高体重哦~</view>-->
+      
+    </view>
   </view>
   <view class="title">
     <view class="height">身高(cm)</view>
