@@ -1,11 +1,17 @@
+page{
+  background: #fbfbfb;
+}
 .container{
   overflow:hidden;
   width: 100%;
   height: 100%;
 }
 .logo{
-  height: 500rpx;
-  width: 100%;
+  height: 480rpx;
+  width: 280rpx;
+  background: url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/prepage/loog_gif_slow.gif?sign=ab00708b2b10111d763b6bc55459bf2b&t=1617979100");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 .title_text{
   height: 20%;

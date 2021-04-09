@@ -22,13 +22,11 @@ Page({
     },
     onLoad: function () {
         let that=this;
-        //延时显示按钮
+
         setTimeout(function(){
-        this.setData({
-            btndisplay: "block"
-        })
-        }.bind(this),1500)
-        this.getOpenid(); 
+            this.getOpenid(); 
+        }.bind(this),1800)
+
     },
     //点击授权按钮
     bindGetUserInfo: function (e) {
