@@ -7,9 +7,9 @@ page{
   height: 100%;
 }
 .logo{
-  height: 480rpx;
-  width: 280rpx;
-  background: url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/prepage/loog_gif_slow.gif?sign=ab00708b2b10111d763b6bc55459bf2b&t=1617979100");
+  height: 550rpx;
+  width: 300rpx;
+  background: url("https://6669-fit-gc46z-1304760622.tcb.qcloud.la/prepage/logo_slow.gif?sign=dabcc9fcf3b8d24787bc280793e97926&t=1617981369");
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }

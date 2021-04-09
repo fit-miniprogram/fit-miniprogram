@@ -1,3 +1,4 @@
+<view style="height: 260rpx"></view>
 <view class="sentence" animation="{{slide_right}}">
   <span class="word">即</span>
   <span class="word">刻</span>
