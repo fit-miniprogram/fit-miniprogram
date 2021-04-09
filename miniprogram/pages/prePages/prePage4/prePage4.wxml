@@ -1,3 +1,4 @@
+<view style="height: 260rpx"></view>
 <view class="outter" animation="{{slide_down}}" style="height: {{outter_height}}">
     <view class="inner" style="height: {{inner_height}}">
       <view class="title">积分可用于拍照识别</view>

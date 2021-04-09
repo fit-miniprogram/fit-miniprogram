@@ -9,6 +9,7 @@ Page({
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
         btndisplay: "none",
         openid: "",
+        isButtonShow:false,
         //当前昵称和头像
         nickname_cur: "",
         profile_cur: "",
@@ -25,7 +26,7 @@ Page({
 
         setTimeout(function(){
             this.getOpenid(); 
-        }.bind(this),1800)
+        }.bind(this),2500)
 
     },
     //点击授权按钮
@@ -81,6 +82,11 @@ Page({
                     wx.switchTab({
                         url: '../../homePage/homePage',
                     })                   
+                }
+                else{
+                    that.setData({
+                        isButtonShow:true
+                    })
                 }
             },
             fail: err =>{

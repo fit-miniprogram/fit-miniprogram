@@ -6,6 +6,6 @@
     <view class="title2">健康生活每一天</view>
   </view>
   <view class="btn_box">
-    <button class="btn1" wx:if="{{openid!=''}}" style="opacity: {{ishided}}" open-type="getUserInfo" lang="zh_CN" bindtap="bindGetUserInfo">点击进入</button>
+    <button class="btn1" wx:if="{{isButtonShow}}" style="opacity: {{ishided}}" open-type="getUserInfo" lang="zh_CN" bindtap="bindGetUserInfo">点击进入</button>
   </view>
 </view>
