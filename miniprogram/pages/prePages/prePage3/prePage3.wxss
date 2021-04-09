@@ -6,8 +6,6 @@
     justify-content: center;
     align-items: center;
     transform: translateY( -800rpx); 
-    -ms-transform: translateY( -800rpx); 
-    -webkit-transform: translateY( -800rpx); 
 }
 .inner{
     transform-style: preserve-3d;

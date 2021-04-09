@@ -61,7 +61,7 @@ Page({
   },
 
   gtNxtPg: function(){
-    this.app.slideupshow(this,'slide_down',-400,0.5,1200);
+    this.app.slideupshow(this,'slide_down',-800,0.5,1200);
     this.app.slideupshow(this,'slide_up',200,0.5,1200);
     setTimeout(function(){
       wx.redirectTo({

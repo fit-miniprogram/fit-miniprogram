@@ -5,9 +5,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  transform: translateY( -500rpx); 
-  -ms-transform: translateY( -500rpx); 
-  -webkit-transform: translateY( -500rpx); 
+  transform: translateY( -800rpx); 
 }
 .inner{
   /* height: 350rpx; */

@@ -1,4 +1,4 @@
-<view style="height: 260rpx"></view>
+<view style="height: 150rpx"></view>
 <view class="outter" animation="{{slide_down}}">
     <view class="inner">
       <view class="title">答对每日一题可获得积分</view>

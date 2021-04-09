@@ -1,4 +1,4 @@
-<view style="height: 260rpx"></view>
+<view style="height: 150rpx"></view>
 <view class="outter" animation="{{slide_down}}">
     <view class="inner">
       <view class="title">点击提交按钮可以上传食物热量</view>
