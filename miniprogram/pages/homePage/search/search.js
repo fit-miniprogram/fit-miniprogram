@@ -92,6 +92,7 @@ Page({
         calorie_breakfast:that.data.calorie_breakfast + allCalorie
       },
       success: res => {
+        console.log(res)
         wx.hideLoading({
           success: (res) => {
             wx.showToast({
@@ -448,8 +449,8 @@ Page({
             //dateString_record:res.result.data[0].dateString_record,
             dateStirngOfHeight_record:res.result.data[0].dateStirngOfHeight_record,
             dateStirngOfWeight_record:res.result.data[0].dateStirngOfWeight_record,
-            dateStirngOfBMI_record:res.res.result.data[0].dateStirngOfBMI_record,
-            dateStirngOfCalorie_record:res.res.result.data[0].dateStirngOfCalorie_record,
+            dateStirngOfBMI_record:res.result.data[0].dateStirngOfBMI_record,
+            dateStirngOfCalorie_record:res.result.data[0].dateStirngOfCalorie_record,
             signInDate_record:res.result.data[0].signInDate_record,
             calorie_breakfast:res.result.data[0].calorie_breakfast,
             calorie_lunch:res.result.data[0].calorie_lunch,
