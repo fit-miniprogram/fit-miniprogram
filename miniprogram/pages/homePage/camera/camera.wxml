@@ -42,6 +42,6 @@
             <view class="cell" bindtap="submitToDinner" hover-class="cell-clik">到晚餐</view>
             <view class="cell" bindtap="submitToLingshi" hover-class="cell-clik">到零食</view>
         </view>
-        <view class="Angle"></view>
+        <!-- <view class="Angle"></view> -->
     </view>
 </van-popup>
