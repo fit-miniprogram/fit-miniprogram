@@ -3,6 +3,10 @@
   position: relative;
   left: 150rpx;
   width: 450rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .abab .content{
@@ -10,4 +14,8 @@
   top: 50rpx;
   font-family: 'cola';
   font-size: 50rpx;
+}
+
+page{
+  background-color: white;
 }

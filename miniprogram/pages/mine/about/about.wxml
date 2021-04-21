@@ -1,6 +1,9 @@
 <view class="abab">
-  <image mode="widthFix" src="https://6669-fit-gc46z-1304760622.tcb.qcloud.la/abab.png?sign=ffd4cfbd9930cb7d40c48fb7b2384b0d&t=1617782383"></image>
+  <image mode="widthFix" src="https://6669-fit-gc46z-1304760622.tcb.qcloud.la/fits_logo.png?sign=9754bba99cc8a19c39baccd76378f8eb&t=1618975638"></image>
 
-  <text class="content">有bug、建议、意见请点击反馈按钮反馈\n\n或者点击联系我们\n\n\n万分感谢！\n\n</text>
+  <text class="content">Fits\n\n</text>
+  <text class="content">热量管理助手\n\n\n\n</text>
+  <text class="content">REV2.2.0</text>
+  <text class="content">搞点名堂</text>
 </view>
 
