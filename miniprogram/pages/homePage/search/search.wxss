@@ -109,24 +109,20 @@
   justify-content: center;
   align-items: center;
 }
-
-
-.massage{
+.massage {
   bottom: 180rpx;
   height: 400rpx;
   display: flex;
   flex-direction: column;
 }
-
-.Text{
+.Text {
   flex: 15;
   background-color: #fff;
   border-radius: 20rpx;
   display: flex;
   flex-direction: column;
 }
-
-.cell{
+.cell {
   width: 100%;
   flex: 25%;
   display: flex;
@@ -135,19 +131,7 @@
   border-top: 1px solid rgba(173, 173, 173, 0.26);
   font-size: 30rpx;
 }
-
-.cell-clik{
+.cell-clik {
   opacity: 0.5;
-  background-color:#f2f3f5;
+  background-color: #f2f3f5;
 }
-
-.Angle {
-  flex: 1;
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 10px solid #fff;
-  margin-left: 80%;
-}
-
