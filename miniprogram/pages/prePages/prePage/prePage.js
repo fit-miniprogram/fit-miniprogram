@@ -23,7 +23,7 @@ Page({
     },
     onLoad: function () {
         let that=this;
-
+        getApp().loadFont();
         setTimeout(function(){
             this.getOpenid(); 
         }.bind(this),2500)
