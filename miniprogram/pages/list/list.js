@@ -793,6 +793,10 @@ Page({
 
   swichNav(e){
     var that = this
+    // wx.pageScrollTo({
+    //   scrollTop:0,
+    //   duration: 100,
+    // })
     that.setData({
       currentTab:e.currentTarget.dataset.current
     })
