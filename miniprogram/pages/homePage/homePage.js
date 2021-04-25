@@ -102,6 +102,7 @@ Page({
     var that = this
     this.setData({
       topColorClass:'topColor-moved',
+      isDisable:false,
       swiperClass: 'swiper-init swiper-moved',
       searchClass: 'searchPartInit searchPartMove',
       searchClassReal:'searchPartInitReal searchPartMoveReal',
@@ -129,6 +130,7 @@ Page({
         topColorClass:'topColor-init',
         swiperClass: 'swiper-init',
         searchClass: 'searchPartInit',
+        isDisable:true,
         searchClassReal:'searchPartInitReal',
         cameraClass: 'camera-init',
         speechClass: 'speech-init',
@@ -213,6 +215,7 @@ gotoHistoryDetail(e)
 
   data: {
     opacity: 0,
+    isDisable:true,
     doYouKonwList:[] ,
     cardCur: 0,
     isTodayAnswer: false,
