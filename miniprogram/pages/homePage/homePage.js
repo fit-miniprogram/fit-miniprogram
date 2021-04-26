@@ -309,24 +309,45 @@ gotoHistoryDetail(e)
   getRandomQuestion:function()
   { 
     var that = this 
-    db.collection('dailyQuestionBank')
-      .aggregate()
-      .sample({
-        size:1
-      })
-      .end().then(  res => {  
-          console.log(res.list[0]);
-          that.setData({
-            stem:res.list[0].stem,
-            questionPicBase:res.list[0].image,
-            optionOne:res.list[0].option1,
-            optionTwo:res.list[0].option2,
-            optionThree:res.list[0].option3,
-            tureAnswer:res.list[0].tureAnswer,
-            rightAnswer:res.list[0].rightAnswer,
-            questionId:res.list[0]._id
-          })
-         })
+    wx.cloud.callFunction({ 
+      name: 'getRandomQuestion',
+      data:{},
+      config:{env:"fit-gc46z"}
+    }).then(ress => { 
+       console.log(ress);
+       var res = ress.result
+       that.setData({
+                    stem:res.list[0].stem,
+                    questionPicBase:res.list[0].image,
+                    optionOne:res.list[0].option1,
+                    optionTwo:res.list[0].option2,
+                    optionThree:res.list[0].option3,
+                    tureAnswer:res.list[0].tureAnswer,
+                    rightAnswer:res.list[0].rightAnswer,
+                    questionId:res.list[0]._id
+                  })
+    })
+     .catch(err => { 
+       console.log(err);
+     });
+//     db.collection('dailyQuestionBank')
+//       .aggregate()
+//       .sample({
+//         size:1
+//       })
+//       .end().then(  res => {  
+//           console.log(res.list[0]);
+//           that.setData({
+//             stem:res.list[0].stem,
+//             questionPicBase:res.list[0].image,
+//             optionOne:res.list[0].option1,
+//             optionTwo:res.list[0].option2,
+//             optionThree:res.list[0].option3,
+//             tureAnswer:res.list[0].tureAnswer,
+//             rightAnswer:res.list[0].rightAnswer,
+//             questionId:res.list[0]._id
+//           })
+//          })
   },
 
   getOriginQuestion: function(){
