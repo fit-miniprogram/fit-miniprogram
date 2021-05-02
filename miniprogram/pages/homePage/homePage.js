@@ -748,10 +748,7 @@ gotoHistoryDetail(e)
           } else {
             wx.showToast({
               icon:'error',
-              title: 'wdnmd',
-            })
-            wx.navigateTo({ //带参数页面跳转
-              url: "../homePage/camera/camera?res=" + "wdnmd"
+              title: '识别失败',
             })
           }
         },
