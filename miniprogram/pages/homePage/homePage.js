@@ -733,7 +733,6 @@ gotoHistoryDetail(e)
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         success: res => {
-          wx.hideLoading();
           console.log(res)
           //个人对返回数据做的判断，可以按自己的需要编写相应逻辑
           if (res.data.result_num > 0) {
@@ -742,11 +741,17 @@ gotoHistoryDetail(e)
               foodName:res.data.result[0].name,
               calorie:res.data.result[0].calorie,
               description:res.data.result[0].baike_info.description
+            },function(){
+              wx.hideLoading();
+              that.gotoResult()
             })
           } else {
             wx.showToast({
               icon:'error',
-              title: '识别未成功',
+              title: 'wdnmd',
+            })
+            wx.navigateTo({ //带参数页面跳转
+              url: "../homePage/camera/camera?res=" + "wdnmd"
             })
           }
         },
@@ -771,7 +776,6 @@ gotoHistoryDetail(e)
           'Content-Type': 'application/json'
         },
         success: res => {
-          wx.hideLoading();
           wx.setStorageSync("token", res.data.access_token);
           wx.request({
             url: 'https://aip.baidubce.com/rest/2.0/image-classify/v2/dish?access_token=' + res.data.access_token,
@@ -784,7 +788,6 @@ gotoHistoryDetail(e)
               'Content-Type': 'application/x-www-form-urlencoded'
             },
             success: res => {
-              wx.hideLoading();
               console.log(res)
               if (res.data.result_num > 0) {
                 that.setData({
@@ -792,6 +795,9 @@ gotoHistoryDetail(e)
                   foodName:res.data.result[0].name,
                   calorie:res.data.result[0].calorie,
                   description:res.data.result[0].baike_info.description
+                },function(){
+                  wx.hideLoading();
+                  that.gotoResult()
                 })
               } else {
                 wx.showToast({
@@ -831,10 +837,6 @@ gotoHistoryDetail(e)
                   pic:res.tempFilePaths[0]
                 })
                 that.check()
-                setTimeout(function () {
-                  that.gotoResult()
-                  //要延时执行的代码
-                 }, 2000)
                 console.log(base64)
                 console.log(that.data.pic) //这个是图片
                 
@@ -854,10 +856,6 @@ gotoHistoryDetail(e)
                 })
               console.log(res.tempFilePaths[0])// 这个是图片
               that.check()
-              setTimeout(function () {
-                that.gotoResult()
-                //要延时执行的代码
-               }, 2000)
             },
           })
         }

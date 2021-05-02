@@ -1,0 +1,26 @@
+custom-tab-bar文件夹
+	自定义tabbar组件
+gradient-bar文件夹
+	自定义navigationbar组件
+ec-canvas文件夹
+	ECharts组件
+colorui文件夹
+	colorui组件库
+image文件夹
+	存放小程序中使用到的图片
+miniprogram_npm文件夹
+	vant组件库
+pages文件夹
+	小程序页面实现代码
+style文件夹
+	自定义样式文件
+app.js
+	小程序框架全局文件
+app.json
+	配置页面路径、窗口表现、标签导航、网络超时、Debug模式
+app.wxss
+	该文件是对所有页面定义的一个全局样式
+package.json、package-lock.json
+	vant组件库相关文件
+sitemap.json.json
+	配置小程序页面是否允许微信索引

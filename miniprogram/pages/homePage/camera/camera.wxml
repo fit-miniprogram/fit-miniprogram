@@ -45,3 +45,8 @@
         <!-- <view class="Angle"></view> -->
     </view>
 </van-popup>
+
+
+
+
+<view>{{res}}</view>
