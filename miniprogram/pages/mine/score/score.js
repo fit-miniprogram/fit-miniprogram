@@ -88,14 +88,18 @@ Page({
       that.setData({
         rank_list_score: res.data
       })
+      console.log(res)
       //根据score的降序结果找userdata的数据
       for(let i=0;i<that.data.rank_list_score.length;i++){
         try{
+          
           const res2=await db.collection('userdata')
             .where({
               openid: that.data.rank_list_score[i].openid
             }).get()
           that.data.rank_list_nickandprofile.push(res2.data[0]);
+          console.log(that.data.rank_list_score[i].openid)
+          console.log(that.data.rank_list_nickandprofile)
         }catch(e){
         }
       }

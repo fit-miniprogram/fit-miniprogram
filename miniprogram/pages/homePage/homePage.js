@@ -390,7 +390,7 @@ gotoHistoryDetail(e)
   updateScore:function(e){
     var that = this
     console.log("积分+"+e)
-    that.judgeUser()
+    that.judgeUser(10)
     db.collection('userScore').where({  	
       openid: that.data.currentOpenid
     }).update({
@@ -454,6 +454,20 @@ gotoHistoryDetail(e)
               console.log(res); 
               that.setData({
                 _id:res._id
+              },function(){
+                db.collection('userScore').where({  	
+                  openid: that.data.currentOpenid
+                }).update({
+                  data: {
+                    score: db.command.inc(e)
+                  },
+                  success: function(res) {
+                    console.log(res)
+                  },
+                  error: function(err){
+                    console.log(err)
+                  }
+                })
               })
             },
             fail: err => {
