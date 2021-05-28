@@ -25,7 +25,7 @@ Page({
         let that=this;
         getApp().loadFont();
         setTimeout(function(){
-            this.getOpenid(); 
+            this.getOpenid();
         }.bind(this),2500)
 
     },
@@ -37,26 +37,38 @@ Page({
             that.setData({ishided: 1});
         }.bind(this),100);
 
-        wx.getUserProfile({
-            desc: '获取您的头像和昵称',
-            success: function(res){
-                var nickname=res.userInfo.nickName;
-                var profile=res.userInfo.avatarUrl;
-                //设置昵称和头像
-                that.setData({
-                    nickname_cur: nickname,
-                    profile_cur: profile
-                })
-                //插入数据后进入到开屏动画
-                that.InsertUserData();
-                wx.redirectTo({
-                    url: '../prePage1/prePage1'
-                })
-            },
-            fail: function(res){
-                console.log(res)
-            }
+        //设置昵称和头像
+        that.setData({
+            nickname_cur: "",
+            profile_cur: ""
         })
+        
+        //插入数据后进入到开屏动画
+        that.InsertUserData();
+        wx.redirectTo({
+            url: '../prePage1/prePage1'
+        })
+
+        // wx.getUserProfile({
+        //     desc: '获取您的头像和昵称',
+        //     success: function(res){
+        //         var nickname=res.userInfo.nickName;
+        //         var profile=res.userInfo.avatarUrl;
+        //         //设置昵称和头像
+        //         that.setData({
+        //             nickname_cur: nickname,
+        //             profile_cur: profile
+        //         })
+        //         //插入数据后进入到开屏动画
+        //         that.InsertUserData();
+        //         wx.redirectTo({
+        //             url: '../prePage1/prePage1'
+        //         })
+        //     },
+        //     fail: function(res){
+        //         console.log(res)
+        //     }
+        // })
     },
     //获取用户的Openid，并且查询用户的信息
     getOpenid: function(){
@@ -130,12 +142,4 @@ Page({
             }
         })
     },
-    //判断数据库中的数据是否需要更新
-    isNeedUpdate:function(){ 
-        if(this.data.nickname_cur!=this.data.nickname_db)
-            return true              
-        else if(this.data.profile_cur!=this.data.profile_db)
-            return true
-        return false
-    }
 })

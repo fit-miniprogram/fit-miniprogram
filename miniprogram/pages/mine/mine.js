@@ -49,7 +49,8 @@ Page({
     dabiao_color:'',
     stepToday:0,//微信步数
     runVaule:0,
-    flag_getRunFail:0
+    flag_getRunFail:0,
+    score_func: "score"
   },
 
   target:function(){
@@ -61,15 +62,96 @@ Page({
     })
   },
 
+  /**
+   * 生命周期函数--监听页面加载
+  */
+  onLoad: function (options) {
+    var that = this
+    getApp().loadFont();
+    this.getOpenid()//获取用户的openid
+    this.authorizeWeRun();//获取用户步数
+    console.log(that.data.height);
+    console.log(that.data.weight);  
+    this.isNeedAuthority();
+  },
+
+  //不需要授权
   score:function(){
-    var openid = this.data.openid;
-    var _id = this.data._id;
-    var targetRun = this.data.targetRun;
+    var openid=this.data.openid;
     wx.navigateTo({
       url: '/pages/mine/score/score?info=' + openid,
     })
   },
-
+  //需要授权
+  score2:function(){
+    var that=this;
+    wx.getUserProfile({
+      desc: '获取您的头像和昵称',
+      success: function(res){
+        var nickname=res.userInfo.nickName;
+        var profile=res.userInfo.avatarUrl;
+        db.collection('userdata').where({
+          openid: that.data.openid
+        }).update({
+          data:{
+              profile: profile,
+              nickname: nickname
+          }
+        }).then(res=>{    
+          var openid=that.data.openid;
+          that.setData({
+            score_func: "score"
+          })
+          wx.navigateTo({
+            url: '/pages/mine/score/score?info=' + openid,
+          })
+        })
+      },
+      fail: function(res){
+          console.log(res)
+      }
+  })
+  },
+  isNeedAuthority: function(){
+    let that = this;
+    wx.cloud.callFunction({ //调用getOpenid云函数
+      name: 'getOpenid',
+      data:{},
+      config:{env:"fit-gc46z"}
+    })
+    .then(res => { //调用getOpenid成功进行以下操作
+      var od=res.result.openid;
+      that.setData({
+          openid: od
+      })
+      //从数据库中获取计分记录的id
+      db.collection("userdata").where({
+        // openid: od,
+        openid: od
+      }).get({
+        success: (res) => {
+            //找到了对应的id
+            if(res.data.length>0){
+              //需要授权
+              if(res.data[0].nickname==""){
+                console.log("fuck")
+                that.setData({
+                  score_func: "score2"
+                })
+              }
+            }
+            else{
+            }
+        },
+        fail: err =>{
+          console.log("错误");
+        }
+      })
+    })
+    .catch(err => { //调用getOpenid失败打印错误信息
+      console.log(err);
+    });
+  },
   history:function(){
     var openid = this.data.openid;
     wx.navigateTo({
@@ -782,17 +864,7 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    var that = this
-    getApp().loadFont();
-    this.getOpenid()//获取用户的openid
-    this.authorizeWeRun();//获取用户步数
-    console.log(that.data.height)
-    console.log(that.data.weight)
-  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
